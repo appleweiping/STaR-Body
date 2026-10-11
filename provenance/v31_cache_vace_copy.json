@@ -1,0 +1,12 @@
+{
+  "destination": "video_VACE/divibody_training/cache_continuous_3dpw_vace_features_v31_resume.py",
+  "source_sha256_before_copy": "43e6349eee3991e3459ae2e3028d946b214fe058e118da729cd9a0b4514b8583",
+  "copied_sha256_before_edit": "43e6349eee3991e3459ae2e3028d946b214fe058e118da729cd9a0b4514b8583",
+  "copied_at_utc": "2026-10-09T01:25:47.1441994Z",
+  "source": "video_VACE/divibody_training/cache_continuous_3dpw_vace_features_v5.py",
+  "original_must_remain_unchanged": true,
+  "destination_sha256_after_edit": "d3b81a40b1e55e7de8c26c83ea542c9e2de0bc340a50ccdde56ea1da39fa48de",
+  "original_sha256_after_edit": "43e6349eee3991e3459ae2e3028d946b214fe058e118da729cd9a0b4514b8583",
+  "protocol": "Original v5 stride8 / v6 stride4, unchanged helpers and encoder; bounded atomic shards",
+  "real_pilot_repair": "Resolve unspecified CUDA device index before PyTorch 2.5 memory fraction call; encoding arguments unchanged."
+}

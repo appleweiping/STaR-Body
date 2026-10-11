@@ -1,0 +1,34 @@
+{
+  "sha256": {
+    "prepare_geometry_teacher_v30_v1.py": "d2f7c70b8480b09b5c73836a6d3a94b30aec33d89c2c20cb080bcb88259b05cf",
+    "mhr_smpl_anchor_v30_v1.py": "a31eff4c8292f08ead1e7d30fa8110ec953de7a7d182c78fb5ae2d089841df29",
+    "fit_geometry_teacher_v30_v1.py": "e7106d9c3bed7c1689d1f88e41d97265b3df7592101f41ee95808b3ca87595b0",
+    "launch_geometry_teacher_v30_v3.py": "5b3c06e5a291a9d4f34828c7c0a3226009f844be14d576ed2b5cd0ea0cd4e1c1"
+  },
+  "copied_sources": [
+    {
+      "path": "scripts/v29/prepare_sam3d_teacher_v6.py",
+      "sha256": "12c930e68f3e4d1809a207649e48c099c41329091a97a6dcc3db5c206156b764"
+    },
+    {
+      "path": "scripts/v29/mhr_smpl_anchor_v1.py",
+      "sha256": "a31eff4c8292f08ead1e7d30fa8110ec953de7a7d182c78fb5ae2d089841df29"
+    },
+    {
+      "path": "scripts/v29/run_mhr_smpl_anchor_pilot_v3.py",
+      "sha256": "bec496d8a899cc5511b95d47bb67fe313cc4c36423090341214933d8a7b9e6e1"
+    },
+    {
+      "path": "scripts/v30/launch_v30_architecture_v3.py",
+      "sha256": "5547d1ff63614b1b17112ecca8e6949d545179e34d8e7bf95774e07a502a9c09"
+    },
+    {
+      "path": "scripts/v30/launch_geometry_teacher_v30_v1.py",
+      "sha256": "5cd90e7ae0dc1878a371e4e01235145b60c24949bebbaa041f2344b4e12ac040"
+    },
+    {
+      "path": "scripts/v30/launch_geometry_teacher_v30_v2.py",
+      "sha256": "f25d9d77747f6fcca636a568f12b72226eaade5776e224dd40757d625485a988"
+    }
+  ]
+}

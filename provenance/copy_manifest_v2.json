@@ -1,0 +1,41 @@
+[
+  {
+    "original_files_unchanged": true,
+    "copies": [
+      {
+        "source": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v29_upgrade_20261006\\human_decoder_parts_v29.py",
+        "copy": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v30_rebuild_20261007\\human_decoder_spatiotemporal_v30.py",
+        "source_sha256": "967738ade8c137ae2cd1b49ad0883fbfb208ed782a59efc8feef89586428ff9b",
+        "copy_sha256": "ac94bf1689a50615572206c2dcad55701e3e68457bdbc207a4f65a06adfd23cc",
+        "reused_verified_copy": true
+      },
+      {
+        "source": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v29_upgrade_20261006\\ram_parts_runtime_v29.py",
+        "copy": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v30_rebuild_20261007\\ram_parts_runtime_v30.py",
+        "source_sha256": "1bff30c3274be5758a9d0392712f796792727b45c5ca8a664ea542c1faa67569",
+        "copy_sha256": "968060eb49d4aec1fcaa36b4f0344ea16267ce26762a3ff909e0289f1cace1b0",
+        "reused_verified_copy": true
+      },
+      {
+        "source": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v29_upgrade_20261006\\parts_training_utils_v29.py",
+        "copy": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v30_rebuild_20261007\\parts_training_utils_v30.py",
+        "source_sha256": "19d83f7ed98bbd88ba82625c953d84ba859566bc703590bc264b3dcc1254174f",
+        "copy_sha256": "97c1dff685f4cf29e2d7250928a0af0ac13207fae8ad743a212cc0a69ef18cfd",
+        "reused_verified_copy": true
+      },
+      {
+        "source": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v29_upgrade_20261006\\train_parts_v29_stitched.py",
+        "copy": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v30_rebuild_20261007\\train_spatiotemporal_v30_v2.py",
+        "source_sha256": "6ce43a5682e11245332feea60c8a365a70e9f9cf1231512fc7bd5136f3d8b460",
+        "copy_sha256": "5603427acd1bbd7c1e8c8eb46308a08e4e3692bb7d9ef9df4981beb1d66bd688"
+      },
+      {
+        "source": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v29_upgrade_20261006\\v29_training_engine_stitched.py",
+        "copy": "C:\\Users\\mingj\\Documents\\ChatGPT\\auto Research0925\\v30_rebuild_20261007\\v30_training_engine.py",
+        "source_sha256": "3d153aed1ab72bcac9fa0c6e2c5541719f6d0accae8a0c4e23f57c99e6c4be09",
+        "copy_sha256": "78747d3ab421e7c3f40f1985265a8d5e0b7780544275bdccd536e80fa1776741"
+      }
+    ],
+    "remote_training_started": false
+  }
+]

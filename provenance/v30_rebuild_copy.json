@@ -1,0 +1,47 @@
+{
+  "copy_method": "PowerShell Copy-Item before editing",
+  "original_model_runtime_optimizer": "reuse unchanged V30 files",
+  "entries": [
+    {
+      "source": "video_VACE/divibody_training/train_spatiotemporal_v31.py",
+      "destination": "video_VACE/divibody_training/train_spatiotemporal_v30_rebuild.py",
+      "source_sha256_before": "f87cef96bab91e22235401cc8a682ed29c9addb25a65f5bc4f9e89b44ac8cb0b",
+      "copied_sha256_before_edit": "f87cef96bab91e22235401cc8a682ed29c9addb25a65f5bc4f9e89b44ac8cb0b",
+      "source_sha256_after": "f87cef96bab91e22235401cc8a682ed29c9addb25a65f5bc4f9e89b44ac8cb0b",
+      "destination_sha256_after": "1bca353b63653d8c04bfd7be4254c7ebac463ee5c38e473cf0a7af1fdc9582e5"
+    },
+    {
+      "source": "video_VACE/divibody_training/v31_training_engine.py",
+      "destination": "video_VACE/divibody_training/v30_rebuild_training_engine.py",
+      "source_sha256_before": "e8ae748ce65623fa11a27d299a287c931827a9b9d15aa2d65c195f372523de3a",
+      "copied_sha256_before_edit": "e8ae748ce65623fa11a27d299a287c931827a9b9d15aa2d65c195f372523de3a",
+      "source_sha256_after": "e8ae748ce65623fa11a27d299a287c931827a9b9d15aa2d65c195f372523de3a",
+      "destination_sha256_after": "a84fccb955dcdc0fe69f0cf949d4c6a2301300549d93a4d8949b79854ee0ec05"
+    },
+    {
+      "source": "video_VACE/divibody_training/v31_training_contract.py",
+      "destination": "video_VACE/divibody_training/v30_rebuild_training_contract.py",
+      "source_sha256_before": "2da8a5dacec1395a9d3cc1a09996d6450333f4a6523f0060f743e725703d4b0b",
+      "copied_sha256_before_edit": "2da8a5dacec1395a9d3cc1a09996d6450333f4a6523f0060f743e725703d4b0b",
+      "source_sha256_after": "2da8a5dacec1395a9d3cc1a09996d6450333f4a6523f0060f743e725703d4b0b",
+      "destination_sha256_after": "c4e4581b3904714f966d4afb06c58f5a98c4f918b633815c54f42e1da866c25a"
+    },
+    {
+      "source": "scripts/train_from_config_v31.py",
+      "destination": "scripts/train_from_config_v30_rebuild.py",
+      "source_sha256_before": "fb0bb9d9aef6da3682f85a0ade0accdfe6bdb143fb2f4565fc67a7ca4de94401",
+      "copied_sha256_before_edit": "fb0bb9d9aef6da3682f85a0ade0accdfe6bdb143fb2f4565fc67a7ca4de94401",
+      "source_sha256_after": "fb0bb9d9aef6da3682f85a0ade0accdfe6bdb143fb2f4565fc67a7ca4de94401",
+      "destination_sha256_after": "842401dce7f507550b6467c023c4afa277384e4e807444ab47ed9d7f2fd99708"
+    },
+    {
+      "source": "configs/star_body_v31.compat.example.json",
+      "destination": "configs/star_body_v30_rebuild.example.json",
+      "source_sha256_before": "35971e96105459c06ca37222e35296e150a24e8f34a78f6a3542d2e82f70b9cf",
+      "copied_sha256_before_edit": "35971e96105459c06ca37222e35296e150a24e8f34a78f6a3542d2e82f70b9cf",
+      "source_sha256_after": "35971e96105459c06ca37222e35296e150a24e8f34a78f6a3542d2e82f70b9cf",
+      "destination_sha256_after": "e958350ee094c32f2919a0c7aeaa77c404085a253c5924988af34e534b0d8cab"
+    }
+  ],
+  "state": "edited_cpu_ast_cli_binding_and_dry_run_checks_passed_no_training"
+}

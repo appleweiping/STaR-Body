@@ -1,16 +1,2 @@
-* text=auto eol=lf
-
-# Platform command files retain the line endings expected by cmd.exe.
-*.bat text eol=crlf
-*.cmd text eol=crlf
-
-# Never run content normalization over binary research and release assets.
-*.drawio binary
-*.npy binary
-*.npz binary
-*.pdf binary
-*.png binary
-*.pptx binary
-*.pyc binary
-*.whl binary
-*.zip binary
+# Preserve exact source bytes and frozen SHA256 fingerprints across platforms.
+* -text

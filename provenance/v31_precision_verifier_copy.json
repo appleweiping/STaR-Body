@@ -1,0 +1,15 @@
+{
+  "original_must_remain_unchanged": true,
+  "destination": "scripts/verify_real_precision_v31.py",
+  "source_sha256_before_copy": "38b000ca5f9fee719f6366a843db9c5138ec7e91dfb6361eff58a207c5456613",
+  "copied_sha256_before_edit": "38b000ca5f9fee719f6366a843db9c5138ec7e91dfb6361eff58a207c5456613",
+  "source": "scripts/verify_real_v31.py",
+  "copied_at_utc": "2026-10-09T01:36:51.5053553Z",
+  "destination_sha256_after_edit": "04a936f8320631d02f827ab39947f303ca8dc32840f2e31753df6a7720a2d569",
+  "original_sha256_after_edit": "38b000ca5f9fee719f6366a843db9c5138ec7e91dfb6361eff58a207c5456613",
+  "validation": {
+    "kind": "AST and CPU CLI/pure-policy interface only",
+    "passed": 13,
+    "real_GPU_forward_run": false
+  }
+}

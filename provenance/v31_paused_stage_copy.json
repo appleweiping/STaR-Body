@@ -1,0 +1,10 @@
+{
+  "format": "star-body-v31-paused-stage-copy-v1",
+  "copied_utc": "2026-10-09T01:48:24.1190789Z",
+  "source": "scripts/train_from_config_v31.py",
+  "destination": "scripts/run_paused_training_stage_v31.py",
+  "source_sha256_before": "fb0bb9d9aef6da3682f85a0ade0accdfe6bdb143fb2f4565fc67a7ca4de94401",
+  "destination_sha256_before_edit": "fb0bb9d9aef6da3682f85a0ade0accdfe6bdb143fb2f4565fc67a7ca4de94401",
+  "destination_sha256_after_edit": "304513c5f84e4bd02c4fc8a22dea97a0dc1c0cba9b2f6bf34d983c796c979a9f",
+  "source_preserved": true
+}

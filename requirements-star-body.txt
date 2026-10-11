@@ -1,0 +1,17 @@
+# Original VACE runtime dependencies are retained unchanged.
+-r video_VACE/requirements.txt
+
+# Body model / research runtime additions; CUDA packages need compatible builds.
+smplx
+scipy
+yacs
+PyYAML
+hydra-core
+pytorch-lightning
+webdataset
+dill
+roma
+fvcore
+omegaconf
+
+# Install official HMR2/4D-Humans and Wan2.1 sources separately; see docs.

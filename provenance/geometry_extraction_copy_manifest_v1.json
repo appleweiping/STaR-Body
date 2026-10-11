@@ -1,0 +1,9 @@
+[
+  {
+    "source": "prepare_sam3d_teacher_v6.py",
+    "copy": "prepare_geometry_teacher_v30_v1.py",
+    "source_sha256": "12c930e68f3e4d1809a207649e48c099c41329091a97a6dcc3db5c206156b764",
+    "copy_sha256": "d2f7c70b8480b09b5c73836a6d3a94b30aec33d89c2c20cb080bcb88259b05cf",
+    "original_unchanged": true
+  }
+]

@@ -1,0 +1,93 @@
+{
+  "project": "STaR-Body",
+  "version": "V30",
+  "split": "validation",
+  "single_seed_exploratory": true,
+  "seed": 2026,
+  "training_completed": false,
+  "test_evaluated": false,
+  "sota_status": "not_established",
+  "source_archive_sha256": "1a630d97a94783fd0721292a9e48acfe777207204a794b36fd05e8d464ec3b10",
+  "source_metrics_sha256": "96b2e60577613cd644685ddc5de446c0dae346895b34e5092232a35e681548a0",
+  "rows": [
+    {
+      "step": 0,
+      "variant": "initial",
+      "accepted": true,
+      "metrics": {
+        "mpjpe_mm": 62.85950597438668,
+        "pa_mpjpe_mm": 38.82444524091865,
+        "pve_mm": 77.49268119025847,
+        "acceleration_error_mm_per_frame2": 22.329070147964064,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      }
+    },
+    {
+      "step": 1000,
+      "variant": "student",
+      "accepted": true,
+      "metrics": {
+        "mpjpe_mm": 62.286325484934956,
+        "pa_mpjpe_mm": 38.36594963962105,
+        "pve_mm": 75.72070227509145,
+        "acceleration_error_mm_per_frame2": 22.22360576975516,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      }
+    },
+    {
+      "step": 1000,
+      "variant": "ema",
+      "accepted": true,
+      "metrics": {
+        "mpjpe_mm": 62.57884743892985,
+        "pa_mpjpe_mm": 38.32275717253645,
+        "pve_mm": 74.99709210148076,
+        "acceleration_error_mm_per_frame2": 22.14981295263481,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      }
+    },
+    {
+      "step": 2000,
+      "variant": "student",
+      "accepted": true,
+      "metrics": {
+        "mpjpe_mm": 62.29586835082917,
+        "pa_mpjpe_mm": 38.28246969298855,
+        "pve_mm": 74.39907022668707,
+        "acceleration_error_mm_per_frame2": 21.99977903059969,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      }
+    },
+    {
+      "step": 2000,
+      "variant": "ema",
+      "accepted": true,
+      "metrics": {
+        "mpjpe_mm": 62.07584736160136,
+        "pa_mpjpe_mm": 38.15318805743487,
+        "pve_mm": 74.32380441024371,
+        "acceleration_error_mm_per_frame2": 22.017716314429506,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      }
+    },
+    {
+      "step": 3000,
+      "variant": "ema",
+      "accepted": true,
+      "metrics": {
+        "mpjpe_mm": 61.757819051897336,
+        "pa_mpjpe_mm": 37.910871956888485,
+        "pve_mm": 73.77133329917727,
+        "acceleration_error_mm_per_frame2": 21.807317852787417,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "evidence_source": "Observed SSH metrics.jsonl output on 2026-10-07; full corresponding artifact not downloaded"
+    }
+  ]
+}

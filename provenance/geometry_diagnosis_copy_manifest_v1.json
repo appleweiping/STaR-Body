@@ -1,0 +1,9 @@
+[
+  {
+    "source": "run_mhr_smpl_anchor_pilot_v3.py",
+    "copy": "diagnose_geometry_repro_v30_v1.py",
+    "source_sha256": "bec496d8a899cc5511b95d47bb67fe313cc4c36423090341214933d8a7b9e6e1",
+    "copy_sha256": "d0cf5120e2f78657ef86eec47d5ffdffe8edb4d599935e2292b761bd81e69f2a",
+    "original_unchanged": true
+  }
+]

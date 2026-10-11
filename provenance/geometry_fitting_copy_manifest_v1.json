@@ -1,0 +1,16 @@
+[
+  {
+    "source": "mhr_smpl_anchor_v1.py",
+    "copy": "mhr_smpl_anchor_v30_v1.py",
+    "source_sha256": "a31eff4c8292f08ead1e7d30fa8110ec953de7a7d182c78fb5ae2d089841df29",
+    "copy_sha256": "a31eff4c8292f08ead1e7d30fa8110ec953de7a7d182c78fb5ae2d089841df29",
+    "original_unchanged": true
+  },
+  {
+    "source": "run_mhr_smpl_anchor_pilot_v3.py",
+    "copy": "fit_geometry_teacher_v30_v1.py",
+    "source_sha256": "bec496d8a899cc5511b95d47bb67fe313cc4c36423090341214933d8a7b9e6e1",
+    "copy_sha256": "e7106d9c3bed7c1689d1f88e41d97265b3df7592101f41ee95808b3ca87595b0",
+    "original_unchanged": true
+  }
+]

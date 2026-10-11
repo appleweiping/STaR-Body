@@ -1,0 +1,2 @@
+# Machine-local runtime paths are never part of source publication.
+*.local.sh

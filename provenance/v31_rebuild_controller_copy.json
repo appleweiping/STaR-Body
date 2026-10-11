@@ -1,0 +1,8 @@
+{
+  "source": "scripts/v30/launch_v30_architecture_v3.py",
+  "source_sha256": "5547d1ff63614b1b17112ecca8e6949d545179e34d8e7bf95774e07a502a9c09",
+  "copy_before_edit": true,
+  "new_file": "scripts/rebuild_pipeline_v31_v1.py",
+  "purpose": "Finite resource-bounded cache rebuild and full baseline evaluation controller; no test selection.",
+  "destination_sha256": "67a51727616c0c482ce96e55c6e6804e797eb2ff98e19e1a50aac0a0222c0527"
+}

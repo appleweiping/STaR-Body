@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "client_date": "2026-10-08",
+  "timezone": "America/Chicago",
+  "source": "scripts/v30/verify_real_v30_v2.py",
+  "destination": "scripts/verify_real_v31.py",
+  "source_sha256_before_copy": "8e86b863282175971c8a4dc01a95752e421b493058f5fbe09dd1424371cf7d81",
+  "copied_destination_sha256_before_edit": "8e86b863282175971c8a4dc01a95752e421b493058f5fbe09dd1424371cf7d81",
+  "source_sha256_after_edit": "8e86b863282175971c8a4dc01a95752e421b493058f5fbe09dd1424371cf7d81",
+  "destination_sha256": "38b000ca5f9fee719f6366a843db9c5138ec7e91dfb6361eff58a207c5456613",
+  "copy_before_edit": true,
+  "original_unchanged": true,
+  "changes": [
+    "Portable train-only JSON assets and cpu/cuda selection",
+    "Explicit V30/V31 model/runtime/loss/optimizer routing",
+    "One unperturbed real optimizer step before diagnostic head perturbation",
+    "Exact disk model and optimizer restore; malformed state rejection",
+    "Train data identity, config, seed, source/init hashes and resource JSON",
+    "Explicit diagnostic-only development cache waiver; original schema/UID/semantic SHA/HMR provenance and exact train split retained",
+    "CUDA allocator limit defaults to 10 GiB; configurable positive cap",
+    "Removed video_VACE/vace/models from verifier sys.path to prevent wan.py shadowing external Wan package",
+    "Hash only existing module source files; record dynamic/non-file module attributes separately",
+    "Prevent CUDA memory metadata probe failure from masking original error and acceptance JSON"
+  ],
+  "local_validation": {
+    "ast_parse": "passed",
+    "help_without_assets": "passed",
+    "real_data_execution": "not_run",
+    "server_access": "not_attempted",
+    "dynamic_source_hash_regression": "passed_without_torch_or_assets"
+  },
+  "reported_remote_failure": {
+    "stage": "import_runtime",
+    "reported_by": "parent agent",
+    "failure": "First real smoke import failed: video_VACE/vace/models/wan.py shadowed external wan package, causing circular import",
+    "action": "Removed conflicting path in new verifier; original launch script preserved",
+    "rerun_status": "import fix passed according to parent; subsequent source-audit failure fixed, real rerun pending"
+  },
+  "second_reported_remote_failure": {
+    "stage": "source_hashes",
+    "reported_by": "parent agent",
+    "failure": "Dynamic torch module __file__=_classes.py was resolved to a nonexistent project file",
+    "action": "Check is_file before resolve/hash; record non-file module sources separately",
+    "rerun_status": "pending"
+  }
+}

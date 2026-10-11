@@ -1,0 +1,61 @@
+{
+  "status": "registered_plan_not_started",
+  "registration_date_user_timezone": "2026-10-08",
+  "dataset": "3DPW",
+  "train_stride": 8,
+  "validation_stride": 4,
+  "window_frames": 8,
+  "vace_context_frames": 17,
+  "expected_train_frames": 22735,
+  "expected_validation_frames": 10413,
+  "seed": 2026,
+  "future_replication_seeds": [
+    2027,
+    2028
+  ],
+  "steps_per_arm": 6000,
+  "evaluate_every_steps": 1000,
+  "initial_checkpoint_sha256": "4254e31c11d6c44f362fe26934cd04ed8f2d37f2b513ef9656a54ccfddb750bd",
+  "cache_hashes": "pending complete rebuilt caches; must be locked before any arm",
+  "arms": [
+    {
+      "name": "v30_matched",
+      "model": "V30"
+    },
+    {
+      "name": "v31_robust_rotation",
+      "model": "V31",
+      "frame_shape_delta_scale": 1.0,
+      "local_radius_schedule": []
+    },
+    {
+      "name": "v31_no_frame_shape_delta",
+      "model": "V31",
+      "frame_shape_delta_scale": 0.0,
+      "local_radius_schedule": []
+    },
+    {
+      "name": "v31_local_radius_schedule",
+      "model": "V31",
+      "frame_shape_delta_scale": 1.0,
+      "local_radius_schedule": [
+        2.0,
+        1.0,
+        0.5
+      ]
+    }
+  ],
+  "candidate_checkpoint_variants": [
+    "student",
+    "ema"
+  ],
+  "selection_split": "validation",
+  "selection_rule": "Use preserved strict 3D selection policy; all MPJPE/PA-MPJPE/PVE improve versus newly reproduced fixed V28 and acceleration <= that baseline; maximize negative sum of the three baseline-normalized errors; strict greater-than preserves earlier candidate on ties; student then EMA at each evaluation",
+  "test_used_for_selection": false,
+  "test_history_disclosure": "Earlier project models have already observed test",
+  "shape_ablation_scope": "Suppress only new per-frame shape delta; V28 initial betas can still vary by frame",
+  "temporal_ablation_scope": "Disables only new refiner temporal branch; frozen V28 retains temporal modeling",
+  "proof_of_contribution": "Matched complete validation, multiple registered seeds, sequence-paired uncertainty; independent test only after freezing choice",
+  "teacher_distillation_enabled": false,
+  "validation_or_test_labels_used_for_training": false
+}

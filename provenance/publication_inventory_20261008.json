@@ -1,0 +1,1810 @@
+{
+  "project": "STaR-Body",
+  "release": "V30",
+  "published_snapshot_date": "2026-10-08",
+  "files_excluding_this_manifest": {
+    ".gitattributes": {
+      "sha256": "bd6ed7cfd4e9af9133a680380bd512d8053fe09cbc49a7721c5635dd0016b564",
+      "bytes": 87
+    },
+    ".gitignore": {
+      "sha256": "c019c88ea935b23a731f2f6838821c1bf8a4d6a74683f0bda71eca8d813e3f06",
+      "bytes": 580
+    },
+    "AGENTS.md": {
+      "sha256": "f329e3354882f796a36a70d9995d765213cfa3c8686e855af3507d2be7a98a4b",
+      "bytes": 427
+    },
+    "LICENSE.txt": {
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357
+    },
+    "original_code_hashes.json": {
+      "sha256": "976e9eb3d49ef04826e2f89b10463c74f2103eb27fc066e9106bd32542edb268",
+      "bytes": 30016
+    },
+    "README.md": {
+      "sha256": "48739542d11e1c4693f118deecd6df04debe8c338b3ad2bfde626422632f2c05",
+      "bytes": 5346
+    },
+    "requirements-star-body.txt": {
+      "sha256": "9aa7c461f9fe002849aa984483875174eb131c2e936bc6bacbefa2d575da6117",
+      "bytes": 341
+    },
+    "THIRD_PARTY_NOTICES.md": {
+      "sha256": "518bd7306c436ef9d489e55f8e4cd6d69e9528a8132fba2f7679d9da75b4ae0d",
+      "bytes": 1489
+    },
+    "configs/star_body_v30.example.json": {
+      "sha256": "3f57a03057c18664aa256e6b7e3a2f6c215bbbda4e2b700ff09e0b4b3b6d3a84",
+      "bytes": 2184
+    },
+    "docs/DESIGN_ZH.md": {
+      "sha256": "b8d72483b90595b9e27b29d5c4c4b9d0dbdbea8eac0eddbc6fa3daea5998fee1",
+      "bytes": 9894
+    },
+    "docs/EXPERIMENT_STATUS_ZH.md": {
+      "sha256": "44a5dfd7355c2ef2336979279b7e966279e82c75265b7a727203aa575847fbdd",
+      "bytes": 2289
+    },
+    "docs/GEOMETRY_TEACHER_ZH.md": {
+      "sha256": "3944d41d477a03d2c1e4587110a16217631943850f052b1760503406ef9be8f2",
+      "bytes": 2094
+    },
+    "docs/REPRODUCTION_ZH.md": {
+      "sha256": "7694530a4e1559d0a4a2221c00fc26a05af615561d70e693dedaffc4741d8545",
+      "bytes": 3790
+    },
+    "evidence/v30_validation_summary.json": {
+      "sha256": "657f74184840b21bea39a03a9eee8266fb2275b0f2c5b2da767e0605b02c3944",
+      "bytes": 2769
+    },
+    "provenance/copy_manifest_v2.json": {
+      "sha256": "30a757445489dd944194bfc50f0eca68203e53259cea15913e651866c39b464a",
+      "bytes": 2535
+    },
+    "provenance/geometry_diagnosis_copy_manifest_v1.json": {
+      "sha256": "70133fd8b82ad813cd6dd6471e7dea2f7c662cf58924be93303af56851e52490",
+      "bytes": 324
+    },
+    "provenance/geometry_evaluation_copy_manifest_v1.json": {
+      "sha256": "995e7fa01932eb84a863a8761a31715cc2b69d1d6f212157209db8736773ea08",
+      "bytes": 326
+    },
+    "provenance/geometry_extraction_copy_manifest_v1.json": {
+      "sha256": "d0ab30a73f05b672a3d11ec88fd4e71b1cb2f625fafd75bb0f7464fbc5f24dea",
+      "bytes": 321
+    },
+    "provenance/geometry_fitting_copy_manifest_v1.json": {
+      "sha256": "8698abd10a13082bebce542a6a907fa93fd492a77056c53a48c1d7bf86f5caed",
+      "bytes": 624
+    },
+    "provenance/publication_source_hashes.json": {
+      "sha256": "3dd7d018e75d1805e8bb14e04a2e0d4bc6f5bca9c4545576c534617737cfe6fe",
+      "bytes": 55421
+    },
+    "scripts/run_star_body.sh": {
+      "sha256": "fd80a915d85a002e37cdf5c8a19fb7913ad9e2116cdeafd4e78d4033dd13bce5",
+      "bytes": 579
+    },
+    "scripts/train_from_config.py": {
+      "sha256": "fd647ab1ca237bf29287b6803955a18fa498028a930a30b5d899339e0d2a27fc",
+      "bytes": 1815
+    },
+    "video_VACE/LICENSE.txt": {
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357
+    },
+    "video_VACE/pyproject.toml": {
+      "sha256": "a4fd64a9a1e5b6e1f719c80da5efd0a221a42d01c16afcd5f196edef1a607cd1",
+      "bytes": 1898
+    },
+    "video_VACE/README.md": {
+      "sha256": "c38260880e2b348b181b0fddc0beafad8dcedcd1d0fc828820379bc94d3d3efb",
+      "bytes": 11554
+    },
+    "video_VACE/requirements.txt": {
+      "sha256": "4e366a78ca001c2e36089c1df06439b726357f2e510d738c2efc5f561b260e63",
+      "bytes": 29
+    },
+    "video_VACE/UserGuide.md": {
+      "sha256": "c6f9ea55be60b1d7ed1fd7cdebaf49d266ff8bdf494c9b5ffc18865f79924c17",
+      "bytes": 47178
+    },
+    "video_VACE/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "scripts/v29/audit_amass_actor_groups_v1.py": {
+      "sha256": "85605b97e820bddd3c27cd010129d1ec2cef5d52c047e094291085f7e6a87c1b",
+      "bytes": 4380
+    },
+    "scripts/v29/audit_amass_v1.py": {
+      "sha256": "0b8b61ccdba370a37772e38a951bf13bbdf7f87fb32ae034f3b33af211fed452",
+      "bytes": 14709
+    },
+    "scripts/v29/audit_amass_v2.py": {
+      "sha256": "22b6d92c341902bbaadbc9efe2a86cf6106fa80407c472d0c5a9aee3ff564681",
+      "bytes": 26446
+    },
+    "scripts/v29/evaluate_v29y_frozen_test_v1.py": {
+      "sha256": "4c30b9fb4e36e5889fee4daccfba47539298ba4f6a779176f68a3d7b64bec1ea",
+      "bytes": 10571
+    },
+    "scripts/v29/evaluate_v29_frozen_test.py": {
+      "sha256": "28182273d5b3fa97cfb3f5f484d23b9487b76563f32323278249f2662f44ec03",
+      "bytes": 5951
+    },
+    "scripts/v29/evaluate_v29_frozen_test_stride8.py": {
+      "sha256": "5466577c789943bd6d3405816e8806c85f73e3715d089b828a0691b7f2a2ddac",
+      "bytes": 9953
+    },
+    "scripts/v29/evaluate_v29_frozen_test_v2.py": {
+      "sha256": "864ece1d994fcedd4086ad4a053750b974c4b830c99e7f9f7f6b5764c7959188",
+      "bytes": 8400
+    },
+    "scripts/v29/fetch_mhr_conversion_sources_v1.py": {
+      "sha256": "8a5bc081dbf68b66bd955189c0cecdf2e17af7b8110ed296f3e2d7b98d928491",
+      "bytes": 2675
+    },
+    "scripts/v29/fetch_mhr_conversion_sources_v2.py": {
+      "sha256": "1d08bc287a71d9373e6ce099be00c9689d0f8239d151981f3f347f7363f3571c",
+      "bytes": 3357
+    },
+    "scripts/v29/finalize_strong_manifest_v1.py": {
+      "sha256": "e72d0e431d54c09ed3503718b7c89bd7f37cb1098ade33e389e62628cf66b096",
+      "bytes": 4090
+    },
+    "scripts/v29/finalize_strong_test_manifest_v1.py": {
+      "sha256": "427ce8bf87b0db977053525467c36f918a2d605d0516d298a5e07f5cd39149af",
+      "bytes": 4236
+    },
+    "scripts/v29/finish_v29_frozen_test.py": {
+      "sha256": "03664595e28afca4cf033892d1482085b2d9e0b5af5b7a4a6cd95213c972ea77",
+      "bytes": 4132
+    },
+    "scripts/v29/finish_v29_frozen_test_stride8.py": {
+      "sha256": "663d11caa19863c9debf095272ea98d71dca25fff3c6ca0896feea4a89b30e81",
+      "bytes": 4132
+    },
+    "scripts/v29/finish_v29_frozen_test_v2.py": {
+      "sha256": "e542254f2fb0e5573c4fe55e12365848918bcc8e20e91fdf1d8b1c4a8c9e4af5",
+      "bytes": 3987
+    },
+    "scripts/v29/mhr_smpl_anchor_v1.py": {
+      "sha256": "a31eff4c8292f08ead1e7d30fa8110ec953de7a7d182c78fb5ae2d089841df29",
+      "bytes": 5790
+    },
+    "scripts/v29/prepare_sam3d_teacher_test_v1.py": {
+      "sha256": "ade041043fe573d6753ab16bfa5cd04d5e830e7391a530a9627a8a1594112c95",
+      "bytes": 15279
+    },
+    "scripts/v29/prepare_sam3d_teacher_v1.py": {
+      "sha256": "e101bae22efd1085d2ec6683e880c8f7ac9f04a5f00ccb582cf77be2bd37c7d2",
+      "bytes": 4458
+    },
+    "scripts/v29/prepare_sam3d_teacher_v2.py": {
+      "sha256": "2ec2a5110f5bb00927ec182ca3b3e80c1ff6eeae4afe23c6c60a7e4714f84c95",
+      "bytes": 5286
+    },
+    "scripts/v29/prepare_sam3d_teacher_v3.py": {
+      "sha256": "0c92a34b47f2beefc6228f0a25d432eedf33111db798d6f479095504000f1a87",
+      "bytes": 11737
+    },
+    "scripts/v29/prepare_sam3d_teacher_v4.py": {
+      "sha256": "2b5cce024a70387342277ad268532fd86cee9603c13a49e8fc5681603817c1fd",
+      "bytes": 11907
+    },
+    "scripts/v29/prepare_sam3d_teacher_v5.py": {
+      "sha256": "e57f9d74bcd3a53e48722b16647ec21088182fc4d0f66bf67ed0f9255c3047b7",
+      "bytes": 14322
+    },
+    "scripts/v29/prepare_sam3d_teacher_v6.py": {
+      "sha256": "12c930e68f3e4d1809a207649e48c099c41329091a97a6dcc3db5c206156b764",
+      "bytes": 14320
+    },
+    "scripts/v29/run_mhr_smpl_anchor_pilot_v1.py": {
+      "sha256": "ca3fa50a0fb01d74b18f38e84b23677ea0ee8d51ba080ce65a998bc3ce945bcc",
+      "bytes": 10897
+    },
+    "scripts/v29/run_mhr_smpl_anchor_pilot_v2.py": {
+      "sha256": "68120226d5a4835781341495bef7c5c26047701f85f044b65190e8209118981b",
+      "bytes": 11076
+    },
+    "scripts/v29/run_mhr_smpl_anchor_pilot_v3.py": {
+      "sha256": "bec496d8a899cc5511b95d47bb67fe313cc4c36423090341214933d8a7b9e6e1",
+      "bytes": 11089
+    },
+    "scripts/v29/run_real_strong_v29y_v1.py": {
+      "sha256": "f0d5556e738a9cd96e468db8de0a07d3eda78e3a73d84e8f9ef3bd281156a336",
+      "bytes": 5479
+    },
+    "scripts/v29/run_real_strong_v29y_v2.py": {
+      "sha256": "ddef84a67807df0dd94036527c6aa3408cfa85028367107fbff0e9807ff27213",
+      "bytes": 5576
+    },
+    "scripts/v29/run_real_strong_v29y_v3.py": {
+      "sha256": "5d87bc25789f6f99a3edca17d9e2492265c0b74dd10f2bf91bad59c43b61d467",
+      "bytes": 5596
+    },
+    "scripts/v29/run_real_v29.py": {
+      "sha256": "368f4ffea94362e66d95191e6d85831e1608a20945a2b8bffe607447604c4799",
+      "bytes": 5052
+    },
+    "scripts/v29/run_real_v29_v2.py": {
+      "sha256": "bdbf9d14a3a65c5c2b7bfd121609fac3dfac123d972123e5b0ca6b272954c822",
+      "bytes": 5044
+    },
+    "scripts/v29/verify_amass_smplh_v1.py": {
+      "sha256": "da540df9c04b640f5167241b19c3cdf93c65171a68cce09637959da896f166ca",
+      "bytes": 5627
+    },
+    "scripts/v29/verify_amass_smplh_v2.py": {
+      "sha256": "a6f9b8007611e5c0360abebf1f5c235fff3af207fd2be14996ec42457c7585f9",
+      "bytes": 5642
+    },
+    "scripts/v29/verify_boundary_v1.py": {
+      "sha256": "0cd1002c1dcdcecac079d0b14df5019717e61ae44beb297c9a5ccd475f0d82f6",
+      "bytes": 3018
+    },
+    "scripts/v29/verify_boundary_v2.py": {
+      "sha256": "2d012ec8d05d0ef4ee8bb5e60e118c3952b1749e5b89af0457dd565790c86764",
+      "bytes": 3449
+    },
+    "scripts/v29/verify_strong_rgb_v29x.py": {
+      "sha256": "b08460f499906096332f498424f1355acc5eae3aebf14a94d4c1a40b7d286f6a",
+      "bytes": 13736
+    },
+    "scripts/v29/verify_strong_rgb_v29y.py": {
+      "sha256": "a714059470972abc7d2e6561ebec118b7a0a47db5d75900537719049071649b1",
+      "bytes": 15805
+    },
+    "scripts/v29/verify_v29.py": {
+      "sha256": "b844f04862af48e4d32ba68b28ff6c079e000fff515ce56b632d23ee0af16548",
+      "bytes": 5759
+    },
+    "scripts/v29/verify_v29_boundary_identity.py": {
+      "sha256": "d7b84a66f62acddc3c39a0cbd0cefab3ef483dbf2717d430e1d4d5ca1d1e970a",
+      "bytes": 4854
+    },
+    "scripts/v29/verify_v29_boundary_partition.py": {
+      "sha256": "64c036d5beb20b67a8af0c8e04af00b37e5b42f9ca05113d3bde7c2d0691cfaa",
+      "bytes": 3951
+    },
+    "scripts/v30/diagnose_geometry_repro_v30_v1.py": {
+      "sha256": "d0cf5120e2f78657ef86eec47d5ffdffe8edb4d599935e2292b761bd81e69f2a",
+      "bytes": 5145
+    },
+    "scripts/v30/evaluate_geometry_teacher_v30_v1.py": {
+      "sha256": "8a3812047618df5ec44dc2a81f12e0484903fb49c5320fd546f60d2dce37ec49",
+      "bytes": 8312
+    },
+    "scripts/v30/fit_geometry_teacher_v30_v1.py": {
+      "sha256": "e7106d9c3bed7c1689d1f88e41d97265b3df7592101f41ee95808b3ca87595b0",
+      "bytes": 9623
+    },
+    "scripts/v30/geometry_teacher_installation_v1.json": {
+      "sha256": "6e049b1ca7a3e12386f34d0b000dfd4eee56dc9b2bcdcf56df7a02911e55da8e",
+      "bytes": 1109
+    },
+    "scripts/v30/geometry_teacher_installation_v2.json": {
+      "sha256": "dce09e25d0ce9c3f844e91c2621519d0eb182e0d2abea684364ea733bb6ddb3b",
+      "bytes": 1272
+    },
+    "scripts/v30/geometry_teacher_installation_v3.json": {
+      "sha256": "759798e1822f73ed5e6dcf37dd4cad84d7d647120a2a5946537f9da03affbffe",
+      "bytes": 1435
+    },
+    "scripts/v30/geometry_teacher_installation_v4.json": {
+      "sha256": "e93879d6856c60b151cf5f4a4c68565bbef1f9f764732e1c976f07c305b58bd0",
+      "bytes": 1598
+    },
+    "scripts/v30/geometry_teacher_installation_v5.json": {
+      "sha256": "870044072cee35fab41f22a2d72be8b56354613660668bd64520ecc53863ffc4",
+      "bytes": 1761
+    },
+    "scripts/v30/launch_geometry_teacher_v30_v1.py": {
+      "sha256": "5cd90e7ae0dc1878a371e4e01235145b60c24949bebbaa041f2344b4e12ac040",
+      "bytes": 8776
+    },
+    "scripts/v30/launch_geometry_teacher_v30_v2.py": {
+      "sha256": "f25d9d77747f6fcca636a568f12b72226eaade5776e224dd40757d625485a988",
+      "bytes": 9752
+    },
+    "scripts/v30/launch_geometry_teacher_v30_v3.py": {
+      "sha256": "5b3c06e5a291a9d4f34828c7c0a3226009f844be14d576ed2b5cd0ea0cd4e1c1",
+      "bytes": 10160
+    },
+    "scripts/v30/launch_geometry_teacher_v30_v4.py": {
+      "sha256": "3824d92fad0f1ab1b967818e256b6fd0e941a41cd9837e8857d70a55fac34538",
+      "bytes": 11490
+    },
+    "scripts/v30/launch_geometry_teacher_v30_v5.py": {
+      "sha256": "29fcba2fdf52a721bfcb7ab9c55a2f300b50a011c5bda76aef647a5dfe59ad83",
+      "bytes": 11558
+    },
+    "scripts/v30/launch_v30_architecture_v1.py": {
+      "sha256": "f6920ffc5f0698276ca98267d361f1bb2cfcd2e3e9b22765f6ade545396ce2de",
+      "bytes": 5989
+    },
+    "scripts/v30/launch_v30_architecture_v2.py": {
+      "sha256": "7270d68c3f8a50c0ec0bb93654e08851bf7a95090f488b1a73a6d4c106d55d0d",
+      "bytes": 6203
+    },
+    "scripts/v30/launch_v30_architecture_v3.py": {
+      "sha256": "5547d1ff63614b1b17112ecca8e6949d545179e34d8e7bf95774e07a502a9c09",
+      "bytes": 6203
+    },
+    "scripts/v30/mhr_smpl_anchor_v30_v1.py": {
+      "sha256": "a31eff4c8292f08ead1e7d30fa8110ec953de7a7d182c78fb5ae2d089841df29",
+      "bytes": 5790
+    },
+    "scripts/v30/prepare_geometry_teacher_v30_v1.py": {
+      "sha256": "d2f7c70b8480b09b5c73836a6d3a94b30aec33d89c2c20cb080bcb88259b05cf",
+      "bytes": 16211
+    },
+    "scripts/v30/verify_real_v30_v1.py": {
+      "sha256": "260df23d40264b318164f100fb21d87e06f57258bd99caccab314d3922430adb",
+      "bytes": 6338
+    },
+    "scripts/v30/verify_real_v30_v2.py": {
+      "sha256": "8e86b863282175971c8a4dc01a95752e421b493058f5fbe09dd1424371cf7d81",
+      "bytes": 6500
+    },
+    "video_VACE/divibody_training/audit_full_3dpw_training_data.py": {
+      "sha256": "9544212378bfa50e3f5c0289cbd50b2d8909e1e984a79b6c03c425aec630f249",
+      "bytes": 3861
+    },
+    "video_VACE/divibody_training/audit_geometry_v3_run.py": {
+      "sha256": "633e4da079abf82b1352957523cd9ea79bd854b36240d309df8030325d4969f5",
+      "bytes": 7179
+    },
+    "video_VACE/divibody_training/audit_hmr2a_crop_protocol_v11.py": {
+      "sha256": "dfa85857b87cb6fb01747ebe0afb71b856d51a8dbd86e3290a53386007bc6e33",
+      "bytes": 7177
+    },
+    "video_VACE/divibody_training/audit_posetrack_images_v41.py": {
+      "sha256": "ab4d472bcf731325d1fd17d4ede2d0bc35578b4b17c94e09853632efca29c29f",
+      "bytes": 3229
+    },
+    "video_VACE/divibody_training/audit_posetrack_images_v41b.py": {
+      "sha256": "844a459160c784f88948ef7acb821fd773c2b725b2b5cee4daab2841bd4d0f9c",
+      "bytes": 3467
+    },
+    "video_VACE/divibody_training/audit_posetrack_image_normalizers_v4.py": {
+      "sha256": "9abf578ca523c4c3143a093615ef3ffd28e307f46841fc7b45e5e85632c040eb",
+      "bytes": 2596
+    },
+    "video_VACE/divibody_training/audit_posetrack_image_normalizers_v4b.py": {
+      "sha256": "eb9fdcbbb052245b4e54451e847f3ec462306e6829c5d988009d43d03d22cc89",
+      "bytes": 2612
+    },
+    "video_VACE/divibody_training/audit_pose_parts_v15.py": {
+      "sha256": "f2ab0a9f053b3a4faadcb9a4aeb0258ae9d4d98cbf20d54227f8550e0b8cf2fd",
+      "bytes": 3753
+    },
+    "video_VACE/divibody_training/autoresearch_body_v29.py": {
+      "sha256": "c45da19e19d11d830f42ab90607d3f32a09fe2aa64ed4102e5b0b66765135879",
+      "bytes": 3677
+    },
+    "video_VACE/divibody_training/autoresearch_joint_evidence_v41.py": {
+      "sha256": "8b78ef1f6de19898518bdf5e5115123f113c1f72667ce7da2da8274a54ff6fac",
+      "bytes": 20672
+    },
+    "video_VACE/divibody_training/autoresearch_pose_v42.py": {
+      "sha256": "9290c6c2cf826e485b8c8bafc68d8005143c49d1a7afcbff5c4199ddf37bd3fa",
+      "bytes": 20805
+    },
+    "video_VACE/divibody_training/build_validation_manifest_v20.py": {
+      "sha256": "6ce176bcf2b7c7fbe338517ee070e648a0f3928c27ebfe12781cb3c41af84eb6",
+      "bytes": 2653
+    },
+    "video_VACE/divibody_training/cache_continuous_3dpw_vace_features.py": {
+      "sha256": "b4e5fb9c8c017b3c088cba2384c68d22772a3c2ce85a4ef985439fa2f9caf8ee",
+      "bytes": 35431
+    },
+    "video_VACE/divibody_training/cache_continuous_3dpw_vace_features_v5.py": {
+      "sha256": "43e6349eee3991e3459ae2e3028d946b214fe058e118da729cd9a0b4514b8583",
+      "bytes": 44193
+    },
+    "video_VACE/divibody_training/cache_continuous_3dpw_vace_features_v6_stride4.py": {
+      "sha256": "c3dc0faa245ae280a1781ead97955c4118f22bc0b6be46238d8d03e6b4de40f3",
+      "bytes": 731
+    },
+    "video_VACE/divibody_training/cache_hmr2a_contract_v29_test.py": {
+      "sha256": "98a34f67a598c56cdfce140279172220164f9041d2463be2aa9da9293701da41",
+      "bytes": 14668
+    },
+    "video_VACE/divibody_training/cache_hmr2a_rgb_anchor_v11_raw.py": {
+      "sha256": "3f8a59aa5a5525b389270dc6510c1614f7f536255754f7e689d94b9e87aea503",
+      "bytes": 5057
+    },
+    "video_VACE/divibody_training/cache_hmr2a_rgb_anchor_v11_test_v1.py": {
+      "sha256": "bd779d3f57d0542b026dc51e9d347fa805a3de0e573e2d2506c2b08aff425602",
+      "bytes": 3755
+    },
+    "video_VACE/divibody_training/cache_hmr2a_rgb_anchor_v8.py": {
+      "sha256": "11c4c703f730cc1c622dc73ed8d1808f7293a23e206727af7e4037ef6c65f031",
+      "bytes": 13986
+    },
+    "video_VACE/divibody_training/cache_official_wan_text_embedding.py": {
+      "sha256": "f9482f9d42b0375f7604cfc5d99efdccfee3685dd949d5fcc22e1e6947e6a88c",
+      "bytes": 4087
+    },
+    "video_VACE/divibody_training/cache_posetrack18_hmr2a_anchor_v1.py": {
+      "sha256": "4a638b12c29fd4074a536b188b4dd2a50b86d5f1789162e3ded01ed5b0512baf",
+      "bytes": 7754
+    },
+    "video_VACE/divibody_training/cache_posetrack18_hmr2a_sharded_v2.py": {
+      "sha256": "bfae18cdcead17719d2aee319dc034fd9525e5bbbbc10089f82949e613b774eb",
+      "bytes": 11602
+    },
+    "video_VACE/divibody_training/cache_posetrack18_vace_features_v1.py": {
+      "sha256": "578f59368dbbdc39d1061d7e62dee9661a666faa21f4f053e152956afe950d23",
+      "bytes": 12040
+    },
+    "video_VACE/divibody_training/cache_posetrack18_vace_sharded_v2.py": {
+      "sha256": "92d74794b73a1130445cd132630cc851650529e1057651e39b2b295d607f078c",
+      "bytes": 15311
+    },
+    "video_VACE/divibody_training/cache_standard_3dpw_vace_features.py": {
+      "sha256": "a1f04fb33ec742e4b6a2795a36f26ebcf31117369b783bf9c0be16f1d2c3b5be",
+      "bytes": 7301
+    },
+    "video_VACE/divibody_training/cache_vace_phase_v14.py": {
+      "sha256": "92dddd5764d2628748c4f36f9a1c92b9757f2d77170ffb8c62de05cde242f693",
+      "bytes": 46276
+    },
+    "video_VACE/divibody_training/diagnose_vace_feature_use_v3.py": {
+      "sha256": "f4fcb025ab1f7cc02815b01ab3a17c0414c24dc87d97c0d5a9b5aa3e9abab4ba",
+      "bytes": 20532
+    },
+    "video_VACE/divibody_training/evaluate_coco_v27_occlusion.py": {
+      "sha256": "06fea3fa2ee09d3b6bae1b4ab3ba5cf26fa4c012f2728b576c545d75ed2aed4b",
+      "bytes": 13489
+    },
+    "video_VACE/divibody_training/evaluate_coco_v27_repeatframe.py": {
+      "sha256": "80b2adf5fb926e2701d42536c3e56683cfc32b1f5a830ea5d84c1b041b58d220",
+      "bytes": 12263
+    },
+    "video_VACE/divibody_training/evaluate_coco_v28_repeatframe.py": {
+      "sha256": "2ffe5bb737f8802969501c9ce80662cbb71f05931ce533e0098a1553ea7cec96",
+      "bytes": 12700
+    },
+    "video_VACE/divibody_training/evaluate_continuous_geometry_v5.py": {
+      "sha256": "b91ba1ac49a148e96c45915cb3894a7da625b4fd98a101fe5b2d1131fb6b1a22",
+      "bytes": 13587
+    },
+    "video_VACE/divibody_training/evaluate_continuous_geometry_v6_overlap.py": {
+      "sha256": "732531305dfc0ed1e07e36f7b1dbb598721abe9cdcadec0a1d6b5c26447ed0d5",
+      "bytes": 10999
+    },
+    "video_VACE/divibody_training/evaluate_divibody_real_3dpw.py": {
+      "sha256": "8993ee93b9cb7bb757632bbcbe547225e72b52d5854560c3f2c1816248d88b76",
+      "bytes": 7199
+    },
+    "video_VACE/divibody_training/evaluate_hmr2a_full_coco_v1.py": {
+      "sha256": "2c84b0078df4352aee8ae48cf165df9a844d6ebdfdbb98b5085c36c54489aa4c",
+      "bytes": 3723
+    },
+    "video_VACE/divibody_training/evaluate_hmr2a_full_posetrack18_v1.py": {
+      "sha256": "bbb32ff8bfbc8e7e9fc9b8b13dcf41c96611872c000701a612c44e144faab4c2",
+      "bytes": 5301
+    },
+    "video_VACE/divibody_training/evaluate_hmr2a_full_posetrack18_v2_protocol_audit.py": {
+      "sha256": "71ecb69bf3dceeb548a39e6ef25a808072abccbb8ef0905eab8899a60f85fbd1",
+      "bytes": 7232
+    },
+    "video_VACE/divibody_training/evaluate_hmr2a_official_posetrack_v41.py": {
+      "sha256": "cb62c7b2af54b2ad6a76ae3f9243d4903d74f30133b678c5dcad89d216a74c10",
+      "bytes": 15500
+    },
+    "video_VACE/divibody_training/evaluate_parts_v15.py": {
+      "sha256": "22d9f98df76bca3bc3a6e99f0dc4711aba7d2d6a558560d80543cc21b5440261",
+      "bytes": 5583
+    },
+    "video_VACE/divibody_training/evaluate_parts_v16.py": {
+      "sha256": "1bfd11edceb8a0adac663fc7443bf0fb883c2b1e8a56ca2c1bd8cdd8901aafff",
+      "bytes": 5616
+    },
+    "video_VACE/divibody_training/evaluate_parts_v16_diagnostic.py": {
+      "sha256": "dd6ad71f6e1b82eb7e56c9faa38535704c087edef9b5d850af4b0c478fd68485",
+      "bytes": 5603
+    },
+    "video_VACE/divibody_training/evaluate_parts_v17.py": {
+      "sha256": "5e36127178804b1ee88c19766c2e5e26b7c2a37fa5ac86f8c4781614b6443066",
+      "bytes": 5610
+    },
+    "video_VACE/divibody_training/evaluate_parts_v26.py": {
+      "sha256": "d96e56ff8deb471afd532d820bf4022161cdbf82eefc4d93413053ea387ad4dc",
+      "bytes": 5548
+    },
+    "video_VACE/divibody_training/evaluate_parts_v27.py": {
+      "sha256": "c92f880ccd255a04049aec463dbd9488c116b965345f42b373c90612011ea533",
+      "bytes": 5553
+    },
+    "video_VACE/divibody_training/evaluate_parts_v28.py": {
+      "sha256": "5bc591c38a92ca0e910d217a02b94bd79614f9b4b84494bcca3998533cb621a2",
+      "bytes": 5817
+    },
+    "video_VACE/divibody_training/evaluate_posetrack18_joint_mapping_v3.py": {
+      "sha256": "7bf241d23635716e66b22ea86eea3a27771eb3b3cfd4c92c5148a3fa8bd81bd2",
+      "bytes": 4877
+    },
+    "video_VACE/divibody_training/evaluate_posetrack_v27.py": {
+      "sha256": "9ebc0c43571fd631fae3747862322feb6602de619db9bd0d8216433d87aef034",
+      "bytes": 3672
+    },
+    "video_VACE/divibody_training/evaluate_posetrack_v28.py": {
+      "sha256": "7c013787b7ba227afa983e96be9852e3d2fbf8ac9afc62344326fdc659cbe2a6",
+      "bytes": 3831
+    },
+    "video_VACE/divibody_training/evaluate_ram_temporal_v10.py": {
+      "sha256": "202cdf22116382f05833c49c648cb3cfd6d2aee19aa9b95599c17d3e5cd52046",
+      "bytes": 5572
+    },
+    "video_VACE/divibody_training/evaluate_ram_temporal_v12.py": {
+      "sha256": "3505efce32209360da8de42ba65727aa1d0e8f9ede2a9f560d339cf5e72841c9",
+      "bytes": 5564
+    },
+    "video_VACE/divibody_training/evaluate_ram_v11_full_3dpw_test_v1.py": {
+      "sha256": "ea782198a8d5cfbf04ac21d1520f611dc49cb1b96b58096fb5abd665863fed2a",
+      "bytes": 5225
+    },
+    "video_VACE/divibody_training/evaluate_standard_3dpw.py": {
+      "sha256": "23ce0b09463a06c93510b6b3ff38a69ba3fea03e0d2334fc382266e12180c284",
+      "bytes": 35645
+    },
+    "video_VACE/divibody_training/evaluate_temporal_3dpw.py": {
+      "sha256": "d92df31351e0e9a1d9091d148b36337a0a33afd9c8d2120b5c7fb1dcbd50a17d",
+      "bytes": 32839
+    },
+    "video_VACE/divibody_training/evaluate_temporal_geometry_3dpw.py": {
+      "sha256": "5defb2777524e09f61d4f1da339b3a51757e6e9be3d267ae3c9e6344884bc247",
+      "bytes": 37242
+    },
+    "video_VACE/divibody_training/evaluate_unified_hmr2_divibody_3dpw.py": {
+      "sha256": "28ae3eff47cf77b7369a95540b495327c4b02f03199cb5e99effaf345fcbd776",
+      "bytes": 29643
+    },
+    "video_VACE/divibody_training/evaluate_v9_adaptation_v13.py": {
+      "sha256": "0190013cf81a9be00ef65e725bd54d17d19fc98961f03cbdc78ff33a8e4dbd0e",
+      "bytes": 5599
+    },
+    "video_VACE/divibody_training/geometry_metrics_3dpw.py": {
+      "sha256": "0dd7bed4794286e172d463a765649775f3dc35544e0ac0cc2bbf745ff9b8d121",
+      "bytes": 10047
+    },
+    "video_VACE/divibody_training/hmr2a_anchor.py": {
+      "sha256": "38de1a52cb346283691b09a51b53dbd52fc7d7f4214229b22bc3accbc9117e81",
+      "bytes": 4360
+    },
+    "video_VACE/divibody_training/launch_fusion_only_a2_server32.py": {
+      "sha256": "0cdcad587cf55fb668bb5286d50cbe9588b5ea5272a2b91dd0be8f9ed18bf8f4",
+      "bytes": 5409
+    },
+    "video_VACE/divibody_training/launch_parts_v15_server32.py": {
+      "sha256": "350c8c4b2a4ca8444f6a764dc2b48a92c6c0164b4e642a4b721f3b4a31305b7f",
+      "bytes": 4968
+    },
+    "video_VACE/divibody_training/launch_parts_v16_server32.py": {
+      "sha256": "37f19cd362e8c08dcd58d078b7105094e7e1149632057edabdb8e8f721166a7d",
+      "bytes": 4968
+    },
+    "video_VACE/divibody_training/launch_parts_v17_server32.py": {
+      "sha256": "9e89061c535d88b60f9abd4a0b63eac045e46677ae2d1179ce853af9aae2a217",
+      "bytes": 4979
+    },
+    "video_VACE/divibody_training/launch_parts_v18_server32.py": {
+      "sha256": "ee4eb499b726ce4501a9018ea83777acb6c1ec8f9ca19e66a349b5beaa2dffd8",
+      "bytes": 5152
+    },
+    "video_VACE/divibody_training/launch_parts_v19_server32.py": {
+      "sha256": "d0e22117ab1b99d780ce054168c2e1dfe4b4bd39e85bf60f7ca9697f3a4e52c9",
+      "bytes": 5416
+    },
+    "video_VACE/divibody_training/launch_parts_v20_server32.py": {
+      "sha256": "bb7597e8c00df9871bfabe8906bed7a5337062c5a26c7072314d4cba88f625f9",
+      "bytes": 7412
+    },
+    "video_VACE/divibody_training/launch_parts_v22_server32.py": {
+      "sha256": "00bf2bd77a05424e2c28800da483be386edfe71ac6f16dc1b8ce93f179d72ca6",
+      "bytes": 4343
+    },
+    "video_VACE/divibody_training/launch_parts_v23_server32.py": {
+      "sha256": "284ae8fc76a607a19cfb2de145c55377aa9857acecb0dcb3a0466d12368ea529",
+      "bytes": 4707
+    },
+    "video_VACE/divibody_training/launch_parts_v24_server32.py": {
+      "sha256": "31c105cbfbb28438a66792db2d19709b044a42f8eac4a9adbb4106d25dd1dfc0",
+      "bytes": 4957
+    },
+    "video_VACE/divibody_training/launch_parts_v25_server32.py": {
+      "sha256": "6bdd248fd600301972370f8eb1d81450183a2838cdb97c2ffe7970f7005b7bd5",
+      "bytes": 4966
+    },
+    "video_VACE/divibody_training/launch_parts_v26_server32.py": {
+      "sha256": "40691adf044df822aa9e21328fc06ac056f76136610c8fe2db6841f02b0db98b",
+      "bytes": 4959
+    },
+    "video_VACE/divibody_training/launch_parts_v27_server32.py": {
+      "sha256": "25dd3ebf7f61da4c4fdafd4c03f45a4ecc5525509c8fceff2b6365edc6084e33",
+      "bytes": 5301
+    },
+    "video_VACE/divibody_training/launch_parts_v28_server32.py": {
+      "sha256": "305a58657c71fe7a93a8e9d54d4bb45b3262e7e39d9d71ae1655a73e7de7a66b",
+      "bytes": 5712
+    },
+    "video_VACE/divibody_training/launch_ram_temporal_v10_server32.py": {
+      "sha256": "3f15a4efd65e57025b9c7ed09f3abae72a976a6562186adad359d599b50ca103",
+      "bytes": 4193
+    },
+    "video_VACE/divibody_training/launch_ram_temporal_v12_server32.py": {
+      "sha256": "46cb415fff85dda1faf260e79f8c342585c40d2c64121e4192099952d96b082b",
+      "bytes": 4217
+    },
+    "video_VACE/divibody_training/launch_ram_v8_server32_20260907.py": {
+      "sha256": "3e6d161825e9d6d4484fff00b9792533e9585e22f316dc7c8168a1d600352ed2",
+      "bytes": 3583
+    },
+    "video_VACE/divibody_training/launch_v9_adaptation_v13_server32.py": {
+      "sha256": "5651733e7aae7a03792df56fe7b74f973089d771cf8bc3a94e4075f2addddae9",
+      "bytes": 4520
+    },
+    "video_VACE/divibody_training/merge_coco_v27_parts.py": {
+      "sha256": "d8a37539f2eb0d532e11fb69e1fe795991e021c7b3cc8aa026ad9f222328e258",
+      "bytes": 3697
+    },
+    "video_VACE/divibody_training/parts_training_utils_strong_rgb_v29x.py": {
+      "sha256": "a8c61085747c6ae9b157e6f2ee75b335007be0f438cf07e4eea6e2e029f450c5",
+      "bytes": 4608
+    },
+    "video_VACE/divibody_training/parts_training_utils_strong_rgb_v29y.py": {
+      "sha256": "76f64dbf73cefeeadec7ed3043bd7df2c054e62cb1b5f10f2ec9dd27d42f0c10",
+      "bytes": 4622
+    },
+    "video_VACE/divibody_training/parts_training_utils_v20.py": {
+      "sha256": "7ae8dc2ba033ce8fde76bc43ce6a92a9e3bc79ba31b681aec4579d19816a1346",
+      "bytes": 8373
+    },
+    "video_VACE/divibody_training/parts_training_utils_v22.py": {
+      "sha256": "4036bb13d793d68266a3723a6a2bc8e1615b100c14e1698f54e3aaf4077ea9e0",
+      "bytes": 3871
+    },
+    "video_VACE/divibody_training/parts_training_utils_v23.py": {
+      "sha256": "27d0a2203448d8bbd67decfdcfa50566263f9c216c90d2e80f4283924fcd7b9c",
+      "bytes": 3529
+    },
+    "video_VACE/divibody_training/parts_training_utils_v24.py": {
+      "sha256": "83ddd5711c8e6b0286c1e18d7c8098cc3f3654e2b29bad45f88ee5741bf5e8ca",
+      "bytes": 3529
+    },
+    "video_VACE/divibody_training/parts_training_utils_v25.py": {
+      "sha256": "6ad353f854711f80622aab255f0626f9ba6a85f4db21c1cb4b2fcddf693ab843",
+      "bytes": 3529
+    },
+    "video_VACE/divibody_training/parts_training_utils_v26.py": {
+      "sha256": "b11395700f53c8411d1b9a1fa4d78ab35011b4cc52d735659cf99bd830fd4600",
+      "bytes": 3568
+    },
+    "video_VACE/divibody_training/parts_training_utils_v27.py": {
+      "sha256": "6e60c66b19732161c74945bb31b0ec91d248bbdbadbaaabf1b34b2f70c266c3a",
+      "bytes": 3668
+    },
+    "video_VACE/divibody_training/parts_training_utils_v28.py": {
+      "sha256": "62168eecfbe01c880bd881c5e5823762648ba7ba7c5286c3f5bba5cd9a9a37ba",
+      "bytes": 3953
+    },
+    "video_VACE/divibody_training/parts_training_utils_v29.py": {
+      "sha256": "19d83f7ed98bbd88ba82625c953d84ba859566bc703590bc264b3dcc1254174f",
+      "bytes": 4133
+    },
+    "video_VACE/divibody_training/parts_training_utils_v30.py": {
+      "sha256": "97c1dff685f4cf29e2d7250928a0af0ac13207fae8ad743a212cc0a69ef18cfd",
+      "bytes": 4299
+    },
+    "video_VACE/divibody_training/parts_training_utils_v41.py": {
+      "sha256": "fb5b9a45ea2d3e57c803a44554bd63450ed925a3445be5d7fb852fb3ebb7229f",
+      "bytes": 4265
+    },
+    "video_VACE/divibody_training/prepare_hmr2_official_posetrack_v41.py": {
+      "sha256": "6b0ce0e03241f618d5348dd8831ac0bf5c590fc99829fd17d9cc3e2b8032ad38",
+      "bytes": 15117
+    },
+    "video_VACE/divibody_training/prepare_phase_caches_v14.py": {
+      "sha256": "9cfa4a69e11aedf6ec2f8319e20f81a4a3616692d05e1b5f93a86d46079e00eb",
+      "bytes": 2868
+    },
+    "video_VACE/divibody_training/preprocessing_v14.py": {
+      "sha256": "4e98e37f4f62dc75aba419089c48a4f0694f204b9f33bd3f09bd81ce4ec457a2",
+      "bytes": 6585
+    },
+    "video_VACE/divibody_training/ram_adaptation_runtime_v13.py": {
+      "sha256": "d0b635a3541f5b008e1e6820a9f23f22a51e3981211656b2c257c6568ffef280",
+      "bytes": 12476
+    },
+    "video_VACE/divibody_training/ram_fusion_only_a2_runtime.py": {
+      "sha256": "cefe850c5a22a287c5c78c33a40dc89c4410369893ff4c69fc0c251143faec74",
+      "bytes": 11506
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v15.py": {
+      "sha256": "4fbc284ece72a405aa47b8e1389aa6d276d78f90ac4378a48656f715aef0b1dd",
+      "bytes": 11428
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v16.py": {
+      "sha256": "f86bb55495026f51ad09023b70d49d030f08b7c3217f62bce52dc00a11ecf8d7",
+      "bytes": 11428
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v19.py": {
+      "sha256": "b83efc2af0d6d5c269000d844a36153e2d268697d9c6cc9f8223f26f0d7f71a2",
+      "bytes": 11507
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v20.py": {
+      "sha256": "88f2233987de12bba9f63e1586d8821a4a4589f227d25b64ed85554ee1c5bdb1",
+      "bytes": 10767
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v22.py": {
+      "sha256": "3fa55ad92a31dcfb6c90de538c1f943acfa48bd0e803589019b042cfe22b9312",
+      "bytes": 10768
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v23.py": {
+      "sha256": "7381c318ac2ee24f70090852ec1e16337bf3dc85728996997e19873fc0b80432",
+      "bytes": 10768
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v24.py": {
+      "sha256": "7f3fa4cad9f8bc07da3c2ffc5b97bfea18f7d45c405cf63786ba8b9a7c7167e2",
+      "bytes": 10768
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v25.py": {
+      "sha256": "41b2620419075ac35d4bab7d7a89365bc510346e936c08ae883908cba4869507",
+      "bytes": 10768
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v26.py": {
+      "sha256": "688286fbad6cb3253cbe6f290e317265c11fda774e1d3b504b6b7aa4b53dc2db",
+      "bytes": 10842
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v27.py": {
+      "sha256": "b72f7272c1e474bdd8752d9d9bc3b35ddd568c6ca350f2781eacdc493abbab28",
+      "bytes": 12708
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v28.py": {
+      "sha256": "ef10526d4d16e94ac8486591104d61062331a000e1c9c2ba1804a44279ae1835",
+      "bytes": 6113
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v29.py": {
+      "sha256": "1bff30c3274be5758a9d0392712f796792727b45c5ca8a664ea542c1faa67569",
+      "bytes": 7001
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v30.py": {
+      "sha256": "968060eb49d4aec1fcaa36b4f0344ea16267ce26762a3ff909e0289f1cace1b0",
+      "bytes": 7496
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v39.py": {
+      "sha256": "2028ccf0086b8438ce82e38ed537489455eceb41f44f648cb85dff75674457e5",
+      "bytes": 8134
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v39b.py": {
+      "sha256": "78e49dbdf6d0d30ec2c8147d792cab4479b2694401af33d1565ba68f06be16ce",
+      "bytes": 8028
+    },
+    "video_VACE/divibody_training/ram_parts_runtime_v41.py": {
+      "sha256": "6b84a4371b90b4a94930d81f89ef29a2671849b6a797fece000a0c8cbb48fa05",
+      "bytes": 13402
+    },
+    "video_VACE/divibody_training/ram_pose_stream_v10.py": {
+      "sha256": "888856881175b472690c0dbe0ea05883960976358324e032f91932f0d90cda76",
+      "bytes": 8650
+    },
+    "video_VACE/divibody_training/ram_pose_stream_v41.py": {
+      "sha256": "e59bcc27e3e3704e030f03deba10c498a08ad09540c73808a698ebbf34f364d4",
+      "bytes": 8995
+    },
+    "video_VACE/divibody_training/ram_ready_adapter_v1.py": {
+      "sha256": "81cfbc4c19c6998e0a606d274cb105f545e56151b961d282cef5565c74f38775",
+      "bytes": 10439
+    },
+    "video_VACE/divibody_training/ram_temporal_runtime_v10.py": {
+      "sha256": "d895c3e1dd1691607df8718c32bf64bad50d94c1cd16762a251c7b4adbe3207e",
+      "bytes": 11442
+    },
+    "video_VACE/divibody_training/ram_temporal_runtime_v12.py": {
+      "sha256": "b6fdf64bbe7b1d6855404c08514d5590dba2973a18cc093cfbedfe8af16e8a97",
+      "bytes": 11439
+    },
+    "video_VACE/divibody_training/real_3dpw_dataset.py": {
+      "sha256": "09403683b1f301e8e1ea1c8bf1ed0846c9881881b8e61325bd2793c1e720f1cf",
+      "bytes": 15863
+    },
+    "video_VACE/divibody_training/real_vace_feature_encoder.py": {
+      "sha256": "29ef1ffe15ebab1669b779fa40a973b5d512e6d2dbbdc88fdd6f355eda1cdac0",
+      "bytes": 6784
+    },
+    "video_VACE/divibody_training/real_vace_temporal_feature_encoder.py": {
+      "sha256": "0059ccc9e72bdc5a702c473dfa13e5823110015c2a44cbba53dbdb2bca232275",
+      "bytes": 8964
+    },
+    "video_VACE/divibody_training/real_vace_temporal_feature_encoder_v2.py": {
+      "sha256": "42d385afe8a232bf0624345e1e34b341afc0e762efb80b106ce4e0571babde21",
+      "bytes": 12575
+    },
+    "video_VACE/divibody_training/run_v14_full_pipeline_server32.py": {
+      "sha256": "7daf4aef23ca7e26d2d953b74171972cad124ae03fc6f30a4a6a8c0e915f02f2",
+      "bytes": 4950
+    },
+    "video_VACE/divibody_training/run_vace_sdpa.py": {
+      "sha256": "a838d53829a16395284cb6b44fa07178e1f0ddbe0347068a3b5916cb33ee4fa9",
+      "bytes": 3401
+    },
+    "video_VACE/divibody_training/smoke_physical_v41.py": {
+      "sha256": "de0576b92ded85f9803af7bc5c3038c82568dfc312dc69ef4aa7c9e3f90e3c0d",
+      "bytes": 6690
+    },
+    "video_VACE/divibody_training/smoke_temporal_vace_features.py": {
+      "sha256": "35932912c61398b707dc334cd1f97244505cecafdd3e11915caf5111e362350e",
+      "bytes": 7246
+    },
+    "video_VACE/divibody_training/smoke_temporal_vace_protocols.py": {
+      "sha256": "0c410ae5b83257169a7dfdbfee26c46ef61d24d70e0342e1a3d2bb29d69902a9",
+      "bytes": 6004
+    },
+    "video_VACE/divibody_training/test_cache_continuous_3dpw_vace_features_v5.py": {
+      "sha256": "cbf462f2e4517fd99c21585aa57a30c4d5ebdd18442ee32c4507d131d746cd2c",
+      "bytes": 10792
+    },
+    "video_VACE/divibody_training/test_continuous_geometry_v5.py": {
+      "sha256": "ba7e9e380964bf05340d020837b03ea54185836543560a3a0e911944f5d0bdcc",
+      "bytes": 1953
+    },
+    "video_VACE/divibody_training/test_continuous_geometry_v6_overlap.py": {
+      "sha256": "461e8b0cb89d99ef3e20d8c4ab36ba3caa371936a547f0ec6e96a978eed9bd4d",
+      "bytes": 1038
+    },
+    "video_VACE/divibody_training/test_geometry_decoder_v3.py": {
+      "sha256": "092d548efad4a96c0a609fd137091a9224b676dcaabe71c303e67a482a276656",
+      "bytes": 11965
+    },
+    "video_VACE/divibody_training/test_geometry_evaluator_v3.py": {
+      "sha256": "d1938e5db9466f0e2e57326159150a3964344a94110660f72e5735cd148f6d1d",
+      "bytes": 15711
+    },
+    "video_VACE/divibody_training/test_geometry_metrics_3dpw.py": {
+      "sha256": "438c61536bd1a712da542c4f63f055185d5f33643778d8e442f4614bfad85607",
+      "bytes": 2896
+    },
+    "video_VACE/divibody_training/test_geometry_training_v3.py": {
+      "sha256": "5b3f739f5f6685652e5dbfaa539a1b2d84e95e740e1aee2737a76ed495a5b284",
+      "bytes": 3969
+    },
+    "video_VACE/divibody_training/test_geometry_video_decoder_v4.py": {
+      "sha256": "b5090b7c48da43d8f631235140e79143961c29f6fd3d8b24b1469c1b51f7de1b",
+      "bytes": 8688
+    },
+    "video_VACE/divibody_training/test_hmr2a_rgb_anchor_cache_v8.py": {
+      "sha256": "7a2d59d3470196fcab361fadd1126bd91d36fc6bc4cd5f09968b0825c101505a",
+      "bytes": 2510
+    },
+    "video_VACE/divibody_training/test_joint_evidence_v41.py": {
+      "sha256": "07d455d25e9edf53a48b74c12feada49f07f8356e629ee67c7d3ea76cd2a45b6",
+      "bytes": 6730
+    },
+    "video_VACE/divibody_training/test_parts_v15.py": {
+      "sha256": "056f9671c03c95b9d2f5f95de1d81ab6e8a70c5957ca843ec8983026e767b7ca",
+      "bytes": 4042
+    },
+    "video_VACE/divibody_training/test_parts_v16.py": {
+      "sha256": "9329e8fb179f342b18c822156e236c1f8aae9c088a23c5e12794a6d65b158213",
+      "bytes": 6066
+    },
+    "video_VACE/divibody_training/test_parts_v20.py": {
+      "sha256": "2ef33927ec541a194e8a45b19206560db4e2134149ef2cafc089ea50ed53009b",
+      "bytes": 14998
+    },
+    "video_VACE/divibody_training/test_parts_v22.py": {
+      "sha256": "7916a6d15f71d5b949d94cbbbef716cfc64ce3d30223579e36d31e7771f2316d",
+      "bytes": 12783
+    },
+    "video_VACE/divibody_training/test_parts_v28.py": {
+      "sha256": "23e42969e8d30b75ca37457010a21af3c7ef54a9d10fcf5800613539d757154d",
+      "bytes": 7166
+    },
+    "video_VACE/divibody_training/test_preprocessing_v14.py": {
+      "sha256": "d75954a9e512be7127a1aeb519e353672fccdfea129adc49a4ff30f0ffa9bfeb",
+      "bytes": 3065
+    },
+    "video_VACE/divibody_training/test_ram_bounded_v12.py": {
+      "sha256": "7046366444e559c7177a152bab7ef8d3b4b5a4f46135ec37b8aba86be9a6539b",
+      "bytes": 4155
+    },
+    "video_VACE/divibody_training/test_ram_geometry_priority_v9.py": {
+      "sha256": "1aa49188d5c67c5f72db2d9b627ff90f96e642543a3e63b0bba7d5be8e794e68",
+      "bytes": 2937
+    },
+    "video_VACE/divibody_training/test_ram_pose_stream_v10.py": {
+      "sha256": "fc978189340f7ee36755466ea51c1522ebf38912cb6177f9092a57613e4ab33b",
+      "bytes": 7200
+    },
+    "video_VACE/divibody_training/test_ram_temporal_refinement_v10.py": {
+      "sha256": "373072438f79027dad6fd8b0547caebab2a852fb903560d77361e1bdbbc895d8",
+      "bytes": 11539
+    },
+    "video_VACE/divibody_training/test_real_vace_temporal_feature_encoder.py": {
+      "sha256": "76e068d3f0276a405368be9bafbb0233b113139c0a3c82e3bbec94710d42e788",
+      "bytes": 1460
+    },
+    "video_VACE/divibody_training/test_real_vace_temporal_feature_encoder_v2.py": {
+      "sha256": "cf94372f7d9dc80dfbe30bd363319f444390758512d6ee53512b01a2ca70850f",
+      "bytes": 1590
+    },
+    "video_VACE/divibody_training/test_rgb_vace_active_temporal_v9.py": {
+      "sha256": "b8f082215f61ce673391f927afe22a1b9b3132abb02ec58dbf7199fa5599298a",
+      "bytes": 1255
+    },
+    "video_VACE/divibody_training/test_rgb_vace_geometry_v7.py": {
+      "sha256": "682d5de2c25f2081429b075f03483baa806ddfaa90513ea0b468dc673e10c64d",
+      "bytes": 4701
+    },
+    "video_VACE/divibody_training/test_rgb_vace_hmr2a_v8.py": {
+      "sha256": "f26a524cc829b7f98f36bb5f8a810d7e6c4daa11e258f0fc098871ca5b8cba93",
+      "bytes": 1413
+    },
+    "video_VACE/divibody_training/test_rgb_vace_training_v7.py": {
+      "sha256": "eef1dc7654f3bd2f81cb1721054703b9c7839d9ea71727acd262be8027b17f0b",
+      "bytes": 3570
+    },
+    "video_VACE/divibody_training/test_temporal_3dpw.py": {
+      "sha256": "b9159f17bfa3b766805387b397b30d94ac037ec5c6e9f51bff64d65ebd328754",
+      "bytes": 10217
+    },
+    "video_VACE/divibody_training/test_temporal_camera_3dpw.py": {
+      "sha256": "6a08b99b9e4e1ac1c9c530dee5acb6a7a8dd2dad5df0b4aaf7cafdb32309fe3d",
+      "bytes": 3737
+    },
+    "video_VACE/divibody_training/test_unified_hmr2_divibody_3dpw.py": {
+      "sha256": "586113aa3b178b5e0b07052f10f70124a3e20d6ce84dd59042cec1e004df49b0",
+      "bytes": 989
+    },
+    "video_VACE/divibody_training/test_v28d_engine_resume.py": {
+      "sha256": "9a487822970822ad22ea103daea3a52ac6e2908383ef1900391a8aefc89f9e87",
+      "bytes": 4834
+    },
+    "video_VACE/divibody_training/test_v28d_experiments.py": {
+      "sha256": "48a6d56e997f75dc01b28de57ee6f2898644d4fb5a44f28de51d1cc2a404a8db",
+      "bytes": 4955
+    },
+    "video_VACE/divibody_training/test_v9_adaptation_v13.py": {
+      "sha256": "e143144ab51b0c926558540c0b764a593b400ef0cf01017c3f2acda258ec7b4f",
+      "bytes": 4850
+    },
+    "video_VACE/divibody_training/train_divibody_continuous_geometry_v5.py": {
+      "sha256": "332f80e177a5dd48b5398cbc2d06327366ca30d80c01b8f910f4bf84a2dc2e9a",
+      "bytes": 29508
+    },
+    "video_VACE/divibody_training/train_divibody_real_3dpw.py": {
+      "sha256": "098f11a506046937d9a993fe6efb712a345d1a7b8f2a840d1b25a12a0bafa525",
+      "bytes": 36884
+    },
+    "video_VACE/divibody_training/train_divibody_real_3dpw_geometry.py": {
+      "sha256": "7fea6ede5313a69488a495aede71146fe03861653df279cfe884d965c1b8168a",
+      "bytes": 27918
+    },
+    "video_VACE/divibody_training/train_divibody_real_3dpw_temporal.py": {
+      "sha256": "7112732454a775ab3f75c4856d5e55c9da706a0f9bf171cbcae8ccb52eb5f486",
+      "bytes": 23824
+    },
+    "video_VACE/divibody_training/train_divibody_real_3dpw_temporal_camera.py": {
+      "sha256": "6be12fe179dfbef5976905b893603b54048cb146d7ef58644c1071ce07db0c57",
+      "bytes": 17963
+    },
+    "video_VACE/divibody_training/train_divibody_rgb_vace_hmr2a_v10_small.py": {
+      "sha256": "637935140f769699eaeb6164d973b6385ec67eef2df47bc980129133460442a9",
+      "bytes": 3653
+    },
+    "video_VACE/divibody_training/train_divibody_rgb_vace_hmr2a_v11_raw_small.py": {
+      "sha256": "029d1a887d54508c06bad7aa2edb7680a64dfcd648190437e441d40ad57deeb9",
+      "bytes": 3546
+    },
+    "video_VACE/divibody_training/train_divibody_rgb_vace_hmr2a_v8.py": {
+      "sha256": "e8a0f0b7e1f68e2a41fefdba6aa05c0d1105e7bbe6aea00c2860ef3f353f9e15",
+      "bytes": 11401
+    },
+    "video_VACE/divibody_training/train_divibody_rgb_vace_hmr2a_v9_small.py": {
+      "sha256": "0b695299da02ed759892b04af38236d2ff1808f5103a9ee33a8d6b7e464efc3c",
+      "bytes": 8063
+    },
+    "video_VACE/divibody_training/train_divibody_rgb_vace_v7.py": {
+      "sha256": "d5308a4c1c6832ffa73dc2c21a344d619e911ab440633c0b37351f2aba55d9f5",
+      "bytes": 19881
+    },
+    "video_VACE/divibody_training/train_fusion_only_a2.py": {
+      "sha256": "272e3505f86c5a6f87839c3ff6fa24b01207fed1d368083d6657e4c8bf57fd1c",
+      "bytes": 17318
+    },
+    "video_VACE/divibody_training/train_parts_strong_v29y.py": {
+      "sha256": "64abefb85b8313a56128ec5b2f1d4367c20e63ff627bb4fde903c5adee7c7e5e",
+      "bytes": 13647
+    },
+    "video_VACE/divibody_training/train_parts_v15.py": {
+      "sha256": "3a726b753becc3fb604b485723b6f2bbdd06a5e1ae726eed4795ba4d31b179dd",
+      "bytes": 16518
+    },
+    "video_VACE/divibody_training/train_parts_v16.py": {
+      "sha256": "f9475f1353414b9a7385a4fd4ff711bcd4376996793da256f45ad00e5aedb8e3",
+      "bytes": 16558
+    },
+    "video_VACE/divibody_training/train_parts_v17.py": {
+      "sha256": "186f6abd7701326978c3c86b9518644ae1cf36baed186ff2fde02ac9e96dd332",
+      "bytes": 16645
+    },
+    "video_VACE/divibody_training/train_parts_v19.py": {
+      "sha256": "afcaf7c9ed74a6f95b9322abdef642e671f27d92cb17abcf6bb69c38174760fe",
+      "bytes": 17665
+    },
+    "video_VACE/divibody_training/train_parts_v20.py": {
+      "sha256": "44017d71eddf962a480a31cc38c1435094cc9a3d352df0105a7d5416a246aa26",
+      "bytes": 19898
+    },
+    "video_VACE/divibody_training/train_parts_v22.py": {
+      "sha256": "eee9baaea51bd0c676383a404e4ce70da1caf77e71062843fa47db8e2ed83b44",
+      "bytes": 12870
+    },
+    "video_VACE/divibody_training/train_parts_v23.py": {
+      "sha256": "d02a2052df384424c623f594153532a75de5525989266264c3bc35c1e96026fe",
+      "bytes": 13999
+    },
+    "video_VACE/divibody_training/train_parts_v24.py": {
+      "sha256": "ffc95435e9a7ca9daf3833887d952b203b5f2ef684e2168ac0ee213b4dc055fd",
+      "bytes": 16054
+    },
+    "video_VACE/divibody_training/train_parts_v25.py": {
+      "sha256": "619cd50570ed3df0a7f0d994ab6742bd036abf586d4b04b6b40c53b13c6404ac",
+      "bytes": 16055
+    },
+    "video_VACE/divibody_training/train_parts_v26.py": {
+      "sha256": "ef32f44a3c6593ed3aabbd6b1b7cb740d8c2bc64f5830056842e35db38265544",
+      "bytes": 16179
+    },
+    "video_VACE/divibody_training/train_parts_v27.py": {
+      "sha256": "9faf6dbdf1a8930d5c4c3c0de94e30f28c4e98b6d551c6eb2d919295abf24b70",
+      "bytes": 16450
+    },
+    "video_VACE/divibody_training/train_parts_v28.py": {
+      "sha256": "126fc6ff811c35a97c7b30402b75ecbd0f234c4f1b7a2b803016872d59f8b854",
+      "bytes": 18376
+    },
+    "video_VACE/divibody_training/train_parts_v28d_balanced.py": {
+      "sha256": "b1b24bb665b12512e6827341a528dd9acdf67752ec9fa3698f183730c1012e98",
+      "bytes": 10689
+    },
+    "video_VACE/divibody_training/train_parts_v29.py": {
+      "sha256": "323c0582d0970e2a3756aa254fb5ef797c2f4c95abc871cc0ea5dbd2771c80a8",
+      "bytes": 11912
+    },
+    "video_VACE/divibody_training/train_parts_v29_boundary.py": {
+      "sha256": "73c031500dc8d523b70935c8f9b41d5f886cc62970f6a8b6c2d2f2564310543f",
+      "bytes": 12416
+    },
+    "video_VACE/divibody_training/train_parts_v29_boundary_v2.py": {
+      "sha256": "051ec3f4729b254fa291209d2d321ff0a2c41c13dcbce42ccc7342fe87689200",
+      "bytes": 12419
+    },
+    "video_VACE/divibody_training/train_parts_v29_research.py": {
+      "sha256": "f7645c94f45e8101c56785d76cc29f1d6204b6bcb80c0685e82c3439d63883d0",
+      "bytes": 19537
+    },
+    "video_VACE/divibody_training/train_parts_v29_stable.py": {
+      "sha256": "eb6c6f48d9c5c6f62839e39160d64a26b052d38638517868de342ece23561b49",
+      "bytes": 12113
+    },
+    "video_VACE/divibody_training/train_parts_v29_stitched.py": {
+      "sha256": "6ce43a5682e11245332feea60c8a365a70e9f9cf1231512fc7bd5136f3d8b460",
+      "bytes": 12416
+    },
+    "video_VACE/divibody_training/train_parts_v31_routed.py": {
+      "sha256": "e140a60e7d9ba455f96bb7be44073871df08a058a9e5a55288f46a8a7b0d1986",
+      "bytes": 20498
+    },
+    "video_VACE/divibody_training/train_parts_v33_staged.py": {
+      "sha256": "04b9534f5a4792b153a0c1790878c488fda819eeccb9e4c9d7d749fd2a8d6397",
+      "bytes": 20722
+    },
+    "video_VACE/divibody_training/train_parts_v35_camera_observation.py": {
+      "sha256": "4d328ef167ad740f073fc47c88db4f9e65a879596fde14030d6c415aa432d326",
+      "bytes": 20819
+    },
+    "video_VACE/divibody_training/train_parts_v36_camera_rotation.py": {
+      "sha256": "0f688db8ec4f3e7153f2d225af130491277229e9759911b4316f7a23b105ef97",
+      "bytes": 20910
+    },
+    "video_VACE/divibody_training/train_parts_v39b_lsp_head.py": {
+      "sha256": "96b45168d39abd1f22411fa4670a82e3d9466cdb56aa9dcb21eb9b888c7356e8",
+      "bytes": 20734
+    },
+    "video_VACE/divibody_training/train_parts_v39_lsp_head.py": {
+      "sha256": "1cc2f7bc968b9f3dbac2b0127908a5e91acedb8e070ca8e0df9d1b2f3201ea11",
+      "bytes": 20723
+    },
+    "video_VACE/divibody_training/train_parts_v41_joint_evidence.py": {
+      "sha256": "74f926091f3d508ed6b32073a00fea3fd0d36f74387554d90241f9727f6f09c8",
+      "bytes": 21490
+    },
+    "video_VACE/divibody_training/train_ram_geometry_priority_v9.py": {
+      "sha256": "eadcc01ed3c58c0ba87b7597cb6ee805f5c656c5ce22aaa9c6863db0b83b09ef",
+      "bytes": 19587
+    },
+    "video_VACE/divibody_training/train_ram_joint_sharded_pose_geometry_v7.py": {
+      "sha256": "6e2f8c15b3291a636de0d1863a38e589e2dff72d477a1d2b602f33bb01d60824",
+      "bytes": 15138
+    },
+    "video_VACE/divibody_training/train_ram_mixed_3dpw_posetrack_v1.py": {
+      "sha256": "7cafb0c7933606623105c6eb39c0399a450fc0fcd20d8d12b6339f0c216effea",
+      "bytes": 14538
+    },
+    "video_VACE/divibody_training/train_ram_mixed_official_pose_v3.py": {
+      "sha256": "fb19dc1b2810341201c6f542d89a1fcf6abd2f3939bd2478cdcbc2bb15b12280",
+      "bytes": 10394
+    },
+    "video_VACE/divibody_training/train_ram_mixed_temporal_gate_v2.py": {
+      "sha256": "64f1daeabc5b34e53912f9c48a4e3e15730b54e3df6f47717017241f41eb6542",
+      "bytes": 7649
+    },
+    "video_VACE/divibody_training/train_ram_posetrack_camera_v4.py": {
+      "sha256": "9f911d4913dbe433af412c4ab76f90454fb907f62b30b3c585ec39690c36b926",
+      "bytes": 7676
+    },
+    "video_VACE/divibody_training/train_ram_posetrack_camera_val_v5.py": {
+      "sha256": "aab5ab8f1eb2e4ad00e7dcee76ac4317264a6e6766d4f7ac16060446f2093ea1",
+      "bytes": 9497
+    },
+    "video_VACE/divibody_training/train_ram_posetrack_sharded_camera_v6.py": {
+      "sha256": "52123836e5ebc72418bc3e07a724597dcaeaf407628554f9366133cbdfbf5cd3",
+      "bytes": 11219
+    },
+    "video_VACE/divibody_training/train_ram_ready_v11_smoke_v1.py": {
+      "sha256": "757291d5359e972ca7548d95c9705951aa57b27740908d391aa38b7a15d36813",
+      "bytes": 3654
+    },
+    "video_VACE/divibody_training/train_ram_temporal_refinement_v10.py": {
+      "sha256": "294810ae3242aeb0bf84eaf3aeca8765ab003f21c8c1d9b831c4aa5045ab356f",
+      "bytes": 23261
+    },
+    "video_VACE/divibody_training/train_ram_temporal_refinement_v12.py": {
+      "sha256": "553730cb3f97eb45894a9c4bc1a786e7b775345ca854dda282c9b705161e9cf3",
+      "bytes": 23395
+    },
+    "video_VACE/divibody_training/train_ram_two_stage_camera_geometry_v8.py": {
+      "sha256": "c2d968e6c54cc6c4e7d97fdf1f41e3c10c08a9e42d79da8fb752c7de2a818915",
+      "bytes": 16321
+    },
+    "video_VACE/divibody_training/train_spatiotemporal_v30.py": {
+      "sha256": "6ce43a5682e11245332feea60c8a365a70e9f9cf1231512fc7bd5136f3d8b460",
+      "bytes": 12416
+    },
+    "video_VACE/divibody_training/train_spatiotemporal_v30_v2.py": {
+      "sha256": "5603427acd1bbd7c1e8c8eb46308a08e4e3692bb7d9ef9df4981beb1d66bd688",
+      "bytes": 12923
+    },
+    "video_VACE/divibody_training/train_spatiotemporal_v30_v3.py": {
+      "sha256": "d5bb15fdf965709edca7e97599dd5aefec594db38ea1d54aa34506d77101bd88",
+      "bytes": 12911
+    },
+    "video_VACE/divibody_training/train_v9_adaptation_v13.py": {
+      "sha256": "666835cd22b8ed24e913d4d22dfd80f68f657c7deaaef6c599a900de7383732f",
+      "bytes": 14333
+    },
+    "video_VACE/divibody_training/train_v9_phase_v14.py": {
+      "sha256": "863fc6dffb5d8634d13a3337bad583db411685ffbf7a7b0f95d3f78e088dc54c",
+      "bytes": 15591
+    },
+    "video_VACE/divibody_training/v28d_autoresearch_server32.py": {
+      "sha256": "6c538b5d83bfafed6ea744b9c3a50ebfca10ce6db875bef44df074580dccb501",
+      "bytes": 10043
+    },
+    "video_VACE/divibody_training/v28d_experiments.py": {
+      "sha256": "26c83271561acf47cf73f4e3e4a6eaa357586bef8c9686b0e8548bb66ffe9c7d",
+      "bytes": 9559
+    },
+    "video_VACE/divibody_training/v28d_experiment_utils.py": {
+      "sha256": "502797992488d860d8a3cb92acd650eacfacecc5699f65ce49442c5b4e5869aa",
+      "bytes": 10578
+    },
+    "video_VACE/divibody_training/v28d_gpu_entry.py": {
+      "sha256": "9dce8e9e7ec11204dc2f1ebba1a5619d01805594eb70d540bf70c19ed16e924f",
+      "bytes": 584
+    },
+    "video_VACE/divibody_training/v28d_training_engine.py": {
+      "sha256": "50ac72e18209043532e6747cf995533e516e166f7f6945eb0a69235e4a5ec89c",
+      "bytes": 12109
+    },
+    "video_VACE/divibody_training/v28d_validation_audit.py": {
+      "sha256": "56b6cc2309e223918d8c9cf656ecff6f845adfd8e4be1fd6af4b288c1cf1c8d1",
+      "bytes": 4568
+    },
+    "video_VACE/divibody_training/v29_benchmark_gate.py": {
+      "sha256": "26da82a6f1656bd813d20ec0f3d16797d09e827390c7a28408e0b9d50dfe0b6a",
+      "bytes": 3158
+    },
+    "video_VACE/divibody_training/v29_boundary_partition.py": {
+      "sha256": "0d130df77e91b7415feba41fd0180ee36f1ddebcf0b51976c90be3f91952feef",
+      "bytes": 12559
+    },
+    "video_VACE/divibody_training/v29_boundary_training.py": {
+      "sha256": "dd2459a3088ecab5d9e8ef81ca8dd30c0460015b6d8e082948ef91d55e5e559c",
+      "bytes": 22326
+    },
+    "video_VACE/divibody_training/v29_boundary_training_strong_v29y.py": {
+      "sha256": "aa31a5d40e4c34b1eaea1ad24f4b74f8561b9aa68ceeb7756c692aabd9ea2579",
+      "bytes": 22749
+    },
+    "video_VACE/divibody_training/v29_experiment_utils.py": {
+      "sha256": "502797992488d860d8a3cb92acd650eacfacecc5699f65ce49442c5b4e5869aa",
+      "bytes": 10578
+    },
+    "video_VACE/divibody_training/v29_geometry_policy.py": {
+      "sha256": "4065d2f1576dd75f1ed52e11c112a6c74ebdc4feb7018faa9d5b638d6c5a6634",
+      "bytes": 3728
+    },
+    "video_VACE/divibody_training/v29_geometry_policy_stable.py": {
+      "sha256": "8909fc7f25a369351ea11fe3c6bef31a459b121ea69c87fd5bbe9705da29e46a",
+      "bytes": 3945
+    },
+    "video_VACE/divibody_training/v29_paired_bootstrap_v2.py": {
+      "sha256": "1103111efe97c5d06392c9198dd9978e898ac589152bf16251b174ace812d34e",
+      "bytes": 3539
+    },
+    "video_VACE/divibody_training/v29_sequence_evaluation.py": {
+      "sha256": "87d71f834f5e504e3600e0484fc93b27b8e6646674854e73669481beb1557ff4",
+      "bytes": 3376
+    },
+    "video_VACE/divibody_training/v29_sequence_evaluation_report.py": {
+      "sha256": "e1f6c1fe2d3bd523b59fde991b087fa80b36c7352e5b3a4e35bd4fed56c67f85",
+      "bytes": 3811
+    },
+    "video_VACE/divibody_training/v29_sequence_evaluation_strong_v29y.py": {
+      "sha256": "dd10c83dc25281790b9ecc85c62e1cfcd3149069bb0b6a732b63a6ddc461ab29",
+      "bytes": 3836
+    },
+    "video_VACE/divibody_training/v29_strong_features_test_v1.py": {
+      "sha256": "945842bc4cd4c3d82063b37a61b56b30a187057b52ea584a37359414b3511a56",
+      "bytes": 22102
+    },
+    "video_VACE/divibody_training/v29_strong_features_v1.py": {
+      "sha256": "e59ff142505c2e5dc39cec570165715f5ef15cbeb298513bfe9a6778371b7241",
+      "bytes": 21745
+    },
+    "video_VACE/divibody_training/v29_training_engine.py": {
+      "sha256": "3e82379adab5f61b6b4ed4432e5f26e32a32a81f60f3964d0593e8f77e08064b",
+      "bytes": 12948
+    },
+    "video_VACE/divibody_training/v29_training_engine_boundary.py": {
+      "sha256": "09cb1feb1eb107ca8245779205b6d8ecdf76b0af11352ddfc3709f5337e43e53",
+      "bytes": 15146
+    },
+    "video_VACE/divibody_training/v29_training_engine_boundary_v2.py": {
+      "sha256": "e6218484a70670670ce418cf29f1b14c2de918fe08c1e57d966009c08df6e8b5",
+      "bytes": 15466
+    },
+    "video_VACE/divibody_training/v29_training_engine_stable.py": {
+      "sha256": "9bd3cc9159b1547dbcbe9fe5b96a5959c6c47d69aff61a82c754cfa6d3d49a67",
+      "bytes": 13352
+    },
+    "video_VACE/divibody_training/v29_training_engine_stitched.py": {
+      "sha256": "3d153aed1ab72bcac9fa0c6e2c5541719f6d0accae8a0c4e23f57c99e6c4be09",
+      "bytes": 15633
+    },
+    "video_VACE/divibody_training/v29_training_engine_strong_v29y.py": {
+      "sha256": "ac408b2f647ece4339f3fa3349e00a06d8a4a03337f7c85ad0504a03e3ac2cff",
+      "bytes": 15943
+    },
+    "video_VACE/divibody_training/v30_training_engine.py": {
+      "sha256": "78747d3ab421e7c3f40f1985265a8d5e0b7780544275bdccd536e80fa1776741",
+      "bytes": 15633
+    },
+    "video_VACE/divibody_training/__init__.py": {
+      "sha256": "d0bb769ec16a313f3e7900034b13d56a8e285b9fcf60ccf6fa0e65f6bcf45eab",
+      "bytes": 70
+    },
+    "video_VACE/models/body_projection_v28.py": {
+      "sha256": "f85d5b548b08c53c83fd6bd045f4ae3b801d1976544a8eed9772959a0c55e8be",
+      "bytes": 1578
+    },
+    "video_VACE/models/body_projection_v39.py": {
+      "sha256": "3012638e9a7beb6f5be8039f34ebf1c97c02127025b2727f8ad0202216e74f62",
+      "bytes": 1540
+    },
+    "video_VACE/models/human_decoder.py": {
+      "sha256": "0ed42aaed5d4bdf08d69b59988678f51f9b0841ca6ab76e6aa7f997d81945ee0",
+      "bytes": 8057
+    },
+    "video_VACE/models/human_decoder_fusion_only_a2.py": {
+      "sha256": "e7380b46441e20734cb40fd651a5389e7431d8d2b8bd80004b8e0b8f3fcc897f",
+      "bytes": 11449
+    },
+    "video_VACE/models/human_decoder_geometry.py": {
+      "sha256": "43d2935c03e0857af89c90fbb3de6d2e592b8fb021ad69b373987882b37df72f",
+      "bytes": 17208
+    },
+    "video_VACE/models/human_decoder_geometry_video_v4.py": {
+      "sha256": "9ab2f689000d143018f86614ed95e7da22a735732e989fa89affeed7285e9542",
+      "bytes": 14293
+    },
+    "video_VACE/models/human_decoder_parts_v15.py": {
+      "sha256": "983fb57edb92ba1e187e2ef4d88993e65c7c8c06a956ada001c3e0940e45e9ec",
+      "bytes": 6537
+    },
+    "video_VACE/models/human_decoder_parts_v16.py": {
+      "sha256": "f082784d29f2ef97af4d797aca523bc6c740c23229bc1e514c2d4643961e982e",
+      "bytes": 9986
+    },
+    "video_VACE/models/human_decoder_parts_v19.py": {
+      "sha256": "c278e04ab9c8b05c425344eab8b5e0096c983bb0b85d97c5cb7f0fb4e88ccea1",
+      "bytes": 11173
+    },
+    "video_VACE/models/human_decoder_parts_v20.py": {
+      "sha256": "e49dd05592693f82b98900e942a0bfc750f475f0749924ab3f9f5cdafc2bd379",
+      "bytes": 16075
+    },
+    "video_VACE/models/human_decoder_parts_v22.py": {
+      "sha256": "0e61da0d5c88443ad9166a85a2e888ab3a6522178ad98cad94f35d38de382c4a",
+      "bytes": 13576
+    },
+    "video_VACE/models/human_decoder_parts_v23.py": {
+      "sha256": "a1619b1b93e63086067daa38cfb99e6e6a726a487522b33d713a0a6895fa02dc",
+      "bytes": 14202
+    },
+    "video_VACE/models/human_decoder_parts_v24.py": {
+      "sha256": "a2ec618b45d71c6091ec2371c900abc5a95d40289ff9aff3412b8b373f98ea25",
+      "bytes": 15015
+    },
+    "video_VACE/models/human_decoder_parts_v25.py": {
+      "sha256": "f9a93cf41d9c98955cfdd76fa816bed71a6dcb57ace9dd527518fe5b8de36e5f",
+      "bytes": 15288
+    },
+    "video_VACE/models/human_decoder_parts_v26.py": {
+      "sha256": "3e5cab47fde22fc0b739188a9c42633902716c070f7444ddf09cc887909eb0c4",
+      "bytes": 18691
+    },
+    "video_VACE/models/human_decoder_parts_v27.py": {
+      "sha256": "673cbd6e214af91133e7373eba1a533c3aeab337e2587878139d60a8d7ac0d16",
+      "bytes": 23708
+    },
+    "video_VACE/models/human_decoder_parts_v28.py": {
+      "sha256": "8ff3c43dfcffa4e28b5c39856cc31f9addcee0f2140e499af4d059728a605beb",
+      "bytes": 17329
+    },
+    "video_VACE/models/human_decoder_parts_v29.py": {
+      "sha256": "967738ade8c137ae2cd1b49ad0883fbfb208ed782a59efc8feef89586428ff9b",
+      "bytes": 19625
+    },
+    "video_VACE/models/human_decoder_parts_v39.py": {
+      "sha256": "76cbd3b4d4145e9b70317adcf631b22905251d548d2a03a5aa57cf11a8ab8e0d",
+      "bytes": 17374
+    },
+    "video_VACE/models/human_decoder_parts_v41.py": {
+      "sha256": "9490424bb3b31ae7ed827bcc1228f98883ffffdda9865bf15d0132067f152a28",
+      "bytes": 26275
+    },
+    "video_VACE/models/human_decoder_rgb_vace_v10_reliable_memory.py": {
+      "sha256": "036bd02b82ce45a548dfeb9e5edf05e92c24d75d4a68e111736eab034e5b91ab",
+      "bytes": 3773
+    },
+    "video_VACE/models/human_decoder_rgb_vace_v10_temporal.py": {
+      "sha256": "9de29d97ef05c9323669422130c4a10e72734279b7f2b4935199e3d7b8e7b011",
+      "bytes": 11641
+    },
+    "video_VACE/models/human_decoder_rgb_vace_v12_bounded.py": {
+      "sha256": "68a9e4324fe423b9864dec840773b358c2c08084e11bb58f8bcdd350a9393833",
+      "bytes": 12001
+    },
+    "video_VACE/models/human_decoder_rgb_vace_v7.py": {
+      "sha256": "3e4ebb9ef82140305a604347bf74eafe1ca9d4edd22d3ccca423d88c174a403a",
+      "bytes": 11890
+    },
+    "video_VACE/models/human_decoder_rgb_vace_v8_hmr2a.py": {
+      "sha256": "c45f0ab856ef6f165198f665cf8a77c027ad591c5f5f7a629048cc9db14fc438",
+      "bytes": 2150
+    },
+    "video_VACE/models/human_decoder_rgb_vace_v9_active_temporal.py": {
+      "sha256": "889fdd960e3e7601b44e33041f63d2befe780baae061aca5c04831cc79d944fa",
+      "bytes": 2109
+    },
+    "video_VACE/models/human_decoder_rgb_vace_v9_isolated.py": {
+      "sha256": "e9d2f529606a996794afbf7d1efcabc791139a8822d9d84fca5e9ff8dc3364bc",
+      "bytes": 2862
+    },
+    "video_VACE/models/human_decoder_spatiotemporal_v30.py": {
+      "sha256": "ac94bf1689a50615572206c2dcad55701e3e68457bdbc207a4f65a06adfd23cc",
+      "bytes": 17626
+    },
+    "video_VACE/models/human_decoder_strong_rgb_v29x.py": {
+      "sha256": "26e42b36f9011a8a1ffb75c7f68e5c1192e243cee2818a7c71977d2d70901da0",
+      "bytes": 7404
+    },
+    "video_VACE/models/human_decoder_strong_rgb_v29y.py": {
+      "sha256": "3517de3cdb5f0c89163f7f2270bd56fcd1d4241f723748d6077dfcd33ae480a3",
+      "bytes": 13347
+    },
+    "video_VACE/models/human_decoder_v9_adaptation_v13.py": {
+      "sha256": "a816a68b6d950e1794506a3083f3bc50b592e0723696caf5d946cc8a5181744c",
+      "bytes": 6104
+    },
+    "video_VACE/models/joint_evidence_v41.py": {
+      "sha256": "762721848757bf2aee1c523627beedf00aa133069fc88639231595788de908f6",
+      "bytes": 11788
+    },
+    "video_VACE/requirements/annotator.txt": {
+      "sha256": "b356f032228c856c2aa5f0c46962acf8d3095181756d6201fed19ca05170af69",
+      "bytes": 285
+    },
+    "video_VACE/requirements/framework.txt": {
+      "sha256": "709ce1402a95ec5a58037836fbbd6c09b82d3317d1f1960ba886e08d672f365c",
+      "bytes": 430
+    },
+    "video_VACE/vace/vace_ltx_inference.py": {
+      "sha256": "fd5a6b3866812e462645572d49ca3422d56325b0b9958605879954e579edf2d2",
+      "bytes": 9855
+    },
+    "video_VACE/vace/vace_pipeline.py": {
+      "sha256": "75113e23ebdda5a1bd408ce15c9df054cc612c6c061f05bac6ccd7509c09ec34",
+      "bytes": 2017
+    },
+    "video_VACE/vace/vace_preproccess.py": {
+      "sha256": "61168e737c132ab3a6db70477b1676d2516cc349133426d45b794f97c635027f",
+      "bytes": 11177
+    },
+    "video_VACE/vace/vace_wan_feature_inference.py": {
+      "sha256": "4696c228d8821cb76e795a2012c6a2e57c08a8462c3b1326a4e8c1e932ded106",
+      "bytes": 14748
+    },
+    "video_VACE/vace/vace_wan_inference.py": {
+      "sha256": "cde0353136d4ee5c7712c8ed4b868638870391dd4c655fef1c3c336817694c08",
+      "bytes": 13715
+    },
+    "video_VACE/vace/__init__.py": {
+      "sha256": "a86e0089708b3df3969504c80dbc10a4f02bc0f284b4b8943fc57dd8e037a7d4",
+      "bytes": 163
+    },
+    "video_VACE/vace/annotators/canvas.py": {
+      "sha256": "bfd7582d73640d7c55ce3e525d711658fa39a06e395271724dc55b169696f510",
+      "bytes": 2129
+    },
+    "video_VACE/vace/annotators/common.py": {
+      "sha256": "5766dfa53bf5e89165e4af996094c979842c149be0220cbbc244bc26a7a769b6",
+      "bytes": 1374
+    },
+    "video_VACE/vace/annotators/composition.py": {
+      "sha256": "313b45ffd86527760590da8bf6e4a35da292872552f61483b6311587ce29ff90",
+      "bytes": 7297
+    },
+    "video_VACE/vace/annotators/depth.py": {
+      "sha256": "794fa18c9034ee7eb3fa986dca38ba4d04cb9dd2a34884ecdbec24ec43f7e745",
+      "bytes": 3239
+    },
+    "video_VACE/vace/annotators/face.py": {
+      "sha256": "110f9be93058378ccf4d17dea06ea3ab55804f5838be1eebda3c5968fd76f1b1",
+      "bytes": 2581
+    },
+    "video_VACE/vace/annotators/flow.py": {
+      "sha256": "9dca93555d274678e4065c9b68f5d48b3098be7f7dfaf08b099eb1f3cdc4c7d0",
+      "bytes": 2280
+    },
+    "video_VACE/vace/annotators/frameref.py": {
+      "sha256": "dd622057ce57078c0afdac2ad89d9698f1fd28867c4db8379efabbe2dc861053",
+      "bytes": 5127
+    },
+    "video_VACE/vace/annotators/gdino.py": {
+      "sha256": "1878e0dac7d1c59ce26d28e133106607d08ab72bacd891dfbf44a23de0761753",
+      "bytes": 3680
+    },
+    "video_VACE/vace/annotators/gray.py": {
+      "sha256": "a5ac01f68230653d1c2f42a44bee32cea859bb778164f13f92500023093339ea",
+      "bytes": 641
+    },
+    "video_VACE/vace/annotators/inpainting.py": {
+      "sha256": "0c80c831587b376779fc26c789c8653375661453eaf4bd7c7d2d2b3824cc9a81",
+      "bytes": 15878
+    },
+    "video_VACE/vace/annotators/layout.py": {
+      "sha256": "be5614d7ae6ea5cefd4f43e04ef7221b5e7faa139f7465cf56dcaf9a5e1a1db2",
+      "bytes": 6943
+    },
+    "video_VACE/vace/annotators/mask.py": {
+      "sha256": "ea1227f2d96c76b4527d19a1b18d89e796513db8df3005d56c0865ad125131b6",
+      "bytes": 3197
+    },
+    "video_VACE/vace/annotators/maskaug.py": {
+      "sha256": "f7ac89c48ef776663a30005ac1a7cd56d550a1887a3eccaa7dcbfd29efda5af9",
+      "bytes": 8497
+    },
+    "video_VACE/vace/annotators/outpainting.py": {
+      "sha256": "c07afb54fd2c825e7a284079b80d2007aa66e8c7160bf596b754e98a243b15cb",
+      "bytes": 10979
+    },
+    "video_VACE/vace/annotators/pose.py": {
+      "sha256": "1046bf5dcfe5dffd241fea0210399c11e902e781313c33097bcdfdcefe9b7cb4",
+      "bytes": 6094
+    },
+    "video_VACE/vace/annotators/prompt_extend.py": {
+      "sha256": "9fb69fa07e3eeb44fe4fe31d88ffb16b6e2faa546d044e6a56df25a3390d84c0",
+      "bytes": 1647
+    },
+    "video_VACE/vace/annotators/ram.py": {
+      "sha256": "471fbc7f95cb81b699bccd03423840236c72ac246948d6236f34e43ceb89f948",
+      "bytes": 2160
+    },
+    "video_VACE/vace/annotators/salient.py": {
+      "sha256": "20d2673cc0084aab58880fa0dedc1a73772532aa618d514383dc9789dd1e5779",
+      "bytes": 14497
+    },
+    "video_VACE/vace/annotators/sam.py": {
+      "sha256": "305b54968505adc90bc0b680ca5e1d561da2d718901f6318300b92f9e3d85305",
+      "bytes": 3730
+    },
+    "video_VACE/vace/annotators/sam2.py": {
+      "sha256": "8535b3ea62a45b9e47cab975550f1a7c8dec3ba279a1f4d8397ef5851fb73d86",
+      "bytes": 10268
+    },
+    "video_VACE/vace/annotators/scribble.py": {
+      "sha256": "7412decc7f081715fa34ee43bb673d5817e6041dbf314bab442f1d561b5b8b6b",
+      "bytes": 4531
+    },
+    "video_VACE/vace/annotators/subject.py": {
+      "sha256": "8c17591da0cabe0f186127f7e4b485275c3e55c08082660bd5137a1d6ebed2cc",
+      "bytes": 2290
+    },
+    "video_VACE/vace/annotators/utils.py": {
+      "sha256": "e55719f190aa911a5f6169f5ae55bad7b549a2d9b798a34b9735003c7e8ccc4e",
+      "bytes": 12543
+    },
+    "video_VACE/vace/annotators/__init__.py": {
+      "sha256": "4cf6b6ce223a00d34bc82752735b72bd9157d2997dcc5005fc4e62a05f8d6ffa",
+      "bytes": 1740
+    },
+    "video_VACE/vace/configs/common_preproccess.py": {
+      "sha256": "15af479a00683effbd317f85411a890e687326b30a6862e496ab843140c76cfe",
+      "bytes": 3984
+    },
+    "video_VACE/vace/configs/composition_preprocess.py": {
+      "sha256": "a6a3550fd32586632690a1b74503fc56666ea2057dea9ea588b19cf328e85875",
+      "bytes": 6642
+    },
+    "video_VACE/vace/configs/image_preproccess.py": {
+      "sha256": "ddc17e6552c540e94153fe1e6162fc64e95b9b729fe676e9d4ff46c5de088edf",
+      "bytes": 7122
+    },
+    "video_VACE/vace/configs/prompt_preprocess.py": {
+      "sha256": "5960078759df741a83d78044d91373cb21289304e2c73b163cf6de7f73d8414b",
+      "bytes": 15132
+    },
+    "video_VACE/vace/configs/video_preproccess.py": {
+      "sha256": "aac5f87f844288e25f5b6fe778565551f7039937550896c9426854a43b7e16f4",
+      "bytes": 14540
+    },
+    "video_VACE/vace/configs/__init__.py": {
+      "sha256": "72ccde07bb8240347d24bb745b875e313852b83a7d6236b3d5bc02b8e43a613e",
+      "bytes": 5692
+    },
+    "video_VACE/vace/gradios/vace_ltx_demo.py": {
+      "sha256": "e2c6d883802bce3d93ddc4c403c75adec6c05526fa14eaec6f88cc8b723a4f54",
+      "bytes": 12990
+    },
+    "video_VACE/vace/gradios/vace_preprocess_demo.py": {
+      "sha256": "d1640f25b954d429e2a6b774adc7d22e7d47fdb3f9eb2a26c79a67dee6cf696b",
+      "bytes": 59147
+    },
+    "video_VACE/vace/gradios/vace_wan_demo.py": {
+      "sha256": "85242486efde405f9a4c06262f3b9982605fcb698205e79e4599e50442aa4978",
+      "bytes": 13480
+    },
+    "video_VACE/vace/gradios/__init__.py": {
+      "sha256": "c625ee3cc338045595c855d26df8bb8d7bff9db502ca96952c2d4f3e593532ac",
+      "bytes": 73
+    },
+    "video_VACE/vace/models/__init__.py": {
+      "sha256": "bdbec98abdf2446c4b64655d51296ff867f09cbc4da1ce25d8832d3ff71b6c6c",
+      "bytes": 562
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/dinov2.py": {
+      "sha256": "a39877f6ffef748c9985ab4260d8ea768afd3f094b117594e003f673a8c1c02a",
+      "bytes": 15254
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/dpt.py": {
+      "sha256": "7d3c28cf96cff0207d2af854f89d27d5ca5d3af5d1621f2857146de274bd73f1",
+      "bytes": 6919
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "video_VACE/vace/annotators/dwpose/onnxdet.py": {
+      "sha256": "9ef7f99b1119edf4b3d195905c149090052d40028d427be434771a5990f92740",
+      "bytes": 4405
+    },
+    "video_VACE/vace/annotators/dwpose/onnxpose.py": {
+      "sha256": "9b978f069151093a06c3b86a5e0e01ebbe6f98009cf3046575c404e80e16ed3a",
+      "bytes": 11682
+    },
+    "video_VACE/vace/annotators/dwpose/util.py": {
+      "sha256": "6444896495e575356c351fe7138d2cfa595dfd72fa3646bdf8f0441fe8fc31ea",
+      "bytes": 10625
+    },
+    "video_VACE/vace/annotators/dwpose/wholebody.py": {
+      "sha256": "ffb52d2596d3b3a491e65cc0d7c22a50dafc7f196eac9d9753a103f02d3df1db",
+      "bytes": 2688
+    },
+    "video_VACE/vace/annotators/dwpose/__init__.py": {
+      "sha256": "3bce5dfaf443687d30b62a2f93b486f8f5f27a50867d3897ae1894a8bde4e1b8",
+      "bytes": 74
+    },
+    "video_VACE/vace/annotators/midas/api.py": {
+      "sha256": "c727374bc5385be6b9ea2f2c3f4a6212fc4ffe605d91d13db512426f31e474b3",
+      "bytes": 5264
+    },
+    "video_VACE/vace/annotators/midas/base_model.py": {
+      "sha256": "7e35ab8ba3a4816b75d61cc3ae1e0e980430de557f8e0daf1aecb387090bbaf1",
+      "bytes": 460
+    },
+    "video_VACE/vace/annotators/midas/blocks.py": {
+      "sha256": "17a6a898521828168cdb878665a757b9521ae0ce12b675c71e3971349fa9ac23",
+      "bytes": 11767
+    },
+    "video_VACE/vace/annotators/midas/dpt_depth.py": {
+      "sha256": "e7d87fd94faea608a417bc5e220fcea9d4e56ad975c89e7332b74c8ef1615103",
+      "bytes": 3255
+    },
+    "video_VACE/vace/annotators/midas/midas_net.py": {
+      "sha256": "be300b14539d39882d2467c6b789cc4db6e1fb93aa961f8f30e6a6239c5d71f1",
+      "bytes": 2819
+    },
+    "video_VACE/vace/annotators/midas/midas_net_custom.py": {
+      "sha256": "03334719aac9feeb3223ff93e691e9f02ee561fc1eb019ad38b152777d3ab5ed",
+      "bytes": 6069
+    },
+    "video_VACE/vace/annotators/midas/transforms.py": {
+      "sha256": "9c80ecbd7e55d185f47f62de072ed0e85f2c3eaea364e619f0527c25669064cc",
+      "bytes": 8228
+    },
+    "video_VACE/vace/annotators/midas/utils.py": {
+      "sha256": "54adf09bd4325928604ca9027479b915c895626664fc09c903808e75b02c8d78",
+      "bytes": 4741
+    },
+    "video_VACE/vace/annotators/midas/vit.py": {
+      "sha256": "afc41abe83a00d301a465dd4144990ce07193063ba7f33cf3152dee2d635a259",
+      "bytes": 15630
+    },
+    "video_VACE/vace/annotators/midas/__init__.py": {
+      "sha256": "3bce5dfaf443687d30b62a2f93b486f8f5f27a50867d3897ae1894a8bde4e1b8",
+      "bytes": 74
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/layers/attention.py": {
+      "sha256": "161f41a6c0162fbd8b160ef7b96fdbf3bbe42a3343b14c55cf1ac0528d706ddb",
+      "bytes": 2362
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/layers/block.py": {
+      "sha256": "d00e51ef630494ca141357c7acbd57c35e4dd6fd9e0a9e3ed52d0191363d4af4",
+      "bytes": 9334
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/layers/drop_path.py": {
+      "sha256": "ff927b55f9f81ff55004e97345c796e2ee925fbf65430c2e31812045aee97aa1",
+      "bytes": 1159
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/layers/layer_scale.py": {
+      "sha256": "d5bb720b979a2dccb8f67335d544e88ec9d73e3c84611c9dfa40ef6ba55b1e4a",
+      "bytes": 813
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/layers/mlp.py": {
+      "sha256": "7d2c0c96b52f8587531b5eb52b575ab8fe760286a6b31eb1a55ee4c25ce7fbf8",
+      "bytes": 1270
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/layers/patch_embed.py": {
+      "sha256": "5df82c747f2a60021db0edac0fec358c26627d98825d9d2ef1b9dbdd8cc4ba92",
+      "bytes": 2833
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/layers/swiglu_ffn.py": {
+      "sha256": "1983ab2ed6f16540d028d861aeec355b95c40d00ef0d4f0f85e3577cb034697a",
+      "bytes": 1860
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/layers/__init__.py": {
+      "sha256": "550520915941e5d6439f21f95a1cd22a80b35f70c0b74483e0a1f29617917477",
+      "bytes": 381
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/util/blocks.py": {
+      "sha256": "8347d2bb8ea893a628ddd058c3c53af9d9e19adb5b586eb01f7b6f5ee7caaa0f",
+      "bytes": 4103
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/util/transform.py": {
+      "sha256": "6d40f7dff66eefdd0a20f3d2eba336825f7e85354fce8135c1559ab5221abd30",
+      "bytes": 6104
+    },
+    "video_VACE/vace/annotators/depth_anything_v2/util/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "video_VACE/vace/models/ltx/ltx_vace.py": {
+      "sha256": "630f572efa38e689f61fac201f7473a81ea52f3e67f8daf878a0efe4ee01ec44",
+      "bytes": 7403
+    },
+    "video_VACE/vace/models/ltx/__init__.py": {
+      "sha256": "7f5af9f0558e0eb317797ea8f516cd27d94b38279a5832d745633f59cb82d047",
+      "bytes": 118
+    },
+    "video_VACE/vace/models/utils/preprocessor.py": {
+      "sha256": "179c1472cdd5b82e7737962b6de910c61f62d5485ddbb29cdac0a67ddc285fcf",
+      "bytes": 11019
+    },
+    "video_VACE/vace/models/utils/__init__.py": {
+      "sha256": "82d7c213fe22452353cb01cee153e6a5ac645d8794f1b46e52c54aba2677d3c9",
+      "bytes": 118
+    },
+    "video_VACE/vace/models/wan/wan_vace.py": {
+      "sha256": "13e21d1df81fd78f962d54e4f3ddfa789e50bffc152446d27d405c62511a70f9",
+      "bytes": 30550
+    },
+    "video_VACE/vace/models/wan/wan_vace_feature.py": {
+      "sha256": "6b6f480323ff5323f638bec8c2eb50bba59582daf86a4b8e36aa9fc9e8dfd0ad",
+      "bytes": 34483
+    },
+    "video_VACE/vace/models/wan/__init__.py": {
+      "sha256": "47079dd1be8c0376f3aee4b42d17bc6c1246df021aa4fe282aa706a028bd87cc",
+      "bytes": 126
+    },
+    "video_VACE/vace/models/ltx/models/__init__.py": {
+      "sha256": "5fb70021eae0f141e57a4584a109d3dd067ddf2b632e6513f0926e74a229ebbc",
+      "bytes": 100
+    },
+    "video_VACE/vace/models/ltx/pipelines/pipeline_ltx_video.py": {
+      "sha256": "a437bdd499fa893701f29952a4d4cfb4d80e765a7854afdad107a0e6897aa8c9",
+      "bytes": 28699
+    },
+    "video_VACE/vace/models/ltx/pipelines/__init__.py": {
+      "sha256": "101b79b493108cf8c9a9edf342ad5745da19fc46538cfbdeba2ad7e682da213b",
+      "bytes": 126
+    },
+    "video_VACE/vace/models/ltx/models/transformers/attention.py": {
+      "sha256": "13081885482c5825767bad9c596b3938486e0d26aaf1c7f704012bbeb4508f56",
+      "bytes": 2039
+    },
+    "video_VACE/vace/models/ltx/models/transformers/transformer3d.py": {
+      "sha256": "624261a9bd1fdbccc0d483315d4bd45f051ec4e694a3f2ba939e1cba4228925d",
+      "bytes": 23874
+    },
+    "video_VACE/vace/models/ltx/models/transformers/__init__.py": {
+      "sha256": "f9d1695c914e0463ea19e7ef07492682825143738b9d0451461b5a3867c96ef2",
+      "bytes": 201
+    },
+    "video_VACE/vace/models/wan/configs/shared_config.py": {
+      "sha256": "fa5de5c4a4263b48543b0cf635a65bd510774077c7b88e41a8ca67d76833e57f",
+      "bytes": 916
+    },
+    "video_VACE/vace/models/wan/configs/wan_t2v_14B.py": {
+      "sha256": "99aadb67eec94e28c2a02db45c178c07f7488b7e1b3c148aae1e23e908fe580f",
+      "bytes": 742
+    },
+    "video_VACE/vace/models/wan/configs/wan_t2v_1_3B.py": {
+      "sha256": "741498c9a558777e36f38129dedfd11ec76e4ab82d7abebea93a763c15119bce",
+      "bytes": 760
+    },
+    "video_VACE/vace/models/wan/configs/__init__.py": {
+      "sha256": "0bc02ba894d525ab19854684d6f521996ab3b4074166b5869878d6f2cc34b933",
+      "bytes": 812
+    },
+    "video_VACE/vace/models/wan/distributed/xdit_context_parallel.py": {
+      "sha256": "cac621a3d375843e4359f0f3839e5423c5d4411da5668cf8dc681b5b2e18895d",
+      "bytes": 6724
+    },
+    "video_VACE/vace/models/wan/distributed/__init__.py": {
+      "sha256": "4ff957216f32cd3166a8cafc47461c797d796464ccb537cacbe243bf575f9631",
+      "bytes": 187
+    },
+    "video_VACE/vace/models/wan/modules/model.py": {
+      "sha256": "fd818e554b16a9287792b6a7b52d1b9cc221d04af42c7ad99e33d04c73477dfd",
+      "bytes": 8138
+    },
+    "video_VACE/vace/models/wan/modules/__init__.py": {
+      "sha256": "24e43e8fa999ff5f9c08edea49d27f775242c1d955bffeeae69a0f0fa2698017",
+      "bytes": 151
+    }
+  },
+  "original_python_files_preserved": 230,
+  "asset_files_included": false,
+  "model_tests_executed_for_publication": false
+}

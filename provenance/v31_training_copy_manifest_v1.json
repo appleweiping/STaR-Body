@@ -1,0 +1,92 @@
+{
+  "format": "star-body-v31-copy-before-edit-v1",
+  "scope": "training_chain",
+  "records": [
+    {
+      "source": "video_VACE/divibody_training/ram_parts_runtime_v30.py",
+      "target": "video_VACE/divibody_training/ram_parts_runtime_v31.py",
+      "source_sha256": "968060eb49d4aec1fcaa36b4f0344ea16267ce26762a3ff909e0289f1cace1b0",
+      "copied_sha256": "968060eb49d4aec1fcaa36b4f0344ea16267ce26762a3ff909e0289f1cace1b0",
+      "modified_sha256": "56efc8bc3c82b2d8b0c3b7b97d4c0e7dbaffaf5e9b0305eb5a7f20c4c921e122"
+    },
+    {
+      "source": "video_VACE/divibody_training/parts_training_utils_v30.py",
+      "target": "video_VACE/divibody_training/parts_training_utils_v31.py",
+      "source_sha256": "97c1dff685f4cf29e2d7250928a0af0ac13207fae8ad743a212cc0a69ef18cfd",
+      "copied_sha256": "97c1dff685f4cf29e2d7250928a0af0ac13207fae8ad743a212cc0a69ef18cfd",
+      "modified_sha256": "4cb37df911f94d8ae1643ec2454cea5791ade0190de0ecb6422151476537d67e"
+    },
+    {
+      "source": "video_VACE/divibody_training/v29_boundary_partition.py",
+      "target": "video_VACE/divibody_training/v31_boundary_partition.py",
+      "source_sha256": "0d130df77e91b7415feba41fd0180ee36f1ddebcf0b51976c90be3f91952feef",
+      "copied_sha256": "0d130df77e91b7415feba41fd0180ee36f1ddebcf0b51976c90be3f91952feef",
+      "modified_sha256": "670589f042d6c2005375e60611e0737559a55d59f41c684f3b2156b5276dfb93"
+    },
+    {
+      "source": "video_VACE/divibody_training/v30_training_engine.py",
+      "target": "video_VACE/divibody_training/v31_training_engine.py",
+      "source_sha256": "78747d3ab421e7c3f40f1985265a8d5e0b7780544275bdccd536e80fa1776741",
+      "copied_sha256": "78747d3ab421e7c3f40f1985265a8d5e0b7780544275bdccd536e80fa1776741",
+      "modified_sha256": "e8ae748ce65623fa11a27d299a287c931827a9b9d15aa2d65c195f372523de3a"
+    },
+    {
+      "source": "video_VACE/divibody_training/train_spatiotemporal_v30_v3.py",
+      "target": "video_VACE/divibody_training/train_spatiotemporal_v31.py",
+      "source_sha256": "d5bb15fdf965709edca7e97599dd5aefec594db38ea1d54aa34506d77101bd88",
+      "copied_sha256": "d5bb15fdf965709edca7e97599dd5aefec594db38ea1d54aa34506d77101bd88",
+      "modified_sha256": "f87cef96bab91e22235401cc8a682ed29c9addb25a65f5bc4f9e89b44ac8cb0b"
+    },
+    {
+      "source": "scripts/train_from_config.py",
+      "target": "scripts/train_from_config_v31.py",
+      "source_sha256": "fd647ab1ca237bf29287b6803955a18fa498028a930a30b5d899339e0d2a27fc",
+      "copied_sha256": "fd647ab1ca237bf29287b6803955a18fa498028a930a30b5d899339e0d2a27fc",
+      "modified_sha256": "fb0bb9d9aef6da3682f85a0ade0accdfe6bdb143fb2f4565fc67a7ca4de94401"
+    },
+    {
+      "source": "configs/star_body_v30.example.json",
+      "target": "configs/star_body_v31.compat.example.json",
+      "source_sha256": "3f57a03057c18664aa256e6b7e3a2f6c215bbbda4e2b700ff09e0b4b3b6d3a84",
+      "copied_sha256": "3f57a03057c18664aa256e6b7e3a2f6c215bbbda4e2b700ff09e0b4b3b6d3a84",
+      "modified_sha256": "35971e96105459c06ca37222e35296e150a24e8f34a78f6a3542d2e82f70b9cf"
+    },
+    {
+      "source": "configs/star_body_v30.example.json",
+      "target": "configs/star_body_v31.shared_shape.example.json",
+      "source_sha256": "3f57a03057c18664aa256e6b7e3a2f6c215bbbda4e2b700ff09e0b4b3b6d3a84",
+      "copied_sha256": "3f57a03057c18664aa256e6b7e3a2f6c215bbbda4e2b700ff09e0b4b3b6d3a84",
+      "modified_sha256": "52d57ddf4ab71b23238358265ba39ca67748cd598f520bb4df6d752d99758793"
+    },
+    {
+      "source": "configs/star_body_v30.example.json",
+      "target": "configs/star_body_v31.local_schedule.example.json",
+      "source_sha256": "3f57a03057c18664aa256e6b7e3a2f6c215bbbda4e2b700ff09e0b4b3b6d3a84",
+      "copied_sha256": "3f57a03057c18664aa256e6b7e3a2f6c215bbbda4e2b700ff09e0b4b3b6d3a84",
+      "modified_sha256": "4378f75548c6af205e824203652af73088636e118426db788a9b02ef0a7359f9"
+    }
+  ],
+  "derived_files": [
+    {
+      "target": "video_VACE/divibody_training/v31_training_contract.py",
+      "source": "video_VACE/divibody_training/train_spatiotemporal_v30_v3.py",
+      "source_sha256": "d5bb15fdf965709edca7e97599dd5aefec594db38ea1d54aa34506d77101bd88",
+      "derivation": "Copied parse_args function into new torch-free contract; added V31 arguments and provenance helpers",
+      "modified_sha256": "2da8a5dacec1395a9d3cc1a09996d6450333f4a6523f0060f743e725703d4b0b"
+    }
+  ],
+  "verification": {
+    "original_sources_unchanged": true,
+    "originals": [
+      "configs/star_body_v30.example.json",
+      "scripts/train_from_config.py",
+      "video_VACE/divibody_training/parts_training_utils_v30.py",
+      "video_VACE/divibody_training/ram_parts_runtime_v30.py",
+      "video_VACE/divibody_training/train_spatiotemporal_v30_v3.py",
+      "video_VACE/divibody_training/v29_boundary_partition.py",
+      "video_VACE/divibody_training/v30_training_engine.py"
+    ],
+    "new_python_ast_parse": "passed",
+    "runtime_forward_backward": "not_run"
+  }
+}

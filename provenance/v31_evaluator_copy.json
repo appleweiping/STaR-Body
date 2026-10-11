@@ -1,0 +1,22 @@
+{
+  "copy_method": "PowerShell Copy-Item before editing",
+  "entries": [
+    {
+      "source": "video_VACE/divibody_training/evaluate_parts_v28.py",
+      "destination": "scripts/evaluate_body_v31.py",
+      "source_sha256_before": "5bc591c38a92ca0e910d217a02b94bd79614f9b4b84494bcca3998533cb621a2",
+      "copied_sha256_before_edit": "5bc591c38a92ca0e910d217a02b94bd79614f9b4b84494bcca3998533cb621a2",
+      "source_sha256_after": "5bc591c38a92ca0e910d217a02b94bd79614f9b4b84494bcca3998533cb621a2",
+      "destination_sha256_after": "451d6998a0827b62d66159ce12546069539a967d599d70e3d51f2369dbd8bdf8"
+    },
+    {
+      "source": "video_VACE/divibody_training/v29_sequence_evaluation_report.py",
+      "destination": "video_VACE/divibody_training/body_sequence_evaluation_v31.py",
+      "source_sha256_before": "e1f6c1fe2d3bd523b59fde991b087fa80b36c7352e5b3a4e35bd4fed56c67f85",
+      "copied_sha256_before_edit": "e1f6c1fe2d3bd523b59fde991b087fa80b36c7352e5b3a4e35bd4fed56c67f85",
+      "source_sha256_after": "e1f6c1fe2d3bd523b59fde991b087fa80b36c7352e5b3a4e35bd4fed56c67f85",
+      "destination_sha256_after": "1bea78a0c636b53c344c2ccec36411c2f4e7da1be255fcd5f0450dce404f7e45"
+    }
+  ],
+  "state": "final_ast_help_and_synthetic_contract_checks_passed"
+}

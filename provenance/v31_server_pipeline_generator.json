@@ -1,0 +1,7 @@
+{
+  "source": "workspace/work/generate_phase2_pipeline.py",
+  "source_sha256": "7d613b9464d118315ee9fe9e5d1c097d53bddabb696a6029925874f8b90b2243",
+  "destination": "scripts/generate_server_pipeline_v31.py",
+  "destination_sha256": "7d613b9464d118315ee9fe9e5d1c097d53bddabb696a6029925874f8b90b2243",
+  "purpose": "Explicit authorized server paths and 22 finite stages; measured cache parity and BF16 acceptance are mandatory prerequisites."
+}

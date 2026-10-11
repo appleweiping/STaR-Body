@@ -1,0 +1,10 @@
+{
+  "source": "video_VACE/models/human_decoder_spatiotemporal_v30.py",
+  "destination": "video_VACE/models/human_decoder_spatiotemporal_v31.py",
+  "copy_method": "PowerShell Copy-Item before editing",
+  "source_sha256_before": "ac94bf1689a50615572206c2dcad55701e3e68457bdbc207a4f65a06adfd23cc",
+  "copied_sha256_before_edit": "ac94bf1689a50615572206c2dcad55701e3e68457bdbc207a4f65a06adfd23cc",
+  "source_sha256_after": "ac94bf1689a50615572206c2dcad55701e3e68457bdbc207a4f65a06adfd23cc",
+  "destination_sha256_after": "ce49a7201edc523aacea7da285ce40f11206a061f17c79f21871b2b6abb81008",
+  "state": "edited_and_synthetic_math_verified"
+}

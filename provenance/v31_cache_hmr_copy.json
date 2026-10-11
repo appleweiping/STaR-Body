@@ -1,0 +1,105 @@
+{
+  "schema": "star-body-copy-provenance-v1",
+  "recorded_at_utc": "2026-10-09T01:37:20.462816+00:00",
+  "source": "video_VACE/divibody_training/cache_hmr2a_rgb_anchor_v11_raw.py",
+  "source_sha256_before_copy": "3f8a59aa5a5525b389270dc6510c1614f7f536255754f7e689d94b9e87aea503",
+  "source_sha256_after_changes": "3f8a59aa5a5525b389270dc6510c1614f7f536255754f7e689d94b9e87aea503",
+  "destination": "video_VACE/divibody_training/cache_hmr2a_rgb_anchor_v31_resume.py",
+  "destination_sha256": "2e2196a25922cda127f82aaa034e41920ab3d43a011303593076978d00a116a5",
+  "copied_before_edit": true,
+  "original_unchanged": true,
+  "scope": "Resumable frozen HMR2a image-only raw25 feature sidecar builder. No trainable model, labels, weights or cache input modified.",
+  "fixed_hmr2a_sha256": "2dcf79638109781d1ae5f5c44fee5f55bc83291c210653feead9b7f04fa6f20e",
+  "changes": [
+    "Unique-frame shards of 128 or 256 with immutable contract and per-shard content hashes.",
+    "Resume binds parameters, seed, environment, actual VACE file SHA, checkpoint/config/assets/source/annotations/image SHA, ordered frame/window UIDs and lookup digest.",
+    "Formal full split coverage reconstructed from original VACE window planner including all owner masks and metric-only boundary keys.",
+    "Explicit diagnostic development override always yields development_only=true and never accepts test split.",
+    "Raw rectangular poses2d crop margin 0.25 and original HMR2 aspect crop/extractor retained.",
+    "Frame-budget pause, merge-only resume, interrupted shard publication recovery, committed shard tamper/missing/unrecorded rejection.",
+    "torch.from_file merge tensors plus native torch.save storage writer; Linux msync/madvise and background page advice, observed memory not hard RSS guarantee.",
+    "No-overwrite final files, actual final SHA, disk reload validation and exact private temporary-file cleanup boundaries.",
+    "GPU allocator cap defaults 8 GiB, batch 2, workers 0, CPU threads 4, seed 2026.",
+    "Portable lazy CLI imports avoid vace/models shadowing external wan package."
+  ],
+  "validation": {
+    "ast_parse": "passed",
+    "cli_help": "passed_without_loading_project_assets",
+    "torch_version": "2.12.0+cpu",
+    "local_python": "C:/Python314/python.exe",
+    "real_hmr_encoding_run_locally": false,
+    "remote_gpu_run_by_this_agent": false,
+    "benchmark_metrics_computed": false,
+    "synthetic_mechanics_tests": [
+      {
+        "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-08\\e\\work\\hmr_fake_shards_3c27f3f2aaf94818a29e04e4a9d61c1a\\test_result.json",
+        "sha256": "4f24d91cd3b1098ba5bb3a7af54990adeee4679c37066adaf48ff8af7c04ce49",
+        "report": {
+          "contract_mismatch_rejected": true,
+          "existing_output_rejected": true,
+          "mmap_merge_exact": true,
+          "real_hmr_encoding": false,
+          "result": {
+            "bytes": 1973761,
+            "cleanup": [
+              {
+                "file": "C:\\Users\\admin\\Documents\\Codex\\2026-10-08\\e\\work\\hmr_fake_shards_3c27f3f2aaf94818a29e04e4a9d61c1a\\merge_e213c6f020174d73a446f98efb92a030_4383669fdab045838a89830549c0b524\\rgb_tokens.mmap",
+                "removed": true
+              },
+              {
+                "file": "C:\\Users\\admin\\Documents\\Codex\\2026-10-08\\e\\work\\hmr_fake_shards_3c27f3f2aaf94818a29e04e4a9d61c1a\\merge_e213c6f020174d73a446f98efb92a030_4383669fdab045838a89830549c0b524\\base_rotmat.mmap",
+                "removed": true
+              },
+              {
+                "file": "C:\\Users\\admin\\Documents\\Codex\\2026-10-08\\e\\work\\hmr_fake_shards_3c27f3f2aaf94818a29e04e4a9d61c1a\\merge_e213c6f020174d73a446f98efb92a030_4383669fdab045838a89830549c0b524\\base_betas.mmap",
+                "removed": true
+              },
+              {
+                "file": "C:\\Users\\admin\\Documents\\Codex\\2026-10-08\\e\\work\\hmr_fake_shards_3c27f3f2aaf94818a29e04e4a9d61c1a\\merge_e213c6f020174d73a446f98efb92a030_4383669fdab045838a89830549c0b524\\base_camera.mmap",
+                "removed": true
+              }
+            ],
+            "file_backed_merge": true,
+            "madvise_supported": false,
+            "memory": {
+              "peak_rss_bytes": 238911488,
+              "rss_bytes": 228544512
+            },
+            "output": "C:\\Users\\admin\\Documents\\Codex\\2026-10-08\\e\\work\\hmr_fake_shards_3c27f3f2aaf94818a29e04e4a9d61c1a\\fake_sidecar.pt",
+            "page_advice_calls": 0,
+            "page_advice_errors": [],
+            "paging_limit": "OS-managed clean file pages; RSS is observed, not a guaranteed hard cap",
+            "sha256": "1a5f05857876a6cf25ac4d7d3abaa9426a12b9d1e53c08fb584516f44d2dbfd4"
+          },
+          "resume_frames": 4,
+          "status": "passed",
+          "synthetic_shards_only": true
+        }
+      },
+      {
+        "path": "C:\\Users\\admin\\Documents\\Codex\\2026-10-08\\e\\work\\hmr_resume_faults_7db4974b521441b894fe88d7cd9a28c7\\test_result.json",
+        "sha256": "f79b7e25d52389e7c88d401254d5182d8fd96fa31c305533ae5c5a75a89e816b",
+        "report": {
+          "checks": {
+            "all": true,
+            "committed_shard_missing_rejected": true,
+            "committed_shard_tamper_rejected": true,
+            "outside_cleanup_refused": true,
+            "published_inflight_recovered": true,
+            "uid_order_mismatch_rejected": true,
+            "unrecorded_shard_rejected": true
+          },
+          "real_hmr_encoding": false,
+          "status": "passed",
+          "synthetic_shards_only": true
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Synthetic tests verify storage/resume mechanisms only; real raw-data schema, HMR checkpoint loading, CUDA forward and Linux paging still require server pilot.",
+    "Final .pt publication before completion report is possible on process death; independent read-only stage verifier must reconstruct acceptance from final native schema and immutable work contract.",
+    "Mmap pages are OS-managed; CUDA allocator cap does not limit all driver memory or guarantee system RSS."
+  ],
+  "real_pilot_repair": "Call preserved evaluate_standard_3dpw.enable_legacy_chumpy_compatibility before HMR SMPL construction under NumPy 1.26; no package/weight/preprocessing edits."
+}

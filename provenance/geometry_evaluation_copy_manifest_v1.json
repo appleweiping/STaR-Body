@@ -1,0 +1,9 @@
+[
+  {
+    "source": "run_mhr_smpl_anchor_pilot_v3.py",
+    "copy": "evaluate_geometry_teacher_v30_v1.py",
+    "source_sha256": "bec496d8a899cc5511b95d47bb67fe313cc4c36423090341214933d8a7b9e6e1",
+    "copy_sha256": "8a3812047618df5ec44dc2a81f12e0484903fb49c5320fd546f60d2dce37ec49",
+    "original_unchanged": true
+  }
+]
