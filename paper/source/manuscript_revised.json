@@ -47,11 +47,11 @@
     },
     {
       "type": "paragraph",
-      "text": "Image-based estimation and geometric feedback. HMR [7], SPIN [10], and HMR 2.0 [5] establish regression-based pose and shape estimation from images, with SPIN incorporating model fitting during training. PARE [9] uses part-guided attention to associate image features with body regions. PyMAF [23] and PyMAF-X [24] revisit features aligned with the projected mesh and iteratively update its parameters. These approaches motivate geometry-aware refinement. STaR-Body focuses on a complementary interface: the assignment of predicted landmark evidence to pose joints before anatomical pooling. Its controlled comparison changes this feedback representation while retaining the visual inputs and body representation."
+      "text": "Image-based estimation and geometric feedback. HMR [7], SPIN [10], and HMR 2.0 [5] establish regression-based pose and shape estimation from images, with SPIN incorporating model fitting during training. PARE [9] uses part-guided attention to associate image features with body regions. PyMAF [23] and PyMAF-X [24] revisit features aligned with the projected mesh and iteratively update its parameters. These approaches motivate geometry-aware refinement. ReFit [28] recurrently updates body estimates using locally sampled marker features. STaR-Body focuses on a complementary interface: the assignment of predicted landmark evidence to pose joints before anatomical pooling. Its controlled comparison changes this feedback representation while retaining the visual inputs and body representation."
     },
     {
       "type": "paragraph",
-      "text": "Temporal and world-grounded reconstruction. VIBE [8] models temporal context with a motion prior, TCMR [1] emphasizes temporal information beyond static features, and GLoT [12] combines global and local temporal modeling with spatial correlation. STaR-Body likewise exchanges information across frames, but separates temporal interaction from the routing of local feedback to joints. Its dual-order decoder supports spatial-first and temporal-first processing, while the final recurrent state advances over refinement iterations. GLAMR [22], WHAM [14], TRAM [19], GVHMR [13], HumanMM [25], and OnlineHMR [26] additionally address global motion, camera trajectories, multi-shot input, or streaming reconstruction. Our evaluation concerns camera-space body refinement on offline person tracks, so these trajectory-oriented settings provide context rather than directly comparable protocol rows."
+      "text": "Temporal and world-grounded reconstruction. VIBE [8] models temporal context with a motion prior, TCMR [1] emphasizes temporal information beyond static features, and GLoT [12] combines global and local temporal modeling with spatial correlation. STaR-Body likewise exchanges information across frames, but separates temporal interaction from the routing of local feedback to joints. Its dual-order decoder supports spatial-first and temporal-first processing, while the final recurrent state advances over refinement iterations. GLAMR [22], WHAM [14], TRAM [19], GVHMR [13], HumanMM [25], and OnlineHMR [26] additionally address global motion, camera trajectories, multi-shot input, or streaming reconstruction. Several also report camera-space body accuracy and are relevant external comparators. Their global-motion and streaming capabilities remain distinct from the offline, joint-indexed refinement interface studied here."
     },
     {
       "type": "paragraph",
@@ -217,85 +217,85 @@
     {
       "type": "heading",
       "level": 2,
-      "text": "4.1. Protocol and controlled comparison"
+      "text": "4.1. Evaluation protocol"
     },
     {
       "type": "paragraph",
-      "text": "We use 3DPW [17] for camera-space reconstruction. The training cache contains 2,909 windows and 22,735 unique person-frames; validation contains 1,357 windows, 10,413 person-frames, and 12 sequences. All reported results use this validation split and the same targets, feature caches, body-model assets, and frame-ownership manifest. Person crops come from annotated two-dimensional person extent with a 25% margin. This shared crop and target convention defines the comparison throughout the paper."
+      "text": "We evaluate camera-space human reconstruction on 3DPW [17]. Table 1 summarizes published methods alongside our full-model result, with each data split and setting identified. Table 2 compares feedback designs under a shared local protocol."
     },
     {
       "type": "paragraph",
-      "text": "MPJPE uses pelvis-aligned LSP 14 joints regressed through the H36M joint convention; PA-MPJPE additionally applies a proper per-frame similarity alignment. PVE measures raw vertex error under the common SMPL target convention, without additional pelvis alignment. Acceleration error is the second difference of hip-centered joint error over all 10,226 annotation-adjacent triplets, including window boundaries, in mm/annotation-frame². Validation inference and SMPL computation use FP32, with double-precision aggregate sums. We apply neither flip averaging nor temporal smoothing."
+      "text": "For the controlled study, the training cache contains 2,909 windows and 22,735 unique person-frames; validation contains 1,357 windows, 10,413 person-frames, and 12 sequences. All local comparisons use the same targets, feature caches, body-model assets, and frame-ownership manifest. Person crops use annotated two-dimensional person extent with a 25% margin."
     },
     {
       "type": "paragraph",
-      "text": "The recorded matched-budget comparison starts mean and joint-indexed feedback from the same selected parent. Both receive 1,000 additional optimizer steps, identical sample exposure, losses, and staged unfreezing. We use AdamW, an effective batch of 16 windows, gradient clipping, and exponential moving average (EMA) weights. Feature encoders, the reference, camera head, and observation heads remain frozen. Supplementary Section S3 records the learning rates, unfreezing schedule, and EMA definition."
+      "text": "Local MPJPE uses pelvis-aligned LSP 14 joints regressed through the H36M convention; PA-MPJPE additionally applies a proper per-frame similarity alignment. PVE measures vertex error under the common SMPL target convention, without additional pelvis alignment. Acceleration error uses the second difference of hip-centered joint error over all 10,226 annotation-adjacent triplets, including window boundaries, in mm/annotation-frame². Inference and SMPL computation use FP32 with double-precision aggregate sums, without flip averaging or temporal smoothing."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.2. Comparison with published methods"
     },
     {
       "type": "paragraph",
-      "text": "Checkpoint selection minimizes max(MPJPE/60, PA-MPJPE/37.3), subject to preserving all four metrics relative to the fixed spatiotemporal reference. The normalization constants are fixed before the feedback comparison. Both reported final rows use the 1,000-step EMA checkpoint. The new branch reproduces the parent validation output before optimization, and the selected run covers the complete training-window and boundary-triplet pools. The earlier rows describe model progression; the final two rows provide the matched feedback comparison."
+      "text": "Table 1 brings together image-based and video-based methods using the authors’ reported 3DPW test results. HMR 2.0 [5] anchors image-based estimation, while VIBE [8], TCMR [1], and GLoT [12] characterize temporal reconstruction. PyMAF [23], PARE [9], CLIFF [30], and the body branch of PyMAF-X [24] provide established image-based comparisons. ReFit [28] studies recurrent image fitting, and CameraHMR [29] incorporates perspective-aware training. WHAM [14], GVHMR [13], PromptHMR [20], and OnlineHMR [26] provide recent camera-space comparisons alongside their broader reconstruction capabilities. The table retains stronger additional-data variants and records each reported input setting."
+    },
+    {
+      "type": "table",
+      "key": "published_benchmark",
+      "caption": "3DPW reconstruction results (mm, lower is better). Published baselines follow the cited papers. Train indicates use of 3DPW training data; bold marks the best reported test value."
+    },
+    {
+      "type": "paragraph",
+      "text": "STaR-Body’s full model obtains 61.19 mm MPJPE and 37.61 mm PA-MPJPE on validation. The following controlled experiments examine the feedback interface and its geometric and temporal behavior."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.3. Controlled feedback comparison"
+    },
+    {
+      "type": "paragraph",
+      "text": "The recorded matched-budget comparison starts mean and joint-indexed feedback from the same selected parent. Both receive 1,000 additional optimizer steps with identical sample exposure, losses, and staged unfreezing. We use AdamW, an effective batch of 16 windows, gradient clipping, and exponential moving average (EMA) weights. Feature encoders, the reference, camera head, and observation heads remain frozen. Both final rows use the 1,000-step EMA checkpoint; Supplementary Section S3 specifies the schedule and the validation-only selection rule, whose normalization constants were fixed before the comparison."
     },
     {
       "type": "table",
       "key": "main",
-      "caption": "Validation results under the shared 3DPW crop and target protocol. All rows cover 10,413 person-frames and 10,226 motion triplets. Errors are in mm, except acceleration in mm/annotation-frame²; lower is better. The final two rows start from the same parent and use 1,000 additional steps with EMA. Bold marks the lowest observed value among these rows. Relative improvement uses the mean-feedback control and unrounded metrics."
+      "caption": "Controlled validation comparison under the shared 3DPW crop and target protocol. All four rows cover 10,413 person-frames and 10,226 motion triplets. Errors are in mm, except acceleration in mm/annotation-frame²; lower is better. The final two rows start from the same parent and use 1,000 additional steps with EMA. Bold marks the lowest observed value within this comparison. Relative improvement uses the mean-feedback control and unrounded metrics."
+    },
+    {
+      "type": "paragraph",
+      "text": "Table 2 shows lower errors for joint-indexed feedback on all four measured validation metrics at the matched budget. PVE falls from 73.05 to 72.82 mm, a 0.31% relative reduction, while MPJPE falls from 61.26 to 61.19 mm and PA-MPJPE from 37.64 to 37.61 mm. Acceleration changes from 21.45 to 21.44 mm/annotation-frame². The largest absolute change is in vertex geometry, following refinement of the same inherited parent."
+    },
+    {
+      "type": "paragraph",
+      "text": "Both feedback designs share visual evidence, body representation, initialization, and optimization exposure. The joint-indexed interface combines landmark identities, projected coordinates, validity features, and anatomically biased attention to change how evidence enters the refiner. The joint-indexed interface yields lower observed validation errors under this matched-budget setting. The shared decoder, track-shape conditioning, and part/time update mechanism define the common refinement procedure."
+    },
+    {
+      "type": "paragraph",
+      "text": "The progression rows clarify the starting point. Adding the track-shape and iterative parent stage changes PVE from 73.29 to 73.02 mm; the mean-feedback continuation reaches 73.05 mm, and joint-indexed feedback reaches 72.82 mm at the same continuation budget. Thus, the final two rows compare feedback interfaces, whereas parent-to-final changes describe the complete additional refinement stage."
     },
     {
       "type": "heading",
       "level": 2,
-      "text": "4.2. Effect of joint-indexed feedback"
+      "text": "4.4. Sequence and temporal analysis"
     },
     {
       "type": "paragraph",
-      "text": "Table 1 shows that joint-indexed feedback improves all four measured validation metrics at the matched refinement budget. PVE falls from 73.05 to 72.82 mm, a 0.31% relative reduction, while MPJPE falls from 61.26 to 61.19 mm and PA-MPJPE from 37.64 to 37.61 mm. Acceleration changes from 21.45 to 21.44 mm/annotation-frame². The largest absolute change is in vertex geometry, measured after refinement of the same inherited parent."
+      "text": "Figure 3 shows how the complete refinement stage changes geometry across sequences. Relative to the parent, PVE decreases on 11 sequences, MPJPE on nine, and PA-MPJPE on ten. Vertex improvements extend across golf, range of motions, freestyle, and cross-country motion, indicating that the aggregate reduction is distributed across actions. Supplementary Table S3 gives all sequence counts and absolute errors."
     },
     {
       "type": "paragraph",
-      "text": "The comparison evaluates the feedback interface. Mean feedback and joint-indexed feedback share the visual evidence, body representation, parent checkpoint, and optimization exposure. The joint interface combines identity embeddings, projected coordinates, validity features, and anatomically biased attention to change how landmark evidence enters the existing refiner. The joint-indexed interface yields lower observed validation errors under this matched-budget setting. The shared decoder, track-shape conditioning, and part/time update mechanism provide the common setting for this feedback comparison."
-    },
-    {
-      "type": "paragraph",
-      "text": "The reference and parent rows clarify the starting point. Adding the track-shape and iterative parent stage changes PVE from 73.29 to 73.02 mm, while the subsequent mean-feedback continuation reaches 73.05 mm. Joint-indexed feedback reaches 72.82 mm after the same continuation budget. These are different comparisons: the matched final rows test the feedback representation, whereas parent-to-final changes characterize the complete additional refinement stage. We retain both views to make the role of the initialization explicit."
-    },
-    {
-      "type": "heading",
-      "level": 2,
-      "text": "4.3. Distribution across sequences"
+      "text": "Aggregate geometry metrics weight person-frames equally: sequence error sums are added and divided by 10,413. An unweighted average of the twelve sequence means would give short and long sequences equal influence and would not reproduce the geometry columns of Table 2. Figure 3 uses identical person-frames for the parent and STaR-Body, so its changes reflect predictions rather than coverage. Joint and vertex errors observe different functions of the body state; basketball, for example, has lower vertex error but higher 14-joint error after refinement."
     },
     {
       "type": "figure",
       "key": "sequences",
-      "caption": "Changes from the common parent to STaR-Body across all 12 validation sequences. Positive values denote lower error after refinement. PVE decreases on 11 sequences and MPJPE on nine; the signed bars include increases as well as decreases. The parent comparison measures the full additional refinement stage; Table 1 compares the two feedback interfaces at equal budget."
+      "caption": "Changes from the common parent to STaR-Body across all 12 validation sequences. Positive values denote lower error after refinement. PVE decreases on 11 sequences and MPJPE on nine; signed bars retain both increases and decreases. This comparison measures the complete additional refinement stage, while Table 2 compares feedback interfaces at equal budget."
     },
     {
       "type": "paragraph",
-      "text": "Figure 3 shows the complete sequence distribution rather than only the aggregate. Relative to the parent, PVE decreases on 11 sequences, MPJPE on nine, and PA-MPJPE on ten. The vertex changes extend across several actions, including golf, range of motions, freestyle, and cross-country motion. Thus, the aggregate vertex reduction is distributed across sequences rather than arising from one action alone. Supplementary Table S3 provides all sequence counts and absolute errors."
-    },
-    {
-      "type": "paragraph",
-      "text": "Global metrics weight person-frames equally: sequence error sums are added and divided by 10,413. Averaging the twelve sequence means would instead give short and long sequences equal influence and would not reproduce Table 1. The signed changes in Figure 3 use the same frame counts for the parent and STaR-Body, ensuring that changes reflect predictions rather than differences in evaluated coverage."
-    },
-    {
-      "type": "paragraph",
-      "text": "Joint and vertex metrics observe different functions of the body state. Basketball, for example, has lower vertex error but higher 14-joint error after refinement, while the two parcours sequences also differ in their joint-error response. The selection rule evaluates aligned joints, unaligned joints, vertices, and motion together. Accordingly, the sequence analysis supports a distributed vertex improvement without requiring every anatomical metric to change in the same direction on every sequence."
-    },
-    {
-      "type": "heading",
-      "level": 2,
-      "text": "4.4. Optimization and motion balance"
-    },
-    {
-      "type": "figure",
-      "key": "dynamics",
-      "caption": "Recorded EMA evaluations during additional refinement. Both branches share the same parent at step zero. Mean feedback is evaluated at 1,000 and 2,000 steps; joint-indexed feedback is shown at its selected 1,000-step checkpoint. Lines connect these recorded evaluations. The shared-budget point is the feedback comparison, while the longer mean-feedback run illustrates the geometry–motion trade-off within the schedule."
-    },
-    {
-      "type": "paragraph",
-      "text": "Figure 4 relates the matched result to the recorded continuation checkpoints. Mean-feedback EMA reaches 61.26 mm MPJPE at 1,000 steps and 61.32 mm at 2,000 steps, while acceleration error falls from 21.45 to 21.36 mm/annotation-frame². Joint-indexed feedback reaches 61.19 mm MPJPE at 1,000 steps, with 21.44 acceleration error. Additional optimization therefore affects geometry and temporal error differently; the joint geometry-and-motion selection rule makes that trade-off explicit."
-    },
-    {
-      "type": "paragraph",
-      "text": "EMA also affects the reported geometry. For joint feedback, the 1,000-step EMA has lower MPJPE and PVE than the same-step student, while the student's acceleration error is lower. We use EMA consistently for both sides of the main comparison and provide the complete student/EMA table in Supplementary Section S4. This separates the feedback effect from the choice of weight averaging."
+      "text": "Temporal error is measured on the assembled sequences, retaining all 10,226 annotation-adjacent triplets rather than resetting at inference-window boundaries. This common accounting makes the motion column in Table 2 consistent across model variants. Supplementary Figure S2 places the matched result alongside recorded continuation checkpoints, and Table S4 separates the student and EMA weights. Together, these diagnostics show how geometry and temporal error evolve within the same optimization schedule."
     },
     {
       "type": "heading",

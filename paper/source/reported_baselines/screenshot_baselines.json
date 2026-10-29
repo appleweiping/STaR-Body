@@ -1,0 +1,401 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-10-28",
+  "status": "four_screenshot_numeric_pairs_verified_in_original_author_self_method_tables_with_variant_annotations",
+  "scope": "Read-only paper/source audit; no model execution, manuscript changes, builder changes, or external publication.",
+  "acceptance": {
+    "original_self_rows_verified": true,
+    "table_pages_visually_checked": true,
+    "pdf_sha_recorded": true,
+    "training_conditions_disclosed": true,
+    "no_missing_metric_imputation": true
+  },
+  "references": {
+    "PyMAF": {
+      "title": "PyMAF: 3D Human Pose and Shape Regression With Pyramidal Mesh Alignment Feedback Loop",
+      "authors": [
+        "Hongwen Zhang",
+        "Yating Tian",
+        "Xinchi Zhou",
+        "Wanli Ouyang",
+        "Yebin Liu",
+        "Limin Wang",
+        "Zhenan Sun"
+      ],
+      "venue": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)",
+      "year": 2021,
+      "pages": "11446-11456",
+      "metadata_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_PyMAF_3D_Human_Pose_and_Shape_Regression_With_Pyramidal_Mesh_ICCV_2021_paper.html",
+      "full_citation": "Hongwen Zhang, Yating Tian, Xinchi Zhou, Wanli Ouyang, Yebin Liu, Limin Wang, and Zhenan Sun. 2021. PyMAF: 3D Human Pose and Shape Regression With Pyramidal Mesh Alignment Feedback Loop. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 11446-11456."
+    },
+    "CLIFF": {
+      "title": "CLIFF: Carrying Location Information in Full Frames into Human Pose and Shape Estimation",
+      "authors": [
+        "Zhihao Li",
+        "Jianzhuang Liu",
+        "Zhensong Zhang",
+        "Songcen Xu",
+        "Youliang Yan"
+      ],
+      "venue": "Computer Vision - ECCV 2022",
+      "year": 2022,
+      "pages": "590-606",
+      "series": "Lecture Notes in Computer Science",
+      "volume": 13665,
+      "doi": "10.1007/978-3-031-20065-6_34",
+      "metadata_url": "https://link.springer.com/chapter/10.1007/978-3-031-20065-6_34",
+      "full_citation": "Zhihao Li, Jianzhuang Liu, Zhensong Zhang, Songcen Xu, and Youliang Yan. 2022. CLIFF: Carrying Location Information in Full Frames into Human Pose and Shape Estimation. In Computer Vision - ECCV 2022, Lecture Notes in Computer Science 13665, 590-606. https://doi.org/10.1007/978-3-031-20065-6_34"
+    },
+    "PARE": {
+      "title": "PARE: Part Attention Regressor for 3D Human Body Estimation",
+      "authors": [
+        "Muhammed Kocabas",
+        "Chun-Hao P. Huang",
+        "Otmar Hilliges",
+        "Michael J. Black"
+      ],
+      "venue": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)",
+      "year": 2021,
+      "pages": "11127-11137",
+      "metadata_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.html",
+      "full_citation": "Muhammed Kocabas, Chun-Hao P. Huang, Otmar Hilliges, and Michael J. Black. 2021. PARE: Part Attention Regressor for 3D Human Body Estimation. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 11127-11137."
+    },
+    "PyMAF-X": {
+      "title": "PyMAF-X: Towards Well-Aligned Full-Body Model Regression From Monocular Images",
+      "authors": [
+        "Hongwen Zhang",
+        "Yating Tian",
+        "Yuxiang Zhang",
+        "Mengcheng Li",
+        "Liang An",
+        "Zhenan Sun",
+        "Yebin Liu"
+      ],
+      "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+      "year": 2023,
+      "volume": 45,
+      "number": 10,
+      "pages": "12287-12303",
+      "doi": "10.1109/TPAMI.2023.3271691",
+      "metadata_url": "https://doi.org/10.1109/TPAMI.2023.3271691",
+      "official_project_url": "https://zhanghongwen.cn/pymaf-x/",
+      "full_citation": "Hongwen Zhang, Yating Tian, Yuxiang Zhang, Mengcheng Li, Liang An, Zhenan Sun, and Yebin Liu. 2023. PyMAF-X: Towards Well-Aligned Full-Body Model Regression From Monocular Images. IEEE Transactions on Pattern Analysis and Machine Intelligence 45, 10 (2023), 12287-12303. https://doi.org/10.1109/TPAMI.2023.3271691"
+    }
+  },
+  "rows": [
+    {
+      "id": "pymaf_iccv21",
+      "method": "PyMAF",
+      "original_row_label": "PyMAF",
+      "source_row_type": "original paper authors own method row",
+      "dataset": "3DPW",
+      "split": "test",
+      "coordinate_protocol": "camera-space body reconstruction",
+      "body_model": "SMPL body",
+      "metrics": {
+        "MPJPE_mm": 92.8,
+        "PA_MPJPE_mm": 58.9,
+        "PVE_mm": 110.1,
+        "Accel": null
+      },
+      "reported_decimal_places": 1,
+      "trained_on_3dpw": false,
+      "backbone": "ResNet-50",
+      "training_data": "Human3.6M, MPI-INF-3DHP, LSP, LSP-Extended, MPII, COCO; pseudo-SMPL supervision for the last five datasets. No 3DPW training.",
+      "protocol_evidence": [
+        "Sec4.1/4.2 p5: ResNet50, training datasets, explicit no 3DPW training and test-only evaluation.",
+        "Table1 p6: PVE110.1 / MPJPE92.8 / PA-MPJPE58.9."
+      ],
+      "source_key": "PyMAF",
+      "source": {
+        "primary_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_PyMAF_3D_Human_Pose_and_Shape_Regression_With_Pyramidal_Mesh_ICCV_2021_paper.pdf",
+        "pdf_sha256": "8f257db02f28ba1043b08c81ba10401693986a652d13f3abdb82a422c273653e",
+        "table": "Table 1",
+        "pdf_page_1based": 6,
+        "printed_page": 11451,
+        "screenshot_sha256": "822acfa06fabda06c09c304cc415ccad8e377d021126a190eacde5ae90c62a29"
+      },
+      "test_time_flip": null,
+      "screenshot_pair_matches_original": true,
+      "source_re_evaluation_status": "Direct original-author value; no dependence on later-paper rerun claims."
+    },
+    {
+      "id": "cliff_hrw48",
+      "method": "CLIFF",
+      "original_row_label": "CLIFF (HR-W48)",
+      "source_row_type": "original paper authors own method row",
+      "dataset": "3DPW",
+      "split": "test",
+      "coordinate_protocol": "camera-space body reconstruction",
+      "body_model": "SMPL body",
+      "metrics": {
+        "MPJPE_mm": 69.0,
+        "PA_MPJPE_mm": 43.0,
+        "PVE_mm": 81.2,
+        "Accel": null
+      },
+      "reported_decimal_places": 1,
+      "trained_on_3dpw": true,
+      "backbone": "HRNet-W48",
+      "training_data": "Human3.6M, MPI-INF-3DHP, COCO, MPII with CLIFF-generated pseudo-GT; additionally uses 3DPW training data for 3DPW evaluation.",
+      "protocol_evidence": [
+        "Sec4 p10: datasets and explicit use of 3DPW training data.",
+        "Table1 p11: 69.0 / 43.0 / 81.2.",
+        "Sec4 p10: MPJPE is pelvis-aligned, PA-MPJPE applies Procrustes; all errors in mm."
+      ],
+      "source_key": "CLIFF",
+      "source": {
+        "primary_url": "https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136650580.pdf",
+        "pdf_sha256": "42a710d617c055a07ffdae7473b235d670c7d615656450441f798ee687078b87",
+        "table": "Table 1",
+        "pdf_page_1based": 11,
+        "printed_page": 11,
+        "screenshot_sha256": "42b7d613f536ee30851cf9140fb03134a878e225669eb74b8e210930e1207d06"
+      },
+      "test_time_flip": null,
+      "screenshot_pair_matches_original": true,
+      "source_re_evaluation_status": "Direct original-author value; no dependence on later-paper rerun claims.",
+      "focal_length_condition": "Sec3: use ground-truth focal if known, otherwise approximate sqrt(width^2+height^2); this audit does not independently establish which cached intrinsics every Table1 test sample used."
+    },
+    {
+      "id": "pare_hrw32_no3dpw",
+      "method": "PARE",
+      "original_row_label": "PARE (HRNet-W32)",
+      "source_row_type": "original paper authors own method row",
+      "dataset": "3DPW",
+      "split": "test",
+      "coordinate_protocol": "camera-space body reconstruction",
+      "body_model": "SMPL body",
+      "metrics": {
+        "MPJPE_mm": 82.0,
+        "PA_MPJPE_mm": 50.9,
+        "PVE_mm": 97.9,
+        "Accel": null
+      },
+      "reported_decimal_places": 1,
+      "trained_on_3dpw": false,
+      "backbone": "HRNet-W32",
+      "training_data": "COCO, MPII, LSPET, MPI-INF-3DHP, Human3.6M; EFT pseudo-SMPL annotations; no 3DPW training in this row.",
+      "protocol_evidence": [
+        "Sec5 p6: training datasets; Evaluation explicitly names 3DPW test split and mm units.",
+        "Table1 p6 distinguishes this row from PARE(HRNet-W32)w.3DPW."
+      ],
+      "source_key": "PARE",
+      "source": {
+        "primary_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.pdf",
+        "pdf_sha256": "825c038863a9e954d4cdc11948fc1fd8bb5b23739b158e944121735fe937d394",
+        "table": "Table 1",
+        "pdf_page_1based": 6,
+        "printed_page": 11132,
+        "screenshot_sha256": "b0b8e4748cb8e693f4a133524fb2088a04c40ffccc53c87daf7649ef73c216d2"
+      },
+      "test_time_flip": null,
+      "screenshot_pair_matches_original": true,
+      "source_re_evaluation_status": "Direct original-author value; no dependence on later-paper rerun claims."
+    },
+    {
+      "id": "pymafx_body_hr48_no3dpw",
+      "method": "PyMAF-X",
+      "original_row_label": "PyMAF (HR48)",
+      "source_row_type": "original paper authors own method row",
+      "dataset": "3DPW",
+      "split": "test",
+      "coordinate_protocol": "camera-space body reconstruction",
+      "body_model": "SMPL body",
+      "metrics": {
+        "MPJPE_mm": 78.0,
+        "PA_MPJPE_mm": 47.1,
+        "PVE_mm": 91.3,
+        "Accel": null
+      },
+      "reported_decimal_places": 1,
+      "trained_on_3dpw": false,
+      "backbone": "HRNet-W48",
+      "training_data": "Body expert: Human3.6M, MPI-INF-3DHP, MPII, LSP, LSP-Extended, COCO; EFT pseudo-SMPL annotations. No 3DPW training in this unstarred row.",
+      "protocol_evidence": [
+        "Sec3.1 distinguishes body-only PyMAF from full-body PyMAF-X.",
+        "Table1 p8: unstarred body-only HR48 row; star section explicitly means training on 3DPW.",
+        "AppendixC p17: no 3DPW training by default unless table specifies otherwise; same protocol as SPIN/HMMR.",
+        "Sec4.3 p8: metric definitions and mm units."
+      ],
+      "source_key": "PyMAF-X",
+      "source": {
+        "primary_url": "https://arxiv.org/pdf/2207.06400v4",
+        "pdf_sha256": "5a6d9d11de3ae393be07b5088377a05e2d0113d14b8e2b2c3305923d5faf24d8",
+        "table": "Table 1",
+        "pdf_page_1based": 8,
+        "printed_page": 8,
+        "screenshot_sha256": "f9f272e59085ab46129c3de3b1cbe0e9d98705a6904647c1fa8375262e33b88f"
+      },
+      "test_time_flip": null,
+      "screenshot_pair_matches_original": true,
+      "source_re_evaluation_status": "Direct original-author value; no dependence on later-paper rerun claims.",
+      "recommended_display_label": "PyMAF-X (body expert, HR48)",
+      "name_correction": "Original Table1 calls it PyMAF(HR48). Later HMR2/RAM tables label the citing paper PyMAF-X. Preserve this distinction in a note.",
+      "focal_length_condition": "Weak-perspective camera, predefined focal length5000 by default for training/evaluation (paper p8); special AGORA setting is irrelevant to this 3DPW row."
+    }
+  ],
+  "additional_author_variants": [
+    {
+      "method": "PARE",
+      "original_row_label": "PARE (R50)",
+      "MPJPE_mm": 82.9,
+      "PA_MPJPE_mm": 52.3,
+      "PVE_mm": 99.7,
+      "trained_on_3dpw": false,
+      "backbone": "ResNet-50",
+      "source_key": "PARE",
+      "source": {
+        "primary_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.pdf",
+        "pdf_sha256": "825c038863a9e954d4cdc11948fc1fd8bb5b23739b158e944121735fe937d394",
+        "table": "Table 1",
+        "pdf_page_1based": 6,
+        "printed_page": 11132,
+        "screenshot_sha256": "b0b8e4748cb8e693f4a133524fb2088a04c40ffccc53c87daf7649ef73c216d2"
+      }
+    },
+    {
+      "method": "PARE",
+      "original_row_label": "PARE (HRNet-W32) w. 3DPW",
+      "MPJPE_mm": 74.5,
+      "PA_MPJPE_mm": 46.5,
+      "PVE_mm": 88.6,
+      "trained_on_3dpw": true,
+      "backbone": "HRNet-W32",
+      "source_key": "PARE",
+      "source": {
+        "primary_url": "https://openaccess.thecvf.com/content/ICCV2021/papers/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.pdf",
+        "pdf_sha256": "825c038863a9e954d4cdc11948fc1fd8bb5b23739b158e944121735fe937d394",
+        "table": "Table 1",
+        "pdf_page_1based": 6,
+        "printed_page": 11132,
+        "screenshot_sha256": "b0b8e4748cb8e693f4a133524fb2088a04c40ffccc53c87daf7649ef73c216d2"
+      }
+    },
+    {
+      "method": "CLIFF",
+      "original_row_label": "CLIFF (Res-50)",
+      "MPJPE_mm": 72.0,
+      "PA_MPJPE_mm": 45.7,
+      "PVE_mm": 85.3,
+      "trained_on_3dpw": true,
+      "backbone": "ResNet-50",
+      "source_key": "CLIFF",
+      "source": {
+        "primary_url": "https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136650580.pdf",
+        "pdf_sha256": "42a710d617c055a07ffdae7473b235d670c7d615656450441f798ee687078b87",
+        "table": "Table 1",
+        "pdf_page_1based": 11,
+        "printed_page": 11,
+        "screenshot_sha256": "42b7d613f536ee30851cf9140fb03134a878e225669eb74b8e210930e1207d06"
+      }
+    },
+    {
+      "method": "PyMAF-X",
+      "original_row_label": "PyMAF (Res50)",
+      "MPJPE_mm": 79.7,
+      "PA_MPJPE_mm": 49.0,
+      "PVE_mm": 94.4,
+      "trained_on_3dpw": false,
+      "backbone": "ResNet-50",
+      "source_key": "PyMAF-X",
+      "source": {
+        "primary_url": "https://arxiv.org/pdf/2207.06400v4",
+        "pdf_sha256": "5a6d9d11de3ae393be07b5088377a05e2d0113d14b8e2b2c3305923d5faf24d8",
+        "table": "Table 1",
+        "pdf_page_1based": 8,
+        "printed_page": 8,
+        "screenshot_sha256": "f9f272e59085ab46129c3de3b1cbe0e9d98705a6904647c1fa8375262e33b88f"
+      }
+    },
+    {
+      "method": "PyMAF-X",
+      "original_row_label": "* PyMAF (Res50)",
+      "MPJPE_mm": 76.8,
+      "PA_MPJPE_mm": 46.8,
+      "PVE_mm": 88.7,
+      "trained_on_3dpw": true,
+      "backbone": "ResNet-50",
+      "source_key": "PyMAF-X",
+      "source": {
+        "primary_url": "https://arxiv.org/pdf/2207.06400v4",
+        "pdf_sha256": "5a6d9d11de3ae393be07b5088377a05e2d0113d14b8e2b2c3305923d5faf24d8",
+        "table": "Table 1",
+        "pdf_page_1based": 8,
+        "printed_page": 8,
+        "screenshot_sha256": "f9f272e59085ab46129c3de3b1cbe0e9d98705a6904647c1fa8375262e33b88f"
+      }
+    },
+    {
+      "method": "PyMAF-X",
+      "original_row_label": "* PyMAF (HR48)",
+      "MPJPE_mm": 74.2,
+      "PA_MPJPE_mm": 45.3,
+      "PVE_mm": 87.0,
+      "trained_on_3dpw": true,
+      "backbone": "HRNet-W48",
+      "source_key": "PyMAF-X",
+      "source": {
+        "primary_url": "https://arxiv.org/pdf/2207.06400v4",
+        "pdf_sha256": "5a6d9d11de3ae393be07b5088377a05e2d0113d14b8e2b2c3305923d5faf24d8",
+        "table": "Table 1",
+        "pdf_page_1based": 8,
+        "printed_page": 8,
+        "screenshot_sha256": "f9f272e59085ab46129c3de3b1cbe0e9d98705a6904647c1fa8375262e33b88f"
+      }
+    }
+  ],
+  "screenshot_origin_trace": {
+    "unique_screenshot_source_proven": false,
+    "reason": "Only the six method/value pairs were supplied to this audit. The same pairs occur in more than one paper, so numeric matching does not identify a unique screenshot origin.",
+    "matching_primary_paper": {
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2026/papers/Jia_RAM_Recover_Any_3D_Human_Motion_in-the-Wild_CVPR_2026_paper.pdf",
+      "local_pdf": "snapshot_source_ram_cvpr2026.pdf",
+      "pdf_sha256": "a7c69be19909ff676a8a9e4323bb1e379a9d7e046dfcff4d7b8377ecb232f8b0",
+      "table": "Table 3 with duplicate Table 4 placeholder caption in the PDF",
+      "pdf_page_1based": 7,
+      "printed_page": 42725,
+      "table_screenshot": "literature_baseline_tables/snapshot_ram_table3_4_p7.png",
+      "screenshot_sha256": "1970d3c9f473a704e3d066de3ac9eb755360776fa8aa93921f77591c46dc6f79"
+    },
+    "title": "RAM: Recover Any 3D Human Motion in-the-Wild",
+    "venue": "CVPR 2026",
+    "match": "All six supplied 3DPW MPJPE/PA-MPJPE pairs and method order occur in the RAM table.",
+    "interpretation": "RAM is a later citing paper for these four methods. Numeric agreement alone is not evidence that RAM reran them. Each of the four pairs is independently confirmed in its original-author paper, so use the original citations rather than claim RAM authors self-reported those methods."
+  },
+  "version_notes": {
+    "PyMAF": "Official CVF ICCV2021 proceedings PDF, original ResNet-50 version.",
+    "PARE": "Official CVF ICCV2021 proceedings PDF.",
+    "CLIFF": "Official ECVA ECCV2022 paper PDF, linked by the conference landing page.",
+    "PyMAF-X": {
+      "latest_arxiv": "2207.06400v4, revised 2026-01-25",
+      "official_project_paper_target": "https://arxiv.org/abs/2207.06400",
+      "journal_publication_year": 2023,
+      "author_hosted_copy": {
+        "file": "baseline_pymafx_tpami2023_author.pdf",
+        "url": "https://hongwenzhang.github.io/pdf/PyMAF-X_compressed.pdf",
+        "bytes": 5716210,
+        "sha256": "ddde543995fe8ffc631e5e01912fbd0bfbe8c2a400594ad8f044f7ae65a57b35",
+        "pages": 21,
+        "table_candidates": [
+          8,
+          9,
+          17
+        ]
+      },
+      "comparison": "The author-hosted TPAMI manuscript and latest arXiv v4 both retain the Table1 PyMAF(HR48) values 78.0/47.1/91.3 and its with-3DPW variant 74.2/45.3/87.0. Latest v4 is the primary inspected screenshot; no publisher-PDF byte-identity claim is made."
+    }
+  },
+  "reporting_decisions": [
+    "All four supplied numeric pairs match original-author self-method rows; none needs correction merely because it also appears in later literature.",
+    "Use explicit backbone/training labels. The screenshot mixes no-3DPW-training PyMAF, PARE, and PyMAF-X-body results with CLIFF trained on 3DPW.",
+    "Name the 78.0/47.1 row PyMAF-X (body expert, HR48) or PyMAF-HR48 (TPAMI2023). Its literal original row is PyMAF(HR48); this is not a full SMPL-X whole-body result.",
+    "Do not silently present PARE 82.0/50.9 as its strongest official variant: PARE w.3DPW reports 74.5/46.5. Likewise retain knowledge of PyMAF-X-body w.3DPW 74.2/45.3.",
+    "Literature rows are author-reported 3DPW test results. They do not establish equal crops/training or convert C10 validation results into test results.",
+    "PyMAF ICCV2021 and its TPAMI2023 extension are related method versions; retaining both screenshot rows does not make them independent framework families."
+  ],
+  "remaining_unknowns": [
+    "No explicit test-time flip setting was established for these four original rows in this narrow audit.",
+    "The exact screenshot provenance cannot be uniquely inferred from its numeric pairs."
+  ]
+}

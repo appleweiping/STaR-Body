@@ -92,7 +92,7 @@
     },
     {
       "type": "paragraph",
-      "text": "The mean and joint feedback runs start from the same selected parent. Optimization uses AdamW, weight decay 10⁻⁴, gradient-norm clipping at one, and an effective batch of 16 windows through accumulation. Neural modules use BF16 autocast and geometry uses FP32 on an RTX 4090. The reported refinement comparison uses random seed 2026; its rows are individual archived runs rather than means over repeated training runs."
+      "text": "The mean and joint feedback runs start from the same selected parent. Optimization uses AdamW, weight decay 10⁻⁴, gradient-norm clipping at one, and an effective batch of 16 windows through accumulation. Neural modules use BF16 autocast and geometry uses FP32 on an RTX 4090."
     },
     {
       "type": "paragraph",
@@ -141,7 +141,16 @@
     },
     {
       "type": "paragraph",
-      "text": "The optimization figure contains only recorded EMA evaluations: the common parent at step zero, mean feedback at 1,000 and 2,000 steps, and the selected joint-feedback result at 1,000 steps. Lines connect these recorded checkpoints. Validation uses FP32 network and SMPL computation, double-precision sums, complete frame ownership, and no flip averaging or temporal smoothing throughout."
+      "text": "The optimization diagnostics retain the same validation protocol: FP32 network and SMPL computation, double-precision sums, complete frame ownership, and no flip averaging or temporal smoothing."
+    },
+    {
+      "type": "figure",
+      "key": "dynamics",
+      "caption": "Recorded EMA evaluations during additional refinement. Both branches share the same parent at step zero. Mean feedback is evaluated at 1,000 and 2,000 steps; joint-indexed feedback is shown at its selected 1,000-step checkpoint. Lines connect these recorded evaluations. The shared-budget point is the feedback comparison, while the longer mean-feedback run illustrates the geometry–motion trade-off within the schedule."
+    },
+    {
+      "type": "paragraph",
+      "text": "Figure S2 relates the matched result to the recorded continuation checkpoints. Mean-feedback EMA reaches 61.26 mm MPJPE at 1,000 steps and 61.32 mm at 2,000 steps, while acceleration error falls from 21.45 to 21.36 mm/annotation-frame². Joint-indexed feedback reaches 61.19 mm MPJPE at 1,000 steps, with 21.44 acceleration error. Additional optimization therefore affects geometry and temporal error differently; the joint geometry-and-motion selection rule makes that trade-off explicit."
     }
   ],
   "citation_mode": "Verified numeric references shared by main manuscript and supplement."

@@ -15,6 +15,17 @@ from latex2mathml.converter import convert
 xslt=etree.XSLT(etree.parse(str(Path(os.environ.get('PROGRAMFILES','C:/Program Files'))/'Microsoft Office/root/Office16/MML2OMML.XSL')))
 tables=json.loads((H/'original_tables.json').read_text('utf8'))
 refs=json.loads((H/'venue_reference_audit.json').read_text('utf8'))['references']
+def author_key(r):
+    first=r['fields']['author'].split('; ')[0].split(' and ')[0]
+    if ', ' in first:
+        surname,given=first.split(', ',1)
+    else:
+        parts=first.split();surname,given=parts[-1],' '.join(parts[:-1])
+    return surname.casefold(),given.casefold(),r['fields']['year'],r['fields']['title'].casefold()
+refs.sort(key=author_key)
+ref_numbers={r['number']:i+1 for i,r in enumerate(refs)}
+def cite(text):
+    return re.sub(r'\[(\d+(?:,\s*\d+)*)\]',lambda m:'['+', '.join(str(n) for n in sorted(ref_numbers[int(v)] for v in m[1].split(',')))+']',text)
 FULL=6.875; COL=3.28125
 
 def el(name,**kwargs):
@@ -68,6 +79,7 @@ def section(doc,cols,new=False):
     for r in p.runs:r.font.size=Pt(1)
 
 def para(doc,text,style=None,boldlead=False):
+    text=cite(text)
     p=doc.add_paragraph(style=style);p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY
     if boldlead and '. ' in text:
         a,b=text.split('. ',1);p.add_run(a+'. ').bold=True;p.add_run(b)
@@ -107,7 +119,13 @@ def format_num(v):
     except:return v
 
 def table(doc,b,num,supp=False):
-    key=b['key'];idx={'interfaces':0,'loss':1,'main':2,'sequences':3,'ema':4}[key]; data=copy.deepcopy(tables[idx])
+    key=b['key']
+    if key=='published_benchmark':
+        bm=json.loads((H/'published_benchmark_rows.json').read_text('utf8'))
+        data=[bm['columns']]+[r['display'] for r in bm['rows']]
+    else:
+        idx={'interfaces':0,'loss':1,'main':2,'sequences':3,'ema':4}[key]
+        data=copy.deepcopy(tables[idx])
     if key=='main':
         tm=json.loads((H/'table_manifest.json').read_text('utf8'))
         data[0]=['Model / refinement stage','MPJPE ↓','PA-MPJPE ↓','PVE ↓','Accel. ↓']
@@ -115,22 +133,25 @@ def table(doc,b,num,supp=False):
         for row,source in [(2,'parent'),(3,'mean_control'),(4,'joint_feedback')]:
             data[row][1:]=[f'{v:.2f}' for v in tm['main_unrounded_values'][source].values()]
         data.append(['Relative improvement']+list(tm['relative_improvement']['display_percent'].values()))
-    elif key=='loss':pass
+    elif key in ['loss','published_benchmark']:pass
     else:data=[[format_num(v) for v in r] for r in data]
     if key=='sequences':data[0][3]='PA-MPJPE'
     wide=not supp
     if wide:section(doc,1)
     p=para(doc,f'Table {"S" if supp else ""}{num}. '+b['caption'],'Caption');p.paragraph_format.keep_with_next=True
     t=doc.add_table(rows=0,cols=len(data[0]));t.autofit=False
-    widths=([2.55]+[(FULL-2.55)/4]*4) if key=='main' else [FULL/len(data[0])]*len(data[0])
+    widths=([2.55]+[(FULL-2.55)/4]*4) if key=='main' else ([1.4,2.0,.55,.7,1.05,1.175] if key=='published_benchmark' else [FULL/len(data[0])]*len(data[0]))
     for i,row in enumerate(data):
         cells=t.add_row().cells
         for j,val in enumerate(row):
             cells[j].width=Inches(widths[j]);p=cells[j].paragraphs[0];p.paragraph_format.first_line_indent=Inches(0)
             p.paragraph_format.space_before=p.paragraph_format.space_after=Pt(1 if supp else 2);p.paragraph_format.line_spacing=Pt(10)
-            p.alignment=WD_ALIGN_PARAGRAPH.LEFT if j==0 else WD_ALIGN_PARAGRAPH.CENTER
-            r=p.add_run(val);r.font.size=Pt(9)
+            p.alignment=WD_ALIGN_PARAGRAPH.LEFT if j==0 or key=='published_benchmark' and j==1 else WD_ALIGN_PARAGRAPH.CENTER
+            r=p.add_run(cite(val));r.font.size=Pt(9)
             if i==0 or key=='main' and i==4:r.bold=True
+            if key=='published_benchmark' and 0<i<len(data)-1 and j in [4,5]:
+                r.bold=float(val)==min(float(v[j]) for v in data[1:-1])
+            if key=='published_benchmark' and i==len(data)-1 and j==0:r.bold=True
             r.font.color.rgb=RGBColor(0,0,0)
             if key=='main' and i==5:r.font.color.rgb=RGBColor.from_string('B00000')
             tcPr=cells[j]._tc.get_or_add_tcPr();borders=el('w:tcBorders')
@@ -140,6 +161,7 @@ def table(doc,b,num,supp=False):
                 borders.append(el('w:top',val='single',sz='8',color='000000'));borders.append(el('w:bottom',val='single',sz='4',color='000000'))
             if i==len(data)-1:borders.append(el('w:bottom',val='single',sz='8',color='000000'))
             if key=='main' and i==4:borders.append(el('w:top',val='single',sz='4',color='000000'))
+            if key=='published_benchmark' and i==len(data)-1:borders.append(el('w:top',val='single',sz='4',color='000000'))
             tcPr.append(borders)
         trpr=t.rows[-1]._tr.get_or_add_trPr();trpr.append(el('w:cantSplit'))
         if i==0:trpr.append(el('w:tblHeader'))
@@ -181,10 +203,8 @@ def build(name,supp=False):
         idx=next(i for i,b in enumerate(blocks) if b.get('text')=='2. Related Work');blocks.insert(idx,overview)
         identity=next(b for b in blocks if b.get('key')=='identity');blocks.remove(identity)
         idx=next(i for i,b in enumerate(blocks) if b.get('text')=='3.2. Track-conditioned shape');blocks.insert(idx,identity)
-        dynamics=next(b for b in blocks if b.get('key')=='dynamics');blocks.remove(dynamics)
-        idx=next(i for i,b in enumerate(blocks) if b.get('key')=='sequences');blocks.insert(idx+1,dynamics)
-        seq_heading=next(b for b in blocks if b.get('text')=='4.3. Distribution across sequences');blocks.remove(seq_heading)
-        idx=next(i for i,b in enumerate(blocks) if b.get('key')=='dynamics');blocks.insert(idx+1,seq_heading)
+        benchmark=next(b for b in blocks if b.get('key')=='published_benchmark');blocks.remove(benchmark)
+        idx=next(i for i,b in enumerate(blocks) if b.get('text')=='4. Experiments');blocks.insert(idx,benchmark)
     for bi,b in enumerate(blocks):
         typ=b['type']
         if typ=='heading':d.add_heading(b['text'],level=b['level'])
@@ -201,13 +221,12 @@ def build(name,supp=False):
         elif typ=='table':tab+=1;table(d,b,tab,supp)
     if not supp:
         d.add_heading('LLM Usage Statement',1)
-        para(d,'OpenAI Codex assisted with manuscript editing, source and result cross-checking, reference metadata verification, and document preparation. Google Gemini generated the overview draft; OpenAI image generation produced drafts of the landmark-feedback and frame-ownership illustrations. The figures were subsequently edited and checked against the implemented computation. Human, mesh, and attention illustrations are schematic. Quantitative plots and tables use archived evaluation measurements; generative tools did not produce experimental outcomes.')
+        para(d,'OpenAI Codex assisted with manuscript editing, source and result cross-checking, reference metadata verification, and document preparation. Google Gemini supplied the overview reference; OpenAI image generation revised the overview and produced the landmark-feedback and frame-ownership drafts. The figures were subsequently edited and checked against the implemented computation. Human, mesh, and attention illustrations are schematic. Quantitative plots and tables use archived measurements and cited original-paper results; generative tools did not produce experimental outcomes.')
         d.add_heading('References',1)
         for r in refs:
             p=para(d,ref_text(r));p.paragraph_format.left_indent=Inches(.18);p.paragraph_format.first_line_indent=Inches(-.18);p.paragraph_format.space_after=Pt(4);p.paragraph_format.line_spacing=Pt(10)
             p.paragraph_format.keep_together=True
             for run in p.runs:run.font.size=Pt(9)
-        section(d,2)
     dest=OUT/(name+'.docx');d.save(dest);print(dest)
 if __name__ == '__main__':
     target = sys.argv[1] if len(sys.argv)>1 else 'all'

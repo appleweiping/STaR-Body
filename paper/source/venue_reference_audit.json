@@ -303,6 +303,38 @@
         "pages": "5745-5753"
       },
       "primary_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Zhou_On_the_Continuity_of_Rotation_Representations_in_Neural_Networks_CVPR_2019_paper.html"
+    },
+    {
+      "number": 28,
+      "fields": {
+        "author": "Wang, Yufu and Daniilidis, Kostas",
+        "title": "ReFit: Recurrent Fitting Network for 3D Human Recovery",
+        "booktitle": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)",
+        "year": "2023",
+        "pages": "14644-14654"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Wang_ReFit_Recurrent_Fitting_Network_for_3D_Human_Recovery_ICCV_2023_paper.html"
+    },
+    {
+      "number": 29,
+      "fields": {
+        "author": "Patel, Priyanka and Black, Michael J.",
+        "title": "CameraHMR: Aligning People with Perspective",
+        "booktitle": "International Conference on 3D Vision (3DV)",
+        "year": "2025"
+      },
+      "primary_url": "https://camerahmr.is.tue.mpg.de/"
+    },
+    {
+      "number": 30,
+      "fields": {
+        "author": "Li, Zhihao and Liu, Jianzhuang and Zhang, Zhensong and Xu, Songcen and Yan, Youliang",
+        "title": "CLIFF: Carrying Location Information in Full Frames into Human Pose and Shape Estimation",
+        "booktitle": "Computer Vision – ECCV 2022",
+        "year": "2022",
+        "pages": "590-606"
+      },
+      "primary_url": "https://link.springer.com/chapter/10.1007/978-3-031-20065-6_34"
     }
   ]
 }

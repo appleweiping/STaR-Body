@@ -1,0 +1,22 @@
+Method,Setting,3DPW_train,Split,MPJPE_mm,PA_MPJPE_mm,Source
+PyMAF,Image; ResNet-50,No,Test,92.80,58.90,https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_PyMAF_3D_Human_Pose_and_Shape_Regression_With_Pyramidal_Mesh_ICCV_2021_paper.pdf
+PARE,Image; HRNet-W32,No,Test,82.00,50.90,https://openaccess.thecvf.com/content/ICCV2021/papers/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.pdf
+PARE,Image; HRNet-W32,Yes,Test,74.50,46.50,https://openaccess.thecvf.com/content/ICCV2021/papers/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.pdf
+CLIFF,Image; HRNet-W48,Yes,Test,69.00,43.00,https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136650580.pdf
+PyMAF-X,Image; body-only HR48,No,Test,78.00,47.10,https://arxiv.org/pdf/2207.06400v4
+PyMAF-X,Image; body-only HR48,Yes,Test,74.20,45.30,https://arxiv.org/pdf/2207.06400v4
+HMR 2.0a,Image; ViT,No,Test,70.00,44.50,https://openaccess.thecvf.com/content/ICCV2023/papers/Goel_Humans_in_4D_Reconstructing_and_Tracking_Humans_with_Transformers_ICCV_2023_paper.pdf
+HMR 2.0b,Image; ViT,No,Test,81.30,54.30,https://openaccess.thecvf.com/content/ICCV2023/papers/Goel_Humans_in_4D_Reconstructing_and_Tracking_Humans_with_Transformers_ICCV_2023_paper.pdf
+ReFit,Image; HRNet,Yes,Test,65.80,41.00,https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_ReFit_Recurrent_Fitting_Network_for_3D_Human_Recovery_ICCV_2023_paper.pdf
+ReFit,Image; BEDLAM + real,Yes,Test,57.60,38.20,https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_ReFit_Recurrent_Fitting_Network_for_3D_Human_Recovery_ICCV_2023_paper.pdf
+CameraHMR,Image; All + 3DPW,Yes,Test,56.00,35.10,https://arxiv.org/pdf/2411.08128v1
+PromptHMR,Image; GT focal length,Yes,Test,58.70,36.60,https://openaccess.thecvf.com/content/CVPR2025/papers/Wang_PromptHMR_Promptable_Human_Mesh_Recovery_CVPR_2025_paper.pdf
+VIBE,Video; SPIN features,Yes,Test,82.90,51.90,https://openaccess.thecvf.com/content_CVPR_2020/papers/Kocabas_VIBE_Video_Inference_for_Human_Body_Pose_and_Shape_Estimation_CVPR_2020_paper.pdf
+TCMR,Video; temporal context,Yes,Test,86.50,52.70,https://openaccess.thecvf.com/content/CVPR2021/papers/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.pdf
+GLoT,Video; 16 frames,Yes,Test,80.70,50.60,https://openaccess.thecvf.com/content/CVPR2023/papers/Shen_Global-to-Local_Modeling_for_Video-Based_3D_Human_Pose_and_Shape_Estimation_CVPR_2023_paper.pdf
+WHAM,Video; ViT; real data,Yes,Test,57.80,35.90,https://openaccess.thecvf.com/content/CVPR2024/papers/Shin_WHAM_Reconstructing_World-grounded_Humans_with_Accurate_3D_Motion_CVPR_2024_paper.pdf
+WHAM,Video; ViT; + BEDLAM,Yes,Test,56.90,35.70,https://openaccess.thecvf.com/content/CVPR2024/papers/Shin_WHAM_Reconstructing_World-grounded_Humans_with_Accurate_3D_Motion_CVPR_2024_paper.pdf
+GVHMR,Video; flip evaluation,Yes,Test,55.60,36.20,https://arxiv.org/pdf/2409.06662v1
+PromptHMR,Video; no flip averaging,Yes,Test,56.90,35.50,https://openaccess.thecvf.com/content/CVPR2025/papers/Wang_PromptHMR_Promptable_Human_Mesh_Recovery_CVPR_2025_paper.pdf
+OnlineHMR,Causal online video,Yes,Test,69.90,43.70,https://openaccess.thecvf.com/content/CVPR2026/papers/Zhao_OnlineHMR_Video-based_Online_World-Grounded_Human_Mesh_Recovery_CVPR_2026_paper.pdf
+STaR-Body (ours),Full model; EMA,Yes,Val.,61.19,37.61,table_manifest.json::main_unrounded_values.joint_feedback

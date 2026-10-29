@@ -4,7 +4,7 @@
     "main": {
       "source_zero_index": 2,
       "original_number": 3,
-      "new_number": "1",
+      "new_number": "2",
       "native_rows": [
         [
           "Model",
@@ -269,6 +269,12 @@
           "21.442"
         ]
       ]
+    },
+    "published_benchmark": {
+      "source": "published_benchmark_rows.json",
+      "new_number": "1",
+      "split": "explicit per row",
+      "origin": "literature_reported plus archived_local_evaluation"
     }
   },
   "main_unrounded_values": {

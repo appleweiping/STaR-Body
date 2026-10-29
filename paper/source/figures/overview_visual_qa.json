@@ -1,36 +1,51 @@
 {
-  "status": "passed_local_visual_review",
-  "png_dimensions": [
-    4096,
-    1664
+  "status": "passed_local_visual_and_flow_review",
+  "original_dimensions": [
+    1962,
+    802
   ],
-  "minimum_vector_label_px": 15.0,
-  "minimum_print_label_pt_at_6_875in": 7.2509765625,
-  "editable_text_elements": 84,
-  "base_original_bytes_unchanged": true,
-  "zero_init_exact": true,
-  "root_pdf_review_required": false,
-  "no_source_project_mutations": true,
-  "no_browser_or_external_upload": true,
+  "render_dimensions": [
+    5886,
+    2406
+  ],
+  "base_image_sha256": "0ee1de642c01472be9e5cc7e74d2c42bda50d1c1e8aeedf48c9d8e2c6ae7f657",
+  "base_image_bytes_embedded_unchanged": true,
+  "retained_original_text_formulas_photos_colors": true,
+  "edits": "arrows and narrow background restoration only; duplicate token artwork remains a noncomputational callout",
+  "source_code_basis": [
+    "part_time_refiner_v36.py:161-182",
+    "part_time_refiner_v36.py:208",
+    "human_decoder_target60_v34.py:116-120",
+    "joint_feedback_v37.py:33-34",
+    "human_decoder_parts_v27.py:75-78"
+  ],
+  "no_manuscript_word_git_or_project_code_edits": true,
+  "actual_render_dimensions": [
+    5886,
+    2406
+  ],
+  "visual_reviews": [
+    "complete figure at readable fit",
+    "decoder mixer/body-state crop",
+    "local-card/addition/part-block crop",
+    "feedback/track-shape crossing crop",
+    "independent shape bypass and projection-return crop"
+  ],
+  "graph_checks": {
+    "dual_order_streams_via_mix_only_to_base_body": true,
+    "local_features_into_plus": true,
+    "no_part_time_to_plus_shortcut": true,
+    "feedback_originates_only_from_Wo": true,
+    "feedback_then_plus_then_six_part_pool_then_part_time_then_gru_then_bounded_updates_then_mesh": true,
+    "track_delta_joins_shape_bypass_only": true,
+    "decoded_beta_camera_bypass_to_mesh": true,
+    "projection_return_goes_to_stage2_and_local_features_not_stage1": true,
+    "crossings_have_no_connection_unless_dot_or_addition": true,
+    "upper_duplicate_token_artwork_is_an_unconnected_schematic_callout": true
+  },
   "files": {
-    "overview_gemini_original.jpg": "e1e9389b23825fab8a66fa7570e4c02a8c2ae951ac6888243e45ff8f8bc3cbac",
-    "overview_final.svg": "b7c4db30b3400d072d068728468ea1e8a5cd9f65dbaa1fad85ba31e0a3fd17fa",
-    "overview_final.png": "b26837828b72ae8957e138ac9bd99caaafb97d6a465096093029d079f07901f3",
-    "overview_edit_notes.txt": "1109df8383748760e7e3b47ace0e24c8e3eca7f1d239712bfe40a328d63d7606"
-  },
-  "sampling_radius_unit_correction": {
-    "label": "2 → 1 → 0.5 token cells",
-    "overlay_occurrences": 2,
-    "unit": "token cells",
-    "matches_sample_joint_neighborhood_normalized_grid_offsets": true,
-    "old_px_labels_remaining": 0,
-    "rendered_label_fits": true,
-    "measured_text_width_source_px": 134.0,
-    "available_box_source_px": 160,
-    "other_composition_unchanged": true
-  },
-  "final_pdf_review_pending": false,
-  "final_pdf_render_verified": true,
-  "verified_pdf_sha256": "db017ff37e86f64cebeda4c0fa97a03253c2e8afe5ad273bf71c32a7a7e881ab",
-  "verified_pdf_page": 2
+    "overview_dense_final.svg": "01bcdf7f9cfed510ea3b33da3addf5fa20ffd6e396fad02445f269ba14666e86",
+    "overview_dense_final.png": "27c916b2b8201ef2e0bf3a698d65e2b7c1d9d0f1492ea977174d50ddb17ea4da",
+    "overview_dense_edit_notes.txt": "c04624db8128846c00abb821c9dd276a3f6d00036468d67621bd285f4ecaaed4"
+  }
 }

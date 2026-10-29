@@ -6,11 +6,11 @@ The revised CVPR-format manuscript and supplementary material share editable Wor
 - [Supplement PDF](STaR-Body_Supplement.pdf) · [editable Word](STaR-Body_Supplement.docx)
 - [Authoring sources and figures](source/)
 
-The results are the recorded shared-protocol 3DPW validation study. The public evidence distinguishes raw C10/parent evaluations from transcribed control records. This directory is a manuscript release, not a conference submission.
+The paper includes 20 source-verified published baseline settings from 14 methods, the archived full-model result, matched feedback controls, per-sequence analysis, and EMA diagnostics. The benchmark table records each row's split; the full-model numbers remain the archived 3DPW validation measurements. Source values and protocol variants are preserved in `source/published_benchmark_rows.json`. This directory is a manuscript revision, not a conference submission.
 
-The overview uses a corrected Gemini draft. Feedback and frame-ownership figures use edited OpenAI image-generation drafts; their anatomy, mesh and attention illustrations are schematic. Numerical charts use archived measurements. The main manuscript includes an LLM Usage Statement.
+The overview preserves the user's dense Gemini reference, revised with OpenAI image generation and precise connectivity corrections. Feedback and frame-ownership figures also use edited OpenAI image-generation drafts; their anatomy, mesh and attention illustrations are schematic. Numerical charts use archived measurements. The main manuscript includes an LLM Usage Statement.
 
-Files named `overview_gemini_original.jpg` and `identity_gemini_style_v2.png` are pre-edit raster bases for the SVG overlays; use the `*_final` assets for the corrected publication figures.
+Files named `overview_reference_user.png`, `overview_gemini_original.jpg`, `overview_dense_generated.png` and `identity_gemini_style_v2.png` are reference or pre-edit raster artwork; use the `*_final` assets for the corrected publication figures. The overview generation prompts and its provenance are recorded in `source/figures/overview_generation_record.json`.
 
 ## Rebuild
 
