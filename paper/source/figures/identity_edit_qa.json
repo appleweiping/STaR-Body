@@ -1,0 +1,67 @@
+{
+  "status": "passed_local_visual_and_graph_review",
+  "source": "identity_gemini_style_v2.png",
+  "outputs": [
+    "identity_final.svg",
+    "identity_final.png"
+  ],
+  "source_sha256": "b475197336b0133033d32f0a455138c24f94143d928a16e66be23762a03c2ff7",
+  "source_raster_embedded_unchanged": true,
+  "canvas": [
+    1860,
+    845
+  ],
+  "changes": [
+    "Prediction and current projection are parallel inputs to residual/feature construction.",
+    "Residual notation uses the same inherited prediction symbol μ; validity is not claimed to mean only finite values.",
+    "K/V no longer feed the local image features. Matching K/V tensors are reused in the attention expressions below.",
+    "Dot-product -> additive anatomical bias -> additive validity mask -> softmax over 17 keys per head.",
+    "Removed softmax-to-concat and head-map-to-feedback bypasses.",
+    "Four headwise weighted-V outputs -> 4x32 concat -> zero-init output projection -> 24 feedback tokens.",
+    "Feedback enters per-joint fusion before anatomical part pooling; no direct W_o-to-Part/Time shortcut.",
+    "The long projection loop returns from updated rotations to current SMPL projection."
+  ],
+  "validated_semantics": {
+    "queries": 24,
+    "keys": 17,
+    "heads": 4,
+    "head_width": 32,
+    "concat_width": 128,
+    "landmark_feature_width": 7,
+    "groups": 6,
+    "refinement_iterations": 3,
+    "mask": "0 for valid keys; negative infinity for invalid keys; all-invalid fallback is implementation detail outside the schematic",
+    "schema_ids": "Input landmark-schema identifiers, not additional branches"
+  },
+  "preserved": [
+    "Two assignment skeletons and pooled-feedback observation",
+    "Projected crop, landmark icons and feature-stack glyphs",
+    "Landmark ID and schema illustration",
+    "Kinematic tree, anchor mapping and anatomical-bias heatmap",
+    "Four colored head heatmaps and validity heatmap",
+    "24-joint local feature figure and six anatomical part figures",
+    "Original muted colors and dense layout"
+  ],
+  "new_vector_labels_min_px": 22,
+  "public_metadata_contains_local_absolute_paths": false,
+  "notes": [
+    "All pictures, skeletons and heatmaps are schematic, not new empirical results.",
+    "Editable corrections overlay a raster base; the full supplied artwork is not claimed to be native vector.",
+    "No subprocess, browser, model-generation call, manuscript change or external upload was performed."
+  ],
+  "png_dimensions": [
+    5580,
+    2535
+  ],
+  "svg_editable_text_elements": 14,
+  "final_pdf_review_pending": false,
+  "output_sha256": {
+    "identity_final.svg": "a9bccf0fec50f97cbd969a26ecc24610f85319380556e555840b6b03f45c3861",
+    "identity_final.png": "8431f7cd484ba0d1927a24650cc99339b3da070e8d543277e9659e50eab21b73",
+    "identity_edit_notes.txt": "c9d4687bbbc4bac61598a963a3ba8ee6cef2b2cc25fcf5f1d01ee0b70728f727"
+  },
+  "root_pdf_review_required": false,
+  "final_pdf_render_verified": true,
+  "verified_pdf_sha256": "db017ff37e86f64cebeda4c0fa97a03253c2e8afe5ad273bf71c32a7a7e881ab",
+  "verified_pdf_page": 3
+}

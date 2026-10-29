@@ -1,0 +1,249 @@
+{
+  "snapshot": "C10 source archive dated 2026-10-25",
+  "protocol": {
+    "dataset": "3DPW",
+    "split": "validation",
+    "precision": "FP32 network/SMPL/metrics",
+    "frames": 10413,
+    "acceleration_triplets": 10226,
+    "length": 8,
+    "crop": "annotation-derived person crops inherited from audited caches",
+    "test_used": false
+  },
+  "selected": {
+    "format": "star-body-joint-feedback-v37-r1",
+    "step": 1000,
+    "variant": "ema",
+    "checkpoint_sha256": "d2517f976b7aaea08e23d6708df6b4f249f4b15a29779b16c67ccf32b924cbff",
+    "metrics": {
+      "mpjpe_mm": 61.18838956648434,
+      "pa_mpjpe_mm": 37.613404729118336,
+      "pve_mm": 72.81972126625095,
+      "acceleration_error_mm_per_frame2": 21.442481117185427,
+      "frames": 10413,
+      "acceleration_triplets": 10226
+    },
+    "selection": {
+      "score": -1.019806492774739,
+      "target_ratio": 1.019806492774739,
+      "accepted": true,
+      "reasons": [],
+      "target_met": false,
+      "protected_target_met": false,
+      "targets": {
+        "mpjpe_mm": 60.0,
+        "pa_mpjpe_mm": 37.3
+      },
+      "selection_metric": "negative max(MPJPE/60,PA-MPJPE/37.3), validation only"
+    },
+    "native_checkpoint_audit_record": "passed in archived source evidence; checkpoint is not bundled"
+  },
+  "metrics_log": [
+    {
+      "step": 0,
+      "variant": "initial",
+      "metrics": {
+        "mpjpe_mm": 61.262784335840614,
+        "pa_mpjpe_mm": 37.64223618655295,
+        "pve_mm": 73.02485116918137,
+        "acceleration_error_mm_per_frame2": 21.481633546754246,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "accepted": false,
+      "development_only": false
+    },
+    {
+      "step": 1000,
+      "variant": "student",
+      "metrics": {
+        "mpjpe_mm": 61.424630085695924,
+        "pa_mpjpe_mm": 37.65306406429587,
+        "pve_mm": 73.02549554730862,
+        "acceleration_error_mm_per_frame2": 21.42991060717341,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "accepted": false,
+      "development_only": false
+    },
+    {
+      "step": 1000,
+      "variant": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.18838956648434,
+        "pa_mpjpe_mm": 37.613404729118336,
+        "pve_mm": 72.81972126625095,
+        "acceleration_error_mm_per_frame2": 21.442481117185427,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "accepted": true,
+      "development_only": false
+    }
+  ],
+  "common_parent": {
+    "metrics": {
+      "mpjpe_mm": 61.262784335840614,
+      "pa_mpjpe_mm": 37.64223618655295,
+      "pve_mm": 73.02485116918137,
+      "acceleration_error_mm_per_frame2": 21.481633546754246,
+      "frames": 10413,
+      "acceleration_triplets": 10226
+    },
+    "initialized_metrics": {
+      "mpjpe_mm": 61.262784335840614,
+      "pa_mpjpe_mm": 37.64223618655295,
+      "pve_mm": 73.02485116918137,
+      "acceleration_error_mm_per_frame2": 21.481633546754246,
+      "frames": 10413,
+      "acceleration_triplets": 10226
+    },
+    "exact_reproduction_passed": true
+  },
+  "loss_pilots": {
+    "selected_loss": {
+      "pa-weight": 0.2,
+      "v36-final-motion-only": false
+    },
+    "winner": [
+      -1.0209968733533388,
+      "D2_R1_PA020",
+      1000,
+      "ema"
+    ],
+    "original_R2_control_reusable": false,
+    "runs": [
+      {
+        "label": "D1_R1_final_motion_only",
+        "new_optimizer_steps": 2000,
+        "main_window_draws": 32000,
+        "validation": [
+          {
+            "step": 1000,
+            "variant": "student",
+            "metrics": {
+              "mpjpe_mm": 61.39464360195634,
+              "pa_mpjpe_mm": 37.652259829774046,
+              "pve_mm": 73.14350912910504,
+              "acceleration_error_mm_per_frame2": 21.440471459042868,
+              "frames": 10413,
+              "acceleration_triplets": 10226
+            },
+            "accepted": false
+          },
+          {
+            "step": 1000,
+            "variant": "ema",
+            "metrics": {
+              "mpjpe_mm": 61.282361636413206,
+              "pa_mpjpe_mm": 37.64003003521656,
+              "pve_mm": 73.02696949588706,
+              "acceleration_error_mm_per_frame2": 21.446451471993544,
+              "frames": 10413,
+              "acceleration_triplets": 10226
+            },
+            "accepted": false
+          },
+          {
+            "step": 2000,
+            "variant": "student",
+            "metrics": {
+              "mpjpe_mm": 61.409725739543084,
+              "pa_mpjpe_mm": 37.67502397260461,
+              "pve_mm": 73.08391221410132,
+              "acceleration_error_mm_per_frame2": 21.34058954411263,
+              "frames": 10413,
+              "acceleration_triplets": 10226
+            },
+            "accepted": false
+          },
+          {
+            "step": 2000,
+            "variant": "ema",
+            "metrics": {
+              "mpjpe_mm": 61.32637529429036,
+              "pa_mpjpe_mm": 37.66606419480043,
+              "pve_mm": 73.1249427114018,
+              "acceleration_error_mm_per_frame2": 21.369880371649273,
+              "frames": 10413,
+              "acceleration_triplets": 10226
+            },
+            "accepted": false
+          }
+        ]
+      },
+      {
+        "label": "D2_R1_PA020",
+        "new_optimizer_steps": 2000,
+        "main_window_draws": 32000,
+        "validation": [
+          {
+            "step": 1000,
+            "variant": "student",
+            "metrics": {
+              "mpjpe_mm": 61.362127570772586,
+              "pa_mpjpe_mm": 37.632320638418676,
+              "pve_mm": 73.12940128582487,
+              "acceleration_error_mm_per_frame2": 21.44798670555054,
+              "frames": 10413,
+              "acceleration_triplets": 10226
+            },
+            "accepted": false
+          },
+          {
+            "step": 1000,
+            "variant": "ema",
+            "metrics": {
+              "mpjpe_mm": 61.25981240120033,
+              "pa_mpjpe_mm": 37.62815692538568,
+              "pve_mm": 73.02331061854574,
+              "acceleration_error_mm_per_frame2": 21.453189014174562,
+              "frames": 10413,
+              "acceleration_triplets": 10226
+            },
+            "accepted": true
+          },
+          {
+            "step": 2000,
+            "variant": "student",
+            "metrics": {
+              "mpjpe_mm": 61.37664020378606,
+              "pa_mpjpe_mm": 37.65717566016771,
+              "pve_mm": 73.07034016983499,
+              "acceleration_error_mm_per_frame2": 21.35798709962086,
+              "frames": 10413,
+              "acceleration_triplets": 10226
+            },
+            "accepted": false
+          },
+          {
+            "step": 2000,
+            "variant": "ema",
+            "metrics": {
+              "mpjpe_mm": 61.29903437087736,
+              "pa_mpjpe_mm": 37.650139964166065,
+              "pve_mm": 73.1192822424763,
+              "acceleration_error_mm_per_frame2": 21.385284019998878,
+              "frames": 10413,
+              "acceleration_triplets": 10226
+            },
+            "accepted": false
+          }
+        ]
+      }
+    ]
+  },
+  "evidence_scope": "Recorded validation measurements and source inspection. No new model inference or training is claimed by this release.",
+  "provenance": {
+    "source_archive_sha256": "41814ff8e75eeac27c4742bafd84cbdc9255db1a55f3e9b35119d4f3998e8506",
+    "sanitization": "Machine paths, process metadata and operational logs omitted; numerical measurements, selection flags and source hashes preserved.",
+    "source_files": {
+      "C10_checkpoint_audit.json": "28431e245d96cbb3f5028c2dbfe816acd3d282aeaad4fd18a705e973bf375f27",
+      "metrics.jsonl": "10f1151377e2fe56eebc2b4771fb18877ec9603b3b696cbdc40b363c9702f22a",
+      "parent_reproduction.json": "c635a3042b424944ab1e99665b8013d7d087043859e5be1e99c0dedab696e08b",
+      "loss_decision.json": "bc2b9f1aefba90a3c410e5e36b3839743337217e89dcc0e978ed4e9286ae1291",
+      "configs/C10_joint_feedback_formal.json": "5730bb2de70ae58e561536e7448c59c484cc5d4850b175408d4da224c6873868"
+    }
+  }
+}

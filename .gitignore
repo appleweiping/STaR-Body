@@ -55,3 +55,7 @@ remote_artifacts/
 build/
 dist/
 *.egg-info/
+
+# Reviewed manuscript illustrations
+!paper/source/figures/*.png
+!paper/source/figures/*.jpg

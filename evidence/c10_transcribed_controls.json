@@ -1,0 +1,134 @@
+{
+  "artifact_type": "transcription_of_archived_control_records",
+  "provenance_status": "These values were transcribed from contemporaneous project work records. The original separate raw C00/D2 evaluation JSON files are not bundled in this release. This file is not an original model-run log.",
+  "protocol": {
+    "dataset": "3DPW",
+    "split": "validation",
+    "frames": 10413,
+    "acceleration_triplets": 10226,
+    "precision": "FP32 network/SMPL/metrics",
+    "geometry_unit": "mm",
+    "acceleration_unit": "mm/annotation-frame^2"
+  },
+  "source_records": {
+    "mean_1000": {
+      "archive_relative_path": "project/docs/A4_SEED2027_COMPLETE_D2_3000_C00_1000_SEED2028_20261024_ZH.md",
+      "sha256": "6b0de47e1bbc374376288dc267039eb2a9fb97b7e618f7e5a33c25b4a21f9910",
+      "public_sanitization": "Only numerical measurements and relative provenance are reproduced; private machine paths and operational text are omitted."
+    },
+    "mean_2000_and_d2_5000": {
+      "archive_relative_path": "project/docs/C10_VALIDATION_MILESTONE_AUDIT_PENDING_20261025_1425CST_ZH.md",
+      "sha256": "50156c49e1f8736fa08eaad0153f4c8b38637a675d59aa455b2219fbade421b1",
+      "public_sanitization": "Only numerical measurements and relative provenance are reproduced; private machine paths and operational text are omitted."
+    },
+    "v30_reference": {
+      "archive_relative_path": "project/docs/V36_IMPLEMENTATION_ZH.md",
+      "sha256": "e8732ab89c950f197072db05ed90165d3359ac3ca322cca3908ff18d20df1132",
+      "public_sanitization": "Only numerical measurements and relative provenance are reproduced; private machine paths and operational text are omitted."
+    }
+  },
+  "rows": [
+    {
+      "model": "Spatiotemporal reference",
+      "step": null,
+      "weights": "selected",
+      "metrics": {
+        "mpjpe_mm": 61.41625000504816,
+        "pa_mpjpe_mm": 37.78266967037827,
+        "pve_mm": 73.28667829992173,
+        "acceleration_error_mm_per_frame2": 21.50762788279954
+      },
+      "source_record": "v30_reference"
+    },
+    {
+      "model": "C00 mean-feedback control",
+      "step": 1000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.39113349634301,
+        "pa_mpjpe_mm": 37.6450219117266,
+        "pve_mm": 73.20204648199497,
+        "acceleration_error_mm_per_frame2": 21.44262779882883
+      },
+      "source_record": "mean_1000"
+    },
+    {
+      "model": "C00 mean-feedback control",
+      "step": 1000,
+      "weights": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.26187129283082,
+        "pa_mpjpe_mm": 37.63712758586579,
+        "pve_mm": 73.04919619218172,
+        "acceleration_error_mm_per_frame2": 21.44694138684099
+      },
+      "source_record": "mean_1000"
+    },
+    {
+      "model": "C00 mean-feedback control",
+      "step": 2000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.51294853230964,
+        "pa_mpjpe_mm": 37.75044989862921,
+        "pve_mm": 73.29757369167922,
+        "acceleration_error_mm_per_frame2": 21.315366620285868
+      },
+      "source_record": "mean_2000_and_d2_5000"
+    },
+    {
+      "model": "C00 mean-feedback control",
+      "step": 2000,
+      "weights": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.31692679471245,
+        "pa_mpjpe_mm": 37.660090100189386,
+        "pve_mm": 73.19373433248552,
+        "acceleration_error_mm_per_frame2": 21.35865831176253
+      },
+      "source_record": "mean_2000_and_d2_5000"
+    },
+    {
+      "model": "D2 loss continuation",
+      "step": 5000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.25938858844402,
+        "pa_mpjpe_mm": 37.769523318283476,
+        "pve_mm": 73.16491763364864,
+        "acceleration_error_mm_per_frame2": 21.26650285683321
+      },
+      "source_record": "mean_2000_and_d2_5000"
+    }
+  ],
+  "relative_improvement": {
+    "comparison": "C10 step1000 EMA vs C00 step1000 EMA",
+    "formula": "100 * (control - C10) / control; lower error is better",
+    "control": {
+      "mpjpe_mm": 61.26187129283082,
+      "pa_mpjpe_mm": 37.63712758586579,
+      "pve_mm": 73.04919619218172,
+      "acceleration_error_mm_per_frame2": 21.44694138684099
+    },
+    "c10": {
+      "mpjpe_mm": 61.18838956648434,
+      "pa_mpjpe_mm": 37.613404729118336,
+      "pve_mm": 72.81972126625095,
+      "acceleration_error_mm_per_frame2": 21.442481117185427
+    },
+    "raw_percent": {
+      "mpjpe_mm": 0.11994691770879402,
+      "pa_mpjpe_mm": 0.0630304655777276,
+      "pve_mm": 0.31413750991463163,
+      "acceleration_error_mm_per_frame2": 0.020796763394430744
+    },
+    "display_percent": {
+      "mpjpe_mm": "0.12%",
+      "pa_mpjpe_mm": "0.06%",
+      "pve_mm": "0.31%",
+      "acceleration_error_mm_per_frame2": "0.02%"
+    },
+    "c10_source": "c10_validation.json, selected metrics"
+  },
+  "scope": "Recorded numerical comparison only. No new evaluation, training, significance test, or independent test result is supplied by this transcription."
+}

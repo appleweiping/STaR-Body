@@ -1,0 +1,323 @@
+{
+  "source": "original_tables.json",
+  "mapping": {
+    "main": {
+      "source_zero_index": 2,
+      "original_number": 3,
+      "new_number": "1",
+      "native_rows": [
+        [
+          "Model",
+          "Refinement stage",
+          "MPJPE ↓",
+          "PA-MPJPE ↓",
+          "PVE ↓",
+          "Accel. ↓"
+        ],
+        [
+          "Spatiotemporal reference",
+          "Selected base",
+          "61.416",
+          "37.783",
+          "73.287",
+          "21.508"
+        ],
+        [
+          "Track-shape + iterative parent",
+          "2,000-step EMA",
+          "61.263",
+          "37.642",
+          "73.025",
+          "21.482"
+        ],
+        [
+          "Mean-feedback control",
+          "+1,000-step EMA",
+          "61.262",
+          "37.637",
+          "73.049",
+          "21.447"
+        ],
+        [
+          "STaR-Body joint feedback",
+          "+1,000-step EMA",
+          "61.188",
+          "37.613",
+          "72.820",
+          "21.442"
+        ]
+      ]
+    },
+    "interfaces": {
+      "source_zero_index": 0,
+      "original_number": 1,
+      "new_number": "S1",
+      "native_rows": [
+        [
+          "Representation",
+          "Tokens",
+          "Width"
+        ],
+        [
+          "HMR 2.0a image grid",
+          "T × 192",
+          "1,280"
+        ],
+        [
+          "VACE latent grid",
+          "5 × 36",
+          "1,536"
+        ],
+        [
+          "Pooled video memory",
+          "30",
+          "256"
+        ],
+        [
+          "Body queries",
+          "T × 26",
+          "256"
+        ],
+        [
+          "Joint feedback",
+          "T × 24",
+          "128"
+        ]
+      ]
+    },
+    "loss": {
+      "source_zero_index": 1,
+      "original_number": 2,
+      "new_number": "S2",
+      "native_rows": [
+        [
+          "Term",
+          "Weight"
+        ],
+        [
+          "Joint / vertex error",
+          "1 / 1"
+        ],
+        [
+          "Rotation / shape error",
+          "0.05 / 0.001"
+        ],
+        [
+          "Velocity error",
+          "0.5"
+        ],
+        [
+          "Within / boundary acceleration",
+          "3.012855 / 0.987145"
+        ],
+        [
+          "PA joint auxiliary",
+          "0.2"
+        ],
+        [
+          "Intermediate base geometry",
+          "0.25"
+        ],
+        [
+          "Shape consistency",
+          "0.01"
+        ],
+        [
+          "Update regularization",
+          "0.001"
+        ]
+      ]
+    },
+    "sequences": {
+      "source_zero_index": 3,
+      "original_number": 4,
+      "new_number": "S3",
+      "native_rows": [
+        [
+          "Sequence",
+          "Frames",
+          "MPJPE",
+          "PA",
+          "PVE"
+        ],
+        [
+          "Basketball 01",
+          "957",
+          "42.51",
+          "29.50",
+          "53.60"
+        ],
+        [
+          "Dancing 00",
+          "827",
+          "70.07",
+          "39.92",
+          "87.30"
+        ],
+        [
+          "Drinking 00",
+          "1378",
+          "47.99",
+          "25.88",
+          "56.42"
+        ],
+        [
+          "Hug 00",
+          "1096",
+          "63.51",
+          "44.50",
+          "78.96"
+        ],
+        [
+          "JumpBench 01",
+          "619",
+          "40.81",
+          "25.89",
+          "48.64"
+        ],
+        [
+          "RangeOfMotions 01",
+          "1057",
+          "50.08",
+          "36.57",
+          "62.56"
+        ],
+        [
+          "WalkDownhill 00",
+          "437",
+          "66.06",
+          "34.40",
+          "73.64"
+        ],
+        [
+          "Crosscountry 00",
+          "484",
+          "108.19",
+          "53.68",
+          "119.99"
+        ],
+        [
+          "Freestyle 01",
+          "273",
+          "43.80",
+          "25.73",
+          "48.81"
+        ],
+        [
+          "Golf 00",
+          "341",
+          "61.31",
+          "31.08",
+          "60.54"
+        ],
+        [
+          "Parcours 00",
+          "1632",
+          "59.99",
+          "40.53",
+          "74.74"
+        ],
+        [
+          "Parcours 01",
+          "1312",
+          "85.83",
+          "50.70",
+          "97.61"
+        ],
+        [
+          "All frames",
+          "10,413",
+          "61.19",
+          "37.61",
+          "72.82"
+        ]
+      ]
+    },
+    "ema": {
+      "source_zero_index": 4,
+      "original_number": 5,
+      "new_number": "S4",
+      "native_rows": [
+        [
+          "Feedback / weights",
+          "MPJPE",
+          "PVE",
+          "Accel."
+        ],
+        [
+          "Mean / student",
+          "61.391",
+          "73.202",
+          "21.443"
+        ],
+        [
+          "Mean / EMA",
+          "61.262",
+          "73.049",
+          "21.447"
+        ],
+        [
+          "Joint / student",
+          "61.425",
+          "73.025",
+          "21.430"
+        ],
+        [
+          "Joint / EMA",
+          "61.188",
+          "72.820",
+          "21.442"
+        ]
+      ]
+    }
+  },
+  "main_unrounded_values": {
+    "mean_control": {
+      "mpjpe_mm": 61.26187129283082,
+      "pa_mpjpe_mm": 37.63712758586579,
+      "pve_mm": 73.04919619218172,
+      "acceleration_error_mm_per_frame2": 21.44694138684099
+    },
+    "joint_feedback": {
+      "mpjpe_mm": 61.18838956648434,
+      "pa_mpjpe_mm": 37.613404729118336,
+      "pve_mm": 72.81972126625095,
+      "acceleration_error_mm_per_frame2": 21.442481117185427
+    },
+    "parent": {
+      "mpjpe_mm": 61.262784335840614,
+      "pa_mpjpe_mm": 37.64223618655295,
+      "pve_mm": 73.02485116918137,
+      "acceleration_error_mm_per_frame2": 21.481633546754246
+    }
+  },
+  "relative_improvement": {
+    "formula": "100 * (mean_control - joint_feedback) / mean_control; lower is better",
+    "raw_percent": {
+      "mpjpe_mm": 0.11994691770879404,
+      "pa_mpjpe_mm": 0.06303046557772761,
+      "pve_mm": 0.31413750991463163,
+      "acceleration_error_mm_per_frame2": 0.020796763394430744
+    },
+    "display_percent": {
+      "mpjpe_mm": "0.12%",
+      "pa_mpjpe_mm": "0.06%",
+      "pve_mm": "0.31%",
+      "acceleration_error_mm_per_frame2": "0.02%"
+    },
+    "caption": "Relative improvement vs. equal-budget mean-feedback control"
+  },
+  "provenance": {
+    "mean_control": "project/docs/A4_SEED2027_COMPLETE_D2_3000_C00_1000_SEED2028_20261024_ZH.md, contemporaneous run record, exact numeric table. Separate raw audit JSON not bundled.",
+    "joint_feedback": "C10_release/metrics.jsonl step 1000 EMA; cross-checked by evidence audit.",
+    "parent": "C10_release/parent_reproduction.json; exact reproduction checked."
+  },
+  "formatting": {
+    "results": "Errors in mm: two decimal places; retain units. Deltas below one may use four decimal places when precision matters.",
+    "loss": "Preserve hyperparameter precision, including 3.012855 / 0.987145.",
+    "counts": "Integers with separators.",
+    "bold": "Main table: lowest raw metric among these four rows, not SOTA. EMA table: best raw value in each column if using bold; joint student has lowest acceleration.",
+    "names": "Table sequences header PA must be PA-MPJPE; comparison labels consistent with main text.",
+    "relative_row_color": "Muted dark red is optional; no unsupported significance markers."
+  }
+}

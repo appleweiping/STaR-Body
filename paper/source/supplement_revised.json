@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "title": "STaR-Body: Supplementary Material",
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "S1. Representation and implementation details"
+    },
+    {
+      "type": "paragraph",
+      "text": "Table S1 lists the token interfaces. Each target window contains eight frames at positions 4–11 of a 17-frame video context. HMR 2.0a supplies a 192-token image grid per target frame. Each of the five VACE latent slices is pooled from a 6 × 6 grid to 2 × 3 cells, yielding 30 memory tokens. Spatial and latent-index embeddings are distinct from source-frame time. The dual-order decoder has width 256 and eight attention heads, with pre-normalized attention and residual MLPs. Four blocks operate in each of three weight-shared iterations."
+    },
+    {
+      "type": "table",
+      "key": "interfaces",
+      "caption": "Token interfaces in STaR-Body. T = 8 target frames; widths are per token. Image and video feature extraction remains frozen."
+    },
+    {
+      "type": "paragraph",
+      "text": "Base-decoder pose updates are full residuals relative to the fixed reference, using the continuous six-dimensional rotation representation [27]:"
+    },
+    {
+      "type": "equation",
+      "key": "reference_rotation",
+      "tex": "R_{tj}=\\operatorname{Rot6D}(I_6+\\Delta r_{tj})R_{tj}^{ref}",
+      "numbered": false
+    },
+    {
+      "type": "paragraph",
+      "text": "Base shape corrections have a tanh bound of three and combine window-shared and frame-specific terms. The track prototype is constructed separately from fixed-decoder predictions. Let m be their componentwise shape median and dᵢ the root-mean-square distance of prediction bᵢ to m. The shape prototype and shared correction are"
+    },
+    {
+      "type": "equation",
+      "key": "track_prototype",
+      "tex": "\\bar b=\\frac{\\sum_iw_ib_i}{\\sum_iw_i},\\quad w_i=(1+d_i)^{-1}, \\\\qquad \\Delta\\beta_{track}=0.3\\tanh(\\operatorname{MLP}([\\bar f;\\bar b]))",
+      "numbered": false
+    },
+    {
+      "type": "paragraph",
+      "text": "The image prototype f̄ averages token means from up to eight deterministic frames in the closer half of the track. No shape labels enter prototype construction, and the prototype remains fixed during refinement training. In the final refiner, local image samples are projected to 64 channels and combined with the 256-dimensional pose query and 22-dimensional body state. The joint feature width is 128. Temporal segments accept independent source-frame increments of two or three, skip repeated frames, and separate gaps or invalid padding."
+    },
+    {
+      "type": "paragraph",
+      "text": "The feedback encoder uses 17 evidence tokens and four attention heads of width 32, producing a 24 × 128 output. Learned landmark and schema embeddings are added before attention, so residual values are not the only information identifying a slot. The head coordinates and uncertainty-related features are detached, while projections are recomputed from the current body. Invalid evidence is excluded from the attention normalization. For an all-invalid frame, one slot is temporarily available to make normalization finite, after which the entire frame output is set to zero."
+    },
+    {
+      "type": "paragraph",
+      "text": "For bounded updates, write v = tanh(u). Since ‖v‖/√(1 + ‖v‖²) < 1 for finite v, the axis-angle magnitude is smaller than its configured scale. Applying the rotation-distance triangle inequality across three updates yields the stated 6° root and 15° body-joint bounds. This is a bound on the refinement displacement relative to its input, not on the reconstruction error relative to ground truth."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "S2. Losses and canonical ownership"
+    },
+    {
+      "type": "paragraph",
+      "text": "Table S2 specifies all loss coefficients. Joint and vertex terms use Euclidean errors in metres; rotation and shape supervision use elementwise squared errors. Velocity and acceleration operate on the hip-centered prediction-minus-target joint error. If this error is εₜ, the acceleration error at an annotation-adjacent triplet is"
+    },
+    {
+      "type": "equation",
+      "key": "acceleration_error",
+      "tex": "\\ell_{acc}(t)=\\frac{1}{14}\\sum_{j=1}^{14}\\|\\epsilon_{t-1,j}-2\\epsilon_{t,j}+\\epsilon_{t+1,j}\\|_2",
+      "numbered": false
+    },
+    {
+      "type": "figure",
+      "key": "motion",
+      "caption": "Canonical ownership of motion transitions. Each person-frame has one owner window. All annotation-adjacent triplets belong either to the within-window set or to the cross-window boundary set, and the two sets are disjoint. Frame numbers are consecutive annotation indices; the owner-window sizes are schematic."
+    },
+    {
+      "type": "paragraph",
+      "text": "For B windows sampled uniformly from W training windows, let n be the number of owned within-window triplets in the minibatch and Nw the total number of such triplets. The within-window minibatch mean is multiplied by nW/(BNw), with a zero contribution when n = 0. Boundary triplets follow a deterministic cyclic traversal, and their owner contexts are forwarded separately. The within/boundary acceleration coefficients sum to four. Together with the count-weighted partition in the main paper, this retains the cross-window portion of the final-output motion objective."
+    },
+    {
+      "type": "table",
+      "key": "loss",
+      "caption": "Loss coefficients for refinement. Coordinate losses operate in metres. The two acceleration coefficients implement the within/boundary partition and sum to four; they are not separately tuned comparison settings."
+    },
+    {
+      "type": "paragraph",
+      "text": "Intermediate supervision covers the first two base-decoder states and their within-window motion terms. The PA auxiliary applies a detached fitted similarity transform to differentiable predictions. Shape consistency and update penalties remain part of the same objective, while auxiliary two-dimensional training weights are zero. Both feedback branches use these losses unchanged."
+    },
+    {
+      "type": "paragraph",
+      "text": "The annotation-frame index defines the motion metric's unit. Source-frame identities used by the temporal refiner and owner-window identities used by the evaluator serve different purposes: the first determine which observations are connected in feature processing, while the second select one prediction for each evaluated person-frame. A cross-owner triplet remains an annotation-adjacent transition. The partition in Figure S1 therefore changes how its context is computed, without changing whether that transition contributes to the complete-sequence error."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "S3. Optimization and checkpoint selection"
+    },
+    {
+      "type": "paragraph",
+      "text": "The mean and joint feedback runs start from the same selected parent. Optimization uses AdamW, weight decay 10⁻⁴, gradient-norm clipping at one, and an effective batch of 16 windows through accumulation. Neural modules use BF16 autocast and geometry uses FP32 on an RTX 4090. The reported refinement comparison uses random seed 2026; its rows are individual archived runs rather than means over repeated training runs."
+    },
+    {
+      "type": "paragraph",
+      "text": "Adapters train at 5 × 10⁻⁵. At step 300, body, root, and shape heads and output normalization become trainable at 5 × 10⁻⁶. At step 800, the last two base-decoder dual-order blocks, its image attention, and its inherited feedback projection become trainable at 10⁻⁶. The new landmark-to-joint module belongs to the adapter group and is trainable from step zero. The reference, feature encoders, camera head, and observation heads remain frozen. Learning rates use 200 warm-up steps and a 6,000-step cosine horizon with a 10% floor. At update u, EMA decay is min(0.999, (1 + u)/(10 + u))."
+    },
+    {
+      "type": "paragraph",
+      "text": "Checkpoint selection minimizes the following normalized criterion, with constants fixed before the feedback comparison, subject to preserving MPJPE, PA-MPJPE, PVE, and acceleration relative to the fixed spatiotemporal reference:"
+    },
+    {
+      "type": "equation",
+      "key": "selection",
+      "tex": "\\rho=\\max\\left(\\frac{\\mathrm{MPJPE}}{60},\\frac{\\mathrm{PA\\!\\text{-}\\!MPJPE}}{37.3}\\right)",
+      "numbered": false
+    },
+    {
+      "type": "paragraph",
+      "text": "The reported joint-feedback checkpoint is the EMA at 1,000 additional steps. It processes 16,000 training-window draws and 16,000 boundary-triplet draws, covering all 2,909 windows and all 5,548 boundary triplets. Zero-initialized feedback and added part/time residuals reproduce the parent's complete validation metrics before optimization. A private initialization generator preserves the random-number stream used by the unchanged model and training sampler."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "S4. Complete sequence and EMA measurements"
+    },
+    {
+      "type": "paragraph",
+      "text": "Table S3 reports all twelve validation sequences. MPJPE, PA-MPJPE, and PVE use the main-paper definitions. The aggregate row is computed from sequence error sums and frame counts, rather than the unweighted average of sequence means. The accompanying main-paper sequence figure compares the same parent and refined outputs on identical person-frames."
+    },
+    {
+      "type": "table",
+      "key": "sequences",
+      "caption": "Complete per-sequence validation geometry of STaR-Body. Errors are in mm; abbreviated names retain the action and sequence suffix. The aggregate uses 10,413 person-frames with frame-weighted error accumulation."
+    },
+    {
+      "type": "paragraph",
+      "text": "Mean-feedback values are transcribed from contemporaneous run records; the released machine-readable archive contains the parent and joint-feedback evaluations. The tables retain the split, checkpoint, and weight type attached to each recorded measurement."
+    },
+    {
+      "type": "paragraph",
+      "text": "Table S4 separates feedback choice from weight averaging at 1,000 steps. EMA improves geometry for both feedback types. For joint feedback, the EMA decreases MPJPE and PVE relative to its same-step student, while the student's acceleration error is lower. The main comparison uses EMA for both branches."
+    },
+    {
+      "type": "table",
+      "key": "ema",
+      "caption": "Student and EMA measurements at 1,000 additional refinement steps under the same validation protocol. All errors are in mm except acceleration in mm/annotation-frame². EMA denotes exponential moving average; the same weight type is used on both sides of the main feedback comparison."
+    },
+    {
+      "type": "paragraph",
+      "text": "The optimization figure contains only recorded EMA evaluations: the common parent at step zero, mean feedback at 1,000 and 2,000 steps, and the selected joint-feedback result at 1,000 steps. Lines connect these recorded checkpoints. Validation uses FP32 network and SMPL computation, double-precision sums, complete frame ownership, and no flip averaging or temporal smoothing throughout."
+    }
+  ],
+  "citation_mode": "Verified numeric references shared by main manuscript and supplement."
+}

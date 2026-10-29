@@ -1,0 +1,387 @@
+{
+  "description": "Full precision sequence mean reductions, computed from archived raw sums, in original Figure 16 / sequence plot order. Positive means lower C10 error.",
+  "sources": [
+    {
+      "file": "C10_checkpoint_audit.json",
+      "sha256": "28431e245d96cbb3f5028c2dbfe816acd3d282aeaad4fd18a705e973bf375f27"
+    },
+    {
+      "file": "parent_reproduction.json",
+      "sha256": "c635a3042b424944ab1e99665b8013d7d087043859e5be1e99c0dedab696e08b"
+    }
+  ],
+  "rows": [
+    {
+      "sequence": "courtyard_basketball_01",
+      "label": "Basketball",
+      "frames": 957,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 40467.96220588684,
+          "c10_sum": 40682.346351623535,
+          "parent_mean": 42.286271897478414,
+          "c10_mean": 42.51028876867663,
+          "reduction_parent_minus_c10": -0.2240168711982177,
+          "display_signed_4dp": "-0.2240"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 28233.403579235077,
+          "c10_sum": 28233.33260154724,
+          "parent_mean": 29.50198911100844,
+          "c10_mean": 29.501914944145497,
+          "reduction_parent_minus_c10": 7.416686294220831e-05,
+          "display_signed_4dp": "+0.0001"
+        },
+        "pve_mm": {
+          "parent_sum": 51437.07911300659,
+          "c10_sum": 51293.70471954346,
+          "parent_mean": 53.74825403657951,
+          "c10_mean": 53.598437533483235,
+          "reduction_parent_minus_c10": 0.14981650309627456,
+          "display_signed_4dp": "+0.1498"
+        }
+      }
+    },
+    {
+      "sequence": "courtyard_dancing_00",
+      "label": "Dancing",
+      "frames": 827,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 58010.28884887695,
+          "c10_sum": 57947.67780685425,
+          "parent_mean": 70.14545205426475,
+          "c10_mean": 70.06974341820344,
+          "reduction_parent_minus_c10": 0.07570863606131206,
+          "display_signed_4dp": "+0.0757"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 33131.78184700012,
+          "c10_sum": 33014.689536094666,
+          "parent_mean": 40.06261408343425,
+          "c10_mean": 39.92102725041676,
+          "reduction_parent_minus_c10": 0.1415868330174807,
+          "display_signed_4dp": "+0.1416"
+        },
+        "pve_mm": {
+          "parent_sum": 72349.2739238739,
+          "c10_sum": 72201.13619422913,
+          "parent_mean": 87.48400716308815,
+          "c10_mean": 87.30488052506544,
+          "reduction_parent_minus_c10": 0.179126638022703,
+          "display_signed_4dp": "+0.1791"
+        }
+      }
+    },
+    {
+      "sequence": "courtyard_drinking_00",
+      "label": "Drinking",
+      "frames": 1378,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 66182.25694274902,
+          "c10_sum": 66126.94827842712,
+          "parent_mean": 48.02776265801816,
+          "c10_mean": 47.98762574631867,
+          "reduction_parent_minus_c10": 0.040136911699491594,
+          "display_signed_4dp": "+0.0401"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 35711.626828193665,
+          "c10_sum": 35669.02300930023,
+          "parent_mean": 25.9155492222015,
+          "c10_mean": 25.88463208222078,
+          "reduction_parent_minus_c10": 0.03091713998072033,
+          "display_signed_4dp": "+0.0309"
+        },
+        "pve_mm": {
+          "parent_sum": 77832.58039855957,
+          "c10_sum": 77747.22100830078,
+          "parent_mean": 56.48227895396195,
+          "c10_mean": 56.42033454883946,
+          "reduction_parent_minus_c10": 0.06194440512248844,
+          "display_signed_4dp": "+0.0619"
+        }
+      }
+    },
+    {
+      "sequence": "courtyard_hug_00",
+      "label": "Hug",
+      "frames": 1096,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 69384.67353820801,
+          "c10_sum": 69601.97380542755,
+          "parent_mean": 63.30718388522629,
+          "c10_mean": 63.5054505523974,
+          "reduction_parent_minus_c10": -0.1982666671711163,
+          "display_signed_4dp": "-0.1983"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 48824.11640739441,
+          "c10_sum": 48773.17156600952,
+          "parent_mean": 44.54755146660074,
+          "c10_mean": 44.50106894708898,
+          "reduction_parent_minus_c10": 0.046482519511758844,
+          "display_signed_4dp": "+0.0465"
+        },
+        "pve_mm": {
+          "parent_sum": 86493.35004234314,
+          "c10_sum": 86538.72060585022,
+          "parent_mean": 78.91729018461966,
+          "c10_mean": 78.9586866841699,
+          "reduction_parent_minus_c10": -0.041396499550255546,
+          "display_signed_4dp": "-0.0414"
+        }
+      }
+    },
+    {
+      "sequence": "courtyard_jumpBench_01",
+      "label": "Bench jump",
+      "frames": 619,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 25353.0000705719,
+          "c10_sum": 25259.938598632812,
+          "parent_mean": 40.95799688299176,
+          "c10_mean": 40.807655248195175,
+          "reduction_parent_minus_c10": 0.1503416347965863,
+          "display_signed_4dp": "+0.1503"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 16031.005346775055,
+          "c10_sum": 16025.475172519684,
+          "parent_mean": 25.89823157798878,
+          "c10_mean": 25.889297532341978,
+          "reduction_parent_minus_c10": 0.008934045646803059,
+          "display_signed_4dp": "+0.0089"
+        },
+        "pve_mm": {
+          "parent_sum": 30142.32682800293,
+          "c10_sum": 30106.459228515625,
+          "parent_mean": 48.69519681422121,
+          "c10_mean": 48.637252388555126,
+          "reduction_parent_minus_c10": 0.057944425666081885,
+          "display_signed_4dp": "+0.0579"
+        }
+      }
+    },
+    {
+      "sequence": "courtyard_rangeOfMotions_01",
+      "label": "Range of motions",
+      "frames": 1057,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 53234.806032180786,
+          "c10_sum": 52932.700333595276,
+          "parent_mean": 50.364054902725435,
+          "c10_mean": 50.07824061834936,
+          "reduction_parent_minus_c10": 0.28581428437607403,
+          "display_signed_4dp": "+0.2858"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 38838.69747161865,
+          "c10_sum": 38657.381291389465,
+          "parent_mean": 36.74427386151244,
+          "c10_mean": 36.572735375013686,
+          "reduction_parent_minus_c10": 0.1715384864987578,
+          "display_signed_4dp": "+0.1715"
+        },
+        "pve_mm": {
+          "parent_sum": 66633.83793830872,
+          "c10_sum": 66120.65620803833,
+          "parent_mean": 63.04052785081241,
+          "c10_mean": 62.55502006436928,
+          "reduction_parent_minus_c10": 0.4855077864431275,
+          "display_signed_4dp": "+0.4855"
+        }
+      }
+    },
+    {
+      "sequence": "downtown_walkDownhill_00",
+      "label": "Downhill walk",
+      "frames": 437,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 29126.907459259033,
+          "c10_sum": 28869.03363418579,
+          "parent_mean": 66.65196214933417,
+          "c10_mean": 66.06186186312539,
+          "reduction_parent_minus_c10": 0.5901002862087922,
+          "display_signed_4dp": "+0.5901"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 15220.8899974823,
+          "c10_sum": 15031.52587890625,
+          "parent_mean": 34.830411893552174,
+          "c10_mean": 34.39708439108982,
+          "reduction_parent_minus_c10": 0.4333275024623565,
+          "display_signed_4dp": "+0.4333"
+        },
+        "pve_mm": {
+          "parent_sum": 32202.73650741577,
+          "c10_sum": 32180.20831298828,
+          "parent_mean": 73.6904725570155,
+          "c10_mean": 73.63892062468715,
+          "reduction_parent_minus_c10": 0.05155193232835294,
+          "display_signed_4dp": "+0.0516"
+        }
+      }
+    },
+    {
+      "sequence": "outdoors_crosscountry_00",
+      "label": "Cross-country",
+      "frames": 484,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 52528.16258621216,
+          "c10_sum": 52362.15107917786,
+          "parent_mean": 108.52926154176066,
+          "c10_mean": 108.18626256028483,
+          "reduction_parent_minus_c10": 0.3429989814758301,
+          "display_signed_4dp": "+0.3430"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 26038.055804252625,
+          "c10_sum": 25982.124106407166,
+          "parent_mean": 53.79763595919964,
+          "c10_mean": 53.68207460001481,
+          "reduction_parent_minus_c10": 0.11556135918483261,
+          "display_signed_4dp": "+0.1156"
+        },
+        "pve_mm": {
+          "parent_sum": 58263.205797195435,
+          "c10_sum": 58076.464628219604,
+          "parent_mean": 120.37852437437073,
+          "c10_mean": 119.99269551285042,
+          "reduction_parent_minus_c10": 0.3858288615203101,
+          "display_signed_4dp": "+0.3858"
+        }
+      }
+    },
+    {
+      "sequence": "outdoors_freestyle_01",
+      "label": "Freestyle",
+      "frames": 273,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 12137.753787994385,
+          "c10_sum": 11958.429403305054,
+          "parent_mean": 44.46063658606002,
+          "c10_mean": 43.80377070807712,
+          "reduction_parent_minus_c10": 0.6568658779828976,
+          "display_signed_4dp": "+0.6569"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 7068.03049659729,
+          "c10_sum": 7023.467721939087,
+          "parent_mean": 25.890221599257472,
+          "c10_mean": 25.72698799245087,
+          "reduction_parent_minus_c10": 0.16323360680660484,
+          "display_signed_4dp": "+0.1632"
+        },
+        "pve_mm": {
+          "parent_sum": 13453.977304458618,
+          "c10_sum": 13323.919658660889,
+          "parent_mean": 49.281968148200065,
+          "c10_mean": 48.80556651524135,
+          "reduction_parent_minus_c10": 0.47640163295871607,
+          "display_signed_4dp": "+0.4764"
+        }
+      }
+    },
+    {
+      "sequence": "outdoors_golf_00",
+      "label": "Golf",
+      "frames": 341,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 21035.925453186035,
+          "c10_sum": 20906.584888458252,
+          "parent_mean": 61.68893094775964,
+          "c10_mean": 61.309633103983145,
+          "reduction_parent_minus_c10": 0.37929784377649034,
+          "display_signed_4dp": "+0.3793"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 10606.111291885376,
+          "c10_sum": 10597.191347122192,
+          "parent_mean": 31.102965665353008,
+          "c10_mean": 31.076807469566546,
+          "reduction_parent_minus_c10": 0.02615819578646215,
+          "display_signed_4dp": "+0.0262"
+        },
+        "pve_mm": {
+          "parent_sum": 20950.46183013916,
+          "c10_sum": 20643.5216217041,
+          "parent_mean": 61.43830448721161,
+          "c10_mean": 60.53818657391232,
+          "reduction_parent_minus_c10": 0.900117913299292,
+          "display_signed_4dp": "+0.9001"
+        }
+      }
+    },
+    {
+      "sequence": "outdoors_parcours_00",
+      "label": "Parkour 00",
+      "frames": 1632,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 97966.0433101654,
+          "c10_sum": 97902.15300559998,
+          "parent_mean": 60.02821281260135,
+          "c10_mean": 59.989064341666655,
+          "reduction_parent_minus_c10": 0.039148470934699565,
+          "display_signed_4dp": "+0.0391"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 66051.04852199554,
+          "c10_sum": 66137.7925863266,
+          "parent_mean": 40.472456202203155,
+          "c10_mean": 40.525608202406005,
+          "reduction_parent_minus_c10": -0.053152000202852136,
+          "display_signed_4dp": "-0.0532"
+        },
+        "pve_mm": {
+          "parent_sum": 122345.47552871704,
+          "c10_sum": 121978.46400260925,
+          "parent_mean": 74.96659039749818,
+          "c10_mean": 74.74170588395175,
+          "reduction_parent_minus_c10": 0.2248845135464388,
+          "display_signed_4dp": "+0.2249"
+        }
+      }
+    },
+    {
+      "sequence": "outdoors_parcours_01",
+      "label": "Parkour 01",
+      "frames": 1312,
+      "metrics": {
+        "mpjpe_mm": {
+          "parent_sum": 112501.59305381775,
+          "c10_sum": 112604.76337051392,
+          "parent_mean": 85.7481654373611,
+          "c10_mean": 85.82680134947707,
+          "reduction_parent_minus_c10": -0.07863591211598094,
+          "display_signed_4dp": "-0.0786"
+        },
+        "pa_mpjpe_mm": {
+          "parent_sum": 66213.83781814575,
+          "c10_sum": 66523.20862674713,
+          "parent_mean": 50.467864190659874,
+          "c10_mean": 50.70366511184995,
+          "reduction_parent_minus_c10": -0.23580092119007576,
+          "display_signed_4dp": "-0.2358"
+        },
+        "pve_mm": {
+          "parent_sum": 128303.4700126648,
+          "c10_sum": 128061.28135681152,
+          "parent_mean": 97.79227897306768,
+          "c10_mean": 97.60768396098439,
+          "reduction_parent_minus_c10": 0.1845950120832862,
+          "display_signed_4dp": "+0.1846"
+        }
+      }
+    }
+  ]
+}

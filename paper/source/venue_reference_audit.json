@@ -1,0 +1,308 @@
+{
+  "references": [
+    {
+      "number": 1,
+      "fields": {
+        "author": "Choi, Hongsuk and Moon, Gyeongsik and Chang, Ju Yong and Lee, Kyoung Mu",
+        "title": "Beyond Static Features for Temporally Consistent 3D Human Pose and Shape From a Video",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2021",
+        "pages": "1964-1973"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2021/html/Choi_Beyond_Static_Features_for_Temporally_Consistent_3D_Human_Pose_and_CVPR_2021_paper.html"
+    },
+    {
+      "number": 2,
+      "fields": {
+        "author": "Alexey Dosovitskiy; Lucas Beyer; Alexander Kolesnikov; Dirk Weissenborn; Xiaohua Zhai; Thomas Unterthiner; Mostafa Dehghani; Matthias Minderer; Georg Heigold; Sylvain Gelly; Jakob Uszkoreit; Neil Houlsby",
+        "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "booktitle": "International Conference on Learning Representations",
+        "year": "2021"
+      },
+      "primary_url": "https://dblp.org/rec/conf/iclr/DosovitskiyB0WZ21.html"
+    },
+    {
+      "number": 3,
+      "fields": {
+        "author": "Dwivedi, Sai Kumar and Sun, Yu and Patel, Priyanka and Feng, Yao and Black, Michael J.",
+        "title": "TokenHMR: Advancing Human Mesh Recovery with a Tokenized Pose Representation",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2024",
+        "pages": "1323-1333"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Dwivedi_TokenHMR_Advancing_Human_Mesh_Recovery_with_a_Tokenized_Pose_Representation_CVPR_2024_paper.html"
+    },
+    {
+      "number": 4,
+      "fields": {
+        "author": "Fiche, Gu\\'enol\\'e and Leglaive, Simon and Alameda-Pineda, Xavier and Moreno-Noguer, Francesc",
+        "title": "MEGA: Masked Generative Autoencoder for Human Mesh Recovery",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2025",
+        "pages": "5366-5378"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Fiche_MEGA_Masked_Generative_Autoencoder_for_Human_Mesh_Recovery_CVPR_2025_paper.html"
+    },
+    {
+      "number": 5,
+      "fields": {
+        "author": "Goel, Shubham and Pavlakos, Georgios and Rajasegaran, Jathushan and Kanazawa, Angjoo and Malik, Jitendra",
+        "title": "Humans in 4D: Reconstructing and Tracking Humans with Transformers",
+        "booktitle": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)",
+        "year": "2023",
+        "pages": "14783-14794"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/ICCV2023/html/Goel_Humans_in_4D_Reconstructing_and_Tracking_Humans_with_Transformers_ICCV_2023_paper.html"
+    },
+    {
+      "number": 6,
+      "fields": {
+        "author": "Jiang, Zeyinzi and Han, Zhen and Mao, Chaojie and Zhang, Jingfeng and Pan, Yulin and Liu, Yu",
+        "title": "VACE: All-in-One Video Creation and Editing",
+        "booktitle": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)",
+        "year": "2025",
+        "pages": "17191-17202"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Jiang_VACE_All-in-One_Video_Creation_and_Editing_ICCV_2025_paper.html"
+    },
+    {
+      "number": 7,
+      "fields": {
+        "author": "Kanazawa, Angjoo and Black, Michael J. and Jacobs, David W. and Malik, Jitendra",
+        "title": "End-to-End Recovery of Human Shape and Pose",
+        "booktitle": "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2018",
+        "pages": "7122-7131"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content_cvpr_2018/html/Kanazawa_End-to-End_Recovery_of_CVPR_2018_paper.html"
+    },
+    {
+      "number": 8,
+      "fields": {
+        "author": "Kocabas, Muhammed and Athanasiou, Nikos and Black, Michael J.",
+        "title": "VIBE: Video Inference for Human Body Pose and Shape Estimation",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2020",
+        "pages": "5253-5263"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content_CVPR_2020/html/Kocabas_VIBE_Video_Inference_for_Human_Body_Pose_and_Shape_Estimation_CVPR_2020_paper.html"
+    },
+    {
+      "number": 9,
+      "fields": {
+        "author": "Kocabas, Muhammed and Huang, Chun-Hao P. and Hilliges, Otmar and Black, Michael J.",
+        "title": "PARE: Part Attention Regressor for 3D Human Body Estimation",
+        "booktitle": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)",
+        "year": "2021",
+        "pages": "11127-11137"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Kocabas_PARE_Part_Attention_Regressor_for_3D_Human_Body_Estimation_ICCV_2021_paper.html"
+    },
+    {
+      "number": 10,
+      "fields": {
+        "author": "Kolotouros, Nikos and Pavlakos, Georgios and Black, Michael J. and Daniilidis, Kostas",
+        "title": "Learning to Reconstruct 3D Human Pose and Shape via Model-Fitting in the Loop",
+        "booktitle": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)",
+        "year": "2019",
+        "pages": "2252-2261"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content_ICCV_2019/html/Kolotouros_Learning_to_Reconstruct_3D_Human_Pose_and_Shape_via_Model-Fitting_ICCV_2019_paper.html"
+    },
+    {
+      "number": 11,
+      "fields": {
+        "author": "Matthew Loper; Naureen Mahmood; Javier Romero; Gerard Pons-Moll; Michael J. Black",
+        "title": "SMPL: a skinned multi-person linear model",
+        "journal": "ACM Transactions on Graphics",
+        "volume": "34",
+        "number": "6",
+        "pages": "248:1-248:16",
+        "year": "2015",
+        "doi": "10.1145/2816795.2818013"
+      },
+      "primary_url": "https://dblp.org/rec/journals/tog/LoperM0PB15"
+    },
+    {
+      "number": 12,
+      "fields": {
+        "author": "Shen, Xiaolong and Yang, Zongxin and Wang, Xiaohan and Ma, Jianxin and Zhou, Chang and Yang, Yi",
+        "title": "Global-to-Local Modeling for Video-Based 3D Human Pose and Shape Estimation",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2023",
+        "pages": "8887-8896"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2023/html/Shen_Global-to-Local_Modeling_for_Video-Based_3D_Human_Pose_and_Shape_Estimation_CVPR_2023_paper.html"
+    },
+    {
+      "number": 13,
+      "fields": {
+        "author": "Zehong Shen; Huaijin Pi; Yan Xia; Zhi Cen; Sida Peng; Zechen Hu; Hujun Bao; Ruizhen Hu; Xiaowei Zhou",
+        "title": "World-Grounded Human Motion Recovery via Gravity-View Coordinates",
+        "booktitle": "SIGGRAPH Asia Conference Papers",
+        "pages": "144:1-144:11",
+        "year": "2024",
+        "doi": "10.1145/3680528.3687565"
+      },
+      "primary_url": "https://dblp.org/rec/conf/siggrapha/ShenPXCPHBHZ24.html"
+    },
+    {
+      "number": 14,
+      "fields": {
+        "author": "Shin, Soyong and Kim, Juyong and Halilaj, Eni and Black, Michael J.",
+        "title": "WHAM: Reconstructing World-grounded Humans with Accurate 3D Motion",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2024",
+        "pages": "2070-2080"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Shin_WHAM_Reconstructing_World-grounded_Humans_with_Accurate_3D_Motion_CVPR_2024_paper.html"
+    },
+    {
+      "number": 15,
+      "fields": {
+        "author": "Stathopoulos, Anastasis and Han, Ligong and Metaxas, Dimitris",
+        "title": "Score-Guided Diffusion for 3D Human Recovery",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2024",
+        "pages": "906-915"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2024/html/Stathopoulos_Score-Guided_Diffusion_for_3D_Human_Recovery_CVPR_2024_paper.html"
+    },
+    {
+      "number": 16,
+      "fields": {
+        "author": "Ashish Vaswani; Noam Shazeer; Niki Parmar; Jakob Uszkoreit; Llion Jones; Aidan N. Gomez; Łukasz Kaiser; Illia Polosukhin",
+        "title": "Attention Is All You Need",
+        "booktitle": "Advances in Neural Information Processing Systems",
+        "volume": "30",
+        "pages": "5998-6008",
+        "year": "2017"
+      },
+      "primary_url": "https://papers.nips.cc/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html"
+    },
+    {
+      "number": 17,
+      "fields": {
+        "author": "von Marcard, Timo and Henschel, Roberto and Black, Michael J. and Rosenhahn, Bodo and Pons-Moll, Gerard",
+        "title": "Recovering Accurate 3D Human Pose in The Wild Using IMUs and a Moving Camera",
+        "booktitle": "Proceedings of the European Conference on Computer Vision (ECCV)",
+        "year": "2018",
+        "pages": "601-617"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content_ECCV_2018/html/Timo_von_Marcard_Recovering_Accurate_3D_ECCV_2018_paper.html"
+    },
+    {
+      "number": 18,
+      "fields": {
+        "author": "Team Wan et al.",
+        "title": "Wan: Open and Advanced Large-Scale Video Generative Models",
+        "eprint": "2503.20314",
+        "year": "2025",
+        "version": "v2, 2025-04-19"
+      },
+      "primary_url": "https://arxiv.org/abs/2503.20314"
+    },
+    {
+      "number": 19,
+      "fields": {
+        "author": "Yufu Wang; Ziyun Wang; Lingjie Liu; Kostas Daniilidis",
+        "title": "TRAM: Global Trajectory and Motion of 3D Humans from in-the-wild Videos",
+        "booktitle": "European Conference on Computer Vision",
+        "part": "XI",
+        "pages": "467-487",
+        "year": "2024"
+      },
+      "primary_url": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/html/1796_ECCV_2024_paper.php"
+    },
+    {
+      "number": 20,
+      "fields": {
+        "author": "Wang, Yufu and Sun, Yu and Patel, Priyanka and Daniilidis, Kostas and Black, Michael J. and Kocabas, Muhammed",
+        "title": "PromptHMR: Promptable Human Mesh Recovery",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2025",
+        "pages": "1148-1159"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Wang_PromptHMR_Promptable_Human_Mesh_Recovery_CVPR_2025_paper.html"
+    },
+    {
+      "number": 21,
+      "fields": {
+        "author": "Xia, Yan and Zhou, Xiaowei and Vouga, Etienne and Huang, Qixing and Pavlakos, Georgios",
+        "title": "Reconstructing Humans with a Biomechanically Accurate Skeleton",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2025",
+        "pages": "5355-5365"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Xia_Reconstructing_Humans_with_a_Biomechanically_Accurate_Skeleton_CVPR_2025_paper.html"
+    },
+    {
+      "number": 22,
+      "fields": {
+        "author": "Yuan, Ye and Iqbal, Umar and Molchanov, Pavlo and Kitani, Kris and Kautz, Jan",
+        "title": "GLAMR: Global Occlusion-Aware Human Mesh Recovery With Dynamic Cameras",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2022",
+        "pages": "11038-11049"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2022/html/Yuan_GLAMR_Global_Occlusion-Aware_Human_Mesh_Recovery_With_Dynamic_Cameras_CVPR_2022_paper.html"
+    },
+    {
+      "number": 23,
+      "fields": {
+        "author": "Zhang, Hongwen and Tian, Yating and Zhou, Xinchi and Ouyang, Wanli and Liu, Yebin and Wang, Limin and Sun, Zhenan",
+        "title": "PyMAF: 3D Human Pose and Shape Regression With Pyramidal Mesh Alignment Feedback Loop",
+        "booktitle": "Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)",
+        "year": "2021",
+        "pages": "11446-11456"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/ICCV2021/html/Zhang_PyMAF_3D_Human_Pose_and_Shape_Regression_With_Pyramidal_Mesh_ICCV_2021_paper.html"
+    },
+    {
+      "number": 24,
+      "fields": {
+        "author": "Hongwen Zhang; Yating Tian; Yuxiang Zhang; Mengcheng Li; Liang An; Zhenan Sun; Yebin Liu",
+        "title": "PyMAF-X: Towards Well-Aligned Full-Body Model Regression From Monocular Images",
+        "journal": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+        "volume": "45",
+        "number": "10",
+        "pages": "12287-12303",
+        "year": "2023"
+      },
+      "primary_url": "https://dblp.org/pid/81/304-1.html"
+    },
+    {
+      "number": 25,
+      "fields": {
+        "author": "Zhang, Yuhong and Wu, Guanlin and Chen, Ling-Hao and Zhao, Zhuokai and Lin, Jing and Jiang, Xiaoke and Wu, Jiamin and Li, Zhuoheng and Yang, Hao Frank and Wang, Haoqian and Zhang, Lei",
+        "title": "HumanMM: Global Human Motion Recovery from Multi-shot Videos",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2025",
+        "pages": "1973-1983"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2025/html/Zhang_HumanMM_Global_Human_Motion_Recovery_from_Multi-shot_Videos_CVPR_2025_paper.html"
+    },
+    {
+      "number": 26,
+      "fields": {
+        "author": "Zhao, Yiwen and Zheng, Ce and Wang, Yufu and Yang, Hsueh-Han Daniel and Wen, Liting and Jeni, L\\'aszl\\'o A.",
+        "title": "OnlineHMR: Video-based Online World-Grounded Human Mesh Recovery",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2026",
+        "pages": "13951-13961"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content/CVPR2026/html/Zhao_OnlineHMR_Video-based_Online_World-Grounded_Human_Mesh_Recovery_CVPR_2026_paper.html"
+    },
+    {
+      "number": 27,
+      "fields": {
+        "author": "Zhou, Yi and Barnes, Connelly and Lu, Jingwan and Yang, Jimei and Li, Hao",
+        "title": "On the Continuity of Rotation Representations in Neural Networks",
+        "booktitle": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "year": "2019",
+        "pages": "5745-5753"
+      },
+      "primary_url": "https://openaccess.thecvf.com/content_CVPR_2019/html/Zhou_On_the_Continuity_of_Rotation_Representations_in_Neural_Networks_CVPR_2019_paper.html"
+    }
+  ]
+}

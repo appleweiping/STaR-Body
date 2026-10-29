@@ -1,0 +1,246 @@
+[
+  [
+    [
+      "Representation",
+      "Tokens",
+      "Width"
+    ],
+    [
+      "HMR 2.0a image grid",
+      "T × 192",
+      "1,280"
+    ],
+    [
+      "VACE latent grid",
+      "5 × 36",
+      "1,536"
+    ],
+    [
+      "Pooled video memory",
+      "30",
+      "256"
+    ],
+    [
+      "Body queries",
+      "T × 26",
+      "256"
+    ],
+    [
+      "Joint feedback",
+      "T × 24",
+      "128"
+    ]
+  ],
+  [
+    [
+      "Term",
+      "Weight"
+    ],
+    [
+      "Joint / vertex error",
+      "1 / 1"
+    ],
+    [
+      "Rotation / shape error",
+      "0.05 / 0.001"
+    ],
+    [
+      "Velocity error",
+      "0.5"
+    ],
+    [
+      "Within / boundary acceleration",
+      "3.012855 / 0.987145"
+    ],
+    [
+      "PA joint auxiliary",
+      "0.2"
+    ],
+    [
+      "Intermediate base geometry",
+      "0.25"
+    ],
+    [
+      "Shape consistency",
+      "0.01"
+    ],
+    [
+      "Update regularization",
+      "0.001"
+    ]
+  ],
+  [
+    [
+      "Model",
+      "Refinement stage",
+      "MPJPE ↓",
+      "PA-MPJPE ↓",
+      "PVE ↓",
+      "Accel. ↓"
+    ],
+    [
+      "Spatiotemporal reference",
+      "Selected base",
+      "61.416",
+      "37.783",
+      "73.287",
+      "21.508"
+    ],
+    [
+      "Track-shape + iterative parent",
+      "2,000-step EMA",
+      "61.263",
+      "37.642",
+      "73.025",
+      "21.482"
+    ],
+    [
+      "Mean-feedback control",
+      "+1,000-step EMA",
+      "61.262",
+      "37.637",
+      "73.049",
+      "21.447"
+    ],
+    [
+      "STaR-Body joint feedback",
+      "+1,000-step EMA",
+      "61.188",
+      "37.613",
+      "72.820",
+      "21.442"
+    ]
+  ],
+  [
+    [
+      "Sequence",
+      "Frames",
+      "MPJPE",
+      "PA",
+      "PVE"
+    ],
+    [
+      "Basketball 01",
+      "957",
+      "42.51",
+      "29.50",
+      "53.60"
+    ],
+    [
+      "Dancing 00",
+      "827",
+      "70.07",
+      "39.92",
+      "87.30"
+    ],
+    [
+      "Drinking 00",
+      "1378",
+      "47.99",
+      "25.88",
+      "56.42"
+    ],
+    [
+      "Hug 00",
+      "1096",
+      "63.51",
+      "44.50",
+      "78.96"
+    ],
+    [
+      "JumpBench 01",
+      "619",
+      "40.81",
+      "25.89",
+      "48.64"
+    ],
+    [
+      "RangeOfMotions 01",
+      "1057",
+      "50.08",
+      "36.57",
+      "62.56"
+    ],
+    [
+      "WalkDownhill 00",
+      "437",
+      "66.06",
+      "34.40",
+      "73.64"
+    ],
+    [
+      "Crosscountry 00",
+      "484",
+      "108.19",
+      "53.68",
+      "119.99"
+    ],
+    [
+      "Freestyle 01",
+      "273",
+      "43.80",
+      "25.73",
+      "48.81"
+    ],
+    [
+      "Golf 00",
+      "341",
+      "61.31",
+      "31.08",
+      "60.54"
+    ],
+    [
+      "Parcours 00",
+      "1632",
+      "59.99",
+      "40.53",
+      "74.74"
+    ],
+    [
+      "Parcours 01",
+      "1312",
+      "85.83",
+      "50.70",
+      "97.61"
+    ],
+    [
+      "All frames",
+      "10,413",
+      "61.19",
+      "37.61",
+      "72.82"
+    ]
+  ],
+  [
+    [
+      "Feedback / weights",
+      "MPJPE",
+      "PVE",
+      "Accel."
+    ],
+    [
+      "Mean / student",
+      "61.391",
+      "73.202",
+      "21.443"
+    ],
+    [
+      "Mean / EMA",
+      "61.262",
+      "73.049",
+      "21.447"
+    ],
+    [
+      "Joint / student",
+      "61.425",
+      "73.025",
+      "21.430"
+    ],
+    [
+      "Joint / EMA",
+      "61.188",
+      "72.820",
+      "21.442"
+    ]
+  ]
+]

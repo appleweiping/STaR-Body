@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "title": "STaR-Body: Joint-Indexed Feedback for Spatiotemporal Human Mesh Refinement",
+  "abstract": "Video human mesh refinement must combine evidence across frames while directing each correction to the appropriate body part. However, pooling landmark feedback erases which landmark produced a residual, even when the image features remain spatially structured. To preserve this correspondence, we introduce STaR-Body, a geometry-guided framework for camera-space pose and shape refinement. A dual-order decoder integrates image and video tokens, while a track-conditioned residual shares shape information across a person track. Anatomically biased attention then routes 17 identity-bearing landmark tokens to 24 pose joints. A part-aware iterative refiner combines these features with local image evidence and composes bounded rotation updates; zero-initialized feedback preserves the inherited prediction at initialization. On 10,413 person-frames of the 3DPW validation split under a shared crop protocol, joint-indexed feedback reduces vertex error by 0.31% against a mean-feedback control at the same refinement budget. The complete refinement stage also lowers vertex error on 11 of 12 sequences relative to its common starting model.",
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "1. Introduction"
+    },
+    {
+      "type": "paragraph",
+      "text": "Monocular human mesh recovery estimates an articulated body from images. Parametric models such as SMPL [11] provide a common representation of pose and shape, while image-based regressors [5, 7, 10] recover useful estimates from a single observation. Video offers repeated views of the same person, creating an opportunity to combine local appearance, body geometry, and temporal context. An effective refiner must decide which evidence should change each body joint and which information should remain shared across the track."
+    },
+    {
+      "type": "paragraph",
+      "text": "Geometry-aligned methods revisit image features around the current mesh [23, 24], and temporal models relate predictions across frames [1, 8, 12]. These mechanisms address where to sample visual evidence and when to exchange it. A complementary question concerns the feedback interface itself: does the correction stage retain the anatomical identity of the evidence it receives? When landmark residuals are averaged into one vector and broadcast to every joint, their assignment to body parts disappears. A wrist residual and an ankle residual can therefore produce the same pooled feedback after their values are exchanged, although the corresponding pose corrections act on different branches of the kinematic tree."
+    },
+    {
+      "type": "paragraph",
+      "text": "This observation concerns the feedback representation. The image grid, pose queries, and projected geometry remain spatially structured, yet a pooled feedback channel cannot distinguish two assignments with the same average. Preserving landmark identity at this interface gives the subsequent refiner access to a distinction that pooling removes. Figure 2 illustrates this mechanism with a schematic exchange of landmark evidence."
+    },
+    {
+      "type": "paragraph",
+      "text": "We address this issue with STaR-Body, or Spatial-Temporal Attentive Refinement. The framework combines a dual-order spatiotemporal decoder, a track-conditioned shape residual, and a joint-indexed refinement stage. Its central module retains 17 landmark identities and routes their residual evidence to 24 pose joints through anatomically biased attention. The receiving joints then exchange information within anatomical parts and across time before a recurrent refiner updates their rotations. Thus, evidence is assigned to joints before it is shared among them."
+    },
+    {
+      "type": "paragraph",
+      "text": "The refinement preserves a controlled starting point through a zero-initialized feedback branch and bounded rotation increments. Moreover, complete-sequence motion accounting includes transitions across inference-window boundaries. Together, these choices support an equal-budget comparison of mean and joint-indexed feedback."
+    },
+    {
+      "type": "paragraph",
+      "text": "We evaluate this comparison on the 3DPW validation split using the same parent checkpoint, cached visual inputs, crop protocol, and training schedule. After 1,000 additional steps, joint-indexed feedback reduces vertex error from 73.05 to 72.82 mm and yields lower values for all four reported metrics. Sequence-level analysis shows that the complete refinement stage reduces vertex error on 11 of 12 sequences relative to the parent. We contribute:"
+    },
+    {
+      "type": "contributions",
+      "items": [
+        "We identify how mean landmark feedback discards anatomical assignment and formulate an identity-preserving interface for body-joint refinement.",
+        "We introduce anatomically biased landmark-to-joint attention within a spatiotemporal refiner, with inherited-output-preserving initialization and bounded iterative rotation updates.",
+        "We evaluate the feedback design through an equal-budget validation comparison and complete-sequence analysis, connecting aggregate geometry improvements to changes across individual sequences."
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "2. Related Work"
+    },
+    {
+      "type": "paragraph",
+      "text": "Image-based estimation and geometric feedback. HMR [7], SPIN [10], and HMR 2.0 [5] establish regression-based pose and shape estimation from images, with SPIN incorporating model fitting during training. PARE [9] uses part-guided attention to associate image features with body regions. PyMAF [23] and PyMAF-X [24] revisit features aligned with the projected mesh and iteratively update its parameters. These approaches motivate geometry-aware refinement. STaR-Body focuses on a complementary interface: the assignment of predicted landmark evidence to pose joints before anatomical pooling. Its controlled comparison changes this feedback representation while retaining the visual inputs and body representation."
+    },
+    {
+      "type": "paragraph",
+      "text": "Temporal and world-grounded reconstruction. VIBE [8] models temporal context with a motion prior, TCMR [1] emphasizes temporal information beyond static features, and GLoT [12] combines global and local temporal modeling with spatial correlation. STaR-Body likewise exchanges information across frames, but separates temporal interaction from the routing of local feedback to joints. Its dual-order decoder supports spatial-first and temporal-first processing, while the final recurrent state advances over refinement iterations. GLAMR [22], WHAM [14], TRAM [19], GVHMR [13], HumanMM [25], and OnlineHMR [26] additionally address global motion, camera trajectories, multi-shot input, or streaming reconstruction. Our evaluation concerns camera-space body refinement on offline person tracks, so these trajectory-oriented settings provide context rather than directly comparable protocol rows."
+    },
+    {
+      "type": "paragraph",
+      "text": "Pose representations and observation conditioning. TokenHMR [3] introduces a tokenized pose representation, MEGA [4] uses a masked generative autoencoder, and ScoreHMR [15] refines estimates through score-guided diffusion. PromptHMR [20] incorporates spatial and semantic prompts, while HSMR [21] reconstructs a biomechanically accurate skeleton. STaR-Body instead applies deterministic residual updates to SMPL rotations. Its inherited landmark heads supply conditioning features, and three-dimensional geometry and motion objectives train the final refinement stage."
+    },
+    {
+      "type": "paragraph",
+      "text": "Visual representations. Attention [16] and vision transformers [2] provide token interfaces for combining heterogeneous features. We use spatial HMR 2.0 [5] features and cached Wan/VACE video features [6, 18]. Although Wan and VACE originate from video generation and editing, their role here is frozen feature extraction; body reconstruction remains a discriminative geometric computation. Together, these representations supply appearance and temporal context. The method below explains how STaR-Body turns that context into joint-specific feedback and bounded body updates."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "3. Method"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.1. Body state and spatiotemporal context"
+    },
+    {
+      "type": "paragraph",
+      "text": "Given an offline monocular person track, STaR-Body predicts a camera-space SMPL state xₜ = (Rₜ, βₜ, cₜ) for each target frame: 24 rotations Rₜ, ten shape coefficients βₜ, and crop camera cₜ = (sₜ, tₓ,ₜ, tᵧ,ₜ). SMPL [11] produces vertices and joints, and the crop camera projects the joints into normalized image coordinates. Figure 1 shows the three coupled computations: contextual body decoding, joint-indexed feedback, and part-aware rotation refinement. Source frames index observations, target windows organize computation, and refinement iterations index repeated updates; these roles remain distinct throughout."
+    },
+    {
+      "type": "figure",
+      "key": "overview",
+      "caption": "STaR-Body overview. Frozen image and video features support contextual body decoding. A track-conditioned residual shares shape information across a person, while projected landmark evidence is routed to individual pose joints. Part/time attention and grouped recurrent updates refine rotations, recomputing geometric evidence at each iteration. Shape and camera remain fixed during the final rotation-refinement stage."
+    },
+    {
+      "type": "paragraph",
+      "text": "Each eight-frame target window reads HMR 2.0a image tokens and a 17-frame VACE context, compressed to 30 memory tokens. A frozen reference supplies the initial body state. Geometry-aligned image samples, projected coordinates, and body parameters form 24 pose queries; shape and camera queries complete the 26-token state. Joint identities and relative source-time embeddings preserve the query structure, while masks prevent invalid or duplicate frames from becoming independent temporal evidence."
+    },
+    {
+      "type": "paragraph",
+      "text": "The decoder attends to image, video, and learned landmark features, then mixes two independently parameterized attention orders. Spatial attention Aₛ exchanges information among body queries within a frame, and temporal attention Aₜ links corresponding queries across frames:"
+    },
+    {
+      "type": "equation",
+      "key": "dual_order",
+      "tex": "Z_{ST}=A_T^{ST}(A_S^{ST}(Z)),\\quad Z_{TS}=A_S^{TS}(A_T^{TS}(Z))",
+      "numbered": false
+    },
+    {
+      "type": "equation",
+      "key": "dual_mix",
+      "tex": "Z^{\\prime}=a_1Z_{ST}+a_2Z_{TS},\\quad a=\\operatorname{softmax}(g([Z_{ST};Z_{TS}]))",
+      "numbered": false
+    },
+    {
+      "type": "paragraph",
+      "text": "Four dual-order blocks operate in each of three weight-shared decoding iterations. Each iteration recomputes local sampling locations and predicts a full residual relative to the fixed reference. Rotations use the continuous six-dimensional representation [27], shape combines bounded shared and frame-specific corrections, and the camera updates scale in log space and translation additively. Track-level shape conditioning follows in Section 3.2; interface dimensions and prototype construction appear in Supplementary Section S1."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.2. Track-conditioned shape"
+    },
+    {
+      "type": "paragraph",
+      "text": "Shape is shared over longer time scales than pose. We therefore form a fixed track prototype from the decoder's predictions and image descriptors. Predicted shapes are averaged with weights inversely related to their distance from the track median, while the image prototype uses deterministic frames from the closer half of the track. An MLP maps their concatenation to a correction bounded componentwise by 0.3. Adding this residual to every valid frame shares track information while retaining the base model's frame-specific shape variation. The prototype remains fixed during refinement training, and the subsequent rotation updates pass shape and camera through unchanged."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.3. Joint-indexed landmark feedback"
+    },
+    {
+      "type": "paragraph",
+      "text": "Mean feedback averages landmark residuals and head features before broadcasting the result to all joints. This channel is invariant to exchanging landmark values: two assignments with the same average are indistinguishable. STaR-Body instead retains one token per landmark, including its identity, and lets each pose joint read the resulting set. Figure 2 contrasts these interfaces. The distinction concerns information available to the refiner; Section 4 evaluates the complete joint-indexed interface at a matched optimization budget."
+    },
+    {
+      "type": "figure",
+      "key": "identity",
+      "caption": "Preserving anatomical assignment in the feedback channel. Mean pooling maps exchanged landmark residuals to the same feedback vector. STaR-Body retains the landmark and schema identities, then uses 24 pose queries to read 17 evidence tokens through a soft kinematic-distance bias. Joint-specific feedback enters before part pooling. The exchanged residuals are a schematic illustration of the representation."
+    },
+    {
+      "type": "paragraph",
+      "text": "At iteration r, the inherited observation head gives coordinates ûₜₗ, log-variance feature ℓₜₗ, and visibility-logit feature zₜₗ for landmark l. The current body projects to pₜₗʳ in the same declared schema. With stop-gradient sg, sigmoid σ, and finite-validity indicator vₜₗ, the seven-dimensional evidence is"
+    },
+    {
+      "type": "equation",
+      "key": "landmark_evidence",
+      "tex": "e_{tl}^{r}=\\operatorname{sg}(\\hat u_{tl})-p_{tl}^{r},\\quad x_{tl}^{r}=[e_{tl}^{r};p_{tl}^{r};\\operatorname{sg}(\\ell_{tl});\\sigma(\\operatorname{sg}(z_{tl}));v_{tl}]",
+      "numbered": false
+    },
+    {
+      "type": "paragraph",
+      "text": "A two-layer encoder maps this vector to width 128 and adds learned landmark and schema embeddings. The declared PoseTrack and COCO conventions give each observation slot a semantic identity. Residuals, projections, and variance features are clipped to finite ranges before encoding. These head outputs are conditioning features; the module does not require their calibration as probabilities."
+    },
+    {
+      "type": "paragraph",
+      "text": "Twenty-four learned pose queries attend to the evidence. For each of four heads, attention combines content similarity and distance on the SMPL kinematic tree:"
+    },
+    {
+      "type": "equation",
+      "key": "anatomical_attention",
+      "tex": "A_{jl}=\\operatorname{softmax}_{l}\\left(\\frac{q_j^{\\mathsf T}k_l}{\\sqrt{d_h}}-\\frac{D(j,a(l))}{2}+M_l\\right)",
+      "numbered": false
+    },
+    {
+      "type": "paragraph",
+      "text": "Here a(l) is the anatomical anchor of landmark l, D is shortest-path tree distance, and M masks invalid evidence. The distance term favors nearby anatomical relations without preventing a query from reading distant valid landmarks. A final projection Wₒ yields 24 feedback vectors of width 128. This computation is independent for each person-frame; temporal exchange occurs in the downstream refiner."
+    },
+    {
+      "type": "paragraph",
+      "text": "We initialize Wₒ to zero, making the new feedback contribution exactly zero at initialization. Together with zero-initialized added part/time residuals, this preserves the inherited prediction. Wₒ can receive gradients immediately; after it changes, gradients reach the internal encoder and attention. For an all-invalid frame, a temporary valid slot keeps softmax finite and the resulting frame feedback is explicitly zeroed. Thus, both initialization and missing evidence have defined behavior without an additional learned fallback. The complete feedback module has 105,472 parameters."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.4. Part-aware iterative rotation refinement"
+    },
+    {
+      "type": "paragraph",
+      "text": "Each joint combines its contextual pose query, current body state, and geometry-aligned local image samples. Joint-indexed feedback is added before pooling into six groups: root, torso/head, left arm, right arm, left leg, and right leg. Two residual part/time blocks exchange context across groups within a frame and across time within a group. Their outputs are broadcast back to the joint features. Source-frame identities determine temporal segments, preventing duplicate observations or padding gaps from creating spurious transitions."
+    },
+    {
+      "type": "paragraph",
+      "text": "Local image evidence is refreshed along with the body projection. Over the three iterations, the sampling radius decreases from two to one to half a token cell. Valid neighborhood samples are projected and averaged before entering the joint feature. The refiner therefore combines the persistent contextual query with evidence sampled around its current geometric estimate."
+    },
+    {
+      "type": "paragraph",
+      "text": "A group-specific GRU retains a separate state for every person-frame-joint across the three refinement iterations. The recurrence therefore describes the correction process; it does not scan video frames. A group-specific output head predicts a three-vector uₜⱼʳ, converted to a bounded axis-angle increment and composed with the current rotation:"
+    },
+    {
+      "type": "equation",
+      "key": "bounded_update",
+      "tex": "\\omega_{tj}^{r}=\\alpha_j\\frac{\\tanh u_{tj}^{r}}{\\sqrt{1+\\|\\tanh u_{tj}^{r}\\|_2^2}},\\quad R_{tj}^{r+1}=\\exp([\\omega_{tj}^{r}]_\\times)R_{tj}^{r}",
+      "numbered": false
+    },
+    {
+      "type": "paragraph",
+      "text": "The scale αⱼ is 2° for the root and 5° for other joints. Because the denominator exceeds the numerator norm, each increment has magnitude below its scale. The triangle inequality on rotations then bounds the three-step geodesic displacement by 6° for the root and 15° for any other joint relative to the refiner input. Shape and camera stay fixed while projected landmarks and local image samples are recomputed. The bound controls update size; the geometry and motion objectives determine which updates are useful."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "3.5. Geometry and complete-sequence motion"
+    },
+    {
+      "type": "paragraph",
+      "text": "Training combines joint and vertex errors, rotation and shape supervision, motion terms, and regularization. Geometry is computed in metres. Motion uses first and second differences of hip-centered prediction-minus-target joint errors; it does not simply penalize movement in the prediction. Each person-frame has one owning window, allowing complete sequences to be assembled without counting overlapping predictions more than once."
+    },
+    {
+      "type": "paragraph",
+      "text": "For acceleration, the valid annotation-adjacent triplets partition into within-window and cross-window sets. If their counts are Nw and Nb and their mean losses are ℓ̄w and ℓ̄b, respectively, the complete final-output objective is"
+    },
+    {
+      "type": "equation",
+      "key": "motion_partition",
+      "tex": "L_{acc}=\\frac{N_w}{N_w+N_b}\\bar\\ell_w+\\frac{N_b}{N_w+N_b}\\bar\\ell_b",
+      "numbered": false
+    },
+    {
+      "type": "paragraph",
+      "text": "Boundary triplets are retained by forwarding their owner contexts separately. Consequently, changing the computational window does not discard a physical transition. Intermediate decoder states receive additional geometry and within-window motion supervision. Supplementary Section S2 gives the precise loss coefficients, sampling normalization, and ownership diagram. The matched comparison uses this same objective for both feedback interfaces, so the experiment compares the two complete feedback interfaces within a common refinement procedure."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "4. Experiments"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.1. Protocol and controlled comparison"
+    },
+    {
+      "type": "paragraph",
+      "text": "We use 3DPW [17] for camera-space reconstruction. The training cache contains 2,909 windows and 22,735 unique person-frames; validation contains 1,357 windows, 10,413 person-frames, and 12 sequences. All reported results use this validation split and the same targets, feature caches, body-model assets, and frame-ownership manifest. Person crops come from annotated two-dimensional person extent with a 25% margin. This shared crop and target convention defines the comparison throughout the paper."
+    },
+    {
+      "type": "paragraph",
+      "text": "MPJPE uses pelvis-aligned LSP 14 joints regressed through the H36M joint convention; PA-MPJPE additionally applies a proper per-frame similarity alignment. PVE measures raw vertex error under the common SMPL target convention, without additional pelvis alignment. Acceleration error is the second difference of hip-centered joint error over all 10,226 annotation-adjacent triplets, including window boundaries, in mm/annotation-frame². Validation inference and SMPL computation use FP32, with double-precision aggregate sums. We apply neither flip averaging nor temporal smoothing."
+    },
+    {
+      "type": "paragraph",
+      "text": "The recorded matched-budget comparison starts mean and joint-indexed feedback from the same selected parent. Both receive 1,000 additional optimizer steps, identical sample exposure, losses, and staged unfreezing. We use AdamW, an effective batch of 16 windows, gradient clipping, and exponential moving average (EMA) weights. Feature encoders, the reference, camera head, and observation heads remain frozen. Supplementary Section S3 records the learning rates, unfreezing schedule, and EMA definition."
+    },
+    {
+      "type": "paragraph",
+      "text": "Checkpoint selection minimizes max(MPJPE/60, PA-MPJPE/37.3), subject to preserving all four metrics relative to the fixed spatiotemporal reference. The normalization constants are fixed before the feedback comparison. Both reported final rows use the 1,000-step EMA checkpoint. The new branch reproduces the parent validation output before optimization, and the selected run covers the complete training-window and boundary-triplet pools. The earlier rows describe model progression; the final two rows provide the matched feedback comparison."
+    },
+    {
+      "type": "table",
+      "key": "main",
+      "caption": "Validation results under the shared 3DPW crop and target protocol. All rows cover 10,413 person-frames and 10,226 motion triplets. Errors are in mm, except acceleration in mm/annotation-frame²; lower is better. The final two rows start from the same parent and use 1,000 additional steps with EMA. Bold marks the lowest observed value among these rows. Relative improvement uses the mean-feedback control and unrounded metrics."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.2. Effect of joint-indexed feedback"
+    },
+    {
+      "type": "paragraph",
+      "text": "Table 1 shows that joint-indexed feedback improves all four measured validation metrics at the matched refinement budget. PVE falls from 73.05 to 72.82 mm, a 0.31% relative reduction, while MPJPE falls from 61.26 to 61.19 mm and PA-MPJPE from 37.64 to 37.61 mm. Acceleration changes from 21.45 to 21.44 mm/annotation-frame². The largest absolute change is in vertex geometry, measured after refinement of the same inherited parent."
+    },
+    {
+      "type": "paragraph",
+      "text": "The comparison evaluates the feedback interface. Mean feedback and joint-indexed feedback share the visual evidence, body representation, parent checkpoint, and optimization exposure. The joint interface combines identity embeddings, projected coordinates, validity features, and anatomically biased attention to change how landmark evidence enters the existing refiner. The joint-indexed interface yields lower observed validation errors under this matched-budget setting. The shared decoder, track-shape conditioning, and part/time update mechanism provide the common setting for this feedback comparison."
+    },
+    {
+      "type": "paragraph",
+      "text": "The reference and parent rows clarify the starting point. Adding the track-shape and iterative parent stage changes PVE from 73.29 to 73.02 mm, while the subsequent mean-feedback continuation reaches 73.05 mm. Joint-indexed feedback reaches 72.82 mm after the same continuation budget. These are different comparisons: the matched final rows test the feedback representation, whereas parent-to-final changes characterize the complete additional refinement stage. We retain both views to make the role of the initialization explicit."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.3. Distribution across sequences"
+    },
+    {
+      "type": "figure",
+      "key": "sequences",
+      "caption": "Changes from the common parent to STaR-Body across all 12 validation sequences. Positive values denote lower error after refinement. PVE decreases on 11 sequences and MPJPE on nine; the signed bars include increases as well as decreases. The parent comparison measures the full additional refinement stage; Table 1 compares the two feedback interfaces at equal budget."
+    },
+    {
+      "type": "paragraph",
+      "text": "Figure 3 shows the complete sequence distribution rather than only the aggregate. Relative to the parent, PVE decreases on 11 sequences, MPJPE on nine, and PA-MPJPE on ten. The vertex changes extend across several actions, including golf, range of motions, freestyle, and cross-country motion. Thus, the aggregate vertex reduction is distributed across sequences rather than arising from one action alone. Supplementary Table S3 provides all sequence counts and absolute errors."
+    },
+    {
+      "type": "paragraph",
+      "text": "Global metrics weight person-frames equally: sequence error sums are added and divided by 10,413. Averaging the twelve sequence means would instead give short and long sequences equal influence and would not reproduce Table 1. The signed changes in Figure 3 use the same frame counts for the parent and STaR-Body, ensuring that changes reflect predictions rather than differences in evaluated coverage."
+    },
+    {
+      "type": "paragraph",
+      "text": "Joint and vertex metrics observe different functions of the body state. Basketball, for example, has lower vertex error but higher 14-joint error after refinement, while the two parcours sequences also differ in their joint-error response. The selection rule evaluates aligned joints, unaligned joints, vertices, and motion together. Accordingly, the sequence analysis supports a distributed vertex improvement without requiring every anatomical metric to change in the same direction on every sequence."
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "text": "4.4. Optimization and motion balance"
+    },
+    {
+      "type": "figure",
+      "key": "dynamics",
+      "caption": "Recorded EMA evaluations during additional refinement. Both branches share the same parent at step zero. Mean feedback is evaluated at 1,000 and 2,000 steps; joint-indexed feedback is shown at its selected 1,000-step checkpoint. Lines connect these recorded evaluations. The shared-budget point is the feedback comparison, while the longer mean-feedback run illustrates the geometry–motion trade-off within the schedule."
+    },
+    {
+      "type": "paragraph",
+      "text": "Figure 4 relates the matched result to the recorded continuation checkpoints. Mean-feedback EMA reaches 61.26 mm MPJPE at 1,000 steps and 61.32 mm at 2,000 steps, while acceleration error falls from 21.45 to 21.36 mm/annotation-frame². Joint-indexed feedback reaches 61.19 mm MPJPE at 1,000 steps, with 21.44 acceleration error. Additional optimization therefore affects geometry and temporal error differently; the joint geometry-and-motion selection rule makes that trade-off explicit."
+    },
+    {
+      "type": "paragraph",
+      "text": "EMA also affects the reported geometry. For joint feedback, the 1,000-step EMA has lower MPJPE and PVE than the same-step student, while the student's acceleration error is lower. We use EMA consistently for both sides of the main comparison and provide the complete student/EMA table in Supplementary Section S4. This separates the feedback effect from the choice of weight averaging."
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "text": "5. Conclusion"
+    },
+    {
+      "type": "paragraph",
+      "text": "STaR-Body routes predicted landmark evidence to individual pose joints before sharing information across anatomical parts and time. Its identity-preserving feedback interface complements a dual-order decoder, track-conditioned shape correction, and bounded recurrent rotation updates. Under a shared 3DPW validation protocol, the equal-budget comparison reduces vertex error by 0.31% relative to mean feedback, and the complete additional stage lowers vertex error on 11 of 12 sequences relative to the parent. These results support joint-indexed evidence routing as a practical interface for incremental human mesh refinement."
+    }
+  ],
+  "citation_mode": "Verified numeric references shared by main manuscript and supplement."
+}

@@ -1,0 +1,15 @@
+{
+  "shared_track_shape": true,
+  "use_memory": true,
+  "use_motion": true,
+  "memory_horizon": 32,
+  "memory_topk": 8,
+  "shape_prototype_frames": 8,
+  "memory_mode": "offline",
+  "feedback_dropout": 0.1,
+  "local_radius_schedule": [
+    2.0,
+    1.0,
+    0.5
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "description": "Continuation data without filling missing steps. D2 and C00 are distinct series. Work-note values are full-precision transcriptions, not claimed as original evaluation JSON.",
+  "metric_keys": [
+    "mpjpe_mm",
+    "pa_mpjpe_mm",
+    "pve_mm",
+    "acceleration_error_mm_per_frame2"
+  ],
+  "parent_at_continuation_step_zero": {
+    "mpjpe_mm": 61.262784335840614,
+    "pa_mpjpe_mm": 37.64223618655295,
+    "pve_mm": 73.02485116918137,
+    "acceleration_error_mm_per_frame2": 21.481633546754246
+  },
+  "selected_C10": {
+    "step": 1000,
+    "weights": "ema",
+    "metrics": {
+      "mpjpe_mm": 61.18838956648434,
+      "pa_mpjpe_mm": 37.613404729118336,
+      "pve_mm": 72.81972126625095,
+      "acceleration_error_mm_per_frame2": 21.442481117185427
+    }
+  },
+  "rows": [
+    {
+      "series": "D2 loss continuation",
+      "step": 1000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.362127570772586,
+        "pa_mpjpe_mm": 37.632320638418676,
+        "pve_mm": 73.12940128582487,
+        "acceleration_error_mm_per_frame2": 21.44798670555054
+      },
+      "provenance": "original_machine_readable",
+      "source": "C10_release/loss_decision.json"
+    },
+    {
+      "series": "D2 loss continuation",
+      "step": 1000,
+      "weights": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.25981240120033,
+        "pa_mpjpe_mm": 37.62815692538568,
+        "pve_mm": 73.02331061854574,
+        "acceleration_error_mm_per_frame2": 21.453189014174562
+      },
+      "provenance": "original_machine_readable",
+      "source": "C10_release/loss_decision.json"
+    },
+    {
+      "series": "D2 loss continuation",
+      "step": 2000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.37664020378606,
+        "pa_mpjpe_mm": 37.65717566016771,
+        "pve_mm": 73.07034016983499,
+        "acceleration_error_mm_per_frame2": 21.35798709962086
+      },
+      "provenance": "original_machine_readable",
+      "source": "C10_release/loss_decision.json"
+    },
+    {
+      "series": "D2 loss continuation",
+      "step": 2000,
+      "weights": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.29903437087736,
+        "pa_mpjpe_mm": 37.650139964166065,
+        "pve_mm": 73.1192822424763,
+        "acceleration_error_mm_per_frame2": 21.385284019998878
+      },
+      "provenance": "original_machine_readable",
+      "source": "C10_release/loss_decision.json"
+    },
+    {
+      "series": "D2 loss continuation",
+      "step": 3000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.337891207846766,
+        "pa_mpjpe_mm": 37.710360499425704,
+        "pve_mm": 73.25838566751425,
+        "acceleration_error_mm_per_frame2": 21.31315940490957
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/A4_SEED2027_COMPLETE_D2_3000_C00_1000_SEED2028_20261024_ZH.md"
+    },
+    {
+      "series": "D2 loss continuation",
+      "step": 3000,
+      "weights": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.28579920279033,
+        "pa_mpjpe_mm": 37.687875407992,
+        "pve_mm": 73.10259950638367,
+        "acceleration_error_mm_per_frame2": 21.327942146288706
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/A4_SEED2027_COMPLETE_D2_3000_C00_1000_SEED2028_20261024_ZH.md"
+    },
+    {
+      "series": "D2 loss continuation",
+      "step": 5000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.25938858844402,
+        "pa_mpjpe_mm": 37.769523318283476,
+        "pve_mm": 73.16491763364864,
+        "acceleration_error_mm_per_frame2": 21.26650285683321
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/C10_VALIDATION_MILESTONE_AUDIT_PENDING_20261025_1425CST_ZH.md"
+    },
+    {
+      "series": "D2 loss continuation",
+      "step": 6000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.293885185225584,
+        "pa_mpjpe_mm": 37.77701216340237,
+        "pve_mm": 73.14230516807932,
+        "acceleration_error_mm_per_frame2": 21.24935653981979
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/C10_VALIDATION_MILESTONE_AUDIT_PENDING_20261025_1425CST_ZH.md"
+    },
+    {
+      "series": "D2 loss continuation",
+      "step": 6000,
+      "weights": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.29641011321532,
+        "pa_mpjpe_mm": 37.77423359000762,
+        "pve_mm": 73.15020480733388,
+        "acceleration_error_mm_per_frame2": 21.255655210058002
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/C10_VALIDATION_MILESTONE_AUDIT_PENDING_20261025_1425CST_ZH.md"
+    },
+    {
+      "series": "C00 mean-feedback control",
+      "step": 1000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.39113349634301,
+        "pa_mpjpe_mm": 37.6450219117266,
+        "pve_mm": 73.20204648199497,
+        "acceleration_error_mm_per_frame2": 21.44262779882883
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/A4_SEED2027_COMPLETE_D2_3000_C00_1000_SEED2028_20261024_ZH.md"
+    },
+    {
+      "series": "C00 mean-feedback control",
+      "step": 1000,
+      "weights": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.26187129283082,
+        "pa_mpjpe_mm": 37.63712758586579,
+        "pve_mm": 73.04919619218172,
+        "acceleration_error_mm_per_frame2": 21.44694138684099
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/A4_SEED2027_COMPLETE_D2_3000_C00_1000_SEED2028_20261024_ZH.md"
+    },
+    {
+      "series": "C00 mean-feedback control",
+      "step": 2000,
+      "weights": "student",
+      "metrics": {
+        "mpjpe_mm": 61.51294853230964,
+        "pa_mpjpe_mm": 37.75044989862921,
+        "pve_mm": 73.29757369167922,
+        "acceleration_error_mm_per_frame2": 21.315366620285868
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/C10_VALIDATION_MILESTONE_AUDIT_PENDING_20261025_1425CST_ZH.md"
+    },
+    {
+      "series": "C00 mean-feedback control",
+      "step": 2000,
+      "weights": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.31692679471245,
+        "pa_mpjpe_mm": 37.660090100189386,
+        "pve_mm": 73.19373433248552,
+        "acceleration_error_mm_per_frame2": 21.35865831176253
+      },
+      "provenance": "transcribed_contemporaneous_record",
+      "source": "project/docs/C10_VALIDATION_MILESTONE_AUDIT_PENDING_20261025_1425CST_ZH.md"
+    }
+  ],
+  "sources": [
+    {
+      "file": "C10_release/C10_checkpoint_audit.json",
+      "sha256": "28431e245d96cbb3f5028c2dbfe816acd3d282aeaad4fd18a705e973bf375f27"
+    },
+    {
+      "file": "C10_release/loss_decision.json",
+      "sha256": "bc2b9f1aefba90a3c410e5e36b3839743337217e89dcc0e978ed4e9286ae1291"
+    },
+    {
+      "file": "C10_release/parent_reproduction.json",
+      "sha256": "c635a3042b424944ab1e99665b8013d7d087043859e5be1e99c0dedab696e08b"
+    },
+    {
+      "file": "project/docs/A4_SEED2027_COMPLETE_D2_3000_C00_1000_SEED2028_20261024_ZH.md",
+      "sha256": "6b0de47e1bbc374376288dc267039eb2a9fb97b7e618f7e5a33c25b4a21f9910"
+    },
+    {
+      "file": "project/docs/C10_VALIDATION_MILESTONE_AUDIT_PENDING_20261025_1425CST_ZH.md",
+      "sha256": "50156c49e1f8736fa08eaad0153f4c8b38637a675d59aa455b2219fbade421b1"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+python-docx
+lxml
+latex2mathml
+pywin32; sys_platform == "win32"

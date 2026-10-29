@@ -1,0 +1,36 @@
+{
+  "status": "passed_local_visual_review",
+  "png_dimensions": [
+    4096,
+    1664
+  ],
+  "minimum_vector_label_px": 15.0,
+  "minimum_print_label_pt_at_6_875in": 7.2509765625,
+  "editable_text_elements": 84,
+  "base_original_bytes_unchanged": true,
+  "zero_init_exact": true,
+  "root_pdf_review_required": false,
+  "no_source_project_mutations": true,
+  "no_browser_or_external_upload": true,
+  "files": {
+    "overview_gemini_original.jpg": "e1e9389b23825fab8a66fa7570e4c02a8c2ae951ac6888243e45ff8f8bc3cbac",
+    "overview_final.svg": "b7c4db30b3400d072d068728468ea1e8a5cd9f65dbaa1fad85ba31e0a3fd17fa",
+    "overview_final.png": "b26837828b72ae8957e138ac9bd99caaafb97d6a465096093029d079f07901f3",
+    "overview_edit_notes.txt": "1109df8383748760e7e3b47ace0e24c8e3eca7f1d239712bfe40a328d63d7606"
+  },
+  "sampling_radius_unit_correction": {
+    "label": "2 → 1 → 0.5 token cells",
+    "overlay_occurrences": 2,
+    "unit": "token cells",
+    "matches_sample_joint_neighborhood_normalized_grid_offsets": true,
+    "old_px_labels_remaining": 0,
+    "rendered_label_fits": true,
+    "measured_text_width_source_px": 134.0,
+    "available_box_source_px": 160,
+    "other_composition_unchanged": true
+  },
+  "final_pdf_review_pending": false,
+  "final_pdf_render_verified": true,
+  "verified_pdf_sha256": "db017ff37e86f64cebeda4c0fa97a03253c2e8afe5ad273bf71c32a7a7e881ab",
+  "verified_pdf_page": 2
+}
