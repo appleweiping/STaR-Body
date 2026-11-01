@@ -38,7 +38,11 @@ C10 = 在训练好的 A5 父模型（V30 双序解码器 + track-shape + GRU 精
    - 加速度单位是 mm/frame²，而 WHAM/GVHMR 用 m/s²（换算 ×0.9）。
    - ✅ v43 评测器同时输出 mpjpe/mpjpe_hip、pve/pve_pelvis/pve_hip、accel 的 mm/frame² 和 m/s²。
 6. **时间平滑性差（中）。** 21.44 mm/frame² ≈ 19.3 m/s²，对比 WHAM 6.6、GVHMR 5.0 m/s²，属 VIBE 量级。论文不能宣称时间上的优势，要如实写成局限。
-7. **协议依赖标注（中，需披露）。** 裁剪框来自 3DPW poses2d（+25% margin）；track 用 GT person id；prototype 是离线非因果的整段统计；`frame_valid` 来自 campose_valid；test 集历史上已被看过（V11/V28/V29Y）。
+7. **协议依赖标注（中，需披露）。**
+   - 裁剪框来自 3DPW poses2d（+25% margin，而 margin 本身是在 validation 上选出来的）；
+   - track 用 GT person id；prototype 是离线非因果的整段统计；`frame_valid` 和 VACE 分段来自 campose_valid。
+   - **test 集历史上被多次看过。** 用 test 评测过的版本有 geometry-v3、V10–V13、V15–V17、V26–V28、V29（三次）、V29Y，比文档里写的多得多。V29Y 的 validation 改善反而在 test 上退步。论文中必须披露这一点。
+   - VACE 特征的贡献从未被消融。审稿人会问“为什么用视频生成模型做特征、代价是否值得”，而父模型已固化 VACE，无法在本轮补做，只能列为局限，并准备 rebuttal 方案。
 8. **其他（低–中）。**
    - v39–v42 属于更早的 “parts” 支线，不是 C10 的后续，也没有任何结果记录。
    - C10 的 PoseTrack 头部映射不是官方映射（neck / 2·nose−neck）。
@@ -46,6 +50,10 @@ C10 = 在训练好的 A5 父模型（V30 双序解码器 + track-shape + GRU 精
    - 旋转上界写松了：每步上界应为 (√3/2)·α，三步合计 5.2°/13.0°。
    - A5 父模型无法从仓库复现，缺少配置。
    - resume 会对所有 `.py` 文件做哈希，运行中改动或新增文件会导致 resume 失败。
+   - 旧启动器 `scripts/run_star_body.sh` 把 `video_VACE/vace/models` 加进 PYTHONPATH，会遮蔽 Wan2.1 的 `wan` 包。✅ C11 改用 `scripts/run_star_body_v43.sh`。
+   - v31/v32 的 HMR 构建脚本拒绝 test，旧的 v11 test 包装脚本不可续跑。✅ 新增 `cache_hmr2a_rgb_anchor_v43_test.py`。
+   - 论文写 validation 有 1,357 个 window（stride 8），而 V31 管线默认 stride 4（2,578 个）。需要确认 C10 实际用的是哪一种；test 必须用相同的 stride（preflight 会检查）。
+9. **新颖性风险（高）。** 关键点身份并不新：WHAM 用有序向量，ReFit 做逐关键点反馈，HybrIK 用 IK 从关键点解析旋转；树距离偏置是 Graphormer 的 spatial encoding；零初始化是 ReZero/ControlNet 的做法。均值池化对照本身是“稻草人”。✅ C11 把贡献定位为“在匹配对照下隔离接口因素”的分析加方法，并加入 WHAM 式有序向量对照（B7）；related work 已如实写出这些先例。
 
 **判断**：按现有结果投稿基本会被拒。拒稿理由会是：效应在噪声内、只有 val 没有 test、对照有混淆、“证据”不是证据、口径与文献不一致。要达到 CVPR 质量，至少需要四样东西：真实证据、严格对照、test 数字、多种子统计。
 
