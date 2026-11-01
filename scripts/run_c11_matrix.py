@@ -116,10 +116,11 @@ def train_config(matrix, variant, seed, resume, smoke=False):
 
 
 class GpuQueue:
-    """One job per GPU at a time; CUDA_VISIBLE_DEVICES pins the job, which then uses cuda:0."""
+    """`jobs_per_gpu` concurrent jobs per GPU; CUDA_VISIBLE_DEVICES pins a job, which then uses cuda:0."""
 
-    def __init__(self, gpus, log_dir, dry_run):
-        self.gpus, self.log_dir, self.dry_run = list(gpus), Path(log_dir), dry_run
+    def __init__(self, gpus, log_dir, dry_run, jobs_per_gpu=1):
+        self.gpus = [f'{gpu}#{slot}' for gpu in gpus for slot in range(max(1, int(jobs_per_gpu)))]
+        self.log_dir, self.dry_run = Path(log_dir), dry_run
         self.log_dir.mkdir(parents=True, exist_ok=True)
         self.failures = []
 
@@ -134,7 +135,8 @@ class GpuQueue:
                 name, command, before = pending.pop(0)
                 if before is not None:
                     before()
-                env = dict(os.environ, CUDA_VISIBLE_DEVICES=str(gpu), V28D_MEMORY_LIMIT_GIB=os.environ.get('V28D_MEMORY_LIMIT_GIB', '20'))
+                env = dict(os.environ, CUDA_VISIBLE_DEVICES=gpu.split('#')[0],
+                           V28D_MEMORY_LIMIT_GIB=os.environ.get('V28D_MEMORY_LIMIT_GIB', '20'))
                 log = self.log_dir / f'{name}.{datetime.now():%Y%m%d_%H%M%S}.log'
                 print(f'[gpu {gpu}] {name}\n  {shlex.join(command)}\n  log: {log}', flush=True)
                 if self.dry_run:
@@ -214,7 +216,7 @@ def cmd_train(matrix, args):
     if not jobs:
         print('nothing to train')
         return True
-    return GpuQueue(args.gpus, resolve(matrix['runs_dir']) / '_logs', args.dry_run).run(jobs)
+    return GpuQueue(args.gpus, resolve(matrix['runs_dir']) / '_logs', args.dry_run, args.jobs_per_gpu).run(jobs)
 
 
 def eval_targets(matrix, args):
@@ -276,7 +278,7 @@ def cmd_evaluate(matrix, args):
     if not jobs:
         print('nothing to evaluate')
         return True
-    return GpuQueue(args.gpus, resolve(matrix['runs_dir']) / '_logs', args.dry_run).run(jobs)
+    return GpuQueue(args.gpus, resolve(matrix['runs_dir']) / '_logs', args.dry_run, args.jobs_per_gpu).run(jobs)
 
 
 def cmd_lock(matrix, args):
@@ -338,8 +340,10 @@ def main():
     sp.add_argument('--splits', nargs='+', default=['train', 'validation', 'test'])
     sp.add_argument('--gpus', default='0')
     sp = sub.add_parser('train'); selection(sp); sp.add_argument('--gpus', default='0')
+    sp.add_argument('--jobs-per-gpu', type=int, default=1, help='Concurrent runs per GPU (each run caps itself at max-cuda-memory-gib)')
     sp.add_argument('--smoke', action='store_true', help='2-step development run per selected variant (runs_dir + _smoke)')
     sp = sub.add_parser('evaluate'); selection(sp); sp.add_argument('--gpus', default='0')
+    sp.add_argument('--jobs-per-gpu', type=int, default=1)
     sp.add_argument('--split', choices=('validation', 'test'), required=True)
     sp.add_argument('--no-references', dest='references', action='store_false')
     sp.add_argument('--references-only', action='store_true', help='Only the archived parent/C10/C00 checkpoints')

@@ -124,6 +124,22 @@ def main():
             check_split(split, *plan[split], sources[split], report, torch)
         except Exception as error:  # report and continue with other splits
             report.setdefault(split, {}).setdefault('errors', []).append(f'{type(error).__name__}: {error}')
+    # Encoder settings must match between validation and test VACE caches (warnings list every difference).
+    ignore = {'split', 'feature_only', 'contains_targets', 'development_only', 'dataset_root', 'dataset_preflight',
+              'window_plan', 'resumable_builder', 'created_utc', 'elapsed_seconds', 'windows', 'actual_windows',
+              'full_windows', 'shards', 'run_manifest', 'output', 'source_files', 'annotations', 'images'}
+    signatures = {}
+    for split in ('validation', 'test'):
+        vace_path = plan[split][0]
+        if split in args.splits and vace_path and resolve(vace_path).is_file():
+            signatures[split] = torch.load(resolve(vace_path), map_location='cpu', weights_only=False, mmap=True)['signature']
+    if len(signatures) == 2:
+        keys = (set(signatures['validation']) | set(signatures['test'])) - ignore
+        differing = sorted(k for k in keys if signatures['validation'].get(k) != signatures['test'].get(k))
+        report.setdefault('test', {})['vace_signature_differences_vs_validation'] = differing
+        if differing:
+            print(json.dumps(dict(warning='validation/test VACE signatures differ; check each key is split-specific',
+                                  keys=differing)), flush=True)
     strides = {split: report.get(split, {}).get('target_stride') for split in ('validation', 'test')}
     if None not in strides.values() and strides['validation'] != strides['test']:
         report['test'].setdefault('errors', []).append(

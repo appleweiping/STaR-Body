@@ -178,6 +178,7 @@ python scripts/run_c11_matrix.py --matrix configs/c11/matrix.local.json status -
 - 每个 run 每 100 步写一次可续跑的 `latest.pt`。中断后重跑同一命令即可：有 `latest.pt` 的 run 会自动 resume，最多损失 100 步；没有 `latest.pt` 的 run 会被移到 `*.incomplete_<时间>` 后从头重跑。
 - 正在运行的 run 会留下 `runs/c11/<变体>/s<seed>.running` 锁文件，`status` 显示为 `running`，再次执行 `train` 时会被跳过，不会被移走。如果确认进程已经不在（用 `nvidia-smi`/`ps` 检查），锁会被自动判定为失效。
 - 请记录第一个 run 的耗时，写进 `results/c11/notes.md`，用于预算。
+- 每个 run 的显存上限约为 3 GiB（`max-cuda-memory-gib`），batch 为 1。如果 `nvidia-smi` 显示单个 run 的 GPU 利用率偏低（例如 < 60%）且显存充足，可以加 `--jobs-per-gpu 2`，让每张卡同时跑两个 run。这不影响结果，只影响速度。
 - **A2-head-joint s2026 应复现 C10。** 它的配置与 C10 完全一致，第 1000 步 EMA 的 validation MPJPE 应约为 61.19，允许 GPU 非确定性带来的约 0.01–0.05 mm 差异。差异更大时先停下来排查。
 
 ## 8. 评测、锁定、test
