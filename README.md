@@ -13,6 +13,36 @@ files without rewriting those originals.
 [Recorded controls](evidence/c10_transcribed_controls.json) ·
 [Source manifest](C10_SOURCE_MANIFEST.json)
 
+## C11 work in progress (branch `claude/c11-cvpr2027`)
+
+C11 tests identity-preserving evidence routing with real image evidence, in preparation for
+CVPR 2027. A code audit found that the landmark tokens C10 routes come from an observation
+head that never received a gradient. They therefore encode drift from the frozen reference
+model rather than image evidence; this still has to be confirmed on the real checkpoint with
+`scripts/inspect_checkpoint_v43.py`. The audit also found that the C10 mean-feedback control
+was neither capacity- nor input-matched.
+
+C11 adds versioned `*_v43.py` files. The original files are unchanged.
+
+- **Evidence router.** The default configuration is numerically identical to C10.
+- **ViTPose / 3DPW-OpenPose keypoint evidence**, computed on the exact HMR2 crops.
+- **Matched controls:** no feedback, mean, capacity-matched pooling, ordered-vector
+  (WHAM-style), no identity, no anatomical bias, and shuffled anatomy.
+- **Protocol:** three seeds at a pre-registered fixed step, with test evaluation only through
+  validation locks.
+- **Metrics:** reported under every literature convention (H36M-pelvis and hip-midpoint
+  roots; unaligned and aligned PVE; acceleration in mm/frame² and m/s²).
+- **Statistics:** hierarchical cluster-bootstrap.
+
+Related documents:
+
+- Plan (Chinese): `docs/C11_CVPR_PLAN_ZH.md`
+- Server runbook (Chinese): `docs/C11_RUNBOOK_ZH.md`
+- LaTeX manuscript: `paper/latex/`
+
+No C11 result exists until the runbook has been executed. Every C11 number in the manuscript is
+generated from evaluation files by `scripts/analyze_results_c11.py`.
+
 ## Manuscript
 
 [Revised paper and editable Word](paper/) · [Supplementary material](paper/STaR-Body_Supplement.pdf)
