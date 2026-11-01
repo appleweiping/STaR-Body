@@ -1,8 +1,9 @@
 """C11 (v43) copy of evaluate_target60_v36.py (unchanged original kept).
 
 Additions: --model-version v43 (also evaluates native C10/C00 v37 checkpoints through the
-v43 code path), --external-keypoints for evidence-router models, the literature-convention
-pelvis-aligned PVE (pve_pelvis_aligned_mm) next to the original unaligned pve_mm, and
+v43 code path), --external-keypoints for evidence-router models, literature-convention metric
+variants next to the unchanged originals (mpjpe_hip_mm, pve_pelvis_mm, pve_hip_mm,
+acceleration_error_m_per_s2; see divibody_training/body_sequence_evaluation_v43.py), and
 --per-frame-output (.npz of per-frame errors for paired sequence-clustered statistics).
 Test evaluation of v36/v43 requires an immutable validation selection lock
 (scripts/make_selection_lock_v43.py).
@@ -92,7 +93,7 @@ def parse_args():
     p.add_argument('--hash-large-caches', action='store_true', help='Hash every byte of VACE/HMR/GT caches.')
     p.add_argument('--selection-lock',type=Path,help='Required immutable validation selection lock before test')
     p.add_argument('--external-keypoints',type=Path,help='v43 router models reading external evidence: keypoint cache for this split')
-    p.add_argument('--per-frame-output',type=Path,help='Optional new .npz with per-frame uid/mpjpe/pa_mpjpe/pve/pve_pelvis_aligned (mm)')
+    p.add_argument('--per-frame-output',type=Path,help='Optional new .npz with per-frame uid and every per-frame metric (mm)')
     args = p.parse_args()
     if args.output.exists():
         p.error('--output already exists; choose a new result path')
@@ -490,7 +491,9 @@ def main():
         source_sha256=source_hashes,
         protocol=dict(name='matched_project_3dpw_owned_sequence_v1',joint_regressor='H36M17 to SPIN/LSP J14',
             mpjpe='H36M pelvis aligned',pa_mpjpe='per-frame Procrustes similarity aligned J14',
-            pve='unaligned SMPL vertex Euclidean error (pve_mm); pve_pelvis_aligned_mm subtracts each H36M pelvis (literature convention)',predicted_body='neutral SMPL',target_body='gendered SMPL',
+            pve='unaligned SMPL vertex Euclidean error (pve_mm); pve_pelvis_mm subtracts each H36M joint 0 (CameraHMR/ReFit); pve_hip_mm subtracts each J14 hip midpoint (WHAM/GVHMR)',
+            mpjpe_hip='mpjpe_hip_mm: J14 hip-midpoint root (VIBE evaluator, WHAM, GVHMR)',
+            acceleration_m_per_s2='acceleration_error_m_per_s2 = mm/frame^2 x 0.9 (30 fps)',predicted_body='neutral SMPL',target_body='gendered SMPL',
             rotation='camera root and local body',distance_unit='mm',acceleration_unit='mm/frame^2',
             acceleration='hip-centered J14 prediction-minus-target second difference; adjacent annotation UIDs across windows',
             bbox='annotation-derived crop protocol inherited from caches; compare external methods only after matching',
@@ -508,11 +511,10 @@ def main():
     with args.output.open('x', encoding='utf-8') as stream:
         stream.write(serialized)
     if per_frame is not None:
-        rows = sorted(per_frame)
+        rows = sorted(per_frame, key=lambda row: row[0])
         args.per_frame_output.parent.mkdir(parents=True, exist_ok=True)
         np.savez_compressed(args.per_frame_output, uid=np.asarray([r[0] for r in rows]),
-            mpjpe_mm=np.asarray([r[1] for r in rows]), pa_mpjpe_mm=np.asarray([r[2] for r in rows]),
-            pve_mm=np.asarray([r[3] for r in rows]), pve_pelvis_aligned_mm=np.asarray([r[4] for r in rows]))
+            **{key: np.asarray([r[1][key] for r in rows]) for key in rows[0][1]})
     print(serialized, flush=True)
 if __name__ == '__main__':
     main()

@@ -1,9 +1,16 @@
-"""C11 (v43) copy of body_sequence_evaluation_v31 with two additions:
-  * pve_pelvis_aligned_mm: vertex error after subtracting each body's H36M pelvis (the
-    convention of VIBE/TCMR/WHAM/GVHMR 3DPW evaluation code); the original unaligned
-    pve_mm is unchanged and still reported;
-  * optional per-frame records (UID, MPJPE, PA-MPJPE, PVE, aligned PVE) for paired,
-    sequence-clustered statistics (scripts/analyze_results_c11.py).
+"""C11 (v43) copy of body_sequence_evaluation_v31. Original metrics are unchanged; added
+literature-convention variants so each published row can be compared under its own protocol:
+  mpjpe_mm                 H36M joint-0 root (SPIN / CameraHMR / ReFit)        [original]
+  mpjpe_hip_mm             J14 hip-midpoint root (VIBE evaluator, WHAM, GVHMR)
+  pa_mpjpe_mm              per-frame similarity Procrustes on J14               [original]
+  pve_mm                   unaligned vertices, gendered GT                      [original]
+  pve_pelvis_mm            vertices minus each body's H36M joint 0 (CameraHMR / ReFit / PromptHMR)
+  pve_hip_mm               vertices minus each body's J14 hip midpoint (WHAM / GVHMR)
+  acceleration_error_mm_per_frame2   hip-centred J14 second difference          [original]
+  acceleration_error_m_per_s2        the same x 30^2 / 1000 (= x 0.9; WHAM/GVHMR unit at 30 fps)
+VIBE/TCMR/GLoT report PVE against *neutral* GT bodies, which is not reproduced here.
+Optional per-frame records (UID + per-frame metrics) feed paired, sequence-clustered
+statistics (scripts/analyze_results_c11.py).
 
 Copied project metrics with injected forward, coverage checks, and resource timing.
 
@@ -50,7 +57,7 @@ def validate(loader,model,models,regressor,args,device,*,forward_batch,expected_
     if device.type == 'cuda':
         torch.cuda.reset_peak_memory_stats(device)
     started=time.perf_counter();forward_seconds=0.;forward_frames=0
-    sums=dict(mpjpe_mm=0.,pa_mpjpe_mm=0.,pve_mm=0.,pve_pelvis_aligned_mm=0.)
+    sums=dict(mpjpe_mm=0.,pa_mpjpe_mm=0.,pve_mm=0.,mpjpe_hip_mm=0.,pve_pelvis_mm=0.,pve_hip_mm=0.)
     errors={}
     sequences={}
     for batch_index,batch in enumerate(loader):
@@ -75,7 +82,11 @@ def validate(loader,model,models,regressor,args,device,*,forward_batch,expected_
         values=dict(mpjpe_mm=mean_euclidean_error(pj,gj)*1000,
                     pa_mpjpe_mm=pa_mpjpe_per_sample(pj,gj)*1000,
                     pve_mm=mean_euclidean_error(pv,gv)*1000,
-                    pve_pelvis_aligned_mm=mean_euclidean_error(pv-pp,gv-gp)*1000)
+                    mpjpe_hip_mm=mean_euclidean_error(hip_centered_j14(pj),hip_centered_j14(gj))*1000,
+                    pve_pelvis_mm=mean_euclidean_error(pv-pp,gv-gp)*1000,
+                    # absolute J14 hip midpoint = (pelvis-relative J14 hip midpoint) + pelvis
+                    pve_hip_mm=mean_euclidean_error(pv-pp-pj[:,[2,3]].mean(1,keepdim=True),
+                                                    gv-gp-gj[:,[2,3]].mean(1,keepdim=True))*1000)
         if any(not torch.isfinite(value).all() for value in values.values()):
             raise FloatingPointError('Nonfinite evaluation metric')
         for k,v in values.items():sums[k]+=float(v.masked_select(owner.reshape(-1)).double().sum())
@@ -87,11 +98,11 @@ def validate(loader,model,models,regressor,args,device,*,forward_batch,expected_
                     if uid in errors:raise ValueError('Duplicate owned frame: '+uid)
                     errors[uid]=motion[row,col]
                     sequence=uid.split('/person_',1)[0]
-                    summary=sequences.setdefault(sequence,dict(frames=0,mpjpe_mm_sum=0.,pa_mpjpe_mm_sum=0.,pve_mm_sum=0.,pve_pelvis_aligned_mm_sum=0.))
+                    summary=sequences.setdefault(sequence,dict(frames=0,**{key+'_sum':0. for key in values}))
                     summary['frames']+=1
                     for key,value in values.items():summary[key+'_sum']+=float(value.reshape(b,t)[row,col])
                     if per_frame is not None:
-                        per_frame.append((uid,*(float(value.reshape(b,t)[row,col]) for value in values.values())))
+                        per_frame.append((uid,{key:float(value.reshape(b,t)[row,col]) for key,value in values.items()}))
         cursor+=b;count+=int(owner.sum())
         if batch_index%25==0:print(json.dumps(dict(event='geometry_validation_progress',windows=cursor,frames=count)),flush=True)
     if not count or cursor!=len(indices):raise ValueError('Incomplete or empty evaluation')
@@ -101,9 +112,9 @@ def validate(loader,model,models,regressor,args,device,*,forward_batch,expected_
     for sequence,summary in sequences.items():
         subset={uid:value for uid,value in errors.items() if uid.split('/person_',1)[0] == sequence}
         seq_accel,seq_triplets=sequence_acceleration(subset)
-        for key in ('mpjpe_mm','pa_mpjpe_mm','pve_mm','pve_pelvis_aligned_mm'):
+        for key in ('mpjpe_mm','pa_mpjpe_mm','pve_mm','mpjpe_hip_mm','pve_pelvis_mm','pve_hip_mm'):
             summary[key]=summary.pop(key+'_sum')/summary['frames']
-        summary.update(acceleration_error_mm_per_frame2=seq_accel,acceleration_triplets=seq_triplets,
+        summary.update(acceleration_error_mm_per_frame2=seq_accel,acceleration_error_m_per_s2=seq_accel*.9,acceleration_triplets=seq_triplets,
                        tracks=len({uid.rsplit('/frame_',1)[0] for uid in subset}))
     synchronize();elapsed=time.perf_counter()-started
     resources=dict(evaluation_seconds=elapsed,model_forward_seconds=forward_seconds,
@@ -116,5 +127,6 @@ def validate(loader,model,models,regressor,args,device,*,forward_batch,expected_
                    peak_cuda_allocated_bytes=int(torch.cuda.max_memory_allocated(device)) if device.type=='cuda' else None,
                    peak_cuda_reserved_bytes=int(torch.cuda.max_memory_reserved(device)) if device.type=='cuda' else None)
     return {k:v/count for k,v in sums.items()}|dict(acceleration_error_mm_per_frame2=acceleration,
+                                                  acceleration_error_m_per_s2=acceleration*.9,
                                                   frames=count,acceleration_triplets=triplets,per_sequence=sequences,
                                                   resources=resources)

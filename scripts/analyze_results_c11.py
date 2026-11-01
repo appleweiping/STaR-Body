@@ -24,7 +24,10 @@ LaTeX macros (paper/latex/generated/results.tex):
   \\res{<variant>@<split>@<metric>@pm}         mean with +- std (when >1 seed)
   \\res{<variant>@<split>@nseeds}
   \\res{cmp@<variant>@<control>@<split>@<metric>@diff|ci|wins|p}
-metric in {mpjpe, pampjpe, pve, pvealigned, accel}.
+metric in {mpjpe (H36M-pelvis root), mpjpehip (hip-midpoint root, WHAM/GVHMR), pampjpe,
+pve (unaligned), pvepelvis (H36M-pelvis aligned, CameraHMR/ReFit), pvehip (hip-midpoint
+aligned, WHAM/GVHMR), accel (mm/frame^2), accelms (m/s^2 at 30 fps)}. The optional
+variants exist only for evaluations produced by scripts/evaluate_target60_v43.py.
 """
 from __future__ import annotations
 
@@ -38,9 +41,10 @@ from pathlib import Path
 import numpy as np
 
 CORE = ('mpjpe_mm', 'pa_mpjpe_mm', 'pve_mm', 'acceleration_error_mm_per_frame2')
-OPTIONAL = ('pve_pelvis_aligned_mm',)
-SHORT = {'mpjpe_mm': 'mpjpe', 'pa_mpjpe_mm': 'pampjpe', 'pve_mm': 'pve', 'pve_pelvis_aligned_mm': 'pvealigned',
-         'acceleration_error_mm_per_frame2': 'accel'}
+OPTIONAL = ('mpjpe_hip_mm', 'pve_pelvis_mm', 'pve_hip_mm', 'acceleration_error_m_per_s2')
+SHORT = {'mpjpe_mm': 'mpjpe', 'pa_mpjpe_mm': 'pampjpe', 'pve_mm': 'pve', 'mpjpe_hip_mm': 'mpjpehip',
+         'pve_pelvis_mm': 'pvepelvis', 'pve_hip_mm': 'pvehip', 'acceleration_error_mm_per_frame2': 'accel',
+         'acceleration_error_m_per_s2': 'accelms'}
 NAME_RE = re.compile(r'^[A-Za-z0-9-]+$')
 T975 = {1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447, 7: 2.365, 8: 2.306,
         9: 2.262, 10: 2.228, 12: 2.179, 15: 2.131, 20: 2.086, 30: 2.042}

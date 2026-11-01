@@ -52,8 +52,8 @@ def selected_runs(matrix, args):
     return [(n, s) for n in names for s in seeds]
 
 
-def run_dir(matrix, variant, seed):
-    return resolve(matrix['runs_dir']) / variant / f's{seed}'
+def run_dir(matrix, variant, seed, smoke=False):
+    return resolve(matrix['runs_dir'] + ('_smoke' if smoke else '')) / variant / f's{seed}'
 
 
 def fixed_checkpoint(matrix, variant, seed):
@@ -71,7 +71,10 @@ def run_status(matrix, variant, seed):
     return 'pending'
 
 
-def train_config(matrix, variant, seed, resume):
+SMOKE = {'stop-after': 2, 'eval-every': 1, 'max-val-windows': 16, 'allow-partial-validation': True}
+
+
+def train_config(matrix, variant, seed, resume, smoke=False):
     spec = matrix['variants'][variant]
     config = json.loads(resolve(matrix['base_config']).read_text(encoding='utf-8'))
     config.pop('v37-joint-feedback', None)
@@ -79,7 +82,9 @@ def train_config(matrix, variant, seed, resume):
         config.pop(key)
     config.update(spec['cli'])
     config.update({'seed': seed, 'v43-variant': variant, 'stop-after': matrix['fixed_step'], 'device': 'cuda:0',
-                   'output-dir': str(run_dir(matrix, variant, seed))})
+                   'output-dir': str(run_dir(matrix, variant, seed, smoke))})
+    if smoke:  # development-only pipeline check: 2 optimizer steps, 16 validation windows
+        config.update(SMOKE)
     if spec['cli'].get('v43-feedback') == 'router':
         config['v43-router-init-seed'] = matrix['router_init_seed_base'] + (seed - matrix['seeds'][0])
     if spec.get('evidence'):
@@ -166,22 +171,25 @@ def cmd_train(matrix, args):
     config_dir.mkdir(parents=True, exist_ok=True)
     jobs = []
     for variant, seed in selected_runs(matrix, args):
-        state = run_status(matrix, variant, seed)
+        state = 'pending' if args.smoke else run_status(matrix, variant, seed)
         if state == 'done':
             continue
-        out = run_dir(matrix, variant, seed)
+        out = run_dir(matrix, variant, seed, args.smoke)
+        if args.smoke and out.exists():
+            print(f'smoke output exists, skipped: {out}')
+            continue
         before = None
         if state == 'incomplete':
             target = out.with_name(out.name + f'.incomplete_{datetime.now():%Y%m%d_%H%M%S}')
             print(f'moving incomplete run without latest.pt aside: {out} -> {target}')
             if not args.dry_run:
                 out.rename(target)
-        config = train_config(matrix, variant, seed, resume=state == 'resumable')
-        path = config_dir / f'{variant}_s{seed}.{"resume." if state == "resumable" else ""}json'
+        config = train_config(matrix, variant, seed, resume=state == 'resumable', smoke=args.smoke)
+        path = config_dir / f'{variant}_s{seed}.{"smoke." if args.smoke else ""}{"resume." if state == "resumable" else ""}json'
         if not args.dry_run:
             path.write_text(json.dumps(config, indent=2), encoding='utf-8')
         command = ['bash', 'scripts/run_star_body.sh', 'scripts/train_from_config_v43.py', '--config', str(path)]
-        jobs.append((f'train_{variant}_s{seed}', command, before))
+        jobs.append((f'{"smoke" if args.smoke else "train"}_{variant}_s{seed}', command, before))
     if not jobs:
         print('nothing to train')
         return True
@@ -191,7 +199,7 @@ def cmd_train(matrix, args):
 def eval_targets(matrix, args):
     """(name, seed, checkpoint, model_version, weights, evidence) for runs and references."""
     targets = []
-    for variant, seed in selected_runs(matrix, args):
+    for variant, seed in ([] if getattr(args, 'references_only', False) else selected_runs(matrix, args)):
         if run_status(matrix, variant, seed) == 'done' or args.dry_run:
             targets.append((variant, seed, fixed_checkpoint(matrix, variant, seed), 'v43',
                             matrix['checkpoint_weights'], matrix['variants'][variant].get('evidence')))
@@ -303,10 +311,13 @@ def main():
     sp.add_argument('--splits', nargs='+', default=['train', 'validation', 'test'])
     sp.add_argument('--gpus', default='0')
     sp = sub.add_parser('train'); selection(sp); sp.add_argument('--gpus', default='0')
+    sp.add_argument('--smoke', action='store_true', help='2-step development run per selected variant (runs_dir + _smoke)')
     sp = sub.add_parser('evaluate'); selection(sp); sp.add_argument('--gpus', default='0')
     sp.add_argument('--split', choices=('validation', 'test'), required=True)
     sp.add_argument('--no-references', dest='references', action='store_false')
+    sp.add_argument('--references-only', action='store_true', help='Only the archived parent/C10/C00 checkpoints')
     sp = sub.add_parser('lock'); selection(sp); sp.add_argument('--no-references', dest='references', action='store_false')
+    sp.add_argument('--references-only', action='store_true')
     sp = sub.add_parser('analyze'); sp.add_argument('--control', default='A1-mean'); sp.add_argument('--bootstrap', type=int, default=20000)
     args = p.parse_args()
     if hasattr(args, 'gpus'):
