@@ -243,5 +243,5 @@ Sequence-level changes (\cref{fig:data:sequences}) show whether an aggregate dif
 \paragraph{Limitations.}
 Our evaluation uses annotation-derived crops and ground-truth track identity for the shape prototype and the validity masks, so the absolute numbers are likely optimistic relative to a detector-and-tracker pipeline; the paired comparisons share this protocol, but their size may change with detected crops.
 All conclusions rest on one dataset, three seeds and one continuation budget; the router may matter more or less with longer training or other data, and a world-grounded benchmark such as EMDB~\cite{kaufmann2023emdb} remains to be evaluated.
-The temporal error of our refiner is far above that of motion-prior methods (\cref{sec:sota}).
+The temporal error of our refiner is far above that of motion-prior methods (\cref{sec:sota}), and the frozen Wan/VACE video features are part of the shared parent, so their contribution is not ablated here.
 Finally, ViTPose runs on these annotation-derived crops, so its keypoints may be more accurate than in a full detection pipeline.
