@@ -37,14 +37,16 @@ export HMR2_SOURCE_ROOT=/path/to/4D-Humans WAN_SOURCE_ROOT=/path/to/Wan2.1
 export HF_ENDPOINT=https://hf-mirror.com
 ```
 
+**启动器**：C11 的命令都用 `scripts/run_star_body_v43.sh`。旧的 `scripts/run_star_body.sh` 会把 `video_VACE/vace/models` 加进 PYTHONPATH，遮蔽外部 Wan2.1 的 `wan` 包，从而导致循环导入。新的启动器与 C10 当时使用的 `run_target60_v34.sh` 相同。
+
 ## 1. CPU 自检（2 分钟，不需要数据）
 
 ```bash
-bash scripts/run_star_body.sh scripts/test_evidence_router_v43.py
+bash scripts/run_star_body_v43.sh scripts/test_evidence_router_v43.py
 ```
 
 ```bash
-bash scripts/run_star_body.sh scripts/test_c11_model_v43.py
+bash scripts/run_star_body_v43.sh scripts/test_c11_model_v43.py
 ```
 
 两者都应显示 `OK`。测试内容：默认 router 与 C10 的 `joint_feedback_v37` 逐位一致；所有变体在初始化时精确复现父模型；C10 checkpoint 能无损转为 v43；外部证据路径有梯度。
@@ -72,7 +74,7 @@ cp configs/c11/matrix.example.json configs/c11/matrix.local.json
 **3a. 观测头是否从未训练。** 这决定论文叙述（计划 §1 第 1 条）：
 
 ```bash
-bash scripts/run_star_body.sh scripts/inspect_checkpoint_v43.py --checkpoint <A5父模型.pt> <C10 best.pt> <C00 best.pt> --output results/c11/checkpoint_audit.json
+bash scripts/run_star_body_v43.sh scripts/inspect_checkpoint_v43.py --checkpoint <A5父模型.pt> <C10 best.pt> <C00 best.pt> --output results/c11/checkpoint_audit.json
 ```
 
 如果 verdict 是 `UNTRAINED`，说明 C10 的“landmark 证据”是参考漂移，论文按此叙述。同时请把 C00 实际使用的 seed 和 A5 的 adaptation_config 发给论文作者。
@@ -80,7 +82,7 @@ bash scripts/run_star_body.sh scripts/inspect_checkpoint_v43.py --checkpoint <A5
 **3b. 资产一致性：**
 
 ```bash
-bash scripts/run_star_body.sh scripts/preflight_c11.py --matrix configs/c11/matrix.local.json --output results/c11/preflight.json --splits train validation
+bash scripts/run_star_body_v43.sh scripts/preflight_c11.py --matrix configs/c11/matrix.local.json --output results/c11/preflight.json --splits train validation
 ```
 
 必须通过的检查：
@@ -132,16 +134,18 @@ test 需要以下文件，与 validation 同一格式、同一协议：
 
 | 文件 | 命令（参数用 `--help` 查看） |
 |---|---|
-| test 覆盖清单（35515/34752） | `bash scripts/run_star_body.sh scripts/prepare_target60_reference_v34.py --archive <3DPW.zip> --split test --output assets/test_manifest.json` |
-| feature-only VACE 缓存 | 先运行 `python -c "import torch;print(torch.load('<validation_vace.pt>',map_location='cpu',weights_only=False,mmap=True)['signature'])"`，确认 validation 缓存用的是哪个 builder（format/参数），再用**同一个脚本、同一组参数**加上 `--split test --feature-only` 生成，例如 `bash scripts/run_star_body.sh video_VACE/divibody_training/cache_vace_phase_v14.py --data-root ... --split test --vace-checkpoint-dir ... --output assets/cache/test_vace.pt --feature-only`。评测器只接受 `divibody-contiguous-vace-video-features-v5`/`-v6-stride4` 格式 |
-| HMR2a sidecar | `bash scripts/run_star_body.sh video_VACE/divibody_training/cache_hmr2a_rgb_anchor_v32_scratch.py --vace-cache assets/cache/test_vace.pt --data-root ... --hmr-source-root ... --hmr2a-checkpoint ... ...`（与 validation sidecar 同参数） |
-| GT 缓存（新脚本，只读 3DPW pickle） | `bash scripts/run_star_body.sh scripts/make_gt_cache_v43.py --data-root /path/to/3DPW --split test --output assets/cache/test_gt.pt --hmr-sidecar assets/cache/test_hmr.pt` |
-| test track prototypes | `bash scripts/run_star_body.sh scripts/cache_target60_predictions_v34.py --checkpoint <V30 祖父 checkpoint，其 sha 必须等于 C10 的 prototype_source_v30_sha256> --vace-cache ... --hmr-sidecar ... --smpl-model-root ... --split test --coverage-manifest assets/test_manifest.json --output assets/test_track_prototypes.pt` |
+| test 覆盖清单（35515/34752） | `bash scripts/run_star_body_v43.sh scripts/prepare_target60_reference_v34.py --archive <3DPW.zip> --split test --output assets/test_manifest.json` |
+| feature-only VACE 缓存 | 先查 validation 缓存的 stride 和编码参数：`python -c "import torch;s=torch.load('<validation_vace.pt>',map_location='cpu',weights_only=False,mmap=True)['signature'];print(s.get('format'),s.get('target_stride'),{k:v for k,v in s.items() if k!='dataset_preflight'})"`。然后用 v31 可续跑的构建脚本，参数**与 validation 完全相同**（尤其是 `--target-stride`），加上 `--split test --feature-only`：`bash scripts/run_star_body_v43.sh video_VACE/divibody_training/cache_continuous_3dpw_vace_features_v31_resume.py --data-root /path/to/3DPW --split test --feature-only --target-stride <同 validation> --vace-checkpoint-dir <Wan2.1-VACE-1.3B> --output assets/cache/test_vace.pt`。中断后加 `--resume` 继续；`--plan-only` 可以只打印 window 数。评测器只接受 `...-v5`（stride 8）或 `...-v6-stride4` 格式。注意：论文写的是 validation 1,357 个 window（对应 stride 8），而 V31 管线默认 stride 4（2,578 个 window）。请以 C10 实际使用的缓存为准，并把结果回报给论文作者 |
+| HMR2a sidecar | v31/v32 构建脚本拒绝 test，请使用新增的 test 版本（v32 的版本化拷贝，可续跑，含 chumpy 兼容补丁），参数与 v32 一致：`bash scripts/run_star_body_v43.sh video_VACE/divibody_training/cache_hmr2a_rgb_anchor_v43_test.py --vace-cache assets/cache/test_vace.pt --data-root /path/to/3DPW --hmr-source-root $HMR2_SOURCE_ROOT --hmr2a-checkpoint <HMR2.0a ckpt，sha 2dcf7963…> --hmr-model-config ... --hmr-data-root ... --output assets/cache/test_hmr.pt`（其余必填参数用 `--help` 查看）。约 16 GiB；可用 `--max-new-frames N` 分段，再用 `--resume` 继续 |
+| GT 缓存（新脚本，只读 3DPW pickle） | `bash scripts/run_star_body_v43.sh scripts/make_gt_cache_v43.py --data-root /path/to/3DPW --split test --output assets/cache/test_gt.pt --hmr-sidecar assets/cache/test_hmr.pt` |
+| test track prototypes | `bash scripts/run_star_body_v43.sh scripts/cache_target60_predictions_v34.py --checkpoint <V30 祖父 checkpoint，其 sha 必须等于 C10 的 prototype_source_v30_sha256> --vace-cache ... --hmr-sidecar ... --smpl-model-root ... --split test --coverage-manifest assets/test_manifest.json --output assets/test_track_prototypes.pt` |
 
-如果服务器上已有 V28/V29 时代的 test 缓存，先用 preflight 检查格式：
+上表中的脚本都会导入 3DPW 数据集类，而这些类会连带导入 Wan/VACE 代码，所以即使是纯 CPU 的 GT 和关键点脚本，也需要先设置 `WAN_SOURCE_ROOT`。
+
+如果服务器上已有 V28/V29 时代的 test 缓存，先用 preflight 检查格式（它会比对 validation 与 test 的 stride）：
 
 ```bash
-bash scripts/run_star_body.sh scripts/preflight_c11.py --matrix configs/c11/matrix.local.json --output results/c11/preflight_test.json --splits test
+bash scripts/run_star_body_v43.sh scripts/preflight_c11.py --matrix configs/c11/matrix.local.json --output results/c11/preflight_test.json --splits validation test
 ```
 
 格式不符就按上表重建，不要混用不同协议。

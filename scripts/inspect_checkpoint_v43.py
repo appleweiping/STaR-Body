@@ -11,7 +11,7 @@ Answers the questions that decide the C11 paper narrative:
   3. Seeds / steps / configs recorded in each checkpoint (e.g. was C00 run with seed 2026?).
 
 Usage:
-  bash scripts/run_star_body.sh scripts/inspect_checkpoint_v43.py \
+  bash scripts/run_star_body_v43.sh scripts/inspect_checkpoint_v43.py \
       --checkpoint assets/checkpoints/refinement_parent.pt runs/c10/best.pt runs/c00/best.pt \
       --output results/c11/checkpoint_audit.json
 """

@@ -40,6 +40,10 @@ Related documents:
 - Server runbook (Chinese): `docs/C11_RUNBOOK_ZH.md`
 - LaTeX manuscript: `paper/latex/`
 
+Launch every C11 command with `scripts/run_star_body_v43.sh`. The older `run_star_body.sh` puts
+`video_VACE/vace/models` on `PYTHONPATH`, which shadows the external Wan2.1 `wan` package. The
+newer launchers already exclude that path.
+
 No C11 result exists until the runbook has been executed. Every C11 number in the manuscript is
 generated from evaluation files by `scripts/analyze_results_c11.py`.
 

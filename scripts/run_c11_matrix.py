@@ -157,7 +157,7 @@ def cmd_keypoints(matrix, args):
         if output.exists():
             print(f'exists, skipped: {output}')
             continue
-        command = ['bash', 'scripts/run_star_body.sh', 'scripts/cache_external_keypoints_v43.py',
+        command = ['bash', 'scripts/run_star_body_v43.sh', 'scripts/cache_external_keypoints_v43.py',
                    '--data-root', str(resolve(args.data_root)), '--split', split, '--hmr-sidecar', str(resolve(sidecars[split])),
                    '--source', args.source, '--output', str(output), '--device', 'cuda:0']
         if args.source == 'vitpose':
@@ -188,7 +188,7 @@ def cmd_train(matrix, args):
         path = config_dir / f'{variant}_s{seed}.{"smoke." if args.smoke else ""}{"resume." if state == "resumable" else ""}json'
         if not args.dry_run:
             path.write_text(json.dumps(config, indent=2), encoding='utf-8')
-        command = ['bash', 'scripts/run_star_body.sh', 'scripts/train_from_config_v43.py', '--config', str(path)]
+        command = ['bash', 'scripts/run_star_body_v43.sh', 'scripts/train_from_config_v43.py', '--config', str(path)]
         jobs.append((f'{"smoke" if args.smoke else "train"}_{variant}_s{seed}', command, before))
     if not jobs:
         print('nothing to train')
@@ -226,7 +226,7 @@ def cmd_evaluate(matrix, args):
         output = out_dir / f'{name}_s{seed}.json'
         if output.exists():
             continue
-        command = ['bash', 'scripts/run_star_body.sh', 'scripts/evaluate_target60_v43.py',
+        command = ['bash', 'scripts/run_star_body_v43.sh', 'scripts/evaluate_target60_v43.py',
                    '--model-version', version, '--checkpoint', str(checkpoint), '--checkpoint-weights', weights,
                    '--split', split, '--vace-cache', str(resolve(spec['vace-cache'])),
                    '--hmr-sidecar', str(resolve(spec['hmr-sidecar'])), '--coverage-manifest', str(resolve(spec['coverage-manifest'])),

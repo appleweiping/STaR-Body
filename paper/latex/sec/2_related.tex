@@ -5,7 +5,8 @@
 HMR~\cite{kanazawa2018hmr}, SPIN~\cite{kolotouros2019spin} and HMR\,2.0~\cite{goel2023hmr2} established direct SMPL regression; CLIFF~\cite{li2022cliff} and CameraHMR~\cite{patel2025camerahmr} add full-frame and perspective cues, while BEDLAM~\cite{black2023bedlam} shows the value of synthetic training data.
 PARE~\cite{kocabas2021pare} attends to body parts, and PyMAF~\cite{zhang2021pymaf}, PyMAF-X~\cite{zhang2023pymafx} and ReFit~\cite{wang2023refit} iteratively resample image features at the current mesh or markers.
 TokenHMR~\cite{dwivedi2024tokenhmr}, MEGA~\cite{fiche2025mega} and ScoreHMR~\cite{stathopoulos2024scorehmr} change the pose representation or the inference procedure, PromptHMR~\cite{wang2025prompthmr} conditions on spatial and semantic prompts, and HSMR~\cite{xia2025hsmr}, NLF~\cite{sarandi2024nlf} and Multi-HMR~\cite{baradel2024multihmr} broaden the body model, the output space or the number of people.
-These works decide \emph{where} image evidence is sampled; we study the interface through which already-localised 2D evidence is assigned to joints.
+ReFit already feeds per-keypoint reprojection signals into recurrent updates, and HybrIK~\cite{li2021hybrik} maps keypoints to joint rotations analytically; landmark identity is thus not new in itself.
+These works decide \emph{where} evidence is sampled or how it is solved for; we isolate, under matched controls, the interface through which already-localised 2D evidence is assigned to joints inside a learned refiner.
 
 \paragraph{Video and keypoint-conditioned reconstruction.}
 VIBE~\cite{kocabas2020vibe}, TCMR~\cite{choi2021tcmr} and GLoT~\cite{shen2023glot} aggregate per-frame image features over time.
@@ -17,3 +18,4 @@ We do not model world-grounded trajectories and evaluate camera-space bodies onl
 Deep Sets~\cite{zaheer2017deepsets} characterise permutation-invariant functions as pooled per-element embeddings, and the Set Transformer~\cite{lee2019settransformer} pools sets with learned queries in attention~\cite{vaswani2017attention}, the token mechanism that also underlies vision transformers~\cite{dosovitskiy2021vit}.
 A set of keypoint residuals with no identity is permutation invariant, whereas anatomy is not.
 Our pooled and identity-free set controls instantiate these two families, and the router adds learned landmark identities and a kinematic prior to the Set Transformer's query-based pooling.
+The shortest-path attention bias follows the spatial encoding of Graphormer~\cite{ying2021graphormer}, and the zero-initialised output follows ReZero~\cite{bachlechner2021rezero} and ControlNet~\cite{zhang2023controlnet}; we claim neither as a contribution.

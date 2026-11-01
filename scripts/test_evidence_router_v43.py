@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """CPU unit checks for the C11 evidence router (no datasets, SMPL files or GPU needed).
 
-Run:  bash scripts/run_star_body.sh scripts/test_evidence_router_v43.py
+Run:  bash scripts/run_star_body_v43.sh scripts/test_evidence_router_v43.py
 These are implementation checks, not performance experiments.
 """
 import sys

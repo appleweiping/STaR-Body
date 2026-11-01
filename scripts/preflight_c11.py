@@ -11,7 +11,7 @@ Checks, per split (train / validation / test):
   * track prototypes and external keypoint caches exist and cover the sidecar frame UIDs.
 Writes a JSON report; exit code 1 if any hard check fails.
 
-  bash scripts/run_star_body.sh scripts/preflight_c11.py --matrix configs/c11/matrix.local.json \
+  bash scripts/run_star_body_v43.sh scripts/preflight_c11.py --matrix configs/c11/matrix.local.json \
       --output results/c11/preflight.json
 """
 import argparse
@@ -55,7 +55,8 @@ def check_split(split, vace_path, hmr_path, prototypes, keypoints, report, torch
         return
     vace = torch.load(resolve(vace_path), map_location='cpu', weights_only=False, mmap=True)
     hmr = torch.load(resolve(hmr_path), map_location='cpu', weights_only=False, mmap=True)
-    out['vace_signature'] = {k: vace['signature'].get(k) for k in ('format', 'split', 'feature_only')}
+    out['vace_signature'] = {k: vace['signature'].get(k) for k in ('format', 'split', 'feature_only', 'target_stride')}
+    out['target_stride'] = int(vace['signature'].get('target_stride', 4 if 'stride4' in str(vace['signature'].get('format')) else 8))
     out['hmr_signature'] = {k: hmr['signature'].get(k) for k in ('format', 'split')} if 'signature' in hmr else None
     if vace['signature'].get('split') != split:
         errors.append(f'VACE cache declares split {vace["signature"].get("split")}')
@@ -116,6 +117,10 @@ def main():
             check_split(split, *plan[split], sources[split], report, torch)
         except Exception as error:  # report and continue with other splits
             report.setdefault(split, {}).setdefault('errors', []).append(f'{type(error).__name__}: {error}')
+    strides = {split: report.get(split, {}).get('target_stride') for split in ('validation', 'test')}
+    if None not in strides.values() and strides['validation'] != strides['test']:
+        report['test'].setdefault('errors', []).append(
+            f'test VACE stride {strides["test"]} differs from validation stride {strides["validation"]}; rebuild test with the validation stride')
     for key in ('init-checkpoint', 'parent-validation-report', 'initial-reference-report', 'validation-manifest'):
         if not resolve(base[key]).is_file():
             report.setdefault('training_assets', {}).setdefault('errors', []).append(f'missing {key}: {base[key]}')

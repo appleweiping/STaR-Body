@@ -9,7 +9,7 @@ Output keys match what scripts/evaluate_target60_v36.py / _v43.py read:
   gt_cam_pose[N,4,4], signature{split, format, ...}
 This file holds labels: keep it separate from feature caches and never pass it to training.
 
-  bash scripts/run_star_body.sh scripts/make_gt_cache_v43.py --data-root /data/3DPW --split test \
+  bash scripts/run_star_body_v43.sh scripts/make_gt_cache_v43.py --data-root /data/3DPW --split test \
       --output assets/cache/test_gt.pt [--hmr-sidecar assets/cache/test_hmr.pt]
 """
 import argparse

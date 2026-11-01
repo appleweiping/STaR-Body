@@ -9,7 +9,7 @@ Builds the real V29 -> V30 -> A5/V34 -> v43 module chain with random weights and
   4. gradients reach the router's output projection.
 Implementation checks only - not performance experiments.
 
-Run:  bash scripts/run_star_body.sh scripts/test_c11_model_v43.py
+Run:  bash scripts/run_star_body_v43.sh scripts/test_c11_model_v43.py
 """
 import sys
 import types
