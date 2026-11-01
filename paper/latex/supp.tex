@@ -1,0 +1,463 @@
+% Supplementary material for the CVPR 2027 submission (review version, anonymous).
+% Build after main.tex (cross-references to the main paper are read from main.aux):
+%   latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+%   latexmk -pdf -interaction=nonstopmode -halt-on-error supp.tex      (or ./build.sh)
+
+\documentclass[10pt,onecolumn,letterpaper]{article}
+\usepackage[review]{cvpr}
+\input{preamble}
+
+% References into the main paper, prefixed M- (use \ref{M-...}; cleveref does not resolve xr labels).
+\usepackage{xr-hyper}
+\externaldocument[M-]{main}
+
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+
+\def\confName{CVPR}
+\def\confYear{2027}
+
+\title{STaR-Body: Identity-Preserving Evidence Routing\\for Spatiotemporal Human Mesh Refinement\\[0.3em]\large Supplementary Material}
+\author{Anonymous CVPR submission}
+
+% Supplementary sections are numbered S1, S2, ... (the main paper cites them by these numbers).
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+% Per-sequence rows (keys proposed for scripts/analyze_results_c11.py; see README.md):
+%   \res{cmp@<variant>@<control>@<split>@<metric>@seq@<3DPW sequence name>}
+\newcommand{\seqd}[5]{\res{cmp@#1@#2@#3@#4@seq@#5}}
+\newcommand{\seqrow}[2]{\texttt{\detokenize{#2}} &
+  \seqd{B4-ext-joint}{B1-ext-pooled}{#1}{mpjpe}{#2} & \seqd{B4-ext-joint}{B1-ext-pooled}{#1}{pvepelvis}{#2} &
+  \seqd{B4-ext-joint}{B7-ext-concat}{#1}{mpjpe}{#2} & \seqd{B4-ext-joint}{B7-ext-concat}{#1}{pvepelvis}{#2} &
+  \seqd{B4-ext-joint}{A0-none}{#1}{mpjpe}{#2} & \seqd{B4-ext-joint}{A0-none}{#1}{pvepelvis}{#2} \\}
+
+% One row of a full seed table: {variant}{split}
+\newcommand{\seedrow}[3]{#1 & \res{#2@#3@nseeds} & \res{#2@#3@mpjpe@pm} & \res{#2@#3@mpjpehip@pm} & \res{#2@#3@pampjpe@pm} &
+  \res{#2@#3@pve@pm} & \res{#2@#3@pvepelvis@pm} & \res{#2@#3@pvehip@pm} & \res{#2@#3@accel@pm} & \res{#2@#3@accelms@pm} \\}
+
+% One row of a paired-comparison table: {label}{variant}{control}{split}
+\newcommand{\pairrow}[4]{#1 & \dci{#2}{#3}{#4}{mpjpe} & \cmpp{#2}{#3}{#4}{mpjpe} & \dci{#2}{#3}{#4}{pampjpe} & \dci{#2}{#3}{#4}{pvepelvis} & \cmpp{#2}{#3}{#4}{pvepelvis} & \dci{#2}{#3}{#4}{accel} & \cmpwins{#2}{#3}{#4}{pvepelvis} \\}
+
+\begin{document}
+\maketitle
+
+\noindent This supplement documents the implementation (\cref{sec:impl}), the objective and schedule (\cref{sec:optim}), the evaluation protocol and its deviations from detector-based pipelines (\cref{sec:protocol}), the statistical procedure (\cref{sec:stats}), the observation-head audit and the archived records (\cref{sec:audit}), full tables over seeds and splits (\cref{sec:tables}) and per-sequence results (\cref{sec:sequences}).
+As in the main paper, every number of the new experiments is inserted by \texttt{scripts/analyze\_results\_c11.py}; a red \textcolor{red}{\textbf{TBD}} marks a value that has not been produced yet.
+
+%-------------------------------------------------------------------------------
+\section{Implementation details}
+\label{sec:impl}
+
+\paragraph{Token interfaces.}
+\Cref{tab:tokens} lists the interfaces of the model.
+Each target window contains eight frames at positions 4--11 of a 17-frame video context.
+HMR\,2.0a supplies a 192-token image grid per frame; each of the five VACE latent slices is pooled from a $6\times6$ grid to $2\times3$ cells, giving 30 memory tokens.
+The dual-order decoder has width 256 and eight heads, with four blocks in each of three weight-shared iterations.
+In the refiner, local image samples are projected to 64 channels and combined with the 256-dimensional pose query and the 22-dimensional body state (9 rotation, 10 shape, 3 camera values per joint) into a 128-dimensional joint feature.
+
+\begin{table}[h]
+  \centering\small
+  \begin{tabular}{@{}l c c l@{}}
+    \toprule
+    Representation & Tokens & Width & Note \\
+    \midrule
+    HMR\,2.0a image grid & $T\times192$ & 1,280 & frozen \\
+    VACE latent grid & $5\times36$ & 1,536 & frozen, cached \\
+    Pooled video memory & 30 & 256 & \\
+    Body queries & $T\times26$ & 256 & 24 pose, shape, camera \\
+    Evidence tokens (one source) & $T\times17$ & $7\rightarrow128$ & main Eq.~(\ref{M-eq:token}) \\
+    Evidence tokens (head + external, \vB{6}) & $T\times34$ & $7\rightarrow128$ & separate identity embeddings \\
+    Joint feedback & $T\times24$ & 128 & zero at initialisation \\
+    \bottomrule
+  \end{tabular}
+  \caption{Token interfaces; $T=8$ target frames. Image and video feature extraction is frozen.}
+  \label{tab:tokens}
+\end{table}
+
+\paragraph{Router tensors.}
+For a batch of $B$ windows, a source is given by residuals and projections $[B,T,17,2]$, the log-confidence feature and the confidence $[B,T,17,1]$, frame validity $[B,T]$ and slot validity $[B,T,17]$.
+For external keypoints $(u,v,c)$, the log-confidence feature is $-2\log\max(c,0.0025)$ clipped to $[-6,6]$, the confidence feature is $c$, and a slot is valid when it is finite and $c$ exceeds a minimum confidence (zero in all reported runs); frames with a non-positive or non-finite camera scale are invalid.
+The token MLP is $\mathrm{Linear}(7,128)$--SiLU--$\mathrm{Linear}(128,128)$, the encoded tokens have shape $[BT,17,128]$, the 24 joint queries $[BT,24,128]$, and the additive attention mask $[4BT,24,17]$ holds the bias $-D(j,a(l))/2$ and $-\infty$ for invalid slots.
+If no slot of a frame is valid, slot~1 is temporarily unmasked to keep the softmax finite and the output of that frame is set to zero.
+The output $\mathrm{Linear}(128,128)$ without bias is zero-initialised and yields $[B,T,24,128]$, added to the joint features at every refinement iteration.
+The anchors $a(l)$ map the five COCO facial landmarks to the SMPL head joint and shoulders, elbows, wrists, hips, knees and ankles to the corresponding SMPL joints; $D$ is the shortest-path distance on the 24-joint SMPL tree.
+Variant \vB{5} permutes the 17 bias columns with the fixed derangement $(9,13,5,16,11,2,15,0,12,4,14,1,8,6,3,10,7)$ (zero-based), which has no fixed point.
+The router of each run is initialised on the CPU from its own generator with seed $370026+(s-2026)$ for training seed $s$, so that it does not change the random stream of the rest of the model; for $s=2026$ this is the initialisation of the archived C10 router.
+
+\paragraph{Parameter counts.}
+\Cref{tab:params} counts the parameters of the feedback module that receive gradient, obtained by instantiating every configuration of \texttt{models/evidence\_router\_v43.py} with width 128 and back-propagating through a forward pass.
+For checkpoint compatibility with C10, the module always instantiates the full C10 parameter set; tensors that a configuration does not use receive no gradient and are never updated (``instantiated'' column).
+
+\begin{table}[h]
+  \centering\small
+  \begin{tabular}{@{}l l r r@{}}
+    \toprule
+    Variant & Components that receive gradient & Used & Instantiated \\
+    \midrule
+    \vA{0} none & -- & 0 & -- \\
+    \vA{1} mean (C00) & $\mathrm{Linear}(4,128)$ on averaged residual, log-variance, visibility & 512 & 512 \\
+    \vA{2} head, routed (C10) & tokens 17,536; identity 2,176; schema 256; queries 3,072; \\
+    & attention 66,048; output 16,384 & 105,472 & 105,472 \\
+    \vB{4}, \vB{3}, \vB{5}, \vC{4} routed & as \vA{2}, with the external identity embedding & 105,472 & 107,648 \\
+    \vB{2} set & tokens, queries, attention, output (no identity, no schema) & 103,040 & 107,648 \\
+    \vB{6} head + external & as \vA{2} plus external identity 2,176 & 107,648 & 107,648 \\
+    \vB{1}, \vC{1} pooled & tokens 17,536; LayerNorm--128--256--128 MLP 66,176; output 16,384 & 100,096 & 173,824 \\
+    \vB{7} ordered vector & tokens 17,536; $\mathrm{Linear}(17{\cdot}128,128)$--SiLU--LayerNorm--$\mathrm{Linear}$ 295,424; \\
+    & output 16,384 & 329,344 & 403,072 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Feedback-module parameters (width 128). Attention: four heads, input and output projections with biases.}
+  \label{tab:params}
+\end{table}
+
+\paragraph{External keypoints.}
+ViTPose++-H (COCO-17 expert head, transformers implementation) runs top-down on the central $192\times256$ region of the same $256\times256$ crop that the HMR\,2.0a backbone sees; coordinates are normalised as $x/256-0.5$, the convention of the body projection.
+The keypoints are cached once per split and never fine-tuned.
+For \vC{1} and \vC{4}, the OpenPose-18 detections distributed with 3DPW (the \texttt{poses2d} field) are mapped to COCO-17 with their confidences; these are the same detections that define the crop box.
+No ground-truth 2D or 3D joint enters either cache.
+
+\paragraph{Bounded rotation updates.}
+Write $w=\tanh u\in(-1,1)^3$. Then $\lVert w\rVert<\sqrt3$ and, since $s\mapsto s/\sqrt{1+s^2}$ is increasing, $\lVert\omega\rVert=\alpha\,\lVert w\rVert/\sqrt{1+\lVert w\rVert^2}<\alpha\sqrt3/2$.
+With $\alpha=2^\circ$ (root) and $5^\circ$ (other joints) each step is below $1.73^\circ$ and $4.33^\circ$, and by the triangle inequality for the geodesic distance on $SO(3)$ three steps move a joint by less than $5.2^\circ$ and $13.0^\circ$ relative to the refiner input.
+This bounds the refinement displacement, not the error with respect to the ground truth.
+The archived manuscript stated the looser bounds $6^\circ$ and $15^\circ$, which also hold.
+
+%-------------------------------------------------------------------------------
+\section{Objective and optimisation}
+\label{sec:optim}
+
+\begin{table}[h]
+  \centering\small
+  \begin{tabular}{@{}l r@{}}
+    \toprule
+    Term & Weight \\
+    \midrule
+    Joint / vertex error & 1 / 1 \\
+    Rotation / shape error & 0.05 / 0.001 \\
+    Velocity error & 0.5 \\
+    Within-window / boundary acceleration & 3.012855 / 0.987145 \\
+    Procrustes-aligned joint auxiliary & 0.2 \\
+    Intermediate base geometry & 0.25 \\
+    Shape consistency & 0.01 \\
+    Update regularisation & 0.001 \\
+    2D reprojection, observation and visibility terms & 0 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Loss coefficients, identical for all variants. Coordinate losses are in metres; the two acceleration coefficients implement the count-weighted within/boundary partition and sum to four.}
+  \label{tab:loss}
+\end{table}
+
+\Cref{tab:loss} lists the loss coefficients.
+Joint and vertex terms use Euclidean errors; rotation and shape supervision use squared errors.
+Velocity and acceleration act on the hip-centred prediction-minus-target joint error $\epsilon_t$; at an annotation-adjacent triplet the acceleration error is $\frac{1}{14}\sum_{j=1}^{14}\lVert\epsilon_{t-1,j}-2\epsilon_{t,j}+\epsilon_{t+1,j}\rVert_2$.
+Every person-frame is owned by one window; triplets inside an owner window and triplets across owner windows form disjoint sets, and the boundary set is traversed cyclically with its owner contexts forwarded separately, so that the final-output motion objective covers complete sequences.
+All 2D terms have weight zero; this is why the inherited observation head never received gradient (\cref{sec:audit}).
+
+Every variant starts from the same parent and runs 1,000 optimiser steps with AdamW (weight decay $10^{-4}$ on matrices), gradient-norm clipping at one and an effective batch of 16 windows (batch one, 16 accumulation steps), which amounts to 16,000 training-window draws and 16,000 boundary-triplet draws, covering all 2,909 training windows and all 5,548 boundary triplets.
+Neural modules run under BF16 autocast and geometry in FP32.
+All parameters outside the decoder backbone (track-shape residual, recurrent refiner with its part/time blocks, and the feedback module) train at $5\times10^{-5}$ from step zero; at step 300 the body, root and shape heads and the output normalisation become trainable at $5\times10^{-6}$, and at step 800 the last two decoder blocks, the image attention and the inherited feedback projection at $10^{-6}$.
+The reference, feature encoders, camera head and observation head stay frozen.
+Learning rates use 200 warm-up steps and a cosine schedule with a 6,000-step horizon and a 10\% floor; at update $k$ the EMA decay is $\min(0.999,(1+k)/(10+k))$.
+The evaluated weights are the EMA at step 1,000 for every variant and seed.
+\TODO{Add GPU type, wall-clock time per run and peak memory from the run records (\texttt{run\_config.json}, evaluation \texttt{resources}).}
+
+%-------------------------------------------------------------------------------
+\section{Evaluation protocol and deviations}
+\label{sec:protocol}
+
+\paragraph{Metrics.}
+Predicted bodies use the neutral SMPL model and targets the gendered SMPL model.
+Joints are the 14 LSP joints obtained from mesh vertices with the H36M regressor.
+\texttt{mpjpe} subtracts the H36M pelvis (joint~0) from both skeletons, as in SPIN, CameraHMR and ReFit; \texttt{mpjpehip} subtracts the midpoint of the two LSP hips, as in the VIBE evaluator, WHAM and GVHMR.
+\texttt{pampjpe} applies a per-frame similarity Procrustes alignment.
+\texttt{pve} is our historical vertex error without any alignment, \texttt{pvepelvis} subtracts each body's H36M pelvis from its vertices (CameraHMR, ReFit, PromptHMR), and \texttt{pvehip} subtracts each body's LSP hip midpoint (WHAM, GVHMR).
+VIBE, TCMR and GLoT compute PVE against neutral-gender ground-truth bodies without alignment, which we do not reproduce.
+\texttt{accel} is the mean over all annotation-adjacent triplets (including triplets across inference windows) of the second difference of the hip-centred prediction-minus-target error, in mm/frame$^2$; \texttt{accelms} $=0.9\times$\texttt{accel} is the same quantity in m/s$^2$ at 30\,fps.
+Aggregates weight person-frames (or triplets) equally; sequence errors are summed and divided by the total count.
+Inference and SMPL computation run in FP32 with double-precision sums, without flip averaging or smoothing.
+
+\paragraph{Deviations from detector-and-tracker pipelines.}
+(i)~Person crops are derived from the 2D person annotations of 3DPW with a 25\% margin rather than from a person detector.
+(ii)~Track identities are the dataset's person identities; the track prototype used by the shape residual is computed offline from the whole track and is therefore non-causal.
+(iii)~Frame validity masks follow the dataset's camera-pose validity flags.
+(iv)~Earlier models of this project were evaluated on the 3DPW test split before this study (we cannot undo that exposure); in this study, test evaluation is gated by validation locks and no decision used test results.
+(v)~The historical unaligned PVE of earlier drafts is not comparable to recent literature; we report it only for continuity.
+(vi)~The archived C10 numbers were selected on validation, the split they are reported on.
+These deviations apply equally to all variants of the controlled study.
+
+%-------------------------------------------------------------------------------
+\section{Statistical procedure}
+\label{sec:stats}
+
+For variant $V$, control $C$, metric $m$, paired seeds $s\in\mathcal S$ and sequences $q\in\mathcal Q$ with counts $n_q$ (person-frames, or triplets for acceleration), let $E^{V}_{s,q}$ be the summed error of sequence $q$.
+The reported difference is
+\begin{equation}
+  \Delta = \frac{\frac{1}{|\mathcal S|}\sum_{s}\sum_{q}\big(E^{V}_{s,q}-E^{C}_{s,q}\big)}{\sum_{q} n_q},
+\end{equation}
+\ie the frame-weighted aggregate difference averaged over seeds.
+For the 95\% interval we draw $|\mathcal S|$ seeds with replacement and then $|\mathcal Q|$ sequences with replacement, recompute $\Delta$ on the resample (with the counts of the drawn sequences in the denominator), repeat 20,000 times and take the 2.5\% and 97.5\% quantiles (percentile bootstrap~\cite{efron1993bootstrap}, random seed 20261101).
+Resampling sequences rather than frames respects the strong correlation of frames within a sequence; resampling seeds propagates training variance.
+With three seeds the seed level of the bootstrap is coarse, so intervals may be narrower than the true uncertainty about the training distribution.
+``Wins'' counts sequences whose seed-averaged difference is negative.
+The paired $t$-test uses the per-seed aggregate differences ($n=3$, two degrees of freedom).
+We call a difference reliable only if its interval excludes zero and all three seeds agree in sign; this rule and the list of comparisons were fixed before test evaluation.
+We do not correct for the 14 comparisons; the two primary ones are \vB{4} \vs \vB{1} and \vB{4} \vs \vB{7}.
+
+%-------------------------------------------------------------------------------
+\section{Observation-head audit and archived records}
+\label{sec:audit}
+
+\paragraph{Audit.}
+The parent's observation head predicts landmark coordinates as a correction to the projection of the frozen reference body, a log-variance and a visibility logit.
+It is created with zero coordinate and log-variance weights, log-variance bias $-4$ and zero visibility weights.
+In every training stage that produced the parent, C00 and C10, all 2D losses have weight zero (\cref{tab:loss}), and the stage contracts forbid enabling them; the head therefore receives no gradient.
+If the head is still at its initialisation, its coordinates equal the reference projection, its log-variance is $-4$ and its visibility is $\sigma(0)=0.5$ for every input, and the residual routed by C10 is $p(x^{\text{ref}})-p(x^r)$.
+\texttt{scripts/inspect\_checkpoint\_v43.py} checks these conditions on the stored weights and EMA weights of each checkpoint.
+\TODO{Insert the verdict for the archived parent, C00 and C10 checkpoints (expected: ``UNTRAINED'' for both weight fields), the maximum absolute coordinate weight and the log-variance bias. If any head turns out to be trained, rewrite Sec.~\ref{M-sec:audit} of the main paper accordingly.}
+
+\paragraph{Archived records.}
+\Cref{tab:archived} reproduces the archived single-seed validation records (10,413 person-frames, 10,226 triplets; validation was also the selection split).
+C00 values are transcriptions of contemporaneous run records whose raw evaluation files are not archived.
+At 1,000 steps, the C10 student is worse than the parent in MPJPE and its gain appears only in the EMA weights.
+From the archived per-sequence error sums of the parent and C10, a sequence-level bootstrap (12 sequences, 20,000 resamples, single seed) gives C10 minus parent differences of $-0.07$\,mm MPJPE (95\% interval $[-0.21,+0.03]$; lower on 9 of 12 sequences), $-0.03$\,mm PA-MPJPE ($[-0.12,+0.05]$; 10 of 12) and $-0.21$\,mm unaligned PVE ($[-0.32,-0.11]$; 11 of 12).
+These differences include the effect of 1,000 additional steps with EMA, which \vA{0} isolates in the new study.
+The C10-versus-C00 difference cannot be bootstrapped because C00 sequence records are not archived.
+
+\begin{table}[h]
+  \centering\small
+  \begin{tabular}{@{}l l cccc@{}}
+    \toprule
+    Model & Weights & MPJPE & PA-MPJPE & PVE (unaligned) & Accel \\
+    \midrule
+    Spatiotemporal reference & selected & 61.42 & 37.78 & 73.29 & 21.51 \\
+    Parent & -- & 61.26 & 37.64 & 73.02 & 21.48 \\
+    C00 mean feedback, 1,000 steps$^\ast$ & student & 61.39 & 37.65 & 73.20 & 21.44 \\
+    C00 mean feedback, 1,000 steps$^\ast$ & EMA & 61.26 & 37.64 & 73.05 & 21.45 \\
+    C10 joint feedback, 1,000 steps & student & 61.42 & 37.65 & 73.03 & 21.43 \\
+    C10 joint feedback, 1,000 steps & EMA & 61.19 & 37.61 & 72.82 & 21.44 \\
+    \midrule
+    \multicolumn{2}{@{}l}{Re-evaluation with the v43 code path} & & & & \\
+    Parent \textsf{P} & -- & \res{P-parent@validation@mpjpe} & \res{P-parent@validation@pampjpe} & \res{P-parent@validation@pve} & \res{P-parent@validation@accel} \\
+    C00 & archived & \res{R-c00-archived@validation@mpjpe} & \res{R-c00-archived@validation@pampjpe} & \res{R-c00-archived@validation@pve} & \res{R-c00-archived@validation@accel} \\
+    C10 & archived & \res{R-c10-archived@validation@mpjpe} & \res{R-c10-archived@validation@pampjpe} & \res{R-c10-archived@validation@pve} & \res{R-c10-archived@validation@accel} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Archived single-seed 3DPW validation records (mm; Accel in mm/frame$^2$) and their re-evaluation through the code used for the new study, which should reproduce them.
+  $^\ast$Transcribed from run records.
+  \TODO{State whether the re-evaluation reproduces the archived values and which weight field each archived checkpoint stores.}}
+  \label{tab:archived}
+\end{table}
+
+%-------------------------------------------------------------------------------
+\section{Full results over seeds}
+
+\label{sec:tables}
+
+\begin{figure}[h]
+  \centering
+  \genfig{ablation}{0.95\linewidth}{6cm}
+  \caption{Paired differences (first minus second variant; MPJPE and PA-MPJPE, mm) for all pre-registered comparisons on validation (circles) and test (squares), with 95\% hierarchical cluster-bootstrap intervals over seeds and sequences. Negative values favour the first variant.}
+  \label{fig:all-pairs}
+\end{figure}
+
+\Cref{tab:full-val,tab:full-test} give every variant under every metric (mean{\scriptsize$\pm$std} over seeds; reference checkpoints are single models).
+\Cref{tab:pairs-val,tab:pairs-test} give the paired comparisons with bootstrap intervals and paired $t$-test $p$-values.
+
+\begin{table}[h]
+  \centering\scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}l c cccccccc@{}}
+    \toprule
+    Variant & $n$ & MPJPE & MPJPE$_{\text{hip}}$ & PA-MPJPE & PVE & PVE$_{\text{pelvis}}$ & PVE$_{\text{hip}}$ & Accel (mm/f$^2$) & Accel (m/s$^2$) \\
+    \midrule
+    \seedrow{\textsf{P} parent}{P-parent}{validation}
+    \seedrow{C00 archived}{R-c00-archived}{validation}
+    \seedrow{C10 archived}{R-c10-archived}{validation}
+    \midrule
+    \seedrow{\vA{0} none}{A0-none}{validation}
+    \seedrow{\vA{1} mean}{A1-mean}{validation}
+    \seedrow{\vA{2} head routed}{A2-head-joint}{validation}
+    \seedrow{\vB{1} pooled}{B1-ext-pooled}{validation}
+    \seedrow{\vB{7} ordered}{B7-ext-concat}{validation}
+    \seedrow{\vB{4} routed}{B4-ext-joint}{validation}
+    \seedrow{\vB{2} set}{B2-ext-set}{validation}
+    \seedrow{\vB{3} no bias}{B3-ext-nobias}{validation}
+    \seedrow{\vB{5} deranged}{B5-ext-shuffled}{validation}
+    \seedrow{\vB{6} head+ext.}{B6-both-joint}{validation}
+    \seedrow{\vC{4} OP routed}{C4-op-joint}{validation}
+    \seedrow{\vC{1} OP pooled}{C1-op-pooled}{validation}
+    \bottomrule
+  \end{tabular}
+  \caption{All variants on 3DPW \textbf{validation} (12 sequences, 10,413 person-frames, 10,226 triplets); mm unless noted.}
+  \label{tab:full-val}
+\end{table}
+
+\begin{table}[h]
+  \centering\scriptsize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}l c cccccccc@{}}
+    \toprule
+    Variant & $n$ & MPJPE & MPJPE$_{\text{hip}}$ & PA-MPJPE & PVE & PVE$_{\text{pelvis}}$ & PVE$_{\text{hip}}$ & Accel (mm/f$^2$) & Accel (m/s$^2$) \\
+    \midrule
+    \seedrow{\textsf{P} parent}{P-parent}{test}
+    \seedrow{C00 archived}{R-c00-archived}{test}
+    \seedrow{C10 archived}{R-c10-archived}{test}
+    \midrule
+    \seedrow{\vA{0} none}{A0-none}{test}
+    \seedrow{\vA{1} mean}{A1-mean}{test}
+    \seedrow{\vA{2} head routed}{A2-head-joint}{test}
+    \seedrow{\vB{1} pooled}{B1-ext-pooled}{test}
+    \seedrow{\vB{7} ordered}{B7-ext-concat}{test}
+    \seedrow{\vB{4} routed}{B4-ext-joint}{test}
+    \seedrow{\vB{2} set}{B2-ext-set}{test}
+    \seedrow{\vB{3} no bias}{B3-ext-nobias}{test}
+    \seedrow{\vB{5} deranged}{B5-ext-shuffled}{test}
+    \seedrow{\vB{6} head+ext.}{B6-both-joint}{test}
+    \seedrow{\vC{4} OP routed}{C4-op-joint}{test}
+    \seedrow{\vC{1} OP pooled}{C1-op-pooled}{test}
+    \bottomrule
+  \end{tabular}
+  \caption{All variants on 3DPW \textbf{test} (24 sequences, 35,515 person-frames, 34,752 triplets); mm unless noted.}
+  \label{tab:full-test}
+\end{table}
+
+\begin{table}[h]
+  \centering\scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}l ccccccc@{}}
+    \toprule
+    Comparison & $\Delta$MPJPE [95\% CI] & $p$ & $\Delta$PA-MPJPE [95\% CI] & $\Delta$PVE$_{\text{pelvis}}$ [95\% CI] & $p$ & $\Delta$Accel [95\% CI] & Wins (PVE) \\
+    \midrule
+    \pairrow{\vB{4} \vs \vB{1}}{B4-ext-joint}{B1-ext-pooled}{validation}
+    \pairrow{\vB{4} \vs \vB{7}}{B4-ext-joint}{B7-ext-concat}{validation}
+    \pairrow{\vB{4} \vs \vB{2}}{B4-ext-joint}{B2-ext-set}{validation}
+    \pairrow{\vB{4} \vs \vB{3}}{B4-ext-joint}{B3-ext-nobias}{validation}
+    \pairrow{\vB{4} \vs \vB{5}}{B4-ext-joint}{B5-ext-shuffled}{validation}
+    \pairrow{\vB{4} \vs \vA{2}}{B4-ext-joint}{A2-head-joint}{validation}
+    \pairrow{\vB{6} \vs \vB{4}}{B6-both-joint}{B4-ext-joint}{validation}
+    \pairrow{\vB{1} \vs \vA{1}}{B1-ext-pooled}{A1-mean}{validation}
+    \pairrow{\vA{2} \vs \vA{1}}{A2-head-joint}{A1-mean}{validation}
+    \pairrow{\vA{1} \vs \vA{0}}{A1-mean}{A0-none}{validation}
+    \pairrow{\vA{2} \vs \vA{0}}{A2-head-joint}{A0-none}{validation}
+    \pairrow{\vB{4} \vs \vA{0}}{B4-ext-joint}{A0-none}{validation}
+    \pairrow{\vC{4} \vs \vC{1}}{C4-op-joint}{C1-op-pooled}{validation}
+    \pairrow{\vB{4} \vs \vC{4}}{B4-ext-joint}{C4-op-joint}{validation}
+    \bottomrule
+  \end{tabular}
+  \caption{Paired differences on \textbf{validation} (first minus second; mm, Accel in mm/frame$^2$; Wins out of 12 sequences). Intervals: hierarchical cluster bootstrap over seeds and sequences; $p$: paired $t$-test over three seeds.}
+  \label{tab:pairs-val}
+\end{table}
+
+\begin{table}[h]
+  \centering\scriptsize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}l ccccccc@{}}
+    \toprule
+    Comparison & $\Delta$MPJPE [95\% CI] & $p$ & $\Delta$PA-MPJPE [95\% CI] & $\Delta$PVE$_{\text{pelvis}}$ [95\% CI] & $p$ & $\Delta$Accel [95\% CI] & Wins (PVE) \\
+    \midrule
+    \pairrow{\vB{4} \vs \vB{1}}{B4-ext-joint}{B1-ext-pooled}{test}
+    \pairrow{\vB{4} \vs \vB{7}}{B4-ext-joint}{B7-ext-concat}{test}
+    \pairrow{\vB{4} \vs \vB{2}}{B4-ext-joint}{B2-ext-set}{test}
+    \pairrow{\vB{4} \vs \vB{3}}{B4-ext-joint}{B3-ext-nobias}{test}
+    \pairrow{\vB{4} \vs \vB{5}}{B4-ext-joint}{B5-ext-shuffled}{test}
+    \pairrow{\vB{4} \vs \vA{2}}{B4-ext-joint}{A2-head-joint}{test}
+    \pairrow{\vB{6} \vs \vB{4}}{B6-both-joint}{B4-ext-joint}{test}
+    \pairrow{\vB{1} \vs \vA{1}}{B1-ext-pooled}{A1-mean}{test}
+    \pairrow{\vA{2} \vs \vA{1}}{A2-head-joint}{A1-mean}{test}
+    \pairrow{\vA{1} \vs \vA{0}}{A1-mean}{A0-none}{test}
+    \pairrow{\vA{2} \vs \vA{0}}{A2-head-joint}{A0-none}{test}
+    \pairrow{\vB{4} \vs \vA{0}}{B4-ext-joint}{A0-none}{test}
+    \pairrow{\vC{4} \vs \vC{1}}{C4-op-joint}{C1-op-pooled}{test}
+    \pairrow{\vB{4} \vs \vC{4}}{B4-ext-joint}{C4-op-joint}{test}
+    \bottomrule
+  \end{tabular}
+  \caption{Paired differences on \textbf{test} with $p$-values and PA-MPJPE/Accel intervals (complements Tab.~\ref{M-tab:paired} of the main paper; Wins out of 24 sequences).}
+  \label{tab:pairs-test}
+\end{table}
+
+%-------------------------------------------------------------------------------
+\section{Per-sequence results}
+\label{sec:sequences}
+
+\Cref{tab:seq-test,tab:seq-val} list the seed-averaged per-sequence differences of the main method to the pooled control, the ordered-vector control and no feedback (mm; negative favours \vB{4}).
+
+\begin{table}[h]
+  \centering\scriptsize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}l cc cc cc@{}}
+    \toprule
+    & \multicolumn{2}{c}{\vB{4} \vs \vB{1}} & \multicolumn{2}{c}{\vB{4} \vs \vB{7}} & \multicolumn{2}{c}{\vB{4} \vs \vA{0}} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+    Sequence & $\Delta$MPJPE & $\Delta$PVE$_{\text{pelvis}}$ & $\Delta$MPJPE & $\Delta$PVE$_{\text{pelvis}}$ & $\Delta$MPJPE & $\Delta$PVE$_{\text{pelvis}}$ \\
+    \midrule
+    \seqrow{test}{downtown_arguing_00}
+    \seqrow{test}{downtown_bar_00}
+    \seqrow{test}{downtown_bus_00}
+    \seqrow{test}{downtown_cafe_00}
+    \seqrow{test}{downtown_car_00}
+    \seqrow{test}{downtown_crossStreets_00}
+    \seqrow{test}{downtown_downstairs_00}
+    \seqrow{test}{downtown_enterShop_00}
+    \seqrow{test}{downtown_rampAndStairs_00}
+    \seqrow{test}{downtown_runForBus_00}
+    \seqrow{test}{downtown_runForBus_01}
+    \seqrow{test}{downtown_sitOnStairs_00}
+    \seqrow{test}{downtown_stairs_00}
+    \seqrow{test}{downtown_upstairs_00}
+    \seqrow{test}{downtown_walkBridge_01}
+    \seqrow{test}{downtown_walkUphill_00}
+    \seqrow{test}{downtown_walking_00}
+    \seqrow{test}{downtown_warmWelcome_00}
+    \seqrow{test}{downtown_weeklyMarket_00}
+    \seqrow{test}{downtown_windowShopping_00}
+    \seqrow{test}{flat_guitar_01}
+    \seqrow{test}{flat_packBags_00}
+    \seqrow{test}{office_phoneCall_00}
+    \seqrow{test}{outdoors_fencing_01}
+    \midrule
+    All (frame-weighted) & \cmpdiff{B4-ext-joint}{B1-ext-pooled}{test}{mpjpe} & \cmpdiff{B4-ext-joint}{B1-ext-pooled}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{B7-ext-concat}{test}{mpjpe} & \cmpdiff{B4-ext-joint}{B7-ext-concat}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{A0-none}{test}{mpjpe} & \cmpdiff{B4-ext-joint}{A0-none}{test}{pvepelvis} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Per-sequence differences on 3DPW \textbf{test} (seed-averaged; mm).}
+  \label{tab:seq-test}
+\end{table}
+
+\begin{table}[h]
+  \centering\scriptsize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}l cc cc cc@{}}
+    \toprule
+    & \multicolumn{2}{c}{\vB{4} \vs \vB{1}} & \multicolumn{2}{c}{\vB{4} \vs \vB{7}} & \multicolumn{2}{c}{\vB{4} \vs \vA{0}} \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+    Sequence & $\Delta$MPJPE & $\Delta$PVE$_{\text{pelvis}}$ & $\Delta$MPJPE & $\Delta$PVE$_{\text{pelvis}}$ & $\Delta$MPJPE & $\Delta$PVE$_{\text{pelvis}}$ \\
+    \midrule
+    \seqrow{validation}{courtyard_basketball_01}
+    \seqrow{validation}{courtyard_dancing_00}
+    \seqrow{validation}{courtyard_drinking_00}
+    \seqrow{validation}{courtyard_hug_00}
+    \seqrow{validation}{courtyard_jumpBench_01}
+    \seqrow{validation}{courtyard_rangeOfMotions_01}
+    \seqrow{validation}{downtown_walkDownhill_00}
+    \seqrow{validation}{outdoors_crosscountry_00}
+    \seqrow{validation}{outdoors_freestyle_01}
+    \seqrow{validation}{outdoors_golf_00}
+    \seqrow{validation}{outdoors_parcours_00}
+    \seqrow{validation}{outdoors_parcours_01}
+    \midrule
+    All (frame-weighted) & \cmpdiff{B4-ext-joint}{B1-ext-pooled}{validation}{mpjpe} & \cmpdiff{B4-ext-joint}{B1-ext-pooled}{validation}{pvepelvis} & \cmpdiff{B4-ext-joint}{B7-ext-concat}{validation}{mpjpe} & \cmpdiff{B4-ext-joint}{B7-ext-concat}{validation}{pvepelvis} & \cmpdiff{B4-ext-joint}{A0-none}{validation}{mpjpe} & \cmpdiff{B4-ext-joint}{A0-none}{validation}{pvepelvis} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Per-sequence differences on 3DPW \textbf{validation} (seed-averaged; mm).}
+  \label{tab:seq-val}
+\end{table}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{main}
+}
+
+\end{document}

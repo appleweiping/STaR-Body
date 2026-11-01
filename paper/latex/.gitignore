@@ -1,0 +1,14 @@
+# LaTeX build products (PDFs are kept so that the current build can be inspected)
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# The repository root ignores *.jpg; the two compressed schematics are part of the paper source.
+!figures/*.jpg

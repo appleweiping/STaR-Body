@@ -7,10 +7,10 @@
 Produces (each skipped with a message if its inputs are missing):
   ablation.pdf    paired differences (variant - control, mm) with 95% cluster-bootstrap CIs,
                   validation (circles) and test (squares), MPJPE and PA-MPJPE panels
-  sequences.pdf   per-sequence mean difference for one comparison on test (default
-                  B4-ext-joint vs B1-ext-pooled), sorted; improvements vs regressions
-  confidence.pdf  per-frame MPJPE difference vs ViTPose mean keypoint confidence quintile
-                  on test, with sequence-cluster bootstrap CIs (needs per-frame .npz files
+  sequences.pdf   per-sequence seed-averaged PVE (H36M-pelvis aligned) difference for one
+                  comparison on test (default B4-ext-joint vs B1-ext-pooled), sorted
+  confidence.pdf  per-frame MPJPE difference (default B4-ext-joint minus A0-none) vs ViTPose
+                  mean keypoint confidence quintile on test, with sequence-cluster bootstrap CIs (needs per-frame .npz files
                   from evaluate_target60_v43.py --per-frame-output and the keypoint cache)
 Colors: fixed categorical slots (blue = validation, orange = test) plus marker shape, so
 identity never relies on color alone.
@@ -23,7 +23,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 BLUE, ORANGE, INK, MUTED, GRID = '#2a78d6', '#eb6834', '#0b0b0b', '#52514e', '#e4e3df'
-LABELS = {'mpjpe_mm': 'Δ MPJPE (mm)', 'pa_mpjpe_mm': 'Δ PA-MPJPE (mm)', 'pve_hip_mm': 'Δ PVE (mm)'}
+LABELS = {'mpjpe_mm': 'Δ MPJPE (mm)', 'pa_mpjpe_mm': 'Δ PA-MPJPE (mm)', 'pve_hip_mm': 'Δ PVE (mm)',
+          'pve_pelvis_mm': 'Δ PVE (mm)'}
 
 
 def resolve(path):
@@ -75,23 +76,23 @@ def ablation(summary, out, plt, metrics=('mpjpe_mm', 'pa_mpjpe_mm')):
     print('wrote', out / 'ablation.pdf')
 
 
-def sequences(summary, out, plt, comparison, metric='mpjpe_mm'):
+def sequences(summary, out, plt, comparison, metric='pve_pelvis_mm'):
     entry = summary['splits'].get('test', {}).get('comparisons', {}).get(comparison, {}).get(metric)
     if not entry:
         print(f'sequences: {comparison} not on test; skipped')
         return
     items = sorted(entry['per_sequence_mean_diff'].items(), key=lambda kv: kv[1])
-    names = [k.replace('_', ' ') for k, _ in items]
+    names = [k.split('_', 1)[-1] for k, _ in items]  # drop the location prefix (downtown_, outdoors_, ...)
     values = np.asarray([v for _, v in items])
-    fig, ax = plt.subplots(figsize=(3.3, 0.16 * len(items) + 0.8))
+    fig, ax = plt.subplots(figsize=(3.4, 2.3))
     colors = [BLUE if v < 0 else ORANGE for v in values]
-    ax.barh(np.arange(len(values)), values, color=colors, height=.7)
-    ax.axvline(0, color=MUTED, lw=1)
-    ax.set_yticks(np.arange(len(values)))
-    ax.set_yticklabels(names, fontsize=6)
-    ax.set_xlabel(LABELS.get(metric, metric) + '  (← better)')
-    ax.set_title(comparison.replace('__vs__', ' vs ') + ' (test)', fontsize=7, color=INK)
-    ax.grid(axis='x', color=GRID, lw=.6)
+    ax.bar(np.arange(len(values)), values, color=colors, width=.75)
+    ax.axhline(0, color=MUTED, lw=1)
+    ax.set_xticks(np.arange(len(values)))
+    ax.set_xticklabels(names, fontsize=5, rotation=90)
+    ax.set_ylabel(LABELS.get(metric, metric) + '  (↓ better)')
+    ax.set_title(comparison.replace('__vs__', ' vs ') + ' (test; blue = improved)', fontsize=7, color=INK)
+    ax.grid(axis='y', color=GRID, lw=.6)
     fig.tight_layout()
     fig.savefig(out / 'sequences.pdf')
     plt.close(fig)
@@ -145,7 +146,7 @@ def confidence(matrix, out, plt, variant, control, metric='mpjpe_mm', bins=5, n_
         means.append(sums.sum() / counts.sum())
         los.append(np.quantile(boots, .025))
         his.append(np.quantile(boots, .975))
-    fig, ax = plt.subplots(figsize=(3.3, 2.2))
+    fig, ax = plt.subplots(figsize=(3.4, 2.3))
     ax.axhline(0, color=MUTED, lw=1)
     ax.grid(axis='y', color=GRID, lw=.6)
     ax.fill_between(centers, los, his, color=ORANGE, alpha=.18, lw=0)
@@ -166,7 +167,7 @@ def main():
     p.add_argument('--out-dir', type=Path, default=ROOT / 'paper/latex/figures/generated')
     p.add_argument('--sequence-comparison', default='B4-ext-joint__vs__B1-ext-pooled')
     p.add_argument('--confidence-variant', default='B4-ext-joint')
-    p.add_argument('--confidence-control', default='B1-ext-pooled')
+    p.add_argument('--confidence-control', default='A0-none')
     args = p.parse_args()
     import matplotlib
     matplotlib.use('Agg')

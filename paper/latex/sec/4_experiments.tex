@@ -1,0 +1,247 @@
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Protocol}
+\label{sec:protocol}
+
+\paragraph{Data.}
+We use 3DPW~\cite{vonmarcard2018pw3d} with its official splits.
+The refiner trains on the training split (2,909 eight-frame windows, 22,735 person-frames); every model is evaluated on validation (12 sequences, 10,413 person-frames, 10,226 acceleration triplets) and, once, on test (24 sequences, 35,515 person-frames, 34,752 triplets).
+A test evaluation is only accepted through an immutable lock that binds the checkpoint hash, configuration, weight type and complete validation result.
+Person crops follow the dataset's 2D person annotations with a 25\% margin, and track identities come from the annotations; Supp.~S3 lists these and other deviations from detector-and-tracker pipelines.
+Earlier models of this project were evaluated on the test split before this study; no decision reported here used test results, but that exposure cannot be undone.
+
+\paragraph{Metrics.}
+MPJPE uses the 14 LSP joints regressed with the H36M regressor; PA-MPJPE additionally applies a per-frame similarity Procrustes alignment.
+Root conventions differ across the literature, so we report MPJPE and PVE both relative to the H36M pelvis (joint~0; SPIN, CameraHMR, ReFit, PromptHMR) and relative to the hip midpoint (VIBE evaluator, WHAM, GVHMR), and compare each published row only under its own convention.
+Controlled tables use the pelvis root; our historical unaligned PVE is kept in the supplement.
+Acceleration error (Accel) is the second difference of the hip-centred prediction-minus-target joint error over all annotation-adjacent triplets, including triplets across inference windows, in mm/frame$^2$; multiplied by $0.9$ it gives m/s$^2$ at 30\,fps, the unit used by WHAM and GVHMR.
+We apply no flip averaging and no temporal smoothing.
+
+\paragraph{Training and selection.}
+Every variant starts from the same parent and trains for 1,000 steps with identical data order, losses and staged unfreezing (AdamW, effective batch of 16 windows; Supp.~S2), with seeds 2026, 2027 and 2028; the router initialisation seed follows the training seed.
+We evaluate the EMA weights at step 1,000 for every variant and seed, a choice fixed before training; no variant, step or seed is selected on validation or test.
+The archived parent (\textsf{P}), C10 and C00 checkpoints are evaluated with the same code path.
+
+\paragraph{Statistics.}
+We report the mean and standard deviation over seeds.
+A paired comparison gives the difference $\Delta$ of the frame-weighted aggregate error, averaged over the paired seeds (negative favours the first variant), and a 95\% percentile interval from a hierarchical cluster bootstrap~\cite{efron1993bootstrap} that resamples seeds and then sequences (20,000 resamples), because frames within a sequence are strongly correlated.
+We also count the sequences whose seed-averaged error decreases; paired $t$-tests over seeds are listed in the supplement but have little power with three seeds.
+The comparisons in \cref{tab:paired} and the rule that a difference is reliable only if its interval excludes zero and all three seeds agree in sign were fixed before any test evaluation.
+
+\begin{table*}[t]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}l l c c c c c c@{}}
+    \toprule
+    Method & Input; setting & 3DPW train & Root & MPJPE$\downarrow$ & PA-MPJPE$\downarrow$ & PVE$\downarrow$ & Accel$\downarrow$ \\
+    \midrule
+    \multicolumn{8}{@{}l}{\emph{Author-reported 3DPW test results}}\\
+    PyMAF~\cite{zhang2021pymaf}         & Image; ResNet-50          & No  & --  & 92.8 & 58.9 & 110.1$^\ast$ & -- \\
+    PARE~\cite{kocabas2021pare}         & Image; HRNet-W32          & No  & --  & 82.0 & 50.9 & 97.9$^\ast$  & -- \\
+    PARE~\cite{kocabas2021pare}         & Image; HRNet-W32          & Yes & --  & 74.5 & 46.5 & 88.6$^\ast$  & -- \\
+    CLIFF~\cite{li2022cliff}            & Image; HRNet-W48          & Yes & P   & 69.0 & 43.0 & 81.2$^\ast$ & -- \\
+    PyMAF-X~\cite{zhang2023pymafx}      & Image; body-only HR48     & No  & P   & 78.0 & 47.1 & 91.3$^\ast$ & -- \\
+    PyMAF-X~\cite{zhang2023pymafx}      & Image; body-only HR48     & Yes & P   & 74.2 & 45.3 & 87.0$^\ast$ & -- \\
+    HMR\,2.0a~\cite{goel2023hmr2}       & Image; ViT                & No  & --  & 70.0 & 44.5 & --    & -- \\
+    HMR\,2.0b~\cite{goel2023hmr2}       & Image; ViT                & No  & --  & 81.3 & 54.3 & --    & -- \\
+    ReFit~\cite{wang2023refit}          & Image; HRNet              & Yes & P   & 65.8 & 41.0 & --    & -- \\
+    ReFit~\cite{wang2023refit}          & Image; BEDLAM + real      & Yes & P   & 57.6 & 38.2 & 67.6  & -- \\
+    CameraHMR~\cite{patel2025camerahmr} & Image; all data + 3DPW    & Yes & P   & 56.0 & 35.1 & 65.9  & -- \\
+    PromptHMR~\cite{wang2025prompthmr}  & Image; GT focal length    & Yes & P   & 58.7 & 36.6 & 69.4  & -- \\
+    VIBE~\cite{kocabas2020vibe}         & Video; SPIN features      & Yes & H   & 82.9 & 51.9 & 99.1$^\ddagger$  & 23.4$^\dagger$ \\
+    TCMR~\cite{choi2021tcmr}            & Video; temporal context   & Yes & H   & 86.5 & 52.7 & 102.9$^\ddagger$ & 7.1$^\dagger$ \\
+    GLoT~\cite{shen2023glot}            & Video; 16 frames          & Yes & H   & 80.7 & 50.6 & 96.3$^\ddagger$  & 6.6$^\dagger$ \\
+    WHAM~\cite{shin2024wham}            & Video; ViT; real data     & Yes & H   & 57.8 & 35.9 & 68.7  & 6.6 \\
+    WHAM~\cite{shin2024wham}            & Video; ViT; + BEDLAM      & Yes & H   & 56.9 & 35.7 & 67.4  & 6.7 \\
+    GVHMR~\cite{shen2024gvhmr}          & Video; flip evaluation    & Yes & H   & 55.6 & 36.2 & 67.2  & 5.0 \\
+    PromptHMR~\cite{wang2025prompthmr}  & Video; no flip averaging  & Yes & P   & 56.9 & 35.5 & 67.3  & -- \\
+    OnlineHMR~\cite{zhao2026onlinehmr}  & Causal online video       & Yes & --  & 69.9 & 43.7 & 83.7$^\ast$  & -- \\
+    \midrule
+    \multicolumn{8}{@{}l}{\emph{Ours, 3DPW test, annotation-derived crops, no flip or smoothing; root P\,/\,H}}\\
+    Parent \textsf{P}            & Video; HMR\,2.0a + VACE   & Yes & P\,/\,H & \res{P-parent@test@mpjpe}\,/\,\res{P-parent@test@mpjpehip} & \res{P-parent@test@pampjpe} & \res{P-parent@test@pvepelvis}\,/\,\res{P-parent@test@pvehip} & \res{P-parent@test@accelms} \\
+    C10 (archived, routes drift) & + head routing            & Yes & P\,/\,H & \res{R-c10-archived@test@mpjpe}\,/\,\res{R-c10-archived@test@mpjpehip} & \res{R-c10-archived@test@pampjpe} & \res{R-c10-archived@test@pvepelvis}\,/\,\res{R-c10-archived@test@pvehip} & \res{R-c10-archived@test@accelms} \\
+    \vA{1} mean (C00 design)     & + head mean               & Yes & P\,/\,H & \res{A1-mean@test@mpjpe}\,/\,\res{A1-mean@test@mpjpehip} & \res{A1-mean@test@pampjpe} & \res{A1-mean@test@pvepelvis}\,/\,\res{A1-mean@test@pvehip} & \res{A1-mean@test@accelms} \\
+    \vB{7} ordered vector        & + ViTPose, concatenated   & Yes & P\,/\,H & \res{B7-ext-concat@test@mpjpe}\,/\,\res{B7-ext-concat@test@mpjpehip} & \res{B7-ext-concat@test@pampjpe} & \res{B7-ext-concat@test@pvepelvis}\,/\,\res{B7-ext-concat@test@pvehip} & \res{B7-ext-concat@test@accelms} \\
+    \vB{4} \method (routed)      & + ViTPose, routed         & Yes & P\,/\,H & \res{B4-ext-joint@test@mpjpe}\,/\,\res{B4-ext-joint@test@mpjpehip} & \res{B4-ext-joint@test@pampjpe} & \res{B4-ext-joint@test@pvepelvis}\,/\,\res{B4-ext-joint@test@pvehip} & \res{B4-ext-joint@test@accelms} \\
+    \vB{6} head + ViTPose        & + both, routed            & Yes & P\,/\,H & \res{B6-both-joint@test@mpjpe}\,/\,\res{B6-both-joint@test@mpjpehip} & \res{B6-both-joint@test@pampjpe} & \res{B6-both-joint@test@pvepelvis}\,/\,\res{B6-both-joint@test@pvehip} & \res{B6-both-joint@test@accelms} \\
+    \bottomrule
+  \end{tabular}
+  \caption{\textbf{3DPW test results} (mm; Accel in m/s$^2$).
+  Published rows are the authors' own numbers with their inputs and training data.
+  Root gives the convention under which MPJPE and PVE were computed: P, vertices and joints relative to the H36M-regressed pelvis; H, relative to the hip midpoint; --, not reported, or convention or unit not established by our audit of the source.
+  Our rows give both conventions (P\,/\,H) and are means over three seeds (single checkpoints for \textsf{P} and C10); compare each published row only with the matching value.
+  $^\ast$PVE alignment not audited.
+  $^\ddagger$Unaligned PVE against neutral-gender ground-truth bodies, which our evaluator does not reproduce; not comparable.
+  $^\dagger$Frame-based acceleration as printed (mm/frame$^2$, not converted).
+  Our crops are derived from dataset annotations, so these rows are not a like-for-like ranking (\cref{sec:protocol}).}
+  \label{tab:sota}
+\end{table*}
+
+\subsection{Comparison with published results}
+\label{sec:sota}
+
+\Cref{tab:sota} places our test results next to author-reported numbers, keeping strong variants with additional training data and recording each row's input, training data and evaluation convention.
+\TODO{Describe where \vB{4} falls relative to the hip-root video methods (WHAM, GVHMR) and the pelvis-root image methods (CameraHMR, ReFit, PromptHMR) using the matching column only; do not claim state of the art, and recall the annotation-derived crops.}
+Temporal quality is a clear weakness of our refiner.
+The archived C10 checkpoint has an acceleration error of 21.44\,mm/frame$^2$ on validation (archived, single seed), \ie 19.3\,m/s$^2$, whereas WHAM and GVHMR report 6.6 and 5.0\,m/s$^2$ on test.
+Our refiner applies no temporal smoothing and is not a motion prior: temporal attention exchanges features between frames, and the acceleration term is one loss among several over a short continuation.
+\TODO{Confirm with \res{B4-ext-joint@test@accelms}\,m/s$^2$ and state whether routing changes temporal error (\cref{tab:paired}, Accel column).}
+
+\begin{table*}[t]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{3.2pt}
+  \begin{tabular}{@{}l l l r cccc cccc@{}}
+    \toprule
+    & & & & \multicolumn{4}{c}{Validation} & \multicolumn{4}{c}{Test} \\
+    \cmidrule(lr){5-8}\cmidrule(l){9-12}
+    ID & Evidence & Interface & Params & MPJPE & PA-MPJPE & PVE & Accel & MPJPE & PA-MPJPE & PVE & Accel \\
+    \midrule
+    \textsf{P} & \multicolumn{2}{l}{parent, no continuation} & -- &
+      \res{P-parent@validation@mpjpe} & \res{P-parent@validation@pampjpe} & \res{P-parent@validation@pvepelvis} & \res{P-parent@validation@accel} &
+      \res{P-parent@test@mpjpe} & \res{P-parent@test@pampjpe} & \res{P-parent@test@pvepelvis} & \res{P-parent@test@accel} \\
+    \midrule
+    \vA{0} & none & -- & 0 &
+      \res{A0-none@validation@mpjpe@pm} & \res{A0-none@validation@pampjpe@pm} & \res{A0-none@validation@pvepelvis@pm} & \res{A0-none@validation@accel@pm} &
+      \res{A0-none@test@mpjpe@pm} & \res{A0-none@test@pampjpe@pm} & \res{A0-none@test@pvepelvis@pm} & \res{A0-none@test@accel@pm} \\
+    \vA{1} & head (drift) & mean (C00) & 512 &
+      \res{A1-mean@validation@mpjpe@pm} & \res{A1-mean@validation@pampjpe@pm} & \res{A1-mean@validation@pvepelvis@pm} & \res{A1-mean@validation@accel@pm} &
+      \res{A1-mean@test@mpjpe@pm} & \res{A1-mean@test@pampjpe@pm} & \res{A1-mean@test@pvepelvis@pm} & \res{A1-mean@test@accel@pm} \\
+    \vA{2} & head (drift) & routed (C10) & 105,472 &
+      \res{A2-head-joint@validation@mpjpe@pm} & \res{A2-head-joint@validation@pampjpe@pm} & \res{A2-head-joint@validation@pvepelvis@pm} & \res{A2-head-joint@validation@accel@pm} &
+      \res{A2-head-joint@test@mpjpe@pm} & \res{A2-head-joint@test@pampjpe@pm} & \res{A2-head-joint@test@pvepelvis@pm} & \res{A2-head-joint@test@accel@pm} \\
+    \vB{1} & ViTPose & pooled & 100,096 &
+      \res{B1-ext-pooled@validation@mpjpe@pm} & \res{B1-ext-pooled@validation@pampjpe@pm} & \res{B1-ext-pooled@validation@pvepelvis@pm} & \res{B1-ext-pooled@validation@accel@pm} &
+      \res{B1-ext-pooled@test@mpjpe@pm} & \res{B1-ext-pooled@test@pampjpe@pm} & \res{B1-ext-pooled@test@pvepelvis@pm} & \res{B1-ext-pooled@test@accel@pm} \\
+    \vB{7} & ViTPose & ordered vector & 329,344 &
+      \res{B7-ext-concat@validation@mpjpe@pm} & \res{B7-ext-concat@validation@pampjpe@pm} & \res{B7-ext-concat@validation@pvepelvis@pm} & \res{B7-ext-concat@validation@accel@pm} &
+      \res{B7-ext-concat@test@mpjpe@pm} & \res{B7-ext-concat@test@pampjpe@pm} & \res{B7-ext-concat@test@pvepelvis@pm} & \res{B7-ext-concat@test@accel@pm} \\
+    \vB{4} & ViTPose & routed (ours) & 105,472 &
+      \res{B4-ext-joint@validation@mpjpe@pm} & \res{B4-ext-joint@validation@pampjpe@pm} & \res{B4-ext-joint@validation@pvepelvis@pm} & \res{B4-ext-joint@validation@accel@pm} &
+      \res{B4-ext-joint@test@mpjpe@pm} & \res{B4-ext-joint@test@pampjpe@pm} & \res{B4-ext-joint@test@pvepelvis@pm} & \res{B4-ext-joint@test@accel@pm} \\
+    \bottomrule
+  \end{tabular}
+  \caption{\textbf{Controlled comparison} on 3DPW (mean{\scriptsize$\pm$std} over three seeds; mm, Accel in mm/frame$^2$; pelvis root, pelvis-aligned PVE).
+  All variants continue the same parent \textsf{P} for 1,000 steps and are evaluated with EMA weights at that pre-registered step.
+  ``Head (drift)'' denotes the inherited observation head, whose outputs equal the frozen reference projection (\cref{sec:audit}).
+  Params counts the feedback module parameters that receive gradient.
+  Archived single-seed validation values for reference: parent 61.26/37.64/73.02, C10 61.19/37.61/72.82, C00 61.26/37.64/73.05\,mm (MPJPE/PA-MPJPE/unaligned PVE; C00 transcribed from run records).}
+  \label{tab:main}
+\end{table*}
+
+\subsection{Does real evidence help, and through which interface?}
+\label{sec:main}
+
+\Cref{tab:main} reports the core variants and \cref{tab:paired} their paired differences on test.
+Continuing the parent without any landmark channel (\vA{0}) isolates the effect of the extra budget: \vA{0} reaches \res{A0-none@test@mpjpe}\,mm test MPJPE, against \res{P-parent@test@mpjpe}\,mm for the parent.
+
+\paragraph{Self-referential evidence.}
+Mean (\vA{1}) and routed (\vA{2}) head feedback re-run the archived C00/C10 designs with three seeds.
+Against no feedback, routed drift gives \dtext{A2-head-joint}{A0-none}{test}{mpjpe}, and routed against mean drift gives \dtext{A2-head-joint}{A1-mean}{test}{mpjpe}.
+\TODO{If both CIs include 0: state that the archived C10 advantage does not survive three seeds and the test split, consistent with routing a signal that contains no image evidence. If A2 beats A0: discuss the reference-drift signal as a learned pull toward the reference (regulariser), not evidence.}
+
+\paragraph{External evidence.}
+Routing ViTPose evidence instead of drift changes test MPJPE by \dtext{B4-ext-joint}{A2-head-joint}{test}{mpjpe}, and relative to no feedback by \dtext{B4-ext-joint}{A0-none}{test}{mpjpe}.
+\TODO{State whether real evidence helps (CI of B4 vs A0 excludes 0) and by how much on PVE (\cref{tab:paired}).}
+
+\paragraph{Identity and routing.}
+The central comparison holds the evidence fixed and changes only the interface.
+Against the capacity-matched pooled control, routing gives \dtext{B4-ext-joint}{B1-ext-pooled}{test}{mpjpe}; against ordered-vector conditioning, which keeps identity by position with $3.1\times$ more parameters, it gives \dtext{B4-ext-joint}{B7-ext-concat}{test}{mpjpe}.
+\TODO{Decision rule (reliable = CI excludes 0 and all seeds agree in sign). B4 better than both B1 and B7: anatomically routed tokens beat pooled and ordered-vector (WHAM-style) conditioning at equal evidence. B4 $\approx$ B7, both better than B1: identity matters but routing is not required; argue parameter efficiency (105k \vs 329k), interpretability and multi-source fusion (B6). B4 $\approx$ B1 $\approx$ A0: external evidence does not help this refiner; reframe the paper around the self-referential-evidence diagnostic and the controlled protocol.}
+
+\begin{table*}[t]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}l l c c c c c c@{}}
+    \toprule
+    Comparison & Isolated factor & $\Delta$MPJPE [95\% CI] & Wins & $\Delta$PVE [95\% CI] & Wins & $\Delta$PA-MPJPE & $\Delta$Accel \\
+    \midrule
+    \vB{4} \vs \vB{1} & routing \vs capacity-matched pooling & \dci{B4-ext-joint}{B1-ext-pooled}{test}{mpjpe} & \cmpwins{B4-ext-joint}{B1-ext-pooled}{test}{mpjpe} & \dci{B4-ext-joint}{B1-ext-pooled}{test}{pvepelvis} & \cmpwins{B4-ext-joint}{B1-ext-pooled}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{B1-ext-pooled}{test}{pampjpe} & \cmpdiff{B4-ext-joint}{B1-ext-pooled}{test}{accel} \\
+    \vB{4} \vs \vB{7} & routing \vs ordered vector & \dci{B4-ext-joint}{B7-ext-concat}{test}{mpjpe} & \cmpwins{B4-ext-joint}{B7-ext-concat}{test}{mpjpe} & \dci{B4-ext-joint}{B7-ext-concat}{test}{pvepelvis} & \cmpwins{B4-ext-joint}{B7-ext-concat}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{B7-ext-concat}{test}{pampjpe} & \cmpdiff{B4-ext-joint}{B7-ext-concat}{test}{accel} \\
+    \vB{4} \vs \vB{2} & explicit identity + bias & \dci{B4-ext-joint}{B2-ext-set}{test}{mpjpe} & \cmpwins{B4-ext-joint}{B2-ext-set}{test}{mpjpe} & \dci{B4-ext-joint}{B2-ext-set}{test}{pvepelvis} & \cmpwins{B4-ext-joint}{B2-ext-set}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{B2-ext-set}{test}{pampjpe} & \cmpdiff{B4-ext-joint}{B2-ext-set}{test}{accel} \\
+    \vB{4} \vs \vB{3} & anatomical bias & \dci{B4-ext-joint}{B3-ext-nobias}{test}{mpjpe} & \cmpwins{B4-ext-joint}{B3-ext-nobias}{test}{mpjpe} & \dci{B4-ext-joint}{B3-ext-nobias}{test}{pvepelvis} & \cmpwins{B4-ext-joint}{B3-ext-nobias}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{B3-ext-nobias}{test}{pampjpe} & \cmpdiff{B4-ext-joint}{B3-ext-nobias}{test}{accel} \\
+    \vB{4} \vs \vB{5} & correct \vs deranged anatomy & \dci{B4-ext-joint}{B5-ext-shuffled}{test}{mpjpe} & \cmpwins{B4-ext-joint}{B5-ext-shuffled}{test}{mpjpe} & \dci{B4-ext-joint}{B5-ext-shuffled}{test}{pvepelvis} & \cmpwins{B4-ext-joint}{B5-ext-shuffled}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{B5-ext-shuffled}{test}{pampjpe} & \cmpdiff{B4-ext-joint}{B5-ext-shuffled}{test}{accel} \\
+    \vB{4} \vs \vA{2} & external \vs self-referential evidence & \dci{B4-ext-joint}{A2-head-joint}{test}{mpjpe} & \cmpwins{B4-ext-joint}{A2-head-joint}{test}{mpjpe} & \dci{B4-ext-joint}{A2-head-joint}{test}{pvepelvis} & \cmpwins{B4-ext-joint}{A2-head-joint}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{A2-head-joint}{test}{pampjpe} & \cmpdiff{B4-ext-joint}{A2-head-joint}{test}{accel} \\
+    \vB{6} \vs \vB{4} & adding head tokens & \dci{B6-both-joint}{B4-ext-joint}{test}{mpjpe} & \cmpwins{B6-both-joint}{B4-ext-joint}{test}{mpjpe} & \dci{B6-both-joint}{B4-ext-joint}{test}{pvepelvis} & \cmpwins{B6-both-joint}{B4-ext-joint}{test}{pvepelvis} & \cmpdiff{B6-both-joint}{B4-ext-joint}{test}{pampjpe} & \cmpdiff{B6-both-joint}{B4-ext-joint}{test}{accel} \\
+    \vB{1} \vs \vA{1} & external \vs drift, pooled & \dci{B1-ext-pooled}{A1-mean}{test}{mpjpe} & \cmpwins{B1-ext-pooled}{A1-mean}{test}{mpjpe} & \dci{B1-ext-pooled}{A1-mean}{test}{pvepelvis} & \cmpwins{B1-ext-pooled}{A1-mean}{test}{pvepelvis} & \cmpdiff{B1-ext-pooled}{A1-mean}{test}{pampjpe} & \cmpdiff{B1-ext-pooled}{A1-mean}{test}{accel} \\
+    \vA{2} \vs \vA{1} & routed \vs mean drift (C10 \vs C00) & \dci{A2-head-joint}{A1-mean}{test}{mpjpe} & \cmpwins{A2-head-joint}{A1-mean}{test}{mpjpe} & \dci{A2-head-joint}{A1-mean}{test}{pvepelvis} & \cmpwins{A2-head-joint}{A1-mean}{test}{pvepelvis} & \cmpdiff{A2-head-joint}{A1-mean}{test}{pampjpe} & \cmpdiff{A2-head-joint}{A1-mean}{test}{accel} \\
+    \vA{1} \vs \vA{0} & mean drift \vs none & \dci{A1-mean}{A0-none}{test}{mpjpe} & \cmpwins{A1-mean}{A0-none}{test}{mpjpe} & \dci{A1-mean}{A0-none}{test}{pvepelvis} & \cmpwins{A1-mean}{A0-none}{test}{pvepelvis} & \cmpdiff{A1-mean}{A0-none}{test}{pampjpe} & \cmpdiff{A1-mean}{A0-none}{test}{accel} \\
+    \vA{2} \vs \vA{0} & routed drift \vs none & \dci{A2-head-joint}{A0-none}{test}{mpjpe} & \cmpwins{A2-head-joint}{A0-none}{test}{mpjpe} & \dci{A2-head-joint}{A0-none}{test}{pvepelvis} & \cmpwins{A2-head-joint}{A0-none}{test}{pvepelvis} & \cmpdiff{A2-head-joint}{A0-none}{test}{pampjpe} & \cmpdiff{A2-head-joint}{A0-none}{test}{accel} \\
+    \vB{4} \vs \vA{0} & routed evidence \vs none & \dci{B4-ext-joint}{A0-none}{test}{mpjpe} & \cmpwins{B4-ext-joint}{A0-none}{test}{mpjpe} & \dci{B4-ext-joint}{A0-none}{test}{pvepelvis} & \cmpwins{B4-ext-joint}{A0-none}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{A0-none}{test}{pampjpe} & \cmpdiff{B4-ext-joint}{A0-none}{test}{accel} \\
+    \vC{4} \vs \vC{1} & routing \vs pooling, OpenPose & \dci{C4-op-joint}{C1-op-pooled}{test}{mpjpe} & \cmpwins{C4-op-joint}{C1-op-pooled}{test}{mpjpe} & \dci{C4-op-joint}{C1-op-pooled}{test}{pvepelvis} & \cmpwins{C4-op-joint}{C1-op-pooled}{test}{pvepelvis} & \cmpdiff{C4-op-joint}{C1-op-pooled}{test}{pampjpe} & \cmpdiff{C4-op-joint}{C1-op-pooled}{test}{accel} \\
+    \vB{4} \vs \vC{4} & ViTPose \vs OpenPose, routed & \dci{B4-ext-joint}{C4-op-joint}{test}{mpjpe} & \cmpwins{B4-ext-joint}{C4-op-joint}{test}{mpjpe} & \dci{B4-ext-joint}{C4-op-joint}{test}{pvepelvis} & \cmpwins{B4-ext-joint}{C4-op-joint}{test}{pvepelvis} & \cmpdiff{B4-ext-joint}{C4-op-joint}{test}{pampjpe} & \cmpdiff{B4-ext-joint}{C4-op-joint}{test}{accel} \\
+    \bottomrule
+  \end{tabular}
+  \caption{\textbf{Paired differences on 3DPW test} (first minus second variant; mm, Accel in mm/frame$^2$; negative favours the first).
+  $\Delta$ is the frame-weighted aggregate difference averaged over paired seeds; intervals are 95\% hierarchical cluster-bootstrap intervals over seeds and sequences; Wins counts the 24 sequences whose seed-averaged error decreases.
+  The comparisons were fixed before test evaluation; validation counterparts and paired $t$-tests are in Supp.~S6.}
+  \label{tab:paired}
+\end{table*}
+
+\subsection{What does the router need?}
+\label{sec:ablation}
+
+\begin{table}[t]
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{2.6pt}
+  \begin{tabular}{@{}l c c l cccc@{}}
+    \toprule
+    ID & Id. & Bias & Evidence & MPJPE & PA & PVE & Accel \\
+    \midrule
+    \vB{4} & \checkmark & anatomy  & ViTPose      & \res{B4-ext-joint@test@mpjpe} & \res{B4-ext-joint@test@pampjpe} & \res{B4-ext-joint@test@pvepelvis} & \res{B4-ext-joint@test@accel} \\
+    \vB{2} & --         & --       & ViTPose      & \res{B2-ext-set@test@mpjpe} & \res{B2-ext-set@test@pampjpe} & \res{B2-ext-set@test@pvepelvis} & \res{B2-ext-set@test@accel} \\
+    \vB{3} & \checkmark & --       & ViTPose      & \res{B3-ext-nobias@test@mpjpe} & \res{B3-ext-nobias@test@pampjpe} & \res{B3-ext-nobias@test@pvepelvis} & \res{B3-ext-nobias@test@accel} \\
+    \vB{5} & \checkmark & deranged & ViTPose      & \res{B5-ext-shuffled@test@mpjpe} & \res{B5-ext-shuffled@test@pampjpe} & \res{B5-ext-shuffled@test@pvepelvis} & \res{B5-ext-shuffled@test@accel} \\
+    \vB{6} & \checkmark & anatomy  & head + ViTP. & \res{B6-both-joint@test@mpjpe} & \res{B6-both-joint@test@pampjpe} & \res{B6-both-joint@test@pvepelvis} & \res{B6-both-joint@test@accel} \\
+    \vC{4} & \checkmark & anatomy  & OpenPose     & \res{C4-op-joint@test@mpjpe} & \res{C4-op-joint@test@pampjpe} & \res{C4-op-joint@test@pvepelvis} & \res{C4-op-joint@test@accel} \\
+    \vC{1} & --         & pooled   & OpenPose     & \res{C1-op-pooled@test@mpjpe} & \res{C1-op-pooled@test@pampjpe} & \res{C1-op-pooled@test@pvepelvis} & \res{C1-op-pooled@test@accel} \\
+    \bottomrule
+  \end{tabular}
+  \caption{\textbf{Router ablations} on 3DPW test (means over three seeds; mm, Accel in mm/frame$^2$; pelvis root).
+  Id.: learned landmark identity; Bias: kinematic-tree bias in \cref{eq:route}.
+  Standard deviations and validation results are in Supp.~S6.}
+  \label{tab:ablation}
+\end{table}
+
+\Cref{tab:ablation} varies one ingredient of the router at a time.
+Removing explicit identity and bias (\vB{2}) gives \dtext{B4-ext-joint}{B2-ext-set}{test}{mpjpe}; removing only the bias (\vB{3}) gives \dtext{B4-ext-joint}{B3-ext-nobias}{test}{mpjpe}; and a deranged anatomy (\vB{5}) gives \dtext{B4-ext-joint}{B5-ext-shuffled}{test}{mpjpe}.
+\TODO{Interpret: if B5 is clearly worse than B4 but B3 is not, the bias matters only when wrong (attention learns anatomy on its own); if B3 and B5 are both worse, the anatomical prior helps at this budget; if none differs, identity embeddings carry the effect. Keep the implicit-identity caveat of \cref{sec:routing} for B2.}
+
+\paragraph{Evidence quality and fusion.}
+With the OpenPose detections shipped with 3DPW, routing \vs pooling gives \dtext{C4-op-joint}{C1-op-pooled}{test}{mpjpe}, and ViTPose \vs OpenPose under routing gives \dtext{B4-ext-joint}{C4-op-joint}{test}{mpjpe}.
+Adding the self-referential head tokens to ViTPose (\vB{6}) gives \dtext{B6-both-joint}{B4-ext-joint}{test}{mpjpe}.
+\TODO{Interpret: does the routing advantage grow with evidence quality (compare B4-vs-B1 with C4-vs-C1)? Does reference drift add anything once real evidence is present (B6 vs B4)? The C runs are optional; drop this paragraph and the C rows if they were not run.}
+
+\begin{figure*}[t]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}\centering
+    \genfig{sequences}{\linewidth}{3.6cm}
+    \caption{Per-sequence $\Delta$PVE on test}\label{fig:data:sequences}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\textwidth}\centering
+    \genfig{confidence}{\linewidth}{3.6cm}
+    \caption{Effect \vs detector confidence}\label{fig:data:confidence}
+  \end{subfigure}
+  \caption{\textbf{Where routing acts.}
+  (a)~Seed-averaged $\Delta$PVE (pelvis-aligned) of \vB{4} against \vB{1} for the 24 test sequences, sorted; blue bars are improvements.
+  (b)~Test MPJPE change of \vB{4} against \vA{0}, binned by the mean ViTPose confidence of a person-frame (quintiles; sequence-cluster bootstrap band).
+  All paired comparisons with their intervals are plotted in Supp.~S6.}
+  \label{fig:data}
+\end{figure*}
+
+\subsection{Where does routing act?}
+\label{sec:where}
+
+\Cref{fig:data} breaks the aggregate differences down.
+Sequence-level changes (\cref{fig:data:sequences}) show whether an aggregate difference is carried by a few sequences or distributed across motions, and the confidence analysis (\cref{fig:data:confidence}) tests the expectation that evidence feedback helps most where the detector is confident and the parent is wrong.
+\TODO{Describe the observed pattern: number of sequences improved (\cmpwins{B4-ext-joint}{B1-ext-pooled}{test}{pvepelvis} for B4 vs B1), sequences with the largest gains or losses, and whether low-confidence frames are protected by the $-2\log c$ feature.}
+
+\paragraph{Limitations.}
+Our evaluation uses annotation-derived crops and ground-truth track identity for the shape prototype and the validity masks, so the absolute numbers are likely optimistic relative to a detector-and-tracker pipeline; the paired comparisons share this protocol, but their size may change with detected crops.
+All conclusions rest on one dataset, three seeds and one continuation budget; the router may matter more or less with longer training or other data, and a world-grounded benchmark such as EMDB~\cite{kaufmann2023emdb} remains to be evaluated.
+The temporal error of our refiner is far above that of motion-prior methods (\cref{sec:sota}).
+Finally, ViTPose runs on these annotation-derived crops, so its keypoints may be more accurate than in a full detection pipeline.

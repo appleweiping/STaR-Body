@@ -1,0 +1,29 @@
+\section{Introduction}
+\label{sec:intro}
+
+Monocular human mesh recovery estimates an articulated SMPL body~\cite{loper2015smpl} from images.
+Single-image regressors~\cite{kanazawa2018hmr,kolotouros2019spin,goel2023hmr2} now provide strong initial estimates, and video methods refine them with temporal context~\cite{kocabas2020vibe,choi2021tcmr,shen2023glot} and with detected 2D keypoints~\cite{shin2024wham,shen2024gvhmr}.
+Keypoints are an attractive refinement signal: they are cheap to obtain from mature detectors~\cite{cao2021openpose,xu2022vitpose}, they are expressed in the same image plane as the body projection, and each of them constrains a specific part of the kinematic tree.
+How this evidence should \emph{enter} a refiner, however, is rarely studied in isolation.
+Common interfaces pool landmark residuals into a single vector or concatenate the keypoints into an ordered per-frame vector; either way, a single per-frame feature computed by a global network conditions every joint.
+Pooling discards which landmark produced a residual, and concatenation keeps identity only by position, leaving a global network to discover which joint each coordinate should move.
+
+This paper asks a narrow question: \emph{does preserving landmark identity, and routing each landmark anatomically to the joints it constrains, matter once the evidence is real?}
+We were led to it by an audit of our own earlier refiner.
+An earlier variant of our refiner routed 17 landmark tokens to 24 joint queries and reported small single-seed validation gains over a mean-feedback control (PVE 72.82 \vs 73.05\,mm).
+Its landmark observations, however, came from an observation head whose 2D losses were zero in every training stage; the head never left its initialisation and its output equals the projection of the frozen reference model (\cref{sec:audit}; \TODO{confirm}).
+That refiner therefore routed the drift of the current body from a frozen reference, not image evidence, and its mean control had 206 times fewer parameters.
+The earlier comparison cannot answer the question above.
+
+We therefore rebuild the feedback interface around external detector keypoints and design a study that changes one factor at a time.
+\method encodes each ViTPose~\cite{xu2022vitpose,xu2024vitposepp} landmark as a token that carries its residual to the current body projection, the projection itself, its detector confidence and a learned identity embedding.
+Twenty-four SMPL joint queries read these tokens through multi-head attention with a soft kinematic-tree distance bias.
+The routed feedback is recomputed at every refinement iteration as the body moves, enters each joint before anatomical part pooling and masked temporal exchange, and is zero at initialisation, so every variant starts from exactly the inherited prediction (\cref{fig:overview}).
+Around this router we place controls that isolate the evidence source (none, self-referential, external), the interface (capacity-matched pooling, ordered concatenation, identity-free set attention, routing), the anatomical prior (none, correct, deranged) and the evidence quality (ViTPose \vs the OpenPose~\cite{cao2021openpose} detections shipped with 3DPW~\cite{vonmarcard2018pw3d}).
+All variants start from one parent checkpoint, share a 1,000-step budget and a pre-registered evaluation step, are trained with three seeds, and are evaluated on the 3DPW test split exactly once through immutable validation locks.
+
+Our contributions are
+(i)~a diagnostic showing that joint-indexed feedback built on an untrained observation head routes reference drift, which explains why an apparent interface effect can arise without image evidence;
+(ii)~an identity-preserving evidence router that turns external keypoints into anatomically routed, per-iteration joint feedback inside a spatiotemporal refiner, with bounded rotation updates and a start that reproduces the inherited prediction exactly;
+and (iii)~a controlled, multi-seed study with paired sequence-clustered statistics that separates evidence, identity, routing, anatomical prior and evidence quality.
+\TODO{Close the paragraph with the answer once test numbers exist, \eg ``Routing real evidence improves over ordered-vector conditioning and pooling on the 3DPW test split, whereas routing self-referential evidence does not''; if routing is not distinguishable from global conditioning, say so and state the finding that does hold (\eg evidence source matters more than interface).}

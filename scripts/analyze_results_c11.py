@@ -24,6 +24,7 @@ LaTeX macros (paper/latex/generated/results.tex):
   \\res{<variant>@<split>@<metric>@pm}         mean with +- std (when >1 seed)
   \\res{<variant>@<split>@nseeds}
   \\res{cmp@<variant>@<control>@<split>@<metric>@diff|ci|wins|p}
+  \\res{cmp@<variant>@<control>@<split>@<metric>@seq@<3DPW sequence name>}   per-sequence diff
 metric in {mpjpe (H36M-pelvis root), mpjpehip (hip-midpoint root, WHAM/GVHMR), pampjpe,
 pve (unaligned), pvepelvis (H36M-pelvis aligned, CameraHMR/ReFit), pvehip (hip-midpoint
 aligned, WHAM/GVHMR), accel (mm/frame^2), accelms (m/s^2 at 30 fps)}. The optional
@@ -172,6 +173,13 @@ def fmt(value, digits=2):
     return 'nan' if value is None or not math.isfinite(value) else f'{value:.{digits}f}'
 
 
+def signed(value, digits=2):
+    r"""LaTeX signed number with a typographic minus (or plus), e.g. \ensuremath{-}0.34."""
+    if value is None or not math.isfinite(value):
+        return 'nan'
+    return ('\\ensuremath{-}' if value < 0 else '\\ensuremath{+}') + f'{abs(value):.{digits}f}'
+
+
 def macro(lines, key, value):
     lines.append('\\expandafter\\def\\csname res@%s\\endcsname{%s}' % (key, value))
 
@@ -252,8 +260,10 @@ def main():
                 p, short = result[m], SHORT[m]
                 lo, hi = p['cluster_bootstrap']['ci95']
                 key = f'cmp@{variant}@{ctrl}@{split}@{short}'
-                macro(tex, f'{key}@diff', f'{p["cluster_bootstrap"]["point"]:+.2f}')
-                macro(tex, f'{key}@ci', f'[{lo:+.2f}, {hi:+.2f}]')
+                macro(tex, f'{key}@diff', signed(p['cluster_bootstrap']['point']))
+                macro(tex, f'{key}@ci', f'[{signed(lo)}, {signed(hi)}]')
+                for sequence, value in p['per_sequence_mean_diff'].items():
+                    macro(tex, f'{key}@seq@{sequence}', signed(value))
                 macro(tex, f'{key}@wins', f'{p["sequences_improved"]}/{p["sequences_total"]}')
                 if p.get('seed_t_p') is not None:
                     macro(tex, f'{key}@p', f'{p["seed_t_p"]:.3f}')
