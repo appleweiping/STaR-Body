@@ -1,0 +1,76 @@
+{
+  "_comment": "C11 experiment matrix. Copy to configs/c11/matrix.local.json (git-ignored) and replace every assets/... path. Consumed by scripts/run_c11_matrix.py.",
+  "base_config": "configs/c11/base.example.json",
+  "runs_dir": "runs/c11",
+  "results_dir": "results/c11",
+  "seeds": [2026, 2027, 2028],
+  "router_init_seed_base": 370026,
+  "fixed_step": 1000,
+  "checkpoint_weights": "ema_model",
+  "keypoints": {
+    "vitpose": {
+      "train": "assets/keypoints/train_vitpose_h.pt",
+      "validation": "assets/keypoints/validation_vitpose_h.pt",
+      "test": "assets/keypoints/test_vitpose_h.pt"
+    },
+    "openpose3dpw": {
+      "train": "assets/keypoints/train_openpose3dpw.pt",
+      "validation": "assets/keypoints/validation_openpose3dpw.pt",
+      "test": "assets/keypoints/test_openpose3dpw.pt"
+    }
+  },
+  "variants": {
+    "A0-none":         {"tier": "ablation", "evidence": null, "cli": {"v43-feedback": "none"}},
+    "A1-mean":         {"tier": "core",     "evidence": null, "cli": {"v43-feedback": "mean"}},
+    "A2-head-joint":   {"tier": "core",     "evidence": null, "cli": {"v43-feedback": "router"}},
+    "B1-ext-pooled":   {"tier": "core",     "evidence": "vitpose", "cli": {"v43-feedback": "router", "v43-router-sources": "external", "v43-router-pooling": "mean", "v43-router-no-identity": true, "v43-router-routing": "none"}},
+    "B7-ext-concat":   {"tier": "core",     "evidence": "vitpose", "cli": {"v43-feedback": "router", "v43-router-sources": "external", "v43-router-pooling": "concat", "v43-router-no-identity": true, "v43-router-routing": "none"}},
+    "B2-ext-set":      {"tier": "ablation", "evidence": "vitpose", "cli": {"v43-feedback": "router", "v43-router-sources": "external", "v43-router-no-identity": true, "v43-router-routing": "none"}},
+    "B3-ext-nobias":   {"tier": "ablation", "evidence": "vitpose", "cli": {"v43-feedback": "router", "v43-router-sources": "external", "v43-router-routing": "none"}},
+    "B4-ext-joint":    {"tier": "core",     "evidence": "vitpose", "cli": {"v43-feedback": "router", "v43-router-sources": "external"}},
+    "B5-ext-shuffled": {"tier": "ablation", "evidence": "vitpose", "cli": {"v43-feedback": "router", "v43-router-sources": "external", "v43-router-routing": "shuffled"}},
+    "B6-both-joint":   {"tier": "ablation", "evidence": "vitpose", "cli": {"v43-feedback": "router", "v43-router-sources": "head+external"}},
+    "C4-op-joint":     {"tier": "optional", "evidence": "openpose3dpw", "cli": {"v43-feedback": "router", "v43-router-sources": "external"}},
+    "C1-op-pooled":    {"tier": "optional", "evidence": "openpose3dpw", "cli": {"v43-feedback": "router", "v43-router-sources": "external", "v43-router-pooling": "mean", "v43-router-no-identity": true, "v43-router-routing": "none"}}
+  },
+  "comparisons": [
+    ["B4-ext-joint", "B1-ext-pooled"],
+    ["B4-ext-joint", "B7-ext-concat"],
+    ["B4-ext-joint", "B2-ext-set"],
+    ["B4-ext-joint", "B3-ext-nobias"],
+    ["B4-ext-joint", "B5-ext-shuffled"],
+    ["B4-ext-joint", "A2-head-joint"],
+    ["B6-both-joint", "B4-ext-joint"],
+    ["B1-ext-pooled", "A1-mean"],
+    ["A2-head-joint", "A1-mean"],
+    ["A1-mean", "A0-none"],
+    ["A2-head-joint", "A0-none"],
+    ["B4-ext-joint", "A0-none"],
+    ["C4-op-joint", "C1-op-pooled"],
+    ["B4-ext-joint", "C4-op-joint"]
+  ],
+  "references": {
+    "_comment": "Archived checkpoints evaluated once per split for Table 1/2 context. Use null to skip.",
+    "P-parent":       {"checkpoint": "assets/checkpoints/refinement_parent.pt", "model_version": "v34", "weights": "model"},
+    "R-c10-archived": {"checkpoint": "assets/checkpoints/c10_step1000.pt",     "model_version": "v43", "weights": "model"},
+    "R-c00-archived": {"checkpoint": "assets/checkpoints/c00_step1000.pt",     "model_version": "v43", "weights": "model"}
+  },
+  "eval": {
+    "smpl-model-root": "assets/smpl",
+    "joint-regressor": "assets/J_regressor_h36m.npy",
+    "batch-size": 8,
+    "validation": {
+      "vace-cache": "assets/cache/validation_vace.pt",
+      "hmr-sidecar": "assets/cache/validation_hmr.pt",
+      "coverage-manifest": "assets/validation_manifest.json",
+      "track-prototypes": "assets/validation_track_prototypes.pt"
+    },
+    "test": {
+      "vace-cache": "assets/cache/test_vace.pt",
+      "hmr-sidecar": "assets/cache/test_hmr.pt",
+      "gt-cache": "assets/cache/test_gt.pt",
+      "coverage-manifest": "assets/test_manifest.json",
+      "track-prototypes": "assets/test_track_prototypes.pt"
+    }
+  }
+}
