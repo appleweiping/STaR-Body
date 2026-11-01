@@ -36,6 +36,8 @@ def _v43_parser():
     p.add_argument('--v43-router-pooling', choices=('joint', 'mean', 'concat'), default='joint')
     p.add_argument('--v43-router-init-seed', type=int, default=V43_DEFAULT_INIT_SEED)
     p.add_argument('--v43-external-min-confidence', type=float, default=0.)
+    p.add_argument('--v43-checkpoint-every', type=int, default=0,
+                   help='Write a resumable latest.pt every N optimizer steps without evaluating (0 = only at evaluations)')
     p.add_argument('--train-external-keypoints', type=Path)
     p.add_argument('--val-external-keypoints', type=Path)
     return p
@@ -72,6 +74,8 @@ def validate_v43(args):
             return 'external evidence requires --train-external-keypoints and --val-external-keypoints'
     elif args.train_external_keypoints or args.val_external_keypoints:
         return 'external keypoint caches given but the configured router does not read external evidence'
+    if args.v43_checkpoint_every < 0:
+        return '--v43-checkpoint-every must be >= 0'
     if not 0. <= args.v43_external_min_confidence < 1.:
         return '--v43-external-min-confidence must be in [0,1)'
     return None

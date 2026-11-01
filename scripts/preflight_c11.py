@@ -48,11 +48,13 @@ def owned_counts(vace):
 def check_split(split, vace_path, hmr_path, prototypes, keypoints, report, torch):
     out = report.setdefault(split, {})
     errors = out.setdefault('errors', [])
+    present = {}
     for name, path in (('vace', vace_path), ('hmr', hmr_path), ('prototypes', prototypes)):
-        if path is None or not resolve(path).is_file():
+        present[name] = path is not None and resolve(path).is_file()
+        if not present[name]:
             errors.append(f'missing {name}: {path}')
-    if errors:
-        return
+    if not (present['vace'] and present['hmr']):
+        return  # nothing below can be checked without both feature caches
     vace = torch.load(resolve(vace_path), map_location='cpu', weights_only=False, mmap=True)
     hmr = torch.load(resolve(hmr_path), map_location='cpu', weights_only=False, mmap=True)
     out['vace_signature'] = {k: vace['signature'].get(k) for k in ('format', 'split', 'feature_only', 'target_stride')}
@@ -76,10 +78,15 @@ def check_split(split, vace_path, hmr_path, prototypes, keypoints, report, torch
         errors.append(f'coverage {frames}/{triplets} != protocol {EXPECTED[split]}')
     if split == 'train' and frames != 22735:
         errors.append(f'train owned frames {frames} != 22,735 (acceleration coefficients assume this cache)')
-    pack = torch.load(resolve(prototypes), map_location='cpu', weights_only=False)
-    out['prototype_format'] = pack.get('format')
-    if pack.get('split') != split:
-        errors.append(f'prototype split {pack.get("split")}')
+    if present['prototypes']:
+        pack = torch.load(resolve(prototypes), map_location='cpu', weights_only=False)
+        out['prototype_format'] = pack.get('format')
+        if pack.get('split') != split:
+            errors.append(f'prototype split {pack.get("split")}')
+    signature = hmr.get('signature', {})
+    out['hmr_crop'] = {k: signature.get(k) for k in ('anchor_revision', 'raw_bbox_margin', 'crop_protocol')}
+    if signature.get('anchor_revision') != 'raw-bbox-v11':
+        errors.append('HMR sidecar is not raw-bbox-v11 (the keypoint caches assume that crop protocol)')
     uids = list(hmr['frame_uids'])
     for source, path in (keypoints or {}).items():
         entry = out.setdefault('keypoints', {})

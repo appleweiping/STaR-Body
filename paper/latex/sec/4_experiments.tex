@@ -25,8 +25,10 @@ The archived parent (\textsf{P}), C10 and C00 checkpoints are evaluated with the
 
 \paragraph{Statistics.}
 We report the mean and standard deviation over seeds.
-A paired comparison gives the difference $\Delta$ of the frame-weighted aggregate error, averaged over the paired seeds (negative favours the first variant), and a 95\% percentile interval from a hierarchical cluster bootstrap~\cite{efron1993bootstrap} that resamples seeds and then sequences (20,000 resamples), because frames within a sequence are strongly correlated.
-We also count the sequences whose seed-averaged error decreases; paired $t$-tests over seeds are listed in the supplement but have little power with three seeds.
+A paired comparison gives the difference $\Delta$ of the frame-weighted aggregate error, averaged over the paired seeds (negative favours the first variant).
+Its 95\% interval and $p$-value combine two sources of uncertainty: training variance, from the spread of the per-seed differences with a Student-$t$ quantile on two degrees of freedom, and test-set sampling variance, from a cluster bootstrap~\cite{efron1993bootstrap} over sequences, because frames within a sequence are strongly correlated (details in Supp.~S4).
+With three seeds these intervals are deliberately wide.
+We also count the sequences whose seed-averaged error decreases.
 The comparisons in \cref{tab:paired} and the rule that a difference is reliable only if its interval excludes zero and all three seeds agree in sign were fixed before any test evaluation.
 
 \begin{table*}[t]
@@ -176,7 +178,7 @@ Against the capacity-matched pooled control, routing gives \dtext{B4-ext-joint}{
     \bottomrule
   \end{tabular}
   \caption{\textbf{Paired differences on 3DPW test} (first minus second variant; mm, Accel in mm/frame$^2$; negative favours the first).
-  $\Delta$ is the frame-weighted aggregate difference averaged over paired seeds; intervals are 95\% hierarchical cluster-bootstrap intervals over seeds and sequences; Wins counts the 24 sequences whose seed-averaged error decreases.
+  $\Delta$ is the frame-weighted aggregate difference averaged over paired seeds; 95\% intervals combine seed variance ($t$, two degrees of freedom) with sequence cluster-bootstrap variance (\cref{sec:protocol}); Wins counts the 24 sequences whose seed-averaged error decreases.
   The comparisons were fixed before test evaluation; validation counterparts and paired $t$-tests are in Supp.~S6.}
   \label{tab:paired}
 \end{table*}

@@ -97,6 +97,11 @@ def parse_args():
     args = p.parse_args()
     if args.output.exists():
         p.error('--output already exists; choose a new result path')
+    if args.per_frame_output is not None:
+        if args.per_frame_output.suffix != '.npz':
+            p.error('--per-frame-output must end in .npz')
+        if args.per_frame_output.exists():
+            p.error('--per-frame-output already exists; remove it or choose a new path')
     if args.model_version in ('v36','v43') and args.split=='test' and args.selection_lock is None:
         p.error('V36 test requires a validation selection lock')
     if args.split == 'test' and args.gt_cache is None:
@@ -506,15 +511,16 @@ def main():
         model_or_teacher_fitting_performed=False,sota_claim=False)
     serialized = json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    if per_frame is not None and args.per_frame_output.exists():
-        raise FileExistsError(args.per_frame_output)
-    with args.output.open('x', encoding='utf-8') as stream:
-        stream.write(serialized)
     if per_frame is not None:
+        # Per-frame file first (atomic), JSON last: a finished JSON always has its .npz.
         rows = sorted(per_frame, key=lambda row: row[0])
         args.per_frame_output.parent.mkdir(parents=True, exist_ok=True)
-        np.savez_compressed(args.per_frame_output, uid=np.asarray([r[0] for r in rows]),
+        temporary = args.per_frame_output.with_name(args.per_frame_output.stem + '.partial.npz')
+        np.savez_compressed(temporary, uid=np.asarray([r[0] for r in rows]),
             **{key: np.asarray([r[1][key] for r in rows]) for key in rows[0][1]})
+        temporary.replace(args.per_frame_output)
+    with args.output.open('x', encoding='utf-8') as stream:
+        stream.write(serialized)
     print(serialized, flush=True)
 if __name__ == '__main__':
     main()

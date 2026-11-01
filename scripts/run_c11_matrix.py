@@ -11,8 +11,10 @@ All heavy work is delegated to the versioned entry points; this script only sche
   python scripts/run_c11_matrix.py --matrix ... evaluate --split test --gpus 0,1,2
   python scripts/run_c11_matrix.py --matrix ... analyze         # tables + LaTeX macros
 
-Every subcommand accepts --dry-run (print commands only). Finished outputs are never
-recomputed or overwritten; interrupted training resumes from latest.pt when possible.
+Global option --dry-run goes BEFORE the subcommand (``--matrix X --dry-run train ...``) and only
+prints commands. Finished outputs are never recomputed or overwritten. Training writes a
+resumable latest.pt every ``checkpoint_every`` (default 100) steps, so an interrupted run
+resumes from there; live runs (lock '<run_dir>.running') are reported as 'running' and skipped.
 Pre-registered protocol: every variant/seed is compared at the same fixed step (EMA);
 test results are produced only through validation locks and never used for selection.
 """
@@ -60,10 +62,26 @@ def fixed_checkpoint(matrix, variant, seed):
     return run_dir(matrix, variant, seed) / f'step_{matrix["fixed_step"]:06d}.pt'
 
 
+def is_running(out):
+    """True while train_from_config_v43 holds '<run_dir>.running' with a live PID on this host."""
+    import socket
+    lock = out.with_name(out.name + '.running')
+    if not lock.is_file():
+        return False
+    try:
+        info = json.loads(lock.read_text())
+        os.kill(int(info['pid']), 0)
+        return info.get('host') == socket.gethostname()
+    except (ProcessLookupError, PermissionError, ValueError, KeyError, json.JSONDecodeError):
+        return False
+
+
 def run_status(matrix, variant, seed):
     out = run_dir(matrix, variant, seed)
     if fixed_checkpoint(matrix, variant, seed).is_file():
         return 'done'
+    if is_running(out):
+        return 'running'
     if (out / 'latest.pt').is_file():
         return 'resumable'
     if out.is_dir() and any(out.iterdir()):
@@ -82,6 +100,7 @@ def train_config(matrix, variant, seed, resume, smoke=False):
         config.pop(key)
     config.update(spec['cli'])
     config.update({'seed': seed, 'v43-variant': variant, 'stop-after': matrix['fixed_step'], 'device': 'cuda:0',
+                   'v43-checkpoint-every': matrix.get('checkpoint_every', 100),
                    'output-dir': str(run_dir(matrix, variant, seed, smoke))})
     if smoke:  # development-only pipeline check: 2 optimizer steps, 16 validation windows
         config.update(SMOKE)
@@ -172,7 +191,9 @@ def cmd_train(matrix, args):
     jobs = []
     for variant, seed in selected_runs(matrix, args):
         state = 'pending' if args.smoke else run_status(matrix, variant, seed)
-        if state == 'done':
+        if state in ('done', 'running'):
+            if state == 'running':
+                print(f'still running, skipped: {variant} s{seed}')
             continue
         out = run_dir(matrix, variant, seed, args.smoke)
         if args.smoke and out.exists():
@@ -225,7 +246,13 @@ def cmd_evaluate(matrix, args):
     for name, seed, checkpoint, version, weights, evidence in eval_targets(matrix, args):
         output = out_dir / f'{name}_s{seed}.json'
         if output.exists():
+            if not output.with_suffix('.npz').exists():
+                print(f'WARNING: {output.name} exists without its per-frame .npz; delete the JSON to re-evaluate')
             continue
+        if output.with_suffix('.npz').exists():
+            print(f'WARNING: removing orphan per-frame file without JSON: {output.with_suffix(".npz")}')
+            if not args.dry_run:
+                output.with_suffix('.npz').unlink()
         command = ['bash', 'scripts/run_star_body_v43.sh', 'scripts/evaluate_target60_v43.py',
                    '--model-version', version, '--checkpoint', str(checkpoint), '--checkpoint-weights', weights,
                    '--split', split, '--vace-cache', str(resolve(spec['vace-cache'])),

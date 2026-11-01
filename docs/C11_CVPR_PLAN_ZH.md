@@ -109,7 +109,7 @@ C10 = 在训练好的 A5 父模型（V30 双序解码器 + track-shape + GRU 精
 | B6-both-joint | ablation | 头部 + ViTPose | 路由 | 两种证据融合 |
 | C4-op-joint / C1-op-pooled | optional | 3DPW OpenPose | 路由 / 池化 | 证据质量轴 |
 
-主要比较（配对，种子 → 序列层级 bootstrap 95% CI，见 `scripts/analyze_results_c11.py`）：
+主要比较（按种子配对；95% CI 合并种子方差（t，自由度 2）和序列 cluster bootstrap 方差，见 `scripts/analyze_results_c11.py`。3 个种子时区间刻意偏宽，以保证覆盖率）：
 
 - B4 vs B1、B4 vs B7、B4 vs B2/B3/B5、B4 vs A2；
 - B1 vs A1、A1 vs A0、A2 vs A0、B4 vs A0；

@@ -59,8 +59,8 @@ def ablation(summary, out, plt, metrics=('mpjpe_mm', 'pa_mpjpe_mm')):
                 entry = comps.get(key, {}).get(metric)
                 if not entry:
                     continue
-                point = entry['cluster_bootstrap']['point']
-                lo, hi = entry['cluster_bootstrap']['ci95']
+                point = entry['combined']['point']
+                lo, hi = entry['combined']['ci95']
                 ax.plot([lo, hi], [row + offset] * 2, color=color, lw=2, solid_capstyle='round')
                 ax.plot(point, row + offset, marker=marker, ms=5, color=color, mec='white', mew=.8, ls='none',
                         label=split if row == y[0] else None)

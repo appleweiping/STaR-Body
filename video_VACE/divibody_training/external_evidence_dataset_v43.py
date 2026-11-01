@@ -27,6 +27,12 @@ def load_external_keypoints(path, sidecar, split):
         raise ValueError(f'{path}: external evidence must declare ground_truth_used=False')
     if pack.get('development_only'):
         raise ValueError(f'{path}: development-only keypoint cache cannot be used for training/evaluation')
+    binding = pack.get('sidecar_binding') or {}
+    signature = sidecar.get('signature', {})
+    mismatched = [k for k, v in binding.items() if signature.get(k) != v]
+    if not binding or mismatched:
+        raise ValueError(f'{path}: keypoint cache is not bound to this HMR sidecar build '
+                         f'(missing binding or mismatch in {mismatched}); regenerate it from this sidecar')
     keypoints = pack['keypoints']
     sidecar_uids = list(sidecar['frame_uids'])
     if list(pack['frame_uids']) != sidecar_uids:

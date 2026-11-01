@@ -198,11 +198,11 @@ The reported difference is
   \Delta = \frac{\frac{1}{|\mathcal S|}\sum_{s}\sum_{q}\big(E^{V}_{s,q}-E^{C}_{s,q}\big)}{\sum_{q} n_q},
 \end{equation}
 \ie the frame-weighted aggregate difference averaged over seeds.
-For the 95\% interval we draw $|\mathcal S|$ seeds with replacement and then $|\mathcal Q|$ sequences with replacement, recompute $\Delta$ on the resample (with the counts of the drawn sequences in the denominator), repeat 20,000 times and take the 2.5\% and 97.5\% quantiles (percentile bootstrap~\cite{efron1993bootstrap}, random seed 20261101).
-Resampling sequences rather than frames respects the strong correlation of frames within a sequence; resampling seeds propagates training variance.
-With three seeds the seed level of the bootstrap is coarse, so intervals may be narrower than the true uncertainty about the training distribution.
+Let $\Delta_s$ be the aggregate difference of seed $s$, so that $\Delta$ is their mean.
+The interval is $\Delta \pm t_{|\mathcal S|-1,\,0.975}\,\sqrt{\sigma^2_{\text{seed}}/|\mathcal S| + \sigma^2_{\text{seq}}}$, where $\sigma^2_{\text{seed}}$ is the sample variance of the $\Delta_s$ and $\sigma^2_{\text{seq}}$ is the variance of $\Delta$ under a cluster bootstrap that resamples $|\mathcal Q|$ sequences with replacement from the seed-averaged sequence differences (20,000 resamples, random seed 20261101~\cite{efron1993bootstrap}); the $p$-value uses the same statistic and degrees of freedom.
+The first term captures training variance, the second the sampling of test sequences; with three seeds the $t$ quantile is $4.30$, which keeps coverage honest at the price of wide intervals.
+A percentile bootstrap that resamples seeds and then sequences is also stored in \texttt{evidence/c11/summary.json}, but it is too narrow with three seeds and is not used for any claim.
 ``Wins'' counts sequences whose seed-averaged difference is negative.
-The paired $t$-test uses the per-seed aggregate differences ($n=3$, two degrees of freedom).
 We call a difference reliable only if its interval excludes zero and all three seeds agree in sign; this rule and the list of comparisons were fixed before test evaluation.
 We do not correct for the 14 comparisons; the two primary ones are \vB{4} \vs \vB{1} and \vB{4} \vs \vB{7}.
 
@@ -259,7 +259,7 @@ The C10-versus-C00 difference cannot be bootstrapped because C00 sequence record
 \begin{figure}[h]
   \centering
   \genfig{ablation}{0.95\linewidth}{6cm}
-  \caption{Paired differences (first minus second variant; MPJPE and PA-MPJPE, mm) for all pre-registered comparisons on validation (circles) and test (squares), with 95\% hierarchical cluster-bootstrap intervals over seeds and sequences. Negative values favour the first variant.}
+  \caption{Paired differences (first minus second variant; MPJPE and PA-MPJPE, mm) for all pre-registered comparisons on validation (circles) and test (squares), with 95\% intervals that combine seed and sequence-sampling variance (\cref{sec:stats}). Negative values favour the first variant.}
   \label{fig:all-pairs}
 \end{figure}
 
@@ -347,7 +347,7 @@ The C10-versus-C00 difference cannot be bootstrapped because C00 sequence record
     \pairrow{\vB{4} \vs \vC{4}}{B4-ext-joint}{C4-op-joint}{validation}
     \bottomrule
   \end{tabular}
-  \caption{Paired differences on \textbf{validation} (first minus second; mm, Accel in mm/frame$^2$; Wins out of 12 sequences). Intervals: hierarchical cluster bootstrap over seeds and sequences; $p$: paired $t$-test over three seeds.}
+  \caption{Paired differences on \textbf{validation} (first minus second; mm, Accel in mm/frame$^2$; Wins out of 12 sequences). Intervals and $p$: combined seed ($t$, two degrees of freedom) and sequence cluster-bootstrap variance (\cref{sec:stats}).}
   \label{tab:pairs-val}
 \end{table}
 

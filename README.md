@@ -32,7 +32,7 @@ C11 adds versioned `*_v43.py` files. The original files are unchanged.
   validation locks.
 - **Metrics:** reported under every literature convention (H36M-pelvis and hip-midpoint
   roots; unaligned and aligned PVE; acceleration in mm/frame² and m/s²).
-- **Statistics:** hierarchical cluster-bootstrap.
+- **Statistics:** paired intervals that combine seed variance (Student-t) with test-sequence cluster-bootstrap variance.
 
 Related documents:
 

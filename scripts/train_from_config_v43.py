@@ -25,6 +25,8 @@ def main():
     for key,value in config.items():
         if not isinstance(key,str) or not key or key.startswith('-') or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789-' for c in key):
             raise ValueError('Invalid CLI option name')
+        if key=='v43-router-identity' and value is False:
+            key,value='v43-router-no-identity',True  # store_false flag spelled positively in JSON
         if value is None or value is False:
             continue
         if key=='local-radius-schedule' and isinstance(value,list):
@@ -56,7 +58,22 @@ def main():
     if not audit['passed']:
         print(json.dumps(dict(asset_preflight=audit),indent=2),file=sys.stderr)
         raise SystemExit(2)
-    completed=subprocess.run(command,cwd=root)
+    # C11: sibling lock '<output-dir>.running' so the matrix runner never moves a live run aside.
+    import os,socket
+    output_dir=Path(args.output_dir).resolve();lock=output_dir.with_name(output_dir.name+'.running')
+    if lock.exists():
+        try:
+            info=json.loads(lock.read_text());os.kill(int(info['pid']),0)
+            if info.get('host')==socket.gethostname():
+                print(json.dumps(dict(error='run already active',lock=str(lock),**info)),file=sys.stderr);raise SystemExit(3)
+        except (ProcessLookupError,ValueError,KeyError,json.JSONDecodeError):
+            pass  # stale lock from a dead process
+    lock.parent.mkdir(parents=True,exist_ok=True)
+    lock.write_text(json.dumps(dict(pid=os.getpid(),host=socket.gethostname(),output_dir=str(output_dir))))
+    try:
+        completed=subprocess.run(command,cwd=root)
+    finally:
+        lock.unlink(missing_ok=True)
     raise SystemExit(completed.returncode)
 
 

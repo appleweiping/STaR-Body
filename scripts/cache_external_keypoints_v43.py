@@ -12,7 +12,8 @@ in the square 256x256 HMR2 crop produced by ``RawBBoxHMR3DPWDataset`` (poses2d b
 
 Sources
   vitpose     ViTPose (HuggingFace transformers implementation) run top-down on the exact
-              HMR2 crop with the central 192x256 box the HMR2 backbone sees.
+              HMR2 crop. The box passed to the processor is pre-shrunk by its standard 1.25
+              padding, so ViTPose sees exactly the central 192x256 view of the HMR2 backbone.
   openpose3dpw  The OpenPose-18 detections shipped as ``poses2d`` in the 3DPW pickles,
               mapped to COCO-17. They are detector outputs (the same ones that define the
               crop box), not ground truth.
@@ -36,7 +37,23 @@ FORMAT = 'star-body-external-keypoints-v43-r1'
 # OpenPose-18 (COCO-18 order used by 3DPW poses2d) -> COCO-17.
 COCO17_FROM_OPENPOSE18 = (0, 15, 14, 17, 16, 5, 2, 6, 3, 7, 4, 11, 8, 12, 9, 13, 10)
 HMR_SIZE = 256.
-VITPOSE_BOX_XYWH = (32., 0., 192., 256.)  # region of the 256 crop seen by the HMR2 ViT
+# The HF ViTPose processor enlarges every box by padding_factor 1.25 (aspect 192:256 kept).
+# (51.2, 25.6, 153.6, 204.8) x 1.25 = (32, 0, 192, 256): exactly the region the HMR2 ViT sees.
+VITPOSE_BOX_XYWH = (51.2, 25.6, 153.6, 204.8)
+SIDECAR_KEYS = ('anchor_revision', 'raw_bbox_margin', 'crop_protocol', 'vace_semantic_sha256', 'split')
+
+
+class Crops:
+    """Module-level (picklable) adapter returning the HMR2 256x256 RGB crops in sidecar order."""
+
+    def __init__(self, dataset, order):
+        self.dataset, self.order = dataset, order
+
+    def __len__(self):
+        return len(self.order)
+
+    def __getitem__(self, row):
+        return self.dataset[self.order[row]]['image']  # [3,256,256] RGB in [0,1]
 
 
 def sha256(path: Path) -> str:
@@ -94,8 +111,15 @@ def main(argv=None):
     if args.output.exists():
         raise FileExistsError(f'{args.output} exists; caches are never overwritten')
     if abs(args.crop_margin - .25) > 1e-12:
-        print(json.dumps(dict(warning='crop margin differs from the audited 0.25 protocol')), flush=True)
+        raise ValueError('Only the audited raw-bbox 0.25 crop protocol is supported')
     sidecar = torch.load(args.hmr_sidecar, map_location='cpu', weights_only=False, mmap=True)
+    signature = sidecar.get('signature', {})
+    # The crops below are rebuilt with RawBBoxHMR3DPWDataset; refuse sidecars built otherwise.
+    if signature.get('anchor_revision') != 'raw-bbox-v11' or abs(float(signature.get('raw_bbox_margin', -1)) - args.crop_margin) > 1e-9:
+        raise ValueError('HMR sidecar was not built with the raw-bbox-v11 / 0.25 crop protocol: '
+                         f'{signature.get("anchor_revision")!r}, margin {signature.get("raw_bbox_margin")!r}')
+    if signature.get('split') != args.split:
+        raise ValueError(f'HMR sidecar split {signature.get("split")!r} != {args.split!r}')
     frame_uids = list(sidecar['frame_uids'])
     if args.max_frames:
         frame_uids = frame_uids[:args.max_frames]
@@ -140,14 +164,8 @@ def main(argv=None):
         moe = getattr(model.config, 'backbone_config', None) is not None and \
             getattr(model.config.backbone_config, 'num_experts', 1) > 1
 
-        class Crops(Dataset):
-            def __len__(self):
-                return len(order)
-
-            def __getitem__(self, row):
-                return dataset[order[row]]['image']  # [3,256,256] RGB in [0,1]
-
-        loader = DataLoader(Crops(), batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers)
+        loader = DataLoader(Crops(dataset, order), batch_size=args.batch_size, shuffle=False,
+                            num_workers=args.num_workers)
         cursor = 0
         with torch.inference_mode():
             for images in loader:
@@ -158,7 +176,8 @@ def main(argv=None):
                     inputs['pixel_values'] = inputs['pixel_values'].half()
                 extra = dict(dataset_index=torch.zeros(len(arrays), dtype=torch.long, device=device)) if moe else {}
                 outputs = model(**inputs, **extra)
-                results = processor.post_process_pose_estimation(outputs, boxes=boxes)
+                from types import SimpleNamespace  # float32 heatmaps: scipy filters reject float16
+                results = processor.post_process_pose_estimation(SimpleNamespace(heatmaps=outputs.heatmaps.float()), boxes=boxes)
                 for offset, per_image in enumerate(results):
                     person = per_image[0]
                     xy = person['keypoints'].float().cpu().numpy()
@@ -180,7 +199,8 @@ def main(argv=None):
                    coordinate='HMR2 256-crop normalised: u=x/256-0.5, v=y/256-0.5; channel 2 = detector confidence',
                    frame_uids=frame_uids, keypoints=torch.from_numpy(keypoints),
                    sidecar=str(args.hmr_sidecar), sidecar_sha256=sha256(args.hmr_sidecar),
-                   sidecar_signature=sidecar.get('signature'), crop_margin=args.crop_margin,
+                   sidecar_signature=signature, sidecar_binding={k: signature.get(k) for k in SIDECAR_KEYS},
+                   crop_margin=args.crop_margin, vitpose_box_xywh=VITPOSE_BOX_XYWH if args.source == 'vitpose' else None,
                    development_only=bool(args.max_frames), created_utc=datetime.now(timezone.utc).isoformat(),
                    elapsed_seconds=time.perf_counter() - started, ground_truth_used=False)
     args.output.parent.mkdir(parents=True, exist_ok=True)

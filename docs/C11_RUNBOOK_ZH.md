@@ -7,7 +7,7 @@
 - 所有新代码都是 `*_v43.py` / `*c11*.py` 新文件，原文件一行未改。
 - 结果文件只新建、不覆盖。
 - test 只能通过 validation lock 评测，且每个 checkpoint 只评一次。
-- **实验运行期间不要 `git pull`，也不要改任何 `.py`。** 训练 resume 会校验所有 `.py` 的哈希，改了就无法续跑。建议为实验单独开一个 checkout：`git worktree add ../star-body-c11 claude/c11-cvpr2027`。
+- **实验运行期间不要 `git pull`，也不要改任何 `.py`。** 训练 resume 会校验所有 `.py` 的哈希，改了就无法续跑。建议为实验单独开一个 checkout：`git worktree add ../star-body-c11 origin/claude/c11-cvpr2027`（detached HEAD，即使当前已检出该分支也能用）。
 
 ---
 
@@ -174,7 +174,9 @@ python scripts/run_c11_matrix.py --matrix configs/c11/matrix.local.json train --
 python scripts/run_c11_matrix.py --matrix configs/c11/matrix.local.json status --tier core ablation optional
 ```
 
-- 中断后重跑同一命令即可。有 `latest.pt` 的 run 会自动 resume，没有的会被移到 `*.incomplete_<时间>` 后重跑。
+- **在 tmux/screen 里运行 runner**（或者 `nohup ... > runs/c11/runner.log 2>&1 &`），这样 SSH 断开不会杀掉任务。
+- 每个 run 每 100 步写一次可续跑的 `latest.pt`。中断后重跑同一命令即可：有 `latest.pt` 的 run 会自动 resume，最多损失 100 步；没有 `latest.pt` 的 run 会被移到 `*.incomplete_<时间>` 后从头重跑。
+- 正在运行的 run 会留下 `runs/c11/<变体>/s<seed>.running` 锁文件，`status` 显示为 `running`，再次执行 `train` 时会被跳过，不会被移走。如果确认进程已经不在（用 `nvidia-smi`/`ps` 检查），锁会被自动判定为失效。
 - 请记录第一个 run 的耗时，写进 `results/c11/notes.md`，用于预算。
 - **A2-head-joint s2026 应复现 C10。** 它的配置与 C10 完全一致，第 1000 步 EMA 的 validation MPJPE 应约为 61.19，允许 GPU 非确定性带来的约 0.01–0.05 mm 差异。差异更大时先停下来排查。
 
@@ -211,7 +213,7 @@ cd paper/latex && bash build.sh
 
 `analyze` 生成三个文件：
 
-- `evidence/c11/summary.json` 和 `evidence/c11/summary.md`：可提交；均值 ± std，配对差的分层 bootstrap CI，序列胜负数；
+- `evidence/c11/summary.json` 和 `evidence/c11/summary.md`：可提交；均值 ± std；配对差的 95% CI 合并了种子方差（t 分布，自由度 S−1）和测试序列抽样方差（按序列做 cluster bootstrap）；序列胜负数；`*` 标记可靠差异（CI 不含 0 且所有种子同号）；
 - `paper/latex/generated/results.tex`：论文中所有 `\res{...}` 的数字来源。
 
 重新编译后，论文里的红色 TBD 会变成真实数字。随后按 `docs/C11_CVPR_PLAN_ZH.md` §5 的决策树，改写论文中所有红色 `\TODO{...}`。

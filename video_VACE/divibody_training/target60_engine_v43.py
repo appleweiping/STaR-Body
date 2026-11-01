@@ -1,5 +1,6 @@
 """C11 (v43) copy of target60_engine_v36: external evidence plumbing (runtime/boundary v43)
-and retained step_XXXXXX.pt checkpoints (student + EMA) at every evaluation.
+and retained step_XXXXXX.pt checkpoints (student + EMA) at every evaluation, plus optional
+resumable latest.pt every --v43-checkpoint-every steps.
 
 V34 step-budgeted training with versioned losses and resume provenance."""
 import json
@@ -254,6 +255,10 @@ def execute_run(model, optimizer, ema, train_loader, pose_loader, coco_loader,
                 coverage=coverage()))
         should_evaluate=step==args.max_steps or step%args.eval_every==0 or (args.stop_after and step>=args.stop_after)
         if should_evaluate:evaluate_step()
+        elif getattr(args,'v43_checkpoint_every',0) and step%args.v43_checkpoint_every==0:
+            # C11: cheap resumable checkpoint between evaluations (no validation pass).
+            save('latest.pt',model,'student',resumable=True)
+            record('events.jsonl',dict(event='resumable_checkpoint',step=step))
         if args.stop_after and step>=args.stop_after and step<args.max_steps:
             atomic_json(out/'paused.json',dict(step=step,reason='stop_after',resumable=True))
             return
