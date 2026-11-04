@@ -1,7 +1,7 @@
 {
-  "updated_utc": "2026-11-04T15:08:45.751400+00:00",
+  "updated_utc": "2026-11-04T18:28:06.182391+00:00",
   "stage": "experiment-bridge",
-  "status": "strict_resume_confirmed_training",
+  "status": "training_step3000_student_evaluated",
   "last_confirmed_checkpoint_step": 2000,
   "target_steps_per_arm": 6000,
   "order": [
@@ -22,8 +22,16 @@
   "writing": "deferred_until_experiments_and_audits",
   "heartbeat": "configured_every_30_minutes_for_liveness_and_sync_only",
   "checkpoint_resumed_from_step": 2000,
-  "last_observed_optimizer_step": 2601,
-  "last_observed_sample_step": 2603,
-  "new_validation_result": false,
-  "monitoring_status": "restored_with_pinned_plink_0.85"
+  "last_observed_optimizer_step": 3000,
+  "last_observed_sample_step": 3000,
+  "new_validation_result": true,
+  "monitoring_status": "restored_with_pinned_plink_0.85",
+  "last_completed_validation": {
+    "arm": "C10_joint_feedback",
+    "step": 3000,
+    "variant": "student"
+  },
+  "checkpoint3000_evaluation_complete": false,
+  "new_result_evidence": "evidence/c10_step3000_student_20261104.json",
+  "review_status": "No new method claim accepted; interpret complete checkpoint after EMA is available."
 }
