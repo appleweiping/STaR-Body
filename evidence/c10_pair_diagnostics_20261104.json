@@ -1,0 +1,2838 @@
+{
+  "schema_version": 1,
+  "source_file": "E:\\STaR-Body\\evidence\\c10_pilot_recovered_20261104.json",
+  "source_sha256": "ee4862861147511e2b14d775694c55399309a1e6a7d3d88aa035776ec374a290",
+  "source_recorded_upstream_summaries": [
+    {
+      "arm": "C00_mean_feedback",
+      "filename": "C00_mean_feedback_pilot_summary.json",
+      "sha256": "be5bde0eaf0a3f84172ba8ecb9599fe77822df59bc58f2f010a4ea92c23d4ced"
+    },
+    {
+      "arm": "C10_joint_feedback",
+      "filename": "C10_joint_feedback_pilot_summary.json",
+      "sha256": "263306b2d50343ff7f3e66618b3d9703f659dbd793dc0843f40a7e76770ff05e"
+    }
+  ],
+  "scope": "Descriptive C10 versus C00, paired by step and weight variant; geometry per-sequence sums only; no model execution",
+  "skill": {
+    "path": "E:\\STaR-Body\\tools\\aris-upstream\\skills\\skills-codex\\analyze-results\\SKILL.md",
+    "sha256": "1a5f798558018fe6c8faa8b9997ac4cd1076aceb73cfb5bdc261e5de5727f7e2",
+    "read": "full"
+  },
+  "formula": {
+    "sequence_mean": "S[a,s,m]/n[s]",
+    "sequence_reduction": "(S[C00,s,m]-S[C10,s,m])/n[s]; positive means lower C10 error",
+    "aggregate_mean": "sum_s S[a,s,m]/sum_s n[s]",
+    "aggregate_reduction": "sum_s (S[C00,s,m]-S[C10,s,m])/N",
+    "relative_reduction_percent": "100*(mean_C00-mean_C10)/mean_C00",
+    "continuation_delta": "mean[step2000]-mean[step1000]; negative means lower error"
+  },
+  "coverage": {
+    "expected_rows": 8,
+    "actual_rows": 8,
+    "unique_sequence_names": [
+      "courtyard_basketball_01",
+      "courtyard_dancing_00",
+      "courtyard_drinking_00",
+      "courtyard_hug_00",
+      "courtyard_jumpBench_01",
+      "courtyard_rangeOfMotions_01",
+      "downtown_walkDownhill_00",
+      "outdoors_crosscountry_00",
+      "outdoors_freestyle_01",
+      "outdoors_golf_00",
+      "outdoors_parcours_00",
+      "outdoors_parcours_01"
+    ],
+    "sequence_names_and_counts_equal_all_rows": true,
+    "frames": 10413,
+    "acceleration_triplets_equal_all_rows": true,
+    "acceleration_triplets": 10226,
+    "geometry_aggregate_reconstruction_tolerance_mm": 1e-09,
+    "max_abs_reconstruction_error_mm": 0.0,
+    "row_checks": [
+      {
+        "arm": "C00_mean_feedback",
+        "step": 1000,
+        "variant": "student",
+        "sequence_count": 12,
+        "sum_frames": 10413,
+        "reported_frames": 10413,
+        "reported_acceleration_triplets": 10226,
+        "geometry_reconstructed": {
+          "mpjpe_mm": 61.39113349634301,
+          "pa_mpjpe_mm": 37.6450219117266,
+          "pve_mm": 73.20204648199497
+        },
+        "reconstructed_minus_reported": {
+          "mpjpe_mm": 0.0,
+          "pa_mpjpe_mm": 0.0,
+          "pve_mm": 0.0
+        }
+      },
+      {
+        "arm": "C00_mean_feedback",
+        "step": 1000,
+        "variant": "ema",
+        "sequence_count": 12,
+        "sum_frames": 10413,
+        "reported_frames": 10413,
+        "reported_acceleration_triplets": 10226,
+        "geometry_reconstructed": {
+          "mpjpe_mm": 61.26187129283082,
+          "pa_mpjpe_mm": 37.63712758586579,
+          "pve_mm": 73.04919619218172
+        },
+        "reconstructed_minus_reported": {
+          "mpjpe_mm": 0.0,
+          "pa_mpjpe_mm": 0.0,
+          "pve_mm": 0.0
+        }
+      },
+      {
+        "arm": "C00_mean_feedback",
+        "step": 2000,
+        "variant": "student",
+        "sequence_count": 12,
+        "sum_frames": 10413,
+        "reported_frames": 10413,
+        "reported_acceleration_triplets": 10226,
+        "geometry_reconstructed": {
+          "mpjpe_mm": 61.51294853230964,
+          "pa_mpjpe_mm": 37.75044989862921,
+          "pve_mm": 73.29757369167922
+        },
+        "reconstructed_minus_reported": {
+          "mpjpe_mm": 0.0,
+          "pa_mpjpe_mm": 0.0,
+          "pve_mm": 0.0
+        }
+      },
+      {
+        "arm": "C00_mean_feedback",
+        "step": 2000,
+        "variant": "ema",
+        "sequence_count": 12,
+        "sum_frames": 10413,
+        "reported_frames": 10413,
+        "reported_acceleration_triplets": 10226,
+        "geometry_reconstructed": {
+          "mpjpe_mm": 61.31692679471245,
+          "pa_mpjpe_mm": 37.660090100189386,
+          "pve_mm": 73.19373433248552
+        },
+        "reconstructed_minus_reported": {
+          "mpjpe_mm": 0.0,
+          "pa_mpjpe_mm": 0.0,
+          "pve_mm": 0.0
+        }
+      },
+      {
+        "arm": "C10_joint_feedback",
+        "step": 1000,
+        "variant": "student",
+        "sequence_count": 12,
+        "sum_frames": 10413,
+        "reported_frames": 10413,
+        "reported_acceleration_triplets": 10226,
+        "geometry_reconstructed": {
+          "mpjpe_mm": 61.424630085695924,
+          "pa_mpjpe_mm": 37.65306406429587,
+          "pve_mm": 73.02549554730862
+        },
+        "reconstructed_minus_reported": {
+          "mpjpe_mm": 0.0,
+          "pa_mpjpe_mm": 0.0,
+          "pve_mm": 0.0
+        }
+      },
+      {
+        "arm": "C10_joint_feedback",
+        "step": 1000,
+        "variant": "ema",
+        "sequence_count": 12,
+        "sum_frames": 10413,
+        "reported_frames": 10413,
+        "reported_acceleration_triplets": 10226,
+        "geometry_reconstructed": {
+          "mpjpe_mm": 61.18838956648434,
+          "pa_mpjpe_mm": 37.613404729118336,
+          "pve_mm": 72.81972126625095
+        },
+        "reconstructed_minus_reported": {
+          "mpjpe_mm": 0.0,
+          "pa_mpjpe_mm": 0.0,
+          "pve_mm": 0.0
+        }
+      },
+      {
+        "arm": "C10_joint_feedback",
+        "step": 2000,
+        "variant": "student",
+        "sequence_count": 12,
+        "sum_frames": 10413,
+        "reported_frames": 10413,
+        "reported_acceleration_triplets": 10226,
+        "geometry_reconstructed": {
+          "mpjpe_mm": 61.34759798025199,
+          "pa_mpjpe_mm": 37.73150700088606,
+          "pve_mm": 72.95875583202846
+        },
+        "reconstructed_minus_reported": {
+          "mpjpe_mm": 0.0,
+          "pa_mpjpe_mm": 0.0,
+          "pve_mm": 0.0
+        }
+      },
+      {
+        "arm": "C10_joint_feedback",
+        "step": 2000,
+        "variant": "ema",
+        "sequence_count": 12,
+        "sum_frames": 10413,
+        "reported_frames": 10413,
+        "reported_acceleration_triplets": 10226,
+        "geometry_reconstructed": {
+          "mpjpe_mm": 61.16190743288366,
+          "pa_mpjpe_mm": 37.62280025388761,
+          "pve_mm": 72.84745162884005
+        },
+        "reconstructed_minus_reported": {
+          "mpjpe_mm": 0.0,
+          "pa_mpjpe_mm": 0.0,
+          "pve_mm": 0.0
+        }
+      }
+    ],
+    "limits": [
+      "Sequence names/counts do not prove identical frame identities; source has no per-frame IDs or predictions.",
+      "Source has aggregate acceleration only; no per-sequence acceleration decomposition or triplet ownership verification is possible."
+    ]
+  },
+  "raw_rows": [
+    {
+      "arm": "C00_mean_feedback",
+      "step": 1000,
+      "variant": "student",
+      "metrics": {
+        "mpjpe_mm": 61.39113349634301,
+        "pa_mpjpe_mm": 37.6450219117266,
+        "pve_mm": 73.20204648199497,
+        "acceleration_error_mm_per_frame2": 21.44262779882883,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "per_sequence": {
+        "courtyard_basketball_01": {
+          "frames": 957,
+          "mpjpe_mm_sum": 40822.20450305939,
+          "pa_mpjpe_mm_sum": 28106.816858291626,
+          "pve_mm_sum": 51646.048248291016
+        },
+        "courtyard_dancing_00": {
+          "frames": 827,
+          "mpjpe_mm_sum": 58338.41207122803,
+          "pa_mpjpe_mm_sum": 33005.46295928955,
+          "pve_mm_sum": 72745.0177783966
+        },
+        "courtyard_drinking_00": {
+          "frames": 1378,
+          "mpjpe_mm_sum": 66832.0903263092,
+          "pa_mpjpe_mm_sum": 35862.3193321228,
+          "pve_mm_sum": 78665.52835655212
+        },
+        "courtyard_hug_00": {
+          "frames": 1096,
+          "mpjpe_mm_sum": 69836.14116096497,
+          "pa_mpjpe_mm_sum": 48578.7991399765,
+          "pve_mm_sum": 86945.39243507385
+        },
+        "courtyard_jumpBench_01": {
+          "frames": 619,
+          "mpjpe_mm_sum": 25268.986764907837,
+          "pa_mpjpe_mm_sum": 15968.659846305847,
+          "pve_mm_sum": 29989.000358581543
+        },
+        "courtyard_rangeOfMotions_01": {
+          "frames": 1057,
+          "mpjpe_mm_sum": 52628.01078414917,
+          "pa_mpjpe_mm_sum": 38720.88878440857,
+          "pve_mm_sum": 65761.0954208374
+        },
+        "downtown_walkDownhill_00": {
+          "frames": 437,
+          "mpjpe_mm_sum": 29086.130405426025,
+          "pa_mpjpe_mm_sum": 15035.719604492188,
+          "pve_mm_sum": 32429.52725982666
+        },
+        "outdoors_crosscountry_00": {
+          "frames": 484,
+          "mpjpe_mm_sum": 52436.71607589722,
+          "pa_mpjpe_mm_sum": 26012.904569625854,
+          "pve_mm_sum": 58156.09399032593
+        },
+        "outdoors_freestyle_01": {
+          "frames": 273,
+          "mpjpe_mm_sum": 12036.771724700928,
+          "pa_mpjpe_mm_sum": 6997.461827278137,
+          "pve_mm_sum": 13386.15182685852
+        },
+        "outdoors_golf_00": {
+          "frames": 341,
+          "mpjpe_mm_sum": 20865.64861679077,
+          "pa_mpjpe_mm_sum": 10552.17862701416,
+          "pve_mm_sum": 20789.667778015137
+        },
+        "outdoors_parcours_00": {
+          "frames": 1632,
+          "mpjpe_mm_sum": 98301.56993103027,
+          "pa_mpjpe_mm_sum": 66377.11088562012,
+          "pve_mm_sum": 122939.16676902771
+        },
+        "outdoors_parcours_01": {
+          "frames": 1312,
+          "mpjpe_mm_sum": 112813.19073295593,
+          "pa_mpjpe_mm_sum": 66779.29073238373,
+          "pve_mm_sum": 128800.21979522705
+        }
+      }
+    },
+    {
+      "arm": "C00_mean_feedback",
+      "step": 1000,
+      "variant": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.26187129283082,
+        "pa_mpjpe_mm": 37.63712758586579,
+        "pve_mm": 73.04919619218172,
+        "acceleration_error_mm_per_frame2": 21.44694138684099,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "per_sequence": {
+        "courtyard_basketball_01": {
+          "frames": 957,
+          "mpjpe_mm_sum": 40571.20092010498,
+          "pa_mpjpe_mm_sum": 28157.116797447205,
+          "pve_mm_sum": 51445.72720718384
+        },
+        "courtyard_dancing_00": {
+          "frames": 827,
+          "mpjpe_mm_sum": 57998.018595695496,
+          "pa_mpjpe_mm_sum": 32994.44942474365,
+          "pve_mm_sum": 72400.74661254883
+        },
+        "courtyard_drinking_00": {
+          "frames": 1378,
+          "mpjpe_mm_sum": 66291.93615150452,
+          "pa_mpjpe_mm_sum": 35783.22814846039,
+          "pve_mm_sum": 77977.75687789917
+        },
+        "courtyard_hug_00": {
+          "frames": 1096,
+          "mpjpe_mm_sum": 69590.45092105865,
+          "pa_mpjpe_mm_sum": 48692.72189235687,
+          "pve_mm_sum": 86677.44109916687
+        },
+        "courtyard_jumpBench_01": {
+          "frames": 619,
+          "mpjpe_mm_sum": 25370.91903114319,
+          "pa_mpjpe_mm_sum": 16038.761916160583,
+          "pve_mm_sum": 30164.327421188354
+        },
+        "courtyard_rangeOfMotions_01": {
+          "frames": 1057,
+          "mpjpe_mm_sum": 53066.69972991943,
+          "pa_mpjpe_mm_sum": 38751.74297618866,
+          "pve_mm_sum": 66318.80800819397
+        },
+        "downtown_walkDownhill_00": {
+          "frames": 437,
+          "mpjpe_mm_sum": 29126.43687438965,
+          "pa_mpjpe_mm_sum": 15099.646167755127,
+          "pve_mm_sum": 32389.25154876709
+        },
+        "outdoors_crosscountry_00": {
+          "frames": 484,
+          "mpjpe_mm_sum": 52446.81495666504,
+          "pa_mpjpe_mm_sum": 26041.199069023132,
+          "pve_mm_sum": 58175.3911857605
+        },
+        "outdoors_freestyle_01": {
+          "frames": 273,
+          "mpjpe_mm_sum": 12066.721956253052,
+          "pa_mpjpe_mm_sum": 7029.909300804138,
+          "pve_mm_sum": 13418.343402862549
+        },
+        "outdoors_golf_00": {
+          "frames": 341,
+          "mpjpe_mm_sum": 20835.240718841553,
+          "pa_mpjpe_mm_sum": 10553.433681488037,
+          "pve_mm_sum": 20717.309616088867
+        },
+        "outdoors_parcours_00": {
+          "frames": 1632,
+          "mpjpe_mm_sum": 97977.61637878418,
+          "pa_mpjpe_mm_sum": 66256.24742794037,
+          "pve_mm_sum": 122490.79173469543
+        },
+        "outdoors_parcours_01": {
+          "frames": 1312,
+          "mpjpe_mm_sum": 112577.80953788757,
+          "pa_mpjpe_mm_sum": 66516.95274925232,
+          "pve_mm_sum": 128485.38523483276
+        }
+      }
+    },
+    {
+      "arm": "C00_mean_feedback",
+      "step": 2000,
+      "variant": "student",
+      "metrics": {
+        "mpjpe_mm": 61.51294853230964,
+        "pa_mpjpe_mm": 37.75044989862921,
+        "pve_mm": 73.29757369167922,
+        "acceleration_error_mm_per_frame2": 21.315366620285868,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "per_sequence": {
+        "courtyard_basketball_01": {
+          "frames": 957,
+          "mpjpe_mm_sum": 41031.20876598358,
+          "pa_mpjpe_mm_sum": 28159.400274276733,
+          "pve_mm_sum": 51592.21381568909
+        },
+        "courtyard_dancing_00": {
+          "frames": 827,
+          "mpjpe_mm_sum": 58174.90612030029,
+          "pa_mpjpe_mm_sum": 32843.71556472778,
+          "pve_mm_sum": 72559.20975112915
+        },
+        "courtyard_drinking_00": {
+          "frames": 1378,
+          "mpjpe_mm_sum": 66437.57449531555,
+          "pa_mpjpe_mm_sum": 36207.624482154846,
+          "pve_mm_sum": 78145.86999702454
+        },
+        "courtyard_hug_00": {
+          "frames": 1096,
+          "mpjpe_mm_sum": 69700.88289451599,
+          "pa_mpjpe_mm_sum": 48659.30534076691,
+          "pve_mm_sum": 87027.8964881897
+        },
+        "courtyard_jumpBench_01": {
+          "frames": 619,
+          "mpjpe_mm_sum": 25403.088238716125,
+          "pa_mpjpe_mm_sum": 16051.467008590698,
+          "pve_mm_sum": 30088.91298675537
+        },
+        "courtyard_rangeOfMotions_01": {
+          "frames": 1057,
+          "mpjpe_mm_sum": 52693.88701438904,
+          "pa_mpjpe_mm_sum": 38440.697295188904,
+          "pve_mm_sum": 65547.44770050049
+        },
+        "downtown_walkDownhill_00": {
+          "frames": 437,
+          "mpjpe_mm_sum": 29237.84697341919,
+          "pa_mpjpe_mm_sum": 14907.736656188965,
+          "pve_mm_sum": 32874.53755569458
+        },
+        "outdoors_crosscountry_00": {
+          "frames": 484,
+          "mpjpe_mm_sum": 52357.33827209473,
+          "pa_mpjpe_mm_sum": 25864.670706748962,
+          "pve_mm_sum": 58051.32031059265
+        },
+        "outdoors_freestyle_01": {
+          "frames": 273,
+          "mpjpe_mm_sum": 12004.018918991089,
+          "pa_mpjpe_mm_sum": 7013.587836265564,
+          "pve_mm_sum": 13392.028675079346
+        },
+        "outdoors_golf_00": {
+          "frames": 341,
+          "mpjpe_mm_sum": 20595.509399414062,
+          "pa_mpjpe_mm_sum": 10572.190105438232,
+          "pve_mm_sum": 20463.517162322998
+        },
+        "outdoors_parcours_00": {
+          "frames": 1632,
+          "mpjpe_mm_sum": 99300.90979385376,
+          "pa_mpjpe_mm_sum": 66996.76391506195,
+          "pve_mm_sum": 123955.1916770935
+        },
+        "outdoors_parcours_01": {
+          "frames": 1312,
+          "mpjpe_mm_sum": 113597.1621799469,
+          "pa_mpjpe_mm_sum": 67378.27560901642,
+          "pve_mm_sum": 129549.48873138428
+        }
+      }
+    },
+    {
+      "arm": "C00_mean_feedback",
+      "step": 2000,
+      "variant": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.31692679471245,
+        "pa_mpjpe_mm": 37.660090100189386,
+        "pve_mm": 73.19373433248552,
+        "acceleration_error_mm_per_frame2": 21.35865831176253,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "per_sequence": {
+        "courtyard_basketball_01": {
+          "frames": 957,
+          "mpjpe_mm_sum": 40797.36769866943,
+          "pa_mpjpe_mm_sum": 28110.982085227966,
+          "pve_mm_sum": 51559.20965766907
+        },
+        "courtyard_dancing_00": {
+          "frames": 827,
+          "mpjpe_mm_sum": 58081.64982128143,
+          "pa_mpjpe_mm_sum": 32822.63178730011,
+          "pve_mm_sum": 72471.19415092468
+        },
+        "courtyard_drinking_00": {
+          "frames": 1378,
+          "mpjpe_mm_sum": 66688.59769821167,
+          "pa_mpjpe_mm_sum": 36029.68274784088,
+          "pve_mm_sum": 78480.10158729553
+        },
+        "courtyard_hug_00": {
+          "frames": 1096,
+          "mpjpe_mm_sum": 69731.47308254242,
+          "pa_mpjpe_mm_sum": 48729.03557872772,
+          "pve_mm_sum": 87088.77962875366
+        },
+        "courtyard_jumpBench_01": {
+          "frames": 619,
+          "mpjpe_mm_sum": 25399.491233825684,
+          "pa_mpjpe_mm_sum": 16055.832263946533,
+          "pve_mm_sum": 30224.657558441162
+        },
+        "courtyard_rangeOfMotions_01": {
+          "frames": 1057,
+          "mpjpe_mm_sum": 52829.521430015564,
+          "pa_mpjpe_mm_sum": 38662.8031129837,
+          "pve_mm_sum": 65943.8948879242
+        },
+        "downtown_walkDownhill_00": {
+          "frames": 437,
+          "mpjpe_mm_sum": 29105.647861480713,
+          "pa_mpjpe_mm_sum": 14993.702955245972,
+          "pve_mm_sum": 32586.46605682373
+        },
+        "outdoors_crosscountry_00": {
+          "frames": 484,
+          "mpjpe_mm_sum": 52428.00100708008,
+          "pa_mpjpe_mm_sum": 25929.916863441467,
+          "pve_mm_sum": 58146.45168304443
+        },
+        "outdoors_freestyle_01": {
+          "frames": 273,
+          "mpjpe_mm_sum": 11960.68388748169,
+          "pa_mpjpe_mm_sum": 6989.755859375,
+          "pve_mm_sum": 13327.263355255127
+        },
+        "outdoors_golf_00": {
+          "frames": 341,
+          "mpjpe_mm_sum": 20617.855869293213,
+          "pa_mpjpe_mm_sum": 10515.319244384766,
+          "pve_mm_sum": 20642.46160888672
+        },
+        "outdoors_parcours_00": {
+          "frames": 1632,
+          "mpjpe_mm_sum": 98230.12291526794,
+          "pa_mpjpe_mm_sum": 66435.21407318115,
+          "pve_mm_sum": 122974.67602348328
+        },
+        "outdoors_parcours_01": {
+          "frames": 1312,
+          "mpjpe_mm_sum": 112622.74620819092,
+          "pa_mpjpe_mm_sum": 66879.64164161682,
+          "pve_mm_sum": 128721.19940567017
+        }
+      }
+    },
+    {
+      "arm": "C10_joint_feedback",
+      "step": 1000,
+      "variant": "student",
+      "metrics": {
+        "mpjpe_mm": 61.424630085695924,
+        "pa_mpjpe_mm": 37.65306406429587,
+        "pve_mm": 73.02549554730862,
+        "acceleration_error_mm_per_frame2": 21.42991060717341,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "per_sequence": {
+        "courtyard_basketball_01": {
+          "frames": 957,
+          "mpjpe_mm_sum": 41241.632254600525,
+          "pa_mpjpe_mm_sum": 28355.552468776703,
+          "pve_mm_sum": 51838.21627807617
+        },
+        "courtyard_dancing_00": {
+          "frames": 827,
+          "mpjpe_mm_sum": 58363.94443130493,
+          "pa_mpjpe_mm_sum": 33072.35896873474,
+          "pve_mm_sum": 72608.4900302887
+        },
+        "courtyard_drinking_00": {
+          "frames": 1378,
+          "mpjpe_mm_sum": 66827.2943649292,
+          "pa_mpjpe_mm_sum": 35677.96917247772,
+          "pve_mm_sum": 78649.73954772949
+        },
+        "courtyard_hug_00": {
+          "frames": 1096,
+          "mpjpe_mm_sum": 69913.16817951202,
+          "pa_mpjpe_mm_sum": 48571.45468521118,
+          "pve_mm_sum": 86787.46273040771
+        },
+        "courtyard_jumpBench_01": {
+          "frames": 619,
+          "mpjpe_mm_sum": 25182.262530326843,
+          "pa_mpjpe_mm_sum": 15969.034834861755,
+          "pve_mm_sum": 29995.24310684204
+        },
+        "courtyard_rangeOfMotions_01": {
+          "frames": 1057,
+          "mpjpe_mm_sum": 52252.201605796814,
+          "pa_mpjpe_mm_sum": 38564.85762214661,
+          "pve_mm_sum": 65257.41030693054
+        },
+        "downtown_walkDownhill_00": {
+          "frames": 437,
+          "mpjpe_mm_sum": 28815.00043487549,
+          "pa_mpjpe_mm_sum": 14981.039525985718,
+          "pve_mm_sum": 32170.54515838623
+        },
+        "outdoors_crosscountry_00": {
+          "frames": 484,
+          "mpjpe_mm_sum": 52402.348222732544,
+          "pa_mpjpe_mm_sum": 25937.35059452057,
+          "pve_mm_sum": 58119.73997306824
+        },
+        "outdoors_freestyle_01": {
+          "frames": 273,
+          "mpjpe_mm_sum": 11944.014223098755,
+          "pa_mpjpe_mm_sum": 7018.995168685913,
+          "pve_mm_sum": 13282.10306930542
+        },
+        "outdoors_golf_00": {
+          "frames": 341,
+          "mpjpe_mm_sum": 21055.26081085205,
+          "pa_mpjpe_mm_sum": 10717.286514282227,
+          "pve_mm_sum": 20827.28995513916
+        },
+        "outdoors_parcours_00": {
+          "frames": 1632,
+          "mpjpe_mm_sum": 98576.9758682251,
+          "pa_mpjpe_mm_sum": 66410.98021507263,
+          "pve_mm_sum": 122553.12959480286
+        },
+        "outdoors_parcours_01": {
+          "frames": 1312,
+          "mpjpe_mm_sum": 113040.57015609741,
+          "pa_mpjpe_mm_sum": 66804.47633075714,
+          "pve_mm_sum": 128325.1153831482
+        }
+      }
+    },
+    {
+      "arm": "C10_joint_feedback",
+      "step": 1000,
+      "variant": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.18838956648434,
+        "pa_mpjpe_mm": 37.613404729118336,
+        "pve_mm": 72.81972126625095,
+        "acceleration_error_mm_per_frame2": 21.442481117185427,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "per_sequence": {
+        "courtyard_basketball_01": {
+          "frames": 957,
+          "mpjpe_mm_sum": 40682.346351623535,
+          "pa_mpjpe_mm_sum": 28233.33260154724,
+          "pve_mm_sum": 51293.70471954346
+        },
+        "courtyard_dancing_00": {
+          "frames": 827,
+          "mpjpe_mm_sum": 57947.67780685425,
+          "pa_mpjpe_mm_sum": 33014.689536094666,
+          "pve_mm_sum": 72201.13619422913
+        },
+        "courtyard_drinking_00": {
+          "frames": 1378,
+          "mpjpe_mm_sum": 66126.94827842712,
+          "pa_mpjpe_mm_sum": 35669.02300930023,
+          "pve_mm_sum": 77747.22100830078
+        },
+        "courtyard_hug_00": {
+          "frames": 1096,
+          "mpjpe_mm_sum": 69601.97380542755,
+          "pa_mpjpe_mm_sum": 48773.17156600952,
+          "pve_mm_sum": 86538.72060585022
+        },
+        "courtyard_jumpBench_01": {
+          "frames": 619,
+          "mpjpe_mm_sum": 25259.938598632812,
+          "pa_mpjpe_mm_sum": 16025.475172519684,
+          "pve_mm_sum": 30106.459228515625
+        },
+        "courtyard_rangeOfMotions_01": {
+          "frames": 1057,
+          "mpjpe_mm_sum": 52932.700333595276,
+          "pa_mpjpe_mm_sum": 38657.381291389465,
+          "pve_mm_sum": 66120.65620803833
+        },
+        "downtown_walkDownhill_00": {
+          "frames": 437,
+          "mpjpe_mm_sum": 28869.03363418579,
+          "pa_mpjpe_mm_sum": 15031.52587890625,
+          "pve_mm_sum": 32180.20831298828
+        },
+        "outdoors_crosscountry_00": {
+          "frames": 484,
+          "mpjpe_mm_sum": 52362.15107917786,
+          "pa_mpjpe_mm_sum": 25982.124106407166,
+          "pve_mm_sum": 58076.464628219604
+        },
+        "outdoors_freestyle_01": {
+          "frames": 273,
+          "mpjpe_mm_sum": 11958.429403305054,
+          "pa_mpjpe_mm_sum": 7023.467721939087,
+          "pve_mm_sum": 13323.919658660889
+        },
+        "outdoors_golf_00": {
+          "frames": 341,
+          "mpjpe_mm_sum": 20906.584888458252,
+          "pa_mpjpe_mm_sum": 10597.191347122192,
+          "pve_mm_sum": 20643.5216217041
+        },
+        "outdoors_parcours_00": {
+          "frames": 1632,
+          "mpjpe_mm_sum": 97902.15300559998,
+          "pa_mpjpe_mm_sum": 66137.7925863266,
+          "pve_mm_sum": 121978.46400260925
+        },
+        "outdoors_parcours_01": {
+          "frames": 1312,
+          "mpjpe_mm_sum": 112604.76337051392,
+          "pa_mpjpe_mm_sum": 66523.20862674713,
+          "pve_mm_sum": 128061.28135681152
+        }
+      }
+    },
+    {
+      "arm": "C10_joint_feedback",
+      "step": 2000,
+      "variant": "student",
+      "metrics": {
+        "mpjpe_mm": 61.34759798025199,
+        "pa_mpjpe_mm": 37.73150700088606,
+        "pve_mm": 72.95875583202846,
+        "acceleration_error_mm_per_frame2": 21.304226508702875,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "per_sequence": {
+        "courtyard_basketball_01": {
+          "frames": 957,
+          "mpjpe_mm_sum": 41149.477979660034,
+          "pa_mpjpe_mm_sum": 28338.90481853485,
+          "pve_mm_sum": 51447.86125564575
+        },
+        "courtyard_dancing_00": {
+          "frames": 827,
+          "mpjpe_mm_sum": 58088.85236740112,
+          "pa_mpjpe_mm_sum": 32901.1851234436,
+          "pve_mm_sum": 72378.80202674866
+        },
+        "courtyard_drinking_00": {
+          "frames": 1378,
+          "mpjpe_mm_sum": 66261.71073532104,
+          "pa_mpjpe_mm_sum": 36000.8375749588,
+          "pve_mm_sum": 77974.33200263977
+        },
+        "courtyard_hug_00": {
+          "frames": 1096,
+          "mpjpe_mm_sum": 69413.05526828766,
+          "pa_mpjpe_mm_sum": 48660.19529533386,
+          "pve_mm_sum": 86522.8321723938
+        },
+        "courtyard_jumpBench_01": {
+          "frames": 619,
+          "mpjpe_mm_sum": 25248.101426124573,
+          "pa_mpjpe_mm_sum": 16064.43760919571,
+          "pve_mm_sum": 30027.460639953613
+        },
+        "courtyard_rangeOfMotions_01": {
+          "frames": 1057,
+          "mpjpe_mm_sum": 52254.64307594299,
+          "pa_mpjpe_mm_sum": 38192.468227386475,
+          "pve_mm_sum": 65046.83505439758
+        },
+        "downtown_walkDownhill_00": {
+          "frames": 437,
+          "mpjpe_mm_sum": 28985.525566101074,
+          "pa_mpjpe_mm_sum": 14918.040184020996,
+          "pve_mm_sum": 32768.69931411743
+        },
+        "outdoors_crosscountry_00": {
+          "frames": 484,
+          "mpjpe_mm_sum": 52262.62150192261,
+          "pa_mpjpe_mm_sum": 25809.600200653076,
+          "pve_mm_sum": 57962.51340484619
+        },
+        "outdoors_freestyle_01": {
+          "frames": 273,
+          "mpjpe_mm_sum": 11854.791012763977,
+          "pa_mpjpe_mm_sum": 7003.253876686096,
+          "pve_mm_sum": 13253.108669281006
+        },
+        "outdoors_golf_00": {
+          "frames": 341,
+          "mpjpe_mm_sum": 20665.009517669678,
+          "pa_mpjpe_mm_sum": 10625.409454345703,
+          "pve_mm_sum": 20387.490226745605
+        },
+        "outdoors_parcours_00": {
+          "frames": 1632,
+          "mpjpe_mm_sum": 99171.44591903687,
+          "pa_mpjpe_mm_sum": 67012.72778129578,
+          "pve_mm_sum": 123234.1366481781
+        },
+        "outdoors_parcours_01": {
+          "frames": 1312,
+          "mpjpe_mm_sum": 113457.30339813232,
+          "pa_mpjpe_mm_sum": 67371.12225437164,
+          "pve_mm_sum": 128715.45306396484
+        }
+      }
+    },
+    {
+      "arm": "C10_joint_feedback",
+      "step": 2000,
+      "variant": "ema",
+      "metrics": {
+        "mpjpe_mm": 61.16190743288366,
+        "pa_mpjpe_mm": 37.62280025388761,
+        "pve_mm": 72.84745162884005,
+        "acceleration_error_mm_per_frame2": 21.345067797077967,
+        "frames": 10413,
+        "acceleration_triplets": 10226
+      },
+      "per_sequence": {
+        "courtyard_basketball_01": {
+          "frames": 957,
+          "mpjpe_mm_sum": 40819.76109790802,
+          "pa_mpjpe_mm_sum": 28189.9450340271,
+          "pve_mm_sum": 51276.299036026
+        },
+        "courtyard_dancing_00": {
+          "frames": 827,
+          "mpjpe_mm_sum": 57993.07773017883,
+          "pa_mpjpe_mm_sum": 32845.135330200195,
+          "pve_mm_sum": 72240.03551864624
+        },
+        "courtyard_drinking_00": {
+          "frames": 1378,
+          "mpjpe_mm_sum": 66458.78715324402,
+          "pa_mpjpe_mm_sum": 35826.070425987244,
+          "pve_mm_sum": 78200.40999031067
+        },
+        "courtyard_hug_00": {
+          "frames": 1096,
+          "mpjpe_mm_sum": 69479.057138443,
+          "pa_mpjpe_mm_sum": 48717.67768764496,
+          "pve_mm_sum": 86625.06922912598
+        },
+        "courtyard_jumpBench_01": {
+          "frames": 619,
+          "mpjpe_mm_sum": 25219.59417438507,
+          "pa_mpjpe_mm_sum": 16017.676050186157,
+          "pve_mm_sum": 30097.04337310791
+        },
+        "courtyard_rangeOfMotions_01": {
+          "frames": 1057,
+          "mpjpe_mm_sum": 52492.2403717041,
+          "pa_mpjpe_mm_sum": 38449.50397968292,
+          "pve_mm_sum": 65492.45520210266
+        },
+        "downtown_walkDownhill_00": {
+          "frames": 437,
+          "mpjpe_mm_sum": 28869.829078674316,
+          "pa_mpjpe_mm_sum": 14958.741020202637,
+          "pve_mm_sum": 32496.635932922363
+        },
+        "outdoors_crosscountry_00": {
+          "frames": 484,
+          "mpjpe_mm_sum": 52336.0657081604,
+          "pa_mpjpe_mm_sum": 25871.451287269592,
+          "pve_mm_sum": 58047.87891769409
+        },
+        "outdoors_freestyle_01": {
+          "frames": 273,
+          "mpjpe_mm_sum": 11815.793943405151,
+          "pa_mpjpe_mm_sum": 6972.936988830566,
+          "pve_mm_sum": 13193.822854995728
+        },
+        "outdoors_golf_00": {
+          "frames": 341,
+          "mpjpe_mm_sum": 20692.33254623413,
+          "pa_mpjpe_mm_sum": 10543.150886535645,
+          "pve_mm_sum": 20520.443161010742
+        },
+        "outdoors_parcours_00": {
+          "frames": 1632,
+          "mpjpe_mm_sum": 98170.50280952454,
+          "pa_mpjpe_mm_sum": 66457.41526794434,
+          "pve_mm_sum": 122368.01828575134
+        },
+        "outdoors_parcours_01": {
+          "frames": 1312,
+          "mpjpe_mm_sum": 112531.90034675598,
+          "pa_mpjpe_mm_sum": 66916.51508522034,
+          "pve_mm_sum": 128002.40230941772
+        }
+      }
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "step": 1000,
+      "variant": "student",
+      "aggregate": {
+        "mpjpe_mm": {
+          "c00": 61.39113349634301,
+          "c10": 61.424630085695924,
+          "c10_minus_c00": 0.03349658935291444,
+          "reduction_c00_minus_c10": -0.03349658935291444,
+          "relative_reduction_percent": -0.05456258492915722
+        },
+        "pa_mpjpe_mm": {
+          "c00": 37.6450219117266,
+          "c10": 37.65306406429587,
+          "c10_minus_c00": 0.008042152569267103,
+          "reduction_c00_minus_c10": -0.008042152569267103,
+          "relative_reduction_percent": -0.021363123623955003
+        },
+        "pve_mm": {
+          "c00": 73.20204648199497,
+          "c10": 73.02549554730862,
+          "c10_minus_c00": -0.17655093468634675,
+          "reduction_c00_minus_c10": 0.17655093468634675,
+          "relative_reduction_percent": 0.2411830586317991
+        },
+        "acceleration_error_mm_per_frame2": {
+          "c00": 21.44262779882883,
+          "c10": 21.42991060717341,
+          "c10_minus_c00": -0.012717191655418958,
+          "reduction_c00_minus_c10": 0.012717191655418958,
+          "relative_reduction_percent": 0.059307990488523775
+        }
+      },
+      "all_four_aggregate_metrics_lower": false,
+      "per_sequence": [
+        {
+          "sequence": "courtyard_basketball_01",
+          "frames": 957,
+          "frame_weight": 0.09190435033131662,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 42.65643103767961,
+              "c10": 43.09470455026178,
+              "c10_minus_c00": 0.43827351258217107,
+              "reduction_c00_minus_c10": -0.43827351258217107,
+              "relative_reduction_percent": -1.0274500278633998,
+              "weighted_aggregate_reduction_contribution": -0.040279242441288554
+            },
+            "pa_mpjpe_mm": {
+              "c00": 29.369714585466692,
+              "c10": 29.629626404155385,
+              "c10_minus_c00": 0.2599118186886926,
+              "reduction_c00_minus_c10": -0.2599118186886926,
+              "relative_reduction_percent": -0.8849654222288812,
+              "weighted_aggregate_reduction_contribution": -0.023887026840015067
+            },
+            "pve_mm": {
+              "c00": 53.966612589645784,
+              "c10": 54.16741512860624,
+              "c10_minus_c00": 0.20080253896045264,
+              "reduction_c00_minus_c10": -0.20080253896045264,
+              "relative_reduction_percent": -0.3720866093399742,
+              "weighted_aggregate_reduction_contribution": -0.01845462688803959
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_dancing_00",
+          "frames": 827,
+          "frame_weight": 0.0794199558244502,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 70.54221532192022,
+              "c10": 70.57308879238806,
+              "c10_minus_c00": 0.030873470467838615,
+              "reduction_c00_minus_c10": -0.030873470467838615,
+              "relative_reduction_percent": -0.04376594968976686,
+              "weighted_aggregate_reduction_contribution": -0.00245196966070338
+            },
+            "pa_mpjpe_mm": {
+              "c00": 39.90987056746016,
+              "c10": 39.99076054260549,
+              "c10_minus_c00": 0.08088997514533247,
+              "reduction_c00_minus_c10": -0.08088997514533247,
+              "relative_reduction_percent": -0.2026816273648473,
+              "weighted_aggregate_reduction_contribution": -0.006424278252683225
+            },
+            "pve_mm": {
+              "c00": 87.96253661232963,
+              "c10": 87.79744864605647,
+              "c10_minus_c00": -0.16508796627316258,
+              "reduction_c00_minus_c10": 0.16508796627316258,
+              "relative_reduction_percent": 0.18767986080340293,
+              "weighted_aggregate_reduction_contribution": 0.01311127898856335
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_drinking_00",
+          "frames": 1378,
+          "frame_weight": 0.132334581772784,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 48.49933985944064,
+              "c10": 48.49585948108069,
+              "c10_minus_c00": -0.003480378359945746,
+              "reduction_c00_minus_c10": 0.003480378359945746,
+              "relative_reduction_percent": 0.007176135530983466,
+              "weighted_aggregate_reduction_contribution": 0.00046057441467443417
+            },
+            "pa_mpjpe_mm": {
+              "c00": 26.024905175705953,
+              "c10": 25.8911242180535,
+              "c10_minus_c00": -0.1337809576524549,
+              "reduction_c00_minus_c10": 0.1337809576524549,
+              "relative_reduction_percent": 0.5140497410047756,
+              "weighted_aggregate_reduction_contribution": 0.01770384708009993
+            },
+            "pve_mm": {
+              "c00": 57.08674046193913,
+              "c10": 57.07528269066001,
+              "c10_minus_c00": -0.011457771279118845,
+              "reduction_c00_minus_c10": 0.011457771279118845,
+              "relative_reduction_percent": 0.02007081011528057,
+              "weighted_aggregate_reduction_contribution": 0.0015162593702709917
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_hug_00",
+          "frames": 1096,
+          "frame_weight": 0.10525304907327379,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 63.71910689869066,
+              "c10": 63.789387025102215,
+              "c10_minus_c00": 0.07028012641155357,
+              "reduction_c00_minus_c10": -0.07028012641155357,
+              "relative_reduction_percent": -0.11029678511234395,
+              "weighted_aggregate_reduction_contribution": -0.007397197594070691
+            },
+            "pa_mpjpe_mm": {
+              "c00": 44.323721843044254,
+              "c10": 44.31702069818539,
+              "c10_minus_c00": -0.0067011448588658595,
+              "reduction_c00_minus_c10": 0.0067011448588658595,
+              "relative_reduction_percent": 0.015118642072963632,
+              "weighted_aggregate_reduction_contribution": 0.0007053159286775977
+            },
+            "pve_mm": {
+              "c00": 79.32973762324256,
+              "c10": 79.1856411773793,
+              "c10_minus_c00": -0.1440964458632692,
+              "reduction_c00_minus_c10": 0.1440964458632692,
+              "relative_reduction_percent": 0.18164240823235855,
+              "weighted_aggregate_reduction_contribution": 0.0151665902877305
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_jumpBench_01",
+          "frames": 619,
+          "frame_weight": 0.05944492461346394,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 40.82227264120814,
+              "c10": 40.6821688696718,
+              "c10_minus_c00": -0.14010377153633868,
+              "reduction_c00_minus_c10": 0.14010377153633868,
+              "relative_reduction_percent": 0.34320424236966807,
+              "weighted_aggregate_reduction_contribution": 0.008328458137039628
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.79751186802237,
+              "c10": 25.798117665366327,
+              "c10_minus_c00": 0.0006057973439581588,
+              "reduction_c00_minus_c10": -0.0006057973439581588,
+              "relative_reduction_percent": -0.0023482781868939947,
+              "weighted_aggregate_reduction_contribution": -3.601157744244724e-05
+            },
+            "pve_mm": {
+              "c00": 48.44749654051945,
+              "c10": 48.45758175580298,
+              "c10_minus_c00": 0.010085215283524462,
+              "reduction_c00_minus_c10": -0.010085215283524462,
+              "relative_reduction_percent": -0.020816793443784266,
+              "weighted_aggregate_reduction_contribution": -0.0005995148622393207
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_rangeOfMotions_01",
+          "frames": 1057,
+          "frame_weight": 0.10150773072121387,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 49.789981820387105,
+              "c10": 49.434438605295,
+              "c10_minus_c00": -0.35554321509210496,
+              "reduction_c00_minus_c10": 0.35554321509210496,
+              "relative_reduction_percent": 0.7140858503919427,
+              "weighted_aggregate_reduction_contribution": 0.03609038493732411
+            },
+            "pa_mpjpe_mm": {
+              "c00": 36.632818149866196,
+              "c10": 36.485201156240876,
+              "c10_minus_c00": -0.14761699362532,
+              "reduction_c00_minus_c10": 0.14761699362532,
+              "relative_reduction_percent": 0.4029637933434809,
+              "weighted_aggregate_reduction_contribution": 0.014984266038794092
+            },
+            "pve_mm": {
+              "c00": 62.21484902633624,
+              "c10": 61.738325739763994,
+              "c10_minus_c00": -0.4765232865722453,
+              "reduction_c00_minus_c10": 0.4765232865722453,
+              "relative_reduction_percent": 0.765931757498162,
+              "weighted_aggregate_reduction_contribution": 0.048370797455763025
+            }
+          }
+        },
+        {
+          "sequence": "downtown_walkDownhill_00",
+          "frames": 437,
+          "frame_weight": 0.04196677230385096,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 66.55865081333187,
+              "c10": 65.93821609811324,
+              "c10_minus_c00": -0.6204347152186216,
+              "reduction_c00_minus_c10": 0.6204347152186216,
+              "relative_reduction_percent": 0.9321623975802511,
+              "weighted_aggregate_reduction_contribution": 0.026037642422984453
+            },
+            "pa_mpjpe_mm": {
+              "c00": 34.40668101714459,
+              "c10": 34.28155497937235,
+              "c10_minus_c00": -0.1251260377722403,
+              "reduction_c00_minus_c10": 0.1251260377722403,
+              "relative_reduction_percent": 0.3636678519206515,
+              "weighted_aggregate_reduction_contribution": 0.005251135936470731
+            },
+            "pve_mm": {
+              "c00": 74.20944453049579,
+              "c10": 73.61680814276025,
+              "c10_minus_c00": -0.5926363877355385,
+              "reduction_c00_minus_c10": 0.5926363877355385,
+              "relative_reduction_percent": 0.7985996815971305,
+              "weighted_aggregate_reduction_contribution": 0.024871036343074013
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_crosscountry_00",
+          "frames": 484,
+          "frame_weight": 0.04648036108710266,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 108.34032247086202,
+              "c10": 108.26931450977798,
+              "c10_minus_c00": -0.07100796108403529,
+              "reduction_c00_minus_c10": 0.07100796108403529,
+              "relative_reduction_percent": 0.06554158180868695,
+              "weighted_aggregate_reduction_contribution": 0.003300475671244872
+            },
+            "pa_mpjpe_mm": {
+              "c00": 53.74567059840052,
+              "c10": 53.589567344050764,
+              "c10_minus_c00": -0.1561032543497589,
+              "reduction_c00_minus_c10": 0.1561032543497589,
+              "relative_reduction_percent": 0.2904480539766575,
+              "weighted_aggregate_reduction_contribution": 0.007255735629048847
+            },
+            "pve_mm": {
+              "c00": 120.15721898827671,
+              "c10": 120.08210738237239,
+              "c10_minus_c00": -0.07511160590432553,
+              "reduction_c00_minus_c10": 0.07511160590432553,
+              "relative_reduction_percent": 0.06251110548060694,
+              "weighted_aggregate_reduction_contribution": 0.0034912145642649025
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_freestyle_01",
+          "frames": 273,
+          "frame_weight": 0.026217228464419477,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 44.090738918318415,
+              "c10": 43.75096785017859,
+              "c10_minus_c00": -0.33977106813982516,
+              "reduction_c00_minus_c10": 0.33977106813982516,
+              "relative_reduction_percent": 0.7706177679836076,
+              "weighted_aggregate_reduction_contribution": 0.008907855719021689
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.63172830504812,
+              "c10": 25.710605013501514,
+              "c10_minus_c00": 0.07887670845339301,
+              "reduction_c00_minus_c10": -0.07887670845339301,
+              "relative_reduction_percent": -0.3077307449371582,
+              "weighted_aggregate_reduction_contribution": -0.0020679286860439718
+            },
+            "pve_mm": {
+              "c00": 49.03352317530594,
+              "c10": 48.652392195257946,
+              "c10_minus_c00": -0.38113098004799184,
+              "reduction_c00_minus_c10": 0.38113098004799184,
+              "relative_reduction_percent": 0.7772865488073585,
+              "weighted_aggregate_reduction_contribution": 0.009992197978786189
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_golf_00",
+          "frames": 341,
+          "frame_weight": 0.0327475271295496,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 61.1895853864832,
+              "c10": 61.74563287639898,
+              "c10_minus_c00": 0.5560474899157768,
+              "reduction_c00_minus_c10": -0.5560474899157768,
+              "relative_reduction_percent": -0.9087289714478239,
+              "weighted_aggregate_reduction_contribution": -0.018209180261334803
+            },
+            "pa_mpjpe_mm": {
+              "c00": 30.944805357812786,
+              "c10": 31.428992710505064,
+              "c10_minus_c00": 0.48418735269227753,
+              "reduction_c00_minus_c10": -0.48418735269227753,
+              "relative_reduction_percent": -1.5646805565381667,
+              "weighted_aggregate_reduction_contribution": -0.015855938468075138
+            },
+            "pve_mm": {
+              "c00": 60.96676767746374,
+              "c10": 61.07709664263683,
+              "c10_minus_c00": 0.11032896517308899,
+              "reduction_c00_minus_c10": -0.11032896517308899,
+              "relative_reduction_percent": -0.18096574474272464,
+              "weighted_aggregate_reduction_contribution": -0.003613000780180874
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_parcours_00",
+          "frames": 1632,
+          "frame_weight": 0.15672716796312303,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 60.23380510479796,
+              "c10": 60.40255874278498,
+              "c10_minus_c00": 0.1687536379870238,
+              "reduction_c00_minus_c10": -0.1687536379870238,
+              "relative_reduction_percent": -0.2801643324598493,
+              "weighted_aggregate_reduction_contribution": -0.02644827976518047
+            },
+            "pa_mpjpe_mm": {
+              "c00": 40.67224931716919,
+              "c10": 40.6930025827651,
+              "c10_minus_c00": 0.020753265595907067,
+              "reduction_c00_minus_c10": -0.020753265595907067,
+              "relative_reduction_percent": -0.051025615608493974,
+              "weighted_aggregate_reduction_contribution": -0.0032526005428324834
+            },
+            "pve_mm": {
+              "c00": 75.33037179474736,
+              "c10": 75.09382940858018,
+              "c10_minus_c00": -0.23654238616718715,
+              "reduction_c00_minus_c10": 0.23654238616718715,
+              "relative_reduction_percent": 0.3140066622951153,
+              "weighted_aggregate_reduction_contribution": 0.03707261828722304
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_parcours_01",
+          "frames": 1312,
+          "frame_weight": 0.12599635071545184,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 85.98566366841153,
+              "c10": 86.15897115556206,
+              "c10_minus_c00": 0.1733074871505238,
+              "reduction_c00_minus_c10": -0.1733074871505238,
+              "relative_reduction_percent": -0.2015539332450272,
+              "weighted_aggregate_reduction_contribution": -0.021836110932630316
+            },
+            "pa_mpjpe_mm": {
+              "c00": 50.89884964358516,
+              "c10": 50.918045983808796,
+              "c10_minus_c00": 0.01919634022363681,
+              "reduction_c00_minus_c10": -0.01919634022363681,
+              "relative_reduction_percent": -0.03771468384463999,
+              "weighted_aggregate_reduction_contribution": -0.0024186688152706315
+            },
+            "pve_mm": {
+              "c00": 98.17089923416695,
+              "c10": 97.80877696886296,
+              "c10_minus_c00": -0.36212226530399505,
+              "reduction_c00_minus_c10": 0.36212226530399505,
+              "relative_reduction_percent": 0.36886925568464557,
+              "weighted_aggregate_reduction_contribution": 0.045626083941117584
+            }
+          }
+        }
+      ],
+      "sequence_signs": {
+        "mpjpe_mm": {
+          "improved": [
+            "courtyard_drinking_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "courtyard_dancing_00",
+            "courtyard_hug_00",
+            "outdoors_golf_00",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "exact_tie": []
+        },
+        "pa_mpjpe_mm": {
+          "improved": [
+            "courtyard_drinking_00",
+            "courtyard_hug_00",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "courtyard_dancing_00",
+            "courtyard_jumpBench_01",
+            "outdoors_freestyle_01",
+            "outdoors_golf_00",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "exact_tie": []
+        },
+        "pve_mm": {
+          "improved": [
+            "courtyard_dancing_00",
+            "courtyard_drinking_00",
+            "courtyard_hug_00",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "courtyard_jumpBench_01",
+            "outdoors_golf_00"
+          ],
+          "exact_tie": []
+        }
+      }
+    },
+    {
+      "step": 1000,
+      "variant": "ema",
+      "aggregate": {
+        "mpjpe_mm": {
+          "c00": 61.26187129283082,
+          "c10": 61.18838956648434,
+          "c10_minus_c00": -0.07348172634647909,
+          "reduction_c00_minus_c10": 0.07348172634647909,
+          "relative_reduction_percent": 0.11994691770879402
+        },
+        "pa_mpjpe_mm": {
+          "c00": 37.63712758586579,
+          "c10": 37.613404729118336,
+          "c10_minus_c00": -0.023722856747454557,
+          "reduction_c00_minus_c10": 0.023722856747454557,
+          "relative_reduction_percent": 0.0630304655777276
+        },
+        "pve_mm": {
+          "c00": 73.04919619218172,
+          "c10": 72.81972126625095,
+          "c10_minus_c00": -0.22947492593077357,
+          "reduction_c00_minus_c10": 0.22947492593077357,
+          "relative_reduction_percent": 0.31413750991463163
+        },
+        "acceleration_error_mm_per_frame2": {
+          "c00": 21.44694138684099,
+          "c10": 21.442481117185427,
+          "c10_minus_c00": -0.004460269655563565,
+          "reduction_c00_minus_c10": 0.004460269655563565,
+          "relative_reduction_percent": 0.020796763394430744
+        }
+      },
+      "all_four_aggregate_metrics_lower": true,
+      "per_sequence": [
+        {
+          "sequence": "courtyard_basketball_01",
+          "frames": 957,
+          "frame_weight": 0.09190435033131662,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 42.39414934180249,
+              "c10": 42.51028876867663,
+              "c10_minus_c00": 0.1161394268741418,
+              "reduction_c00_minus_c10": -0.1161394268741418,
+              "relative_reduction_percent": -0.27395154444017406,
+              "weighted_aggregate_reduction_contribution": -0.010673718574719552
+            },
+            "pa_mpjpe_mm": {
+              "c00": 29.422274605482972,
+              "c10": 29.501914944145497,
+              "c10_minus_c00": 0.07964033866252507,
+              "reduction_c00_minus_c10": -0.07964033866252507,
+              "relative_reduction_percent": -0.2706804274326355,
+              "weighted_aggregate_reduction_contribution": -0.007319293584945416
+            },
+            "pve_mm": {
+              "c00": 53.75729070761112,
+              "c10": 53.598437533483235,
+              "c10_minus_c00": -0.15885317412788424,
+              "reduction_c00_minus_c10": 0.15885317412788424,
+              "relative_reduction_percent": 0.2955007070425023,
+              "weighted_aggregate_reduction_contribution": 0.014599297766290298
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_dancing_00",
+          "frames": 827,
+          "frame_weight": 0.0794199558244502,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 70.13061498874909,
+              "c10": 70.06974341820344,
+              "c10_minus_c00": -0.060871570545643294,
+              "reduction_c00_minus_c10": 0.060871570545643294,
+              "relative_reduction_percent": 0.08679742870557858,
+              "weighted_aggregate_reduction_contribution": 0.004834417443699948
+            },
+            "pa_mpjpe_mm": {
+              "c00": 39.896553113353875,
+              "c10": 39.92102725041676,
+              "c10_minus_c00": 0.0244741370628887,
+              "reduction_c00_minus_c10": -0.0244741370628887,
+              "relative_reduction_percent": -0.06134398877354871,
+              "weighted_aggregate_reduction_contribution": -0.0019437348843765662
+            },
+            "pve_mm": {
+              "c00": 87.54624741541575,
+              "c10": 87.30488052506544,
+              "c10_minus_c00": -0.24136689035030656,
+              "reduction_c00_minus_c10": 0.24136689035030656,
+              "relative_reduction_percent": 0.2757021545480943,
+              "weighted_aggregate_reduction_contribution": 0.019169347769106133
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_drinking_00",
+          "frames": 1378,
+          "frame_weight": 0.132334581772784,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 48.10735569775364,
+              "c10": 47.98762574631867,
+              "c10_minus_c00": -0.11972995143496945,
+              "reduction_c00_minus_c10": 0.11972995143496945,
+              "relative_reduction_percent": 0.24888075783504393,
+              "weighted_aggregate_reduction_contribution": 0.015844413048822874
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.967509541698394,
+              "c10": 25.88463208222078,
+              "c10_minus_c00": -0.08287745947761493,
+              "reduction_c00_minus_c10": 0.08287745947761493,
+              "relative_reduction_percent": 0.3191582902647289,
+              "weighted_aggregate_reduction_contribution": 0.010967553938361303
+            },
+            "pve_mm": {
+              "c00": 56.587631986864416,
+              "c10": 56.42033454883946,
+              "c10_minus_c00": -0.16729743802495278,
+              "reduction_c00_minus_c10": 0.16729743802495278,
+              "relative_reduction_percent": 0.2956431152019,
+              "weighted_aggregate_reduction_contribution": 0.02213923649269074
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_hug_00",
+          "frames": 1096,
+          "frame_weight": 0.10525304907327379,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 63.494936971768844,
+              "c10": 63.5054505523974,
+              "c10_minus_c00": 0.010513580628554564,
+              "reduction_c00_minus_c10": -0.010513580628554564,
+              "relative_reduction_percent": -0.016558140113170156,
+              "weighted_aggregate_reduction_contribution": -0.0011065864178331397
+            },
+            "pa_mpjpe_mm": {
+              "c00": 44.42766596017963,
+              "c10": 44.50106894708898,
+              "c10_minus_c00": 0.07340298690935043,
+              "reduction_c00_minus_c10": -0.07340298690935043,
+              "relative_reduction_percent": -0.1652190933801053,
+              "weighted_aggregate_reduction_contribution": -0.007725888183294817
+            },
+            "pve_mm": {
+              "c00": 79.08525647734203,
+              "c10": 78.9586866841699,
+              "c10_minus_c00": -0.12656979317212347,
+              "reduction_c00_minus_c10": 0.12656979317212347,
+              "relative_reduction_percent": 0.16004221116534634,
+              "weighted_aggregate_reduction_contribution": 0.01332185665193992
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_jumpBench_01",
+          "frames": 619,
+          "frame_weight": 0.05944492461346394,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 40.986945123009995,
+              "c10": 40.807655248195175,
+              "c10_minus_c00": -0.1792898748148204,
+              "reduction_c00_minus_c10": 0.1792898748148204,
+              "relative_reduction_percent": 0.43743166092699937,
+              "weighted_aggregate_reduction_contribution": 0.010657873092324592
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.910762384750537,
+              "c10": 25.889297532341978,
+              "c10_minus_c00": -0.021464852408559665,
+              "reduction_c00_minus_c10": 0.021464852408559665,
+              "relative_reduction_percent": 0.08284145441120845,
+              "weighted_aggregate_reduction_contribution": 0.0012759765332660768
+            },
+            "pve_mm": {
+              "c00": 48.730738967994114,
+              "c10": 48.637252388555126,
+              "c10_minus_c00": -0.09348657943898786,
+              "reduction_c00_minus_c10": 0.09348657943898786,
+              "relative_reduction_percent": 0.19184313929733132,
+              "weighted_aggregate_reduction_contribution": 0.005557302667120858
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_rangeOfMotions_01",
+          "frames": 1057,
+          "frame_weight": 0.10150773072121387,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 50.20501393559076,
+              "c10": 50.07824061834936,
+              "c10_minus_c00": -0.12677331724140117,
+              "reduction_c00_minus_c10": 0.12677331724140117,
+              "relative_reduction_percent": 0.2525112679065118,
+              "weighted_aggregate_reduction_contribution": 0.01286847174917485
+            },
+            "pa_mpjpe_mm": {
+              "c00": 36.662008492136856,
+              "c10": 36.572735375013686,
+              "c10_minus_c00": -0.08927311712317021,
+              "reduction_c00_minus_c10": 0.08927311712317021,
+              "relative_reduction_percent": 0.24350307251256353,
+              "weighted_aggregate_reduction_contribution": 0.009061911533582477
+            },
+            "pve_mm": {
+              "c00": 62.74248628968209,
+              "c10": 62.55502006436928,
+              "c10_minus_c00": -0.18746622531281076,
+              "reduction_c00_minus_c10": 0.18746622531281076,
+              "relative_reduction_percent": 0.2987867335178257,
+              "weighted_aggregate_reduction_contribution": 0.019029271118375074
+            }
+          }
+        },
+        {
+          "sequence": "downtown_walkDownhill_00",
+          "frames": 437,
+          "frame_weight": 0.04196677230385096,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 66.65088529608616,
+              "c10": 66.06186186312539,
+              "c10_minus_c00": -0.5890234329607722,
+              "reduction_c00_minus_c10": 0.5890234329607722,
+              "relative_reduction_percent": 0.8837443498974207,
+              "weighted_aggregate_reduction_contribution": 0.02471941229269734
+            },
+            "pa_mpjpe_mm": {
+              "c00": 34.552966058936214,
+              "c10": 34.39708439108982,
+              "c10_minus_c00": -0.15588166784639412,
+              "reduction_c00_minus_c10": 0.15588166784639412,
+              "relative_reduction_percent": 0.45113831206418076,
+              "weighted_aggregate_reduction_contribution": 0.0065418504608544085
+            },
+            "pve_mm": {
+              "c00": 74.1172804319613,
+              "c10": 73.63892062468715,
+              "c10_minus_c00": -0.4783598072741597,
+              "reduction_c00_minus_c10": 0.4783598072741597,
+              "relative_reduction_percent": 0.645409281730578,
+              "weighted_aggregate_reduction_contribution": 0.020075217111188762
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_crosscountry_00",
+          "frames": 484,
+          "frame_weight": 0.04648036108710266,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 108.36118792699388,
+              "c10": 108.18626256028483,
+              "c10_minus_c00": -0.17492536670904713,
+              "reduction_c00_minus_c10": 0.17492536670904713,
+              "relative_reduction_percent": 0.16142806299511914,
+              "weighted_aggregate_reduction_contribution": 0.008130594207930723
+            },
+            "pa_mpjpe_mm": {
+              "c00": 53.80413030789904,
+              "c10": 53.68207460001481,
+              "c10_minus_c00": -0.12205570788422904,
+              "reduction_c00_minus_c10": 0.12205570788422904,
+              "relative_reduction_percent": 0.2268519297417394,
+              "weighted_aggregate_reduction_contribution": 0.005673193375200883
+            },
+            "pve_mm": {
+              "c00": 120.19708922677789,
+              "c10": 119.99269551285042,
+              "c10_minus_c00": -0.2043937139274732,
+              "reduction_c00_minus_c10": 0.2043937139274732,
+              "relative_reduction_percent": 0.17004880504372288,
+              "weighted_aggregate_reduction_contribution": 0.009500293627282585
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_freestyle_01",
+          "frames": 273,
+          "frame_weight": 0.026217228464419477,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 44.200446726201655,
+              "c10": 43.80377070807712,
+              "c10_minus_c00": -0.3966760181245377,
+              "reduction_c00_minus_c10": 0.3966760181245377,
+              "relative_reduction_percent": 0.8974479841385663,
+              "weighted_aggregate_reduction_contribution": 0.010399745793527135
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.750583519429078,
+              "c10": 25.72698799245087,
+              "c10_minus_c00": -0.02359552697820888,
+              "reduction_c00_minus_c10": 0.02359552697820888,
+              "relative_reduction_percent": 0.09163103803222872,
+              "weighted_aggregate_reduction_contribution": 0.000618609321526099
+            },
+            "pve_mm": {
+              "c00": 49.15144103612655,
+              "c10": 48.80556651524135,
+              "c10_minus_c00": -0.34587452088519655,
+              "reduction_c00_minus_c10": 0.34587452088519655,
+              "relative_reduction_percent": 0.7036915166555892,
+              "weighted_aggregate_reduction_contribution": 0.009067871334068967
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_golf_00",
+          "frames": 341,
+          "frame_weight": 0.0327475271295496,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 61.100412665224496,
+              "c10": 61.309633103983145,
+              "c10_minus_c00": 0.20922043875864915,
+              "reduction_c00_minus_c10": -0.20922043875864915,
+              "relative_reduction_percent": -0.34242066400596943,
+              "weighted_aggregate_reduction_contribution": -0.006851451994305121
+            },
+            "pa_mpjpe_mm": {
+              "c00": 30.948485869466385,
+              "c10": 31.076807469566546,
+              "c10_minus_c00": 0.12832160010016125,
+              "reduction_c00_minus_c10": -0.12832160010016125,
+              "relative_reduction_percent": -0.41462965471523333,
+              "weighted_aggregate_reduction_contribution": -0.0042022150805872726
+            },
+            "pve_mm": {
+              "c00": 60.75457365421955,
+              "c10": 60.53818657391232,
+              "c10_minus_c00": -0.21638708030722853,
+              "reduction_c00_minus_c10": 0.21638708030722853,
+              "relative_reduction_percent": 0.356165910304598,
+              "weighted_aggregate_reduction_contribution": 0.007086141782845061
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_parcours_00",
+          "frames": 1632,
+          "frame_weight": 0.15672716796312303,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 60.03530415366678,
+              "c10": 59.989064341666655,
+              "c10_minus_c00": -0.04623981200012395,
+              "reduction_c00_minus_c10": 0.04623981200012395,
+              "relative_reduction_percent": 0.07702103395989834,
+              "weighted_aggregate_reduction_contribution": 0.007247034781926832
+            },
+            "pa_mpjpe_mm": {
+              "c00": 40.59819082594385,
+              "c10": 40.525608202406005,
+              "c10_minus_c00": -0.07258262353784772,
+              "reduction_c00_minus_c10": 0.07258262353784772,
+              "relative_reduction_percent": 0.17878290155595936,
+              "weighted_aggregate_reduction_contribution": 0.011375669030420582
+            },
+            "pve_mm": {
+              "c00": 75.05563219037711,
+              "c10": 74.74170588395175,
+              "c10_minus_c00": -0.31392630642535835,
+              "reduction_c00_minus_c10": 0.31392630642535835,
+              "relative_reduction_percent": 0.4182581603324459,
+              "weighted_aggregate_reduction_contribution": 0.04920078095516966
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_parcours_01",
+          "frames": 1312,
+          "frame_weight": 0.12599635071545184,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 85.80625726973138,
+              "c10": 85.82680134947707,
+              "c10_minus_c00": 0.02054407974569017,
+              "reduction_c00_minus_c10": -0.02054407974569017,
+              "relative_reduction_percent": -0.02394240280299139,
+              "weighted_aggregate_reduction_contribution": -0.002588479076763927
+            },
+            "pa_mpjpe_mm": {
+              "c00": 50.69889691253988,
+              "c10": 50.70366511184995,
+              "c10_minus_c00": 0.004768199310070997,
+              "reduction_c00_minus_c10": -0.004768199310070997,
+              "relative_reduction_percent": -0.009404936991620481,
+              "weighted_aggregate_reduction_contribution": -0.0006007757125527717
+            },
+            "pve_mm": {
+              "c00": 97.93093386801277,
+              "c10": 97.60768396098439,
+              "c10_minus_c00": -0.32324990702838363,
+              "reduction_c00_minus_c10": 0.32324990702838363,
+              "relative_reduction_percent": 0.3300794695413059,
+              "weighted_aggregate_reduction_contribution": 0.04072830865468551
+            }
+          }
+        }
+      ],
+      "sequence_signs": {
+        "mpjpe_mm": {
+          "improved": [
+            "courtyard_dancing_00",
+            "courtyard_drinking_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_parcours_00"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "courtyard_hug_00",
+            "outdoors_golf_00",
+            "outdoors_parcours_01"
+          ],
+          "exact_tie": []
+        },
+        "pa_mpjpe_mm": {
+          "improved": [
+            "courtyard_drinking_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_parcours_00"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "courtyard_dancing_00",
+            "courtyard_hug_00",
+            "outdoors_golf_00",
+            "outdoors_parcours_01"
+          ],
+          "exact_tie": []
+        },
+        "pve_mm": {
+          "improved": [
+            "courtyard_basketball_01",
+            "courtyard_dancing_00",
+            "courtyard_drinking_00",
+            "courtyard_hug_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_golf_00",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "regressed": [],
+          "exact_tie": []
+        }
+      }
+    },
+    {
+      "step": 2000,
+      "variant": "student",
+      "aggregate": {
+        "mpjpe_mm": {
+          "c00": 61.51294853230964,
+          "c10": 61.34759798025199,
+          "c10_minus_c00": -0.16535055205765303,
+          "reduction_c00_minus_c10": 0.16535055205765303,
+          "relative_reduction_percent": 0.2688060904295666
+        },
+        "pa_mpjpe_mm": {
+          "c00": 37.75044989862921,
+          "c10": 37.73150700088606,
+          "c10_minus_c00": -0.018942897743151832,
+          "reduction_c00_minus_c10": 0.018942897743151832,
+          "relative_reduction_percent": 0.050179263542603984
+        },
+        "pve_mm": {
+          "c00": 73.29757369167922,
+          "c10": 72.95875583202846,
+          "c10_minus_c00": -0.33881785965076006,
+          "reduction_c00_minus_c10": 0.33881785965076006,
+          "relative_reduction_percent": 0.4622497616032587
+        },
+        "acceleration_error_mm_per_frame2": {
+          "c00": 21.315366620285868,
+          "c10": 21.304226508702875,
+          "c10_minus_c00": -0.011140111582992773,
+          "reduction_c00_minus_c10": 0.011140111582992773,
+          "relative_reduction_percent": 0.0522632886473119
+        }
+      },
+      "all_four_aggregate_metrics_lower": true,
+      "per_sequence": [
+        {
+          "sequence": "courtyard_basketball_01",
+          "frames": 957,
+          "frame_weight": 0.09190435033131662,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 42.87482629674356,
+              "c10": 42.99840959212125,
+              "c10_minus_c00": 0.12358329537769208,
+              "reduction_c00_minus_c10": -0.12358329537769208,
+              "relative_reduction_percent": -0.28824208994423034,
+              "weighted_aggregate_reduction_contribution": -0.011357842473490122
+            },
+            "pa_mpjpe_mm": {
+              "c00": 29.424660683674748,
+              "c10": 29.612230740370794,
+              "c10_minus_c00": 0.1875700566960461,
+              "reduction_c00_minus_c10": -0.1875700566960461,
+              "relative_reduction_percent": -0.6374586905605774,
+              "weighted_aggregate_reduction_contribution": -0.017238504202258493
+            },
+            "pve_mm": {
+              "c00": 53.91035926404293,
+              "c10": 53.759520643307994,
+              "c10_minus_c00": -0.15083862073493748,
+              "reduction_c00_minus_c10": 0.15083862073493748,
+              "relative_reduction_percent": 0.2797952430555284,
+              "weighted_aggregate_reduction_contribution": 0.013862725443516273
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_dancing_00",
+          "frames": 827,
+          "frame_weight": 0.0794199558244502,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 70.34450558682019,
+              "c10": 70.24045026287924,
+              "c10_minus_c00": -0.10405532394095474,
+              "reduction_c00_minus_c10": 0.10405532394095474,
+              "relative_reduction_percent": 0.14792246114023527,
+              "weighted_aggregate_reduction_contribution": 0.008264069230689515
+            },
+            "pa_mpjpe_mm": {
+              "c00": 39.71428726085585,
+              "c10": 39.78377886752552,
+              "c10_minus_c00": 0.06949160666967202,
+              "reduction_c00_minus_c10": -0.06949160666967202,
+              "relative_reduction_percent": -0.17497885890090242,
+              "weighted_aggregate_reduction_contribution": -0.00551902033187557
+            },
+            "pve_mm": {
+              "c00": 87.73785943304613,
+              "c10": 87.51971224516161,
+              "c10_minus_c00": -0.2181471878845116,
+              "reduction_c00_minus_c10": 0.2181471878845116,
+              "relative_reduction_percent": 0.24863518359595094,
+              "weighted_aggregate_reduction_contribution": 0.01732524002501615
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_drinking_00",
+          "frames": 1378,
+          "frame_weight": 0.132334581772784,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 48.213043900809545,
+              "c10": 48.085421433469556,
+              "c10_minus_c00": -0.1276224673399895,
+              "reduction_c00_minus_c10": 0.1276224673399895,
+              "relative_reduction_percent": 0.2647052685629056,
+              "weighted_aggregate_reduction_contribution": 0.016888865840248422
+            },
+            "pa_mpjpe_mm": {
+              "c00": 26.27548946455359,
+              "c10": 26.125426396922208,
+              "c10_minus_c00": -0.15006306763138255,
+              "reduction_c00_minus_c10": 0.15006306763138255,
+              "relative_reduction_percent": 0.5711142615775895,
+              "weighted_aggregate_reduction_contribution": 0.01985853329453999
+            },
+            "pve_mm": {
+              "c00": 56.70962989624422,
+              "c10": 56.58514659117545,
+              "c10_minus_c00": -0.1244833050687717,
+              "reduction_c00_minus_c10": 0.1244833050687717,
+              "relative_reduction_percent": 0.21950999379915898,
+              "weighted_aggregate_reduction_contribution": 0.016473446113969618
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_hug_00",
+          "frames": 1096,
+          "frame_weight": 0.10525304907327379,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 63.59569607163868,
+              "c10": 63.333079624350056,
+              "c10_minus_c00": -0.26261644728862166,
+              "reduction_c00_minus_c10": 0.26261644728862166,
+              "relative_reduction_percent": 0.41294688714907996,
+              "weighted_aggregate_reduction_contribution": 0.02764118181391842
+            },
+            "pa_mpjpe_mm": {
+              "c00": 44.39717640580922,
+              "c10": 44.397988408151335,
+              "c10_minus_c00": 0.0008120023421156475,
+              "reduction_c00_minus_c10": -0.0008120023421156475,
+              "relative_reduction_percent": -0.0018289504149849487,
+              "weighted_aggregate_reduction_contribution": -8.54657223620058e-05
+            },
+            "pve_mm": {
+              "c00": 79.4050150439687,
+              "c10": 78.9441899383155,
+              "c10_minus_c00": -0.4608251056531998,
+              "reduction_c00_minus_c10": 0.4608251056531998,
+              "relative_reduction_percent": 0.5803476082688587,
+              "weighted_aggregate_reduction_contribution": 0.048503247459512
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_jumpBench_01",
+          "frames": 619,
+          "frame_weight": 0.05944492461346394,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 41.0389147636771,
+              "c10": 40.7885321908313,
+              "c10_minus_c00": -0.2503825728458011,
+              "reduction_c00_minus_c10": 0.2503825728458011,
+              "relative_reduction_percent": 0.6101101217896016,
+              "weighted_aggregate_reduction_contribution": 0.014883973167343967
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.931287574459933,
+              "c10": 25.95224169498499,
+              "c10_minus_c00": 0.020954120525058073,
+              "reduction_c00_minus_c10": -0.020954120525058073,
+              "relative_reduction_percent": -0.08080632504224766,
+              "weighted_aggregate_reduction_contribution": -0.0012456161149535182
+            },
+            "pve_mm": {
+              "c00": 48.60890627908784,
+              "c10": 48.50962946680713,
+              "c10_minus_c00": -0.0992768122807135,
+              "reduction_c00_minus_c10": 0.0992768122807135,
+              "relative_reduction_percent": 0.20423584869553757,
+              "weighted_aggregate_reduction_contribution": 0.005901502621891656
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_rangeOfMotions_01",
+          "frames": 1057,
+          "frame_weight": 0.10150773072121387,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 49.85230559544848,
+              "c10": 49.436748416218535,
+              "c10_minus_c00": -0.4155571792299426,
+              "reduction_c00_minus_c10": 0.4155571792299426,
+              "relative_reduction_percent": 0.8335766506010568,
+              "weighted_aggregate_reduction_contribution": 0.042182266248539796
+            },
+            "pa_mpjpe_mm": {
+              "c00": 36.36773632468203,
+              "c10": 36.13289330878569,
+              "c10_minus_c00": -0.23484301589633816,
+              "reduction_c00_minus_c10": 0.23484301589633816,
+              "relative_reduction_percent": 0.6457454866030665,
+              "weighted_aggregate_reduction_contribution": 0.02383838161936322
+            },
+            "pve_mm": {
+              "c00": 62.01272251702979,
+              "c10": 61.539106011729025,
+              "c10_minus_c00": -0.47361650530076815,
+              "reduction_c00_minus_c10": 0.47361650530076815,
+              "relative_reduction_percent": 0.7637408681270278,
+              "weighted_aggregate_reduction_contribution": 0.04807573668519209
+            }
+          }
+        },
+        {
+          "sequence": "downtown_walkDownhill_00",
+          "frames": 437,
+          "frame_weight": 0.04196677230385096,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 66.9058283144604,
+              "c10": 66.32843378970497,
+              "c10_minus_c00": -0.5773945247554195,
+              "reduction_c00_minus_c10": 0.5773945247554195,
+              "relative_reduction_percent": 0.8629958544742012,
+              "weighted_aggregate_reduction_contribution": 0.024231384549900627
+            },
+            "pa_mpjpe_mm": {
+              "c00": 34.113813858555986,
+              "c10": 34.1373917254485,
+              "c10_minus_c00": 0.023577866892516397,
+              "reduction_c00_minus_c10": -0.023577866892516397,
+              "relative_reduction_percent": -0.06911530616387795,
+              "weighted_aggregate_reduction_contribution": -0.0009894869712888936
+            },
+            "pve_mm": {
+              "c00": 75.22777472698989,
+              "c10": 74.98558195450214,
+              "c10_minus_c00": -0.24219277248775484,
+              "reduction_c00_minus_c10": 0.24219277248775484,
+              "relative_reduction_percent": 0.32194594797825643,
+              "weighted_aggregate_reduction_contribution": 0.010164048936631944
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_crosscountry_00",
+          "frames": 484,
+          "frame_weight": 0.04648036108710266,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 108.17631874399737,
+              "c10": 107.98062293785662,
+              "c10_minus_c00": -0.19569580614074766,
+              "reduction_c00_minus_c10": 0.19569580614074766,
+              "relative_reduction_percent": 0.18090447929169035,
+              "weighted_aggregate_reduction_contribution": 0.009096011732653331
+            },
+            "pa_mpjpe_mm": {
+              "c00": 53.43940228667141,
+              "c10": 53.32562024928322,
+              "c10_minus_c00": -0.11378203738819082,
+              "reduction_c00_minus_c10": 0.11378203738819082,
+              "relative_reduction_percent": 0.21291787055891112,
+              "weighted_aggregate_reduction_contribution": 0.005288630183029505
+            },
+            "pve_mm": {
+              "c00": 119.94074444337325,
+              "c10": 119.75725910092189,
+              "c10_minus_c00": -0.1834853424513625,
+              "reduction_c00_minus_c10": 0.1834853424513625,
+              "relative_reduction_percent": 0.15297999299811757,
+              "weighted_aggregate_reduction_contribution": 0.008528464971330064
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_freestyle_01",
+          "frames": 273,
+          "frame_weight": 0.026217228464419477,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 43.97076527102963,
+              "c10": 43.424142903897355,
+              "c10_minus_c00": -0.5466223671322723,
+              "reduction_c00_minus_c10": 0.5466223671322723,
+              "relative_reduction_percent": 1.243149542117288,
+              "weighted_aggregate_reduction_contribution": 0.014330923482868704
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.690797935038695,
+              "c10": 25.652944603245775,
+              "c10_minus_c00": -0.037853331792920386,
+              "reduction_c00_minus_c10": 0.037853331792920386,
+              "relative_reduction_percent": 0.14734198559591516,
+              "weighted_aggregate_reduction_contribution": 0.0009924094477545158
+            },
+            "pve_mm": {
+              "c00": 49.05505009186574,
+              "c10": 48.54618560176193,
+              "c10_minus_c00": -0.5088644901038109,
+              "reduction_c00_minus_c10": 0.5088644901038109,
+              "relative_reduction_percent": 1.037333544968065,
+              "weighted_aggregate_reduction_contribution": 0.013341016594481883
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_golf_00",
+          "frames": 341,
+          "frame_weight": 0.0327475271295496,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 60.397388268076426,
+              "c10": 60.60120093158263,
+              "c10_minus_c00": 0.20381266350620564,
+              "reduction_c00_minus_c10": -0.20381266350620564,
+              "relative_reduction_percent": -0.337452776271673,
+              "weighted_aggregate_reduction_contribution": -0.006674360727515148
+            },
+            "pa_mpjpe_mm": {
+              "c00": 31.00349004527341,
+              "c10": 31.159558517142823,
+              "c10_minus_c00": 0.15606847186941408,
+              "reduction_c00_minus_c10": -0.15606847186941408,
+              "relative_reduction_percent": -0.5033900107423785,
+              "weighted_aggregate_reduction_contribution": -0.005110856516611035
+            },
+            "pve_mm": {
+              "c00": 60.01031425901172,
+              "c10": 59.78736136875544,
+              "c10_minus_c00": -0.2229528902562805,
+              "reduction_c00_minus_c10": 0.2229528902562805,
+              "relative_reduction_percent": 0.3715242837989301,
+              "weighted_aggregate_reduction_contribution": 0.0073011558222791295
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_parcours_00",
+          "frames": 1632,
+          "frame_weight": 0.15672716796312303,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 60.84614570701824,
+              "c10": 60.76681735235102,
+              "c10_minus_c00": -0.07932835466721855,
+              "reduction_c00_minus_c10": 0.07932835466721855,
+              "relative_reduction_percent": 0.13037531588146017,
+              "weighted_aggregate_reduction_contribution": 0.012432908366166767
+            },
+            "pa_mpjpe_mm": {
+              "c00": 41.05193867344482,
+              "c10": 41.06172045422535,
+              "c10_minus_c00": 0.009781780780528493,
+              "reduction_c00_minus_c10": -0.009781780780528493,
+              "relative_reduction_percent": -0.023827816898830192,
+              "weighted_aggregate_reduction_contribution": -0.0015330707993686434
+            },
+            "pve_mm": {
+              "c00": 75.95293607665043,
+              "c10": 75.511113142266,
+              "c10_minus_c00": -0.4418229343844331,
+              "reduction_c00_minus_c10": 0.4418229343844331,
+              "relative_reduction_percent": 0.5817061949238576,
+              "weighted_aggregate_reduction_contribution": 0.06924565724722993
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_parcours_01",
+          "frames": 1312,
+          "frame_weight": 0.12599635071545184,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 86.58320288105709,
+              "c10": 86.47660319979597,
+              "c10_minus_c00": -0.10659968126111607,
+              "reduction_c00_minus_c10": 0.10659968126111607,
+              "relative_reduction_percent": 0.12311820042919462,
+              "weighted_aggregate_reduction_contribution": 0.013431170826330087
+            },
+            "pa_mpjpe_mm": {
+              "c00": 51.355392994677146,
+              "c10": 51.34994074266131,
+              "c10_minus_c00": -0.005452252015835768,
+              "reduction_c00_minus_c10": 0.005452252015835768,
+              "relative_reduction_percent": 0.010616707803990284,
+              "weighted_aggregate_reduction_contribution": 0.0006869638571761636
+            },
+            "pve_mm": {
+              "c00": 98.74198836233558,
+              "c10": 98.10629044509515,
+              "c10_minus_c00": -0.6356979172404209,
+              "reduction_c00_minus_c10": 0.6356979172404209,
+              "relative_reduction_percent": 0.6437969578936525,
+              "weighted_aggregate_reduction_contribution": 0.08009561772970648
+            }
+          }
+        }
+      ],
+      "sequence_signs": {
+        "mpjpe_mm": {
+          "improved": [
+            "courtyard_dancing_00",
+            "courtyard_drinking_00",
+            "courtyard_hug_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "outdoors_golf_00"
+          ],
+          "exact_tie": []
+        },
+        "pa_mpjpe_mm": {
+          "improved": [
+            "courtyard_drinking_00",
+            "courtyard_rangeOfMotions_01",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_parcours_01"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "courtyard_dancing_00",
+            "courtyard_hug_00",
+            "courtyard_jumpBench_01",
+            "downtown_walkDownhill_00",
+            "outdoors_golf_00",
+            "outdoors_parcours_00"
+          ],
+          "exact_tie": []
+        },
+        "pve_mm": {
+          "improved": [
+            "courtyard_basketball_01",
+            "courtyard_dancing_00",
+            "courtyard_drinking_00",
+            "courtyard_hug_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_golf_00",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "regressed": [],
+          "exact_tie": []
+        }
+      }
+    },
+    {
+      "step": 2000,
+      "variant": "ema",
+      "aggregate": {
+        "mpjpe_mm": {
+          "c00": 61.31692679471245,
+          "c10": 61.16190743288366,
+          "c10_minus_c00": -0.15501936182879206,
+          "reduction_c00_minus_c10": 0.15501936182879206,
+          "relative_reduction_percent": 0.2528165874127923
+        },
+        "pa_mpjpe_mm": {
+          "c00": 37.660090100189386,
+          "c10": 37.62280025388761,
+          "c10_minus_c00": -0.03728984630177479,
+          "reduction_c00_minus_c10": 0.03728984630177479,
+          "relative_reduction_percent": 0.09901688021077587
+        },
+        "pve_mm": {
+          "c00": 73.19373433248552,
+          "c10": 72.84745162884005,
+          "c10_minus_c00": -0.3462827036454712,
+          "reduction_c00_minus_c10": 0.3462827036454712,
+          "relative_reduction_percent": 0.4731042988904869
+        },
+        "acceleration_error_mm_per_frame2": {
+          "c00": 21.35865831176253,
+          "c10": 21.345067797077967,
+          "c10_minus_c00": -0.013590514684562294,
+          "reduction_c00_minus_c10": 0.013590514684562294,
+          "relative_reduction_percent": 0.06363000187646523
+        }
+      },
+      "all_four_aggregate_metrics_lower": true,
+      "per_sequence": [
+        {
+          "sequence": "courtyard_basketball_01",
+          "frames": 957,
+          "frame_weight": 0.09190435033131662,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 42.63047826402239,
+              "c10": 42.65387784525394,
+              "c10_minus_c00": 0.023399581231544175,
+              "reduction_c00_minus_c10": -0.023399581231544175,
+              "relative_reduction_percent": -0.054889323752419734,
+              "weighted_aggregate_reduction_contribution": -0.0021505233111098077
+            },
+            "pa_mpjpe_mm": {
+              "c00": 29.37406696471052,
+              "c10": 29.456577882995923,
+              "c10_minus_c00": 0.08251091828540424,
+              "reduction_c00_minus_c10": -0.08251091828540424,
+              "relative_reduction_percent": -0.2808971545701567,
+              "weighted_aggregate_reduction_contribution": -0.007583112340260568
+            },
+            "pve_mm": {
+              "c00": 53.875872160573735,
+              "c10": 53.580249776411705,
+              "c10_minus_c00": -0.29562238416203,
+              "reduction_c00_minus_c10": 0.29562238416203,
+              "relative_reduction_percent": 0.548710159681398,
+              "weighted_aggregate_reduction_contribution": 0.027168983159806627
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_dancing_00",
+          "frames": 827,
+          "frame_weight": 0.0794199558244502,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 70.23174101726896,
+              "c10": 70.12464054435168,
+              "c10_minus_c00": -0.10710047291728131,
+              "reduction_c00_minus_c10": 0.10710047291728131,
+              "relative_reduction_percent": 0.1524958250585684,
+              "weighted_aggregate_reduction_contribution": 0.00850591482786902
+            },
+            "pa_mpjpe_mm": {
+              "c00": 39.68879297134233,
+              "c10": 39.71600402684425,
+              "c10_minus_c00": 0.027211055501922488,
+              "reduction_c00_minus_c10": -0.027211055501922488,
+              "relative_reduction_percent": -0.06856105581636229,
+              "weighted_aggregate_reduction_contribution": -0.0021611008258989196
+            },
+            "pve_mm": {
+              "c00": 87.63143186327048,
+              "c10": 87.35191719304261,
+              "c10_minus_c00": -0.2795146702278686,
+              "reduction_c00_minus_c10": 0.2795146702278686,
+              "relative_reduction_percent": 0.3189662251142827,
+              "weighted_aggregate_reduction_contribution": 0.022199042761782615
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_drinking_00",
+          "frames": 1378,
+          "frame_weight": 0.132334581772784,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 48.39520877954403,
+              "c10": 48.228437701918736,
+              "c10_minus_c00": -0.16677107762529175,
+              "reduction_c00_minus_c10": 0.16677107762529175,
+              "relative_reduction_percent": 0.3446024551417651,
+              "weighted_aggregate_reduction_contribution": 0.02206958080933942
+            },
+            "pa_mpjpe_mm": {
+              "c00": 26.146359033266243,
+              "c10": 25.998599728582906,
+              "c10_minus_c00": -0.14775930468333698,
+              "reduction_c00_minus_c10": 0.14775930468333698,
+              "relative_reduction_percent": 0.5651238265922284,
+              "weighted_aggregate_reduction_contribution": 0.019553665788306702
+            },
+            "pve_mm": {
+              "c00": 56.952178220098354,
+              "c10": 56.74920899151718,
+              "c10_minus_c00": -0.20296922858117483,
+              "reduction_c00_minus_c10": 0.20296922858117483,
+              "relative_reduction_percent": 0.3563853656251329,
+              "weighted_aggregate_reduction_contribution": 0.026859847977034793
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_hug_00",
+          "frames": 1096,
+          "frame_weight": 0.10525304907327379,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 63.623606827137245,
+              "c10": 63.39330030879835,
+              "c10_minus_c00": -0.23030651833889237,
+              "reduction_c00_minus_c10": 0.23030651833889237,
+              "relative_reduction_percent": 0.3619828076780146,
+              "weighted_aggregate_reduction_contribution": 0.02424046327661829
+            },
+            "pa_mpjpe_mm": {
+              "c00": 44.46079888570048,
+              "c10": 44.450435846391386,
+              "c10_minus_c00": -0.010363039309090993,
+              "reduction_c00_minus_c10": 0.010363039309090993,
+              "relative_reduction_percent": 0.023308261589568433,
+              "weighted_aggregate_reduction_contribution": 0.0010907414849480141
+            },
+            "pve_mm": {
+              "c00": 79.46056535470224,
+              "c10": 79.03747192438502,
+              "c10_minus_c00": -0.42309343031722335,
+              "reduction_c00_minus_c10": 0.42309343031722335,
+              "relative_reduction_percent": 0.5324571105536262,
+              "weighted_aggregate_reduction_contribution": 0.0445318735837593
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_jumpBench_01",
+          "frames": 619,
+          "frame_weight": 0.05944492461346394,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 41.03310377031613,
+              "c10": 40.74247847235068,
+              "c10_minus_c00": -0.2906252979654482,
+              "reduction_c00_minus_c10": 0.2906252979654482,
+              "relative_reduction_percent": 0.7082703263010054,
+              "weighted_aggregate_reduction_contribution": 0.017276198928321596
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.93833968327388,
+              "c10": 25.87669798091463,
+              "c10_minus_c00": -0.061641702359249706,
+              "reduction_c00_minus_c10": 0.061641702359249706,
+              "relative_reduction_percent": 0.23764706265682392,
+              "weighted_aggregate_reduction_contribution": 0.0036642863497912204
+            },
+            "pve_mm": {
+              "c00": 48.82820284077732,
+              "c10": 48.622040990481274,
+              "c10_minus_c00": -0.2061618502960485,
+              "reduction_c00_minus_c10": 0.2061618502960485,
+              "relative_reduction_percent": 0.42221879631391834,
+              "weighted_aggregate_reduction_contribution": 0.012255275649020642
+            }
+          }
+        },
+        {
+          "sequence": "courtyard_rangeOfMotions_01",
+          "frames": 1057,
+          "frame_weight": 0.10150773072121387,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 49.98062576160413,
+              "c10": 49.66153299120539,
+              "c10_minus_c00": -0.31909277039873984,
+              "reduction_c00_minus_c10": 0.31909277039873984,
+              "relative_reduction_percent": 0.6384329238308011,
+              "weighted_aggregate_reduction_contribution": 0.03239038301272087
+            },
+            "pa_mpjpe_mm": {
+              "c00": 36.57786481833841,
+              "c10": 36.37606809809169,
+              "c10_minus_c00": -0.20179672024671902,
+              "reduction_c00_minus_c10": 0.20179672024671902,
+              "relative_reduction_percent": 0.5516908142367777,
+              "weighted_aggregate_reduction_contribution": 0.020483927139228007
+            },
+            "pve_mm": {
+              "c00": 62.3877908116596,
+              "c10": 61.96069555544244,
+              "c10_minus_c00": -0.42709525621715727,
+              "reduction_c00_minus_c10": 0.42709525621715727,
+              "relative_reduction_percent": 0.6845814712473163,
+              "weighted_aggregate_reduction_contribution": 0.043353470260398846
+            }
+          }
+        },
+        {
+          "sequence": "downtown_walkDownhill_00",
+          "frames": 437,
+          "frame_weight": 0.04196677230385096,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 66.6033131841664,
+              "c10": 66.06368210222956,
+              "c10_minus_c00": -0.5396310819368324,
+              "reduction_c00_minus_c10": 0.5396310819368324,
+              "relative_reduction_percent": 0.8102165735279351,
+              "weighted_aggregate_reduction_contribution": 0.022646574743723853
+            },
+            "pa_mpjpe_mm": {
+              "c00": 34.31053307836607,
+              "c10": 34.230528650349285,
+              "c10_minus_c00": -0.08000442801678531,
+              "reduction_c00_minus_c10": 0.08000442801678531,
+              "relative_reduction_percent": 0.23317745554711522,
+              "weighted_aggregate_reduction_contribution": 0.003357527613880242
+            },
+            "pve_mm": {
+              "c00": 74.56857221241128,
+              "c10": 74.36301128815187,
+              "c10_minus_c00": -0.20556092425941586,
+              "reduction_c00_minus_c10": 0.20556092425941586,
+              "relative_reduction_percent": 0.27566697089742864,
+              "weighted_aggregate_reduction_contribution": 0.008626728502964294
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_crosscountry_00",
+          "frames": 484,
+          "frame_weight": 0.04648036108710266,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 108.32231613033073,
+              "c10": 108.13236716562066,
+              "c10_minus_c00": -0.1899489647100694,
+              "reduction_c00_minus_c10": 0.1899489647100694,
+              "relative_reduction_percent": 0.17535533904345943,
+              "weighted_aggregate_reduction_contribution": 0.008828896467845744
+            },
+            "pa_mpjpe_mm": {
+              "c00": 53.574208395540225,
+              "c10": 53.45341175055701,
+              "c10_minus_c00": -0.12079664498321563,
+              "reduction_c00_minus_c10": 0.12079664498321563,
+              "relative_reduction_percent": 0.2254753707070571,
+              "weighted_aggregate_reduction_contribution": 0.005614671676930279
+            },
+            "pve_mm": {
+              "c00": 120.13729686579428,
+              "c10": 119.93363412746713,
+              "c10_minus_c00": -0.20366273832715365,
+              "reduction_c00_minus_c10": 0.20366273832715365,
+              "relative_reduction_percent": 0.16952498819302209,
+              "weighted_aggregate_reduction_contribution": 0.009466317617434149
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_freestyle_01",
+          "frames": 273,
+          "frame_weight": 0.026217228464419477,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 43.81202889187432,
+              "c10": 43.281296495989565,
+              "c10_minus_c00": -0.5307323958847547,
+              "reduction_c00_minus_c10": 0.5307323958847547,
+              "relative_reduction_percent": 1.2113851134230125,
+              "weighted_aggregate_reduction_contribution": 0.013914332476379342
+            },
+            "pa_mpjpe_mm": {
+              "c00": 25.60350131639194,
+              "c10": 25.541893731980096,
+              "c10_minus_c00": -0.06160758441184555,
+              "reduction_c00_minus_c10": 0.06160758441184555,
+              "relative_reduction_percent": 0.24062171673529267,
+              "weighted_aggregate_reduction_contribution": 0.0016151801156663395
+            },
+            "pve_mm": {
+              "c00": 48.81781448811402,
+              "c10": 48.3290214468708,
+              "c10_minus_c00": -0.48879304124321976,
+              "reduction_c00_minus_c10": 0.48879304124321976,
+              "relative_reduction_percent": 1.0012595737202232,
+              "weighted_aggregate_reduction_contribution": 0.012814798834091944
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_golf_00",
+          "frames": 341,
+          "frame_weight": 0.0327475271295496,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 60.462920437810006,
+              "c10": 60.6813271150561,
+              "c10_minus_c00": 0.21840667724609375,
+              "reduction_c00_minus_c10": -0.21840667724609375,
+              "relative_reduction_percent": -0.3612241612952504,
+              "weighted_aggregate_reduction_contribution": -0.007152278588391239
+            },
+            "pa_mpjpe_mm": {
+              "c00": 30.83671332664154,
+              "c10": 30.918331045559075,
+              "c10_minus_c00": 0.08161771891753489,
+              "reduction_c00_minus_c10": -0.08161771891753489,
+              "relative_reduction_percent": -0.26467710113263215,
+              "weighted_aggregate_reduction_contribution": -0.0026727784645038805
+            },
+            "pve_mm": {
+              "c00": 60.53507803192586,
+              "c10": 60.177252671585755,
+              "c10_minus_c00": -0.35782536034010803,
+              "reduction_c00_minus_c10": 0.35782536034010803,
+              "relative_reduction_percent": 0.5911041531182845,
+              "weighted_aggregate_reduction_contribution": 0.011717895695378523
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_parcours_00",
+          "frames": 1632,
+          "frame_weight": 0.15672716796312303,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 60.19002629612007,
+              "c10": 60.153494368581214,
+              "c10_minus_c00": -0.036531927538852926,
+              "reduction_c00_minus_c10": 0.036531927538852926,
+              "relative_reduction_percent": 0.060694320615719395,
+              "weighted_aggregate_reduction_contribution": 0.005725545543398464
+            },
+            "pa_mpjpe_mm": {
+              "c00": 40.70785176052767,
+              "c10": 40.72145543378942,
+              "c10_minus_c00": 0.013603673261755489,
+              "reduction_c00_minus_c10": -0.013603673261755489,
+              "relative_reduction_percent": -0.03341781173268956,
+              "weighted_aggregate_reduction_contribution": -0.002132065184210467
+            },
+            "pve_mm": {
+              "c00": 75.35212991635005,
+              "c10": 74.98040336136724,
+              "c10_minus_c00": -0.37172655498281415,
+              "reduction_c00_minus_c10": 0.37172655498281415,
+              "relative_reduction_percent": 0.4933192404720018,
+              "weighted_aggregate_reduction_contribution": 0.05825965021914276
+            }
+          }
+        },
+        {
+          "sequence": "outdoors_parcours_01",
+          "frames": 1312,
+          "frame_weight": 0.12599635071545184,
+          "geometry": {
+            "mpjpe_mm": {
+              "c00": 85.84050778063332,
+              "c10": 85.77126550819816,
+              "c10_minus_c00": -0.06924227243516157,
+              "reduction_c00_minus_c10": 0.06924227243516157,
+              "relative_reduction_percent": 0.08066386630902884,
+              "weighted_aggregate_reduction_contribution": 0.008724273642075916
+            },
+            "pa_mpjpe_mm": {
+              "c00": 50.97533661708599,
+              "c10": 51.00344137593014,
+              "c10_minus_c00": 0.028104758844143873,
+              "reduction_c00_minus_c10": -0.028104758844143873,
+              "relative_reduction_percent": -0.055134032866246296,
+              "weighted_aggregate_reduction_contribution": -0.003541097052099839
+            },
+            "pve_mm": {
+              "c00": 98.11067027871202,
+              "c10": 97.5628066382757,
+              "c10_minus_c00": -0.5478636404363186,
+              "reduction_c00_minus_c10": 0.5478636404363186,
+              "relative_reduction_percent": 0.5584139206061399,
+              "weighted_aggregate_reduction_contribution": 0.06902881938465777
+            }
+          }
+        }
+      ],
+      "sequence_signs": {
+        "mpjpe_mm": {
+          "improved": [
+            "courtyard_dancing_00",
+            "courtyard_drinking_00",
+            "courtyard_hug_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "outdoors_golf_00"
+          ],
+          "exact_tie": []
+        },
+        "pa_mpjpe_mm": {
+          "improved": [
+            "courtyard_drinking_00",
+            "courtyard_hug_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01"
+          ],
+          "regressed": [
+            "courtyard_basketball_01",
+            "courtyard_dancing_00",
+            "outdoors_golf_00",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "exact_tie": []
+        },
+        "pve_mm": {
+          "improved": [
+            "courtyard_basketball_01",
+            "courtyard_dancing_00",
+            "courtyard_drinking_00",
+            "courtyard_hug_00",
+            "courtyard_jumpBench_01",
+            "courtyard_rangeOfMotions_01",
+            "downtown_walkDownhill_00",
+            "outdoors_crosscountry_00",
+            "outdoors_freestyle_01",
+            "outdoors_golf_00",
+            "outdoors_parcours_00",
+            "outdoors_parcours_01"
+          ],
+          "regressed": [],
+          "exact_tie": []
+        }
+      }
+    }
+  ],
+  "within_run_continuation": [
+    {
+      "arm": "C00_mean_feedback",
+      "variant": "student",
+      "delta_step2000_minus_step1000": {
+        "mpjpe_mm": 0.1218150359666339,
+        "pa_mpjpe_mm": 0.10542798690261179,
+        "pve_mm": 0.09552720968424921,
+        "acceleration_error_mm_per_frame2": -0.12726117854296248
+      },
+      "note": "Within-run continuation; correlated checkpoints, not independent replicates."
+    },
+    {
+      "arm": "C00_mean_feedback",
+      "variant": "ema",
+      "delta_step2000_minus_step1000": {
+        "mpjpe_mm": 0.05505550188163255,
+        "pa_mpjpe_mm": 0.022962514323594974,
+        "pve_mm": 0.1445381403037942,
+        "acceleration_error_mm_per_frame2": -0.08828307507846134
+      },
+      "note": "Within-run continuation; correlated checkpoints, not independent replicates."
+    },
+    {
+      "arm": "C10_joint_feedback",
+      "variant": "student",
+      "delta_step2000_minus_step1000": {
+        "mpjpe_mm": -0.07703210544393357,
+        "pa_mpjpe_mm": 0.07844293659019286,
+        "pve_mm": -0.06673971528016409,
+        "acceleration_error_mm_per_frame2": -0.1256840984705363
+      },
+      "note": "Within-run continuation; correlated checkpoints, not independent replicates."
+    },
+    {
+      "arm": "C10_joint_feedback",
+      "variant": "ema",
+      "delta_step2000_minus_step1000": {
+        "mpjpe_mm": -0.026482133600680413,
+        "pa_mpjpe_mm": 0.009395524769274743,
+        "pve_mm": 0.027730362589096558,
+        "acceleration_error_mm_per_frame2": -0.09741332010746007
+      },
+      "note": "Within-run continuation; correlated checkpoints, not independent replicates."
+    }
+  ],
+  "limits": [
+    "Only 3DPW validation, test_used=false.",
+    "One recorded trajectory per arm; source does not expose seed IDs or independent repeated runs, so no multi-seed variance or statistical significance claim.",
+    "1000 and 2000 checkpoints and student/EMA are correlated, not four independent replications.",
+    "Source records 2000 completed steps per arm against original_max_steps=6000; not a completed 6000-step experiment.",
+    "This file has no optimizer/RNG/stream checkpoint states; strict future resume must validate those elsewhere.",
+    "Source contains no compute timing, training-draw pairing or calibration evidence.",
+    "No bootstrap, hypothesis test, subset selection, SOTA claim or model inference performed.",
+    "Whole-interface comparison is not isolated evidence for identity routing, anatomical bias, parameter count or other components."
+  ]
+}
