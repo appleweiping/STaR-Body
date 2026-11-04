@@ -1,7 +1,7 @@
 {
-  "updated_utc": "2026-11-04T18:28:06.182391+00:00",
+  "updated_utc": "2026-11-04T19:03:14.544304+00:00",
   "stage": "experiment-bridge",
-  "status": "training_step3000_student_evaluated",
+  "status": "training_checkpoint3000_evaluation_complete",
   "last_confirmed_checkpoint_step": 2000,
   "target_steps_per_arm": 6000,
   "order": [
@@ -22,16 +22,38 @@
   "writing": "deferred_until_experiments_and_audits",
   "heartbeat": "configured_every_30_minutes_for_liveness_and_sync_only",
   "checkpoint_resumed_from_step": 2000,
-  "last_observed_optimizer_step": 3000,
-  "last_observed_sample_step": 3000,
+  "last_observed_optimizer_step": 3001,
+  "last_observed_sample_step": 3013,
   "new_validation_result": true,
   "monitoring_status": "restored_with_pinned_plink_0.85",
   "last_completed_validation": {
     "arm": "C10_joint_feedback",
     "step": 3000,
-    "variant": "student"
+    "variants": [
+      "student",
+      "ema"
+    ]
   },
-  "checkpoint3000_evaluation_complete": false,
-  "new_result_evidence": "evidence/c10_step3000_student_20261104.json",
-  "review_status": "No new method claim accepted; interpret complete checkpoint after EMA is available."
+  "checkpoint3000_evaluation_complete": true,
+  "new_result_evidence": "evidence/c10_step3000_complete_20261104.json",
+  "review_status": "partial; retain original 6000-step continuation, no new method or final-paper claim accepted",
+  "last_reported_saved_progress_step": 3000,
+  "last_independently_audited_checkpoint_step": 2000,
+  "checkpoint3000_payload_identity": "not independently verified; bounded CPU read timed out",
+  "last_semantically_reviewed_checkpoint": 3000,
+  "result_to_claim": {
+    "claim_supported": "partial",
+    "confidence": "high",
+    "confidence_scope": "High confidence in the limited-support/unsupported-claim distinction; no prediction of final performance or publication outcome.",
+    "review_independence": "same-family",
+    "acceptance_status": "provisional",
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "ultra",
+    "reported_model": null,
+    "review_completed": true,
+    "review_scope_complete": true,
+    "integrity_status": "unavailable",
+    "raw_review_sha256": "59dcfea4bc796cb930ca627b57c910684b3c3020eee2c3ef92d23f2af308e8be",
+    "public_findings": "findings.md"
+  }
 }

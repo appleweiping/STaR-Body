@@ -52,3 +52,9 @@ STaR-Body 与 TempoRAC 均为服务器高优先级项目；本聊天和本流水
 新增完整 3DPW validation 行：MPJPE 60.90945 mm、PA-MPJPE 37.60175 mm、PVE 72.72183 mm、加速度误差 21.25096 mm/annotation-frame²，覆盖 10,413 人帧与 10,226 三元组。原选择器接纳该行，但 Target60/37.3 仍未达到。只与同一 C10 student 的 2,000 步作描述性续训比较，全部序列的改善与回退均保留；没有将尚处 2,000 步的 C00 冒充同预算对照。
 
 该快照尚未出现 EMA 3,000 行，已保存 progress 仍是 2,000，因此不声称 3,000 权重已落盘或整次检查点评测已完成。详见 `docs/C10_STEP3000_20261104.md` 与 `evidence/c10_step3000_student_20261104.json`。继续原冻结 6,000 步流程；本阶段仅记录可机械核对的验证事实，未接受新的机制、SOTA 或显著性主张，完整检查点的解释待 EMA 结果合并后处理。
+
+## 3,000 步检查点评测已齐与中期审阅（2026-11-04）
+
+student/EMA两行完整validation均已记录；C10 progress与best_step为3,000，训练已继续进入后续更新。原selector先接纳student，EMA因未超过同轮student更新后的best score未被接纳，未触发保护指标失败。两种权重都尚未达到60/37.3目标；EMA相对自身2,000步的PA-MPJPE回退也保留。文件stat与progress记录了保存阶段，独立payload身份读取超时，尚不能将此项标为通过。
+
+本次有新结果后运行了一次限定范围fresh Astra result-to-claim审阅，结论为partial、same-family/provisional。当前仅保留单条续训轨迹的描述性改善主张，不升级为同预算C00胜出、机制因果、SOTA或最终验收。继续原C10→C00的6,000步合同，不改模型、loss、选参或预算；没有对TempoRAC作任何操作。完整结果见`docs/C10_STEP3000_COMPLETE_20261104.md`，主张与缺口见根目录`findings.md`。
