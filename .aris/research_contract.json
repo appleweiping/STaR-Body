@@ -34,5 +34,23 @@
     "delete project or shared assets",
     "write project data/cache to C or D"
   ],
-  "priority": "highest for current user-authorized server research; serial C10 then C00"
+  "priority": "STaR-Body and TempoRAC are both high-priority server projects; this chat and pipeline manage STaR-Body only",
+  "project_boundary": {
+    "managed_project": "STaR-Body",
+    "peer_high_priority_project": "TempoRAC",
+    "ownership_checks": [
+      "exact project path",
+      "launch command",
+      "run records"
+    ],
+    "do_not_manage_peer": [
+      "processes",
+      "GPU allocation",
+      "queue",
+      "code",
+      "data",
+      "configuration"
+    ],
+    "no_identification_by_account_or_gpu_alone": true
+  }
 }
