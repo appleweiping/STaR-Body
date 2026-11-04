@@ -1,7 +1,7 @@
 {
-  "updated_utc": "2026-11-04T08:26:33.064565+00:00",
+  "updated_utc": "2026-11-04T09:28:23.974836+00:00",
   "stage": "experiment-bridge",
-  "status": "continuation_process_launched",
+  "status": "strict_resume_confirmed_training",
   "last_confirmed_checkpoint_step": 2000,
   "target_steps_per_arm": 6000,
   "order": [
@@ -20,5 +20,9 @@
   "quality_completion": false,
   "test_used": false,
   "writing": "deferred_until_experiments_and_audits",
-  "heartbeat": "configured_every_30_minutes_for_liveness_and_sync_only"
+  "heartbeat": "configured_every_30_minutes_for_liveness_and_sync_only",
+  "checkpoint_resumed_from_step": 2000,
+  "last_observed_optimizer_step": 2001,
+  "last_observed_sample_step": 2025,
+  "new_validation_result": false
 }
