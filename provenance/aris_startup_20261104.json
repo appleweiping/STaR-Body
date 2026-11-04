@@ -1,0 +1,34 @@
+{
+  "aris_commit": "f76ec8d6b77792e2242cca049e08d0cbb7d54e19",
+  "read_receipt_sha256": "67d307db04760404b5a55dec365f7783e805b3be48010f28081f5796c068112e",
+  "full_read_receipt_private_path": "runs/session_20261104/work/aris_read_audit.md",
+  "full_read_file_count": 47,
+  "installed_skill_count": 87,
+  "installation_verification": {
+    "checked_files": 164,
+    "passed": true,
+    "skill_count": 87,
+    "installation": "project-local immutable copies; no native links available",
+    "upstream_commit": "f76ec8d6b77792e2242cca049e08d0cbb7d54e19",
+    "all_locations_on_E": true
+  },
+  "full_reads": [
+    "README.md",
+    "SETUP_GUIDE.md",
+    "AGENT_GUIDE.md",
+    "skills/skills-codex/README.md"
+  ],
+  "stage_skills": [
+    "research-pipeline",
+    "research-lit",
+    "novelty-check",
+    "experiment-plan",
+    "experiment-bridge",
+    "run-experiment",
+    "monitor-experiment",
+    "auto-review-loop",
+    "experiment-audit",
+    "result-to-claim",
+    "paper-writing"
+  ]
+}

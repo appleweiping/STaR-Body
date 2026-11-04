@@ -1,0 +1,12 @@
+{
+  "repository": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep.git",
+  "commit": "f76ec8d6b77792e2242cca049e08d0cbb7d54e19",
+  "pack": "skills/skills-codex",
+  "scope": "project-local",
+  "auto_update": false,
+  "executor_policy": "Sol for routine tasks; Astra for major design and direction",
+  "semantic_review_assurance": "Same-family reviews remain provisional. Accepted cross-family review requires actual verified model identities and completed scope.",
+  "read_receipt": "runs/session_20261104/work/aris_read_audit.md",
+  "install_note": "Upstream unmodified. Installer emulated links and unsupported native junctions were replaced with project-local immutable copies; E-only backups retained.",
+  "installation": "E-only project-local copy, all source files verified identical"
+}

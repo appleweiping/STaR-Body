@@ -1,0 +1,138 @@
+{
+  "verdict": "PASS",
+  "hallucination_rate": 0.0,
+  "pending_rate": 0.0,
+  "warnings": [],
+  "papers": [
+    {
+      "id": "arxiv-0",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2207.06400"
+      }
+    },
+    {
+      "id": "arxiv-1",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2312.07531"
+      }
+    },
+    {
+      "id": "arxiv-2",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2403.17346"
+      }
+    },
+    {
+      "id": "arxiv-3",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2504.06397"
+      }
+    },
+    {
+      "id": "arxiv-4",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2602.15989"
+      }
+    },
+    {
+      "id": "arxiv-5",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2409.06662"
+      }
+    },
+    {
+      "id": "arxiv-6",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2411.08128"
+      }
+    },
+    {
+      "id": "arxiv-7",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2603.17355"
+      }
+    },
+    {
+      "id": "arxiv-8",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2403.12473"
+      }
+    },
+    {
+      "id": "arxiv-9",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2605.09856"
+      }
+    },
+    {
+      "id": "arxiv-10",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2607.09089"
+      }
+    },
+    {
+      "id": "arxiv-11",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2605.14854"
+      }
+    },
+    {
+      "id": "arxiv-12",
+      "status": "verified",
+      "method": "arxiv",
+      "confidence": "high",
+      "reason": null,
+      "identifiers": {
+        "arxiv_id": "2401.01730"
+      }
+    }
+  ]
+}

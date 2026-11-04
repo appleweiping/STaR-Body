@@ -1,0 +1,24 @@
+{
+  "updated_utc": "2026-11-04T08:26:33.064565+00:00",
+  "stage": "experiment-bridge",
+  "status": "continuation_process_launched",
+  "last_confirmed_checkpoint_step": 2000,
+  "target_steps_per_arm": 6000,
+  "order": [
+    "C10_joint_feedback",
+    "C00_mean_feedback"
+  ],
+  "runtime_preflight": "passed_on_server",
+  "launch_review": {
+    "model": "gpt-6-astra",
+    "effort": "xhigh",
+    "verdict": "LAUNCH",
+    "assurance": "same-family/provisional",
+    "report_sha256": "0a7e9f28a76814418ff5bf09dc09809e8ca2bb6a24a47ef91dbd195155de8e6a"
+  },
+  "training_completion": false,
+  "quality_completion": false,
+  "test_used": false,
+  "writing": "deferred_until_experiments_and_audits",
+  "heartbeat": "configured_every_30_minutes_for_liveness_and_sync_only"
+}

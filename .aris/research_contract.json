@@ -1,0 +1,38 @@
+{
+  "project": "STaR-Body",
+  "venue": "CVPR 2027",
+  "auto_proceed": true,
+  "final_writing_after_experiments": true,
+  "preserve_original_model_and_training_files": true,
+  "active_route": "C10/V37r1 matched C00 strict continuation from step2000; runtime preflight passed, controller launched",
+  "inherited_checkpoint_steps": 2000,
+  "total_steps_per_arm": 6000,
+  "split": "3DPW train/validation; test untouched until frozen selection",
+  "full_train_windows": 2909,
+  "full_validation_frames": 10413,
+  "full_acceleration_triplets": 10226,
+  "training_caps": 0,
+  "selection": "negative max(MPJPE/60, PA-MPJPE/37.3), inherited protected metrics",
+  "loss": "inherited frozen objective; fewer-than-three user criterion currently unmet, no relabeling",
+  "required_later_evidence": [
+    "same-protocol competitive baselines",
+    "C10 matched additional seeds",
+    "three coupled components and removal ablations",
+    "isolate joint routing from input and parameter changes",
+    "empirical observation motivation",
+    "hyperparameter/stability curves",
+    "efficiency and reproducibility",
+    "final Word/PDF all-page render verification"
+  ],
+  "six_dataset_seven_baseline_user_requirement": "retained as unmet/unresolved for this inherited one-dataset project; not a CVPR official requirement; do not silently waive or claim satisfied",
+  "forbidden": [
+    "restart from best checkpoint with reset state",
+    "revive superseded V37 CUDA RNG implementation",
+    "test-driven tuning",
+    "hide unfavorable results",
+    "automatic submission",
+    "delete project or shared assets",
+    "write project data/cache to C or D"
+  ],
+  "priority": "highest for current user-authorized server research; serial C10 then C00"
+}
