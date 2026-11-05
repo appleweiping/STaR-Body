@@ -9,7 +9,7 @@
 | G0-003 | G0 | 单帧强起点及转换成本 | SAM3DB、CameraHMR、TokenHMR | TODO | 映射误差/资源profile |
 | G0-004 | G0a | 冻结外部矩阵元数据（不跑test） | 15候选×3数据家族 | METADATA_CREATED_PENDING_ELIGIBILITY | 每方法每指标资格、输入/训练数据/coverage |
 | G1-001 | G1 | 错误反馈observation | 固定train/val困难片段 | TODO | 分层前后误差和失败机制 |
-| G2-A | G2 | 推荐主线4臂筛选 | 强视频起点+Full/3w/o | WAIT_G0_G1 | 每臂<=0.15B |
+| G2-A | G2 | 候选A四臂筛选 | 强视频起点+Full/3w/o | WAIT_G0_G1 | 每臂<=0.15B |
 | G2-B | G2 | 最多一个竞争方向 | 强单帧起点+Full/3w/o | WAIT_G0_G1 | 映射通过后才运行 |
 | G3-001 | G3 | 删除贡献 | 胜者4配置×5seed | WAIT_G2 | delta/CI/副指标保护 |
 | G4-001 | G4 | 耦合机制 | 补齐8组合×5seed | WAIT_G3 | 预注册关键交互 |

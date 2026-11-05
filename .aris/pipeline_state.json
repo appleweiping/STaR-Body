@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-11-05T17:00:32.842878+00:00",
+  "updated_utc": "2026-11-05T17:12:52.090346+00:00",
   "stage": "experiment-plan",
   "status": "external_baseline_development_adapter_ready_waiting_server_and_data",
   "last_confirmed_checkpoint_step": 2000,
@@ -75,12 +75,12 @@
     "automation_status": "deleted; earlier heartbeat updates are historical only",
     "latest_reconnect_result": "SSH refused before authentication; TCP timeout; no current PID/disk verification"
   },
-  "primary_workstream": "External baseline standard-protocol evaluation and new coupled mechanism; no internal variant loop",
+  "primary_workstream": "STaR-Body method development and claim-driven validation; external baselines, ablations, observation and efficiency organized to comparable conference-paper standards",
   "plan": "refine-logs/EXPERIMENT_PLAN.md",
   "tracker": "refine-logs/EXPERIMENT_TRACKER.md",
   "new_method_implemented": false,
   "new_external_evaluations_completed": 0,
-  "legacy_continuation_priority": "evidence recovery only; no automatic C00 launch under new user direction",
+  "legacy_continuation_priority": "Preserve original strict6000-step recovery work and evidence; current assets/connectivity not verified, so no blind restart or duplicated C00 queue",
   "legacy_fields_scope": "All existing step, order, old launch_review and old selector fields refer solely to historical C10/C00. They do not authorize launching a new method.",
   "historical_project_3dpw_test_access": true,
   "new_method_test_opened": false,
@@ -118,5 +118,6 @@
     "server_connection": "two SSH attempts refused; three TCP probes timed out; independent DNS agrees",
     "training_state_currently_observable": false,
     "other_project_actions": 0
-  }
+  },
+  "user_clarification": "STaR-Body is the research subject; external baseline preparation supports method validation and is not the main research objective."
 }

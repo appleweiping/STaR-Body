@@ -145,3 +145,5 @@
 | 2026-11-05 17:00 | /experiment-bridge | `research_dependencies/assets/WHAM/wham_vit_w_3dpw.pth.tar` | implementation | 官方权重及下载回执（E盘，不入Git） |
 | 2026-11-05 17:00 | /experiment-bridge | `research_dependencies/assets/WHAM/weight_download_receipt.json` | implementation | 官方权重及下载回执（E盘，不入Git） |
 | 2026-11-05 17:00 | /experiment-bridge | `research_dependencies/assets/WHAM/http_probe.json` | implementation | 官方权重及下载回执（E盘，不入Git） |
+| 2026-11-05 17:12 | /experiment-plan | `refine-logs/EXPERIMENT_PLAN_20261105_171252.md` | implementation | 用户澄清后的表述修正；保留方案与实验准备 |
+| 2026-11-05 17:13 | /experiment-plan | `refine-logs/EXPERIMENT_TRACKER_20261105_171346.md` | implementation | 候选实现路线称谓修正 |

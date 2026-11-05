@@ -4,7 +4,7 @@
   "auto_proceed": true,
   "final_writing_after_experiments": true,
   "preserve_original_model_and_training_files": true,
-  "active_route": "External top-conference baselines and evidence-gated coupled-refinement vNext; legacy C10 preserved as historical evidence",
+  "active_route": "STaR-Body problem-driven method and coupled mechanisms; validate using experiments, external comparisons and ablations following comparable top-conference papers",
   "inherited_checkpoint_steps": 2000,
   "total_steps_per_arm": 6000,
   "split": "Core standard benchmark plan: 3DPW, RICH, EMDB; model and dataset selection on predeclared development data, final test only after freeze",
@@ -27,9 +27,9 @@
   ],
   "six_dataset_seven_baseline_user_requirement": {
     "previous": "At least6 datasets and7 top-conference frameworks, previously unmet",
-    "current_scale_basis": "Latest explicit2026-11-05 user request: match actual recent task-matched top-conference papers",
-    "replacement_plan": "Three core dataset families and approximately15 external candidate methods, based on five audited primary paper tables; no claim prior six-dataset requirement was met",
-    "status": "re-scoped explicitly, experiments not completed"
+    "current_scale_basis": "Peer-paper audit informs experimental organization; three core dataset families are the current first validation layer, not proof of satisfying or explicitly waiving the earlier six-dataset requirement.",
+    "replacement_plan": "Prioritize three core families and approximately15 external candidate methods, then resolve the remaining expansion requirements against the research question. No completed experiments are claimed.",
+    "status": "earlier six-dataset requirement remains unmet; current core-first plan is not a completion or explicit waiver"
   },
   "forbidden": [
     "restart from best checkpoint with reset state",
@@ -59,7 +59,7 @@
     ],
     "no_identification_by_account_or_gpu_alone": true
   },
-  "updated_utc": "2026-11-05T16:42:10.735165+00:00",
+  "updated_utc": "2026-11-05T17:12:52.090346+00:00",
   "scheduler_allowed": false,
   "automatic_tasks": "disabled and existing star-body automation deleted at user request",
   "legacy_continuation": {
@@ -74,7 +74,7 @@
     },
     "status": "runtime assets unavailable; checkpoint recovery is evidence-preservation branch",
     "automatic_resume_or_c00_launch": false,
-    "requirements": "Preserve source/config/assets/optimizer/EMA/RNG/streams and native invariants. New priority supersedes running internal iterations as the main research loop.",
+    "requirements": "Preserve source/config/assets/optimizer/EMA/RNG/streams and native invariants. Preserve existing C10/C00 evidence; do not mistake internal variants for external baselines.",
     "immutable_original_contract": {
       "inherited_checkpoint_steps": 2000,
       "total_steps_per_arm": 6000,
@@ -83,7 +83,8 @@
       "full_acceleration_triplets": 10226,
       "training_caps": 0,
       "selection": "negative max(MPJPE/60, PA-MPJPE/37.3), inherited protected metrics"
-    }
+    },
+    "resume_authorization": "Existing user authorization for strict original6000-step continuation remains, conditional on verified native checkpoint, original invariants and exact process/resource ownership; no blind restart or duplicated queue."
   },
   "external_benchmark": {
     "candidate_method_count": 15,
@@ -132,7 +133,8 @@
     "challenger": "SAM3DB native representation plus same hypothesis, only if mapping/cost gates pass",
     "max_substantive_candidates": 2,
     "legacy_starting_point": "C10 original code and results retained, never rewritten",
-    "new_training_budget": "Calibrate compute B after G0; cannot substitute old6000 horizon or invent GPU-hour estimates"
+    "new_training_budget": "Calibrate compute B after G0; cannot substitute old6000 horizon or invent GPU-hour estimates",
+    "status": "Provisional implementation candidates pending observation and empirical validation; not a user-selected initializer or established result."
   },
   "legacy_compatibility_fields": {
     "fields": [
@@ -146,5 +148,6 @@
     ],
     "scope": "Deprecated read-only aliases for the audited original recovery observer. Not the active new-method budget or selector.",
     "active_training_configuration": "Not yet frozen; G0/G1 required. New benchmark code must never read these aliases."
-  }
+  },
+  "user_clarification": "External baselines are comparisons, not the research direction. Retain the improved plan and organize evidence around STaR-Body method claims."
 }
