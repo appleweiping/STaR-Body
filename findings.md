@@ -18,3 +18,7 @@ student3000的MPJPE/PA-MPJPE/PVE为60.90945183/37.60175182/72.72183195 mm，acce
 下一步继续已授权的C10→C00原6000步严格续训，保持数据、loss、selector和horizon，保留全部student/EMA与负结果；在完整配对结果之后再由设计审查确定必要的等输入/等容量路由对照、配对seed和组件删除消融。本次没有授权或启动新增预算，也没有修改最终论文。一次限时CPU checkpoint读取超时，独立payload身份核验仍开放；不因此重启健康训练或重跑已完成validation。
 
 完整数值与逐序列证据见`evidence/c10_step3000_complete_20261104.json`和`docs/C10_STEP3000_COMPLETE_20261104.md`。私有完整请求/响应与身份元数据保存在`.aris/traces/result-to-claim/2026-11-04_run01/`，不提交Git。后续只有新证据出现才重新评估相应主张，不按定时器重复刷评审。
+
+## 运行状态更新（2026-11-05）
+
+恢复连接后的只读检查发现原记录PID不存在、原source/experiment/controller路径不可用；当前不能执行或承诺连续训练。此前3000步数值与审阅结论仍作为历史证据保留，不能据此声称checkpoint当前可恢复。最近保存进度报告为C10=3000、C00=2000；真实latest及原绑定资产定位/核验完成前，下一步是恢复资产可用性，而非重新初始化或启动其他实验。服务器侧本次状态快照尚未同步；详细范围和限制见`evidence/runtime_unavailable_20261105.json`。本轮无新validation，未重复语义科研审查。

@@ -1,0 +1,60 @@
+{
+  "project": "STaR-Body",
+  "event": "original_runtime_processes_and_paths_unavailable",
+  "checked_utc": "2026-11-05T10:58:53.432537+00:00",
+  "storage_checked_utc": "2026-11-05T11:00:07.090180+00:00",
+  "read_only_server_diagnostics": true,
+  "server_uptime_seconds": 14091.11,
+  "approx_boot_utc": "2026-11-05T07:04:02Z",
+  "boot_time_is_inferred_from_uptime": true,
+  "recorded_controller_wrapper_trainer_pids_all_absent": true,
+  "original_source_directory_present": false,
+  "original_experiment_directory_present": false,
+  "original_continuation_snapshot_root_present": false,
+  "configured_data_mount_present": true,
+  "current_data_filesystem_bytes": {
+    "total": 7937303777280,
+    "used": 1562251792384,
+    "free": 5974957047808
+  },
+  "limited_project_name_search": {
+    "roots": [
+      "mounted-data-roots",
+      "account-home"
+    ],
+    "maximum_depth_below_roots": 2,
+    "scanned_directories": 348,
+    "project_name_hits": 0,
+    "scope_limitation": "Directory-name search only; no claim that every possible backup or migrated location was searched.",
+    "permission_denied_count": 2,
+    "peer_project_subtree_traversal_excluded": true
+  },
+  "last_verified_running": {
+    "checked_utc": "2026-11-05T05:27:03.240287+00:00",
+    "arm": "C10_joint_feedback",
+    "last_sample_step": 3673,
+    "last_observed_optimizer_step": 3601,
+    "optimizer_diagnostic_checked_utc": "2026-11-05T04:26:58.133214+00:00"
+  },
+  "last_reported_saved_progress": {
+    "C10_joint_feedback": 3000,
+    "C00_mean_feedback": 2000
+  },
+  "checkpoint3000_independent_payload_identity": "unverified; prior bounded CPU read timed out",
+  "local_project_checkpoint_backup_search": "No real native checkpoint backup found; only small CPU test fixtures. Source-only Git/zip/tar archives and metric manifests cannot restore optimizer/RNG state.",
+  "recovery_status": "waiting_for_original_runtime_assets_or_verified_backup_location",
+  "remote_snapshot_sync": "pending; original synchronized root unavailable; no replacement directory created",
+  "scientific_review": "No new validation result; previous checkpoint3000 partial/provisional review retained. No repeated research review triggered.",
+  "frozen_protocol_unchanged": true,
+  "new_training_started": false,
+  "other_project_or_shared_mount_mutations": false,
+  "private_raw_evidence_sha256": {
+    "paths": "5072f934a6b16c4b2c392b102ccc43411e54e3c0b11116a43e62320346a6bc9b",
+    "storage": "a5ca0c519defe53fdaf762893ca2e0b80ffe871a6808f6695775870d15baea28"
+  },
+  "interpretation_limits": [
+    "Missing original paths do not establish the cause or permanent data loss.",
+    "Historical saved progress is not proof those checkpoint files are currently available.",
+    "Previously estimated completion times cannot be used until actual recovery and throughput are verified."
+  ]
+}

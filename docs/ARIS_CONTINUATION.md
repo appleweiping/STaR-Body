@@ -58,3 +58,13 @@ STaR-Body 与 TempoRAC 均为服务器高优先级项目；本聊天和本流水
 student/EMA两行完整validation均已记录；C10 progress与best_step为3,000，训练已继续进入后续更新。原selector先接纳student，EMA因未超过同轮student更新后的best score未被接纳，未触发保护指标失败。两种权重都尚未达到60/37.3目标；EMA相对自身2,000步的PA-MPJPE回退也保留。文件stat与progress记录了保存阶段，独立payload身份读取超时，尚不能将此项标为通过。
 
 本次有新结果后运行了一次限定范围fresh Astra result-to-claim审阅，结论为partial、same-family/provisional。当前仅保留单条续训轨迹的描述性改善主张，不升级为同预算C00胜出、机制因果、SOTA或最终验收。继续原C10→C00的6,000步合同，不改模型、loss、选参或预算；没有对TempoRAC作任何操作。完整结果见`docs/C10_STEP3000_COMPLETE_20261104.md`，主张与缺口见根目录`findings.md`。
+
+## 运行恢复受阻（2026-11-05 11:00 UTC）
+
+SSH中断后重新取得只读命令响应：服务器uptime推算本次启动约为07:04 UTC；原controller/wrapper/trainer三项记录PID均不存在。原source、experiment及外部controller/snapshot目录在约10:59 UTC均不可见，虽然配置的数据挂载本身存在。有界目录名查找未找到STaR-Body目录，但这不能证明永久丢失或确定原因；仍需确认迁移位置、原卷状态或有效备份。后续一次连接又中止，入口仍不稳定。
+
+最后实时确认训练为05:27 UTC的C10日志步3673；最近可报告保存进度仍是C10=3000、C00=2000，3000 checkpoint独立payload身份尚未验证。E盘项目内未找到真实原生checkpoint备份；代码Git归档、指标和manifest不能代替optimizer/RNG完整状态。先前剩余时间估计在恢复前失效，不推算缺测期间的新训练或成绩。
+
+保持原6000步合同与C10→C00顺序。缺少可验证原资产时不重建训练、不从best重置、不修改或卸载共享挂载。旧启动控制器只支持首次从2000步续跑，不能直接重新启动绕过阶段检查；找到原latest、源文件绑定、配置、环境和资产后，须核对真实进程及锁，再准备符合实际恢复步数的严格恢复入口。TempoRAC与其他项目均未操作。
+
+去敏状态和机械证据保存于`evidence/runtime_unavailable_20261105.json`；本轮未产生新validation，不重复科研审查。E盘与GitHub记录本次阻塞；服务器原快照目的地不可用，服务器侧同步明确待恢复，不声称三方已完成。本事件不改变既有3000步结果与partial/provisional审阅。
