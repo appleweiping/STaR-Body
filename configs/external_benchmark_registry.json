@@ -329,9 +329,10 @@
         }
       },
       "downloaded_variant": "wham_vit_w_3dpw",
-      "checkpoint_status": "downloaded_to_E_not_loaded",
+      "checkpoint_status": "cpu_state_metadata_readable_no_forward",
       "development_adapter": "integrations/wham/g0_validation.patch",
-      "development_adapter_status": "reviewed_static_only_no_real_evaluation"
+      "development_adapter_status": "reviewed_static_only_no_real_evaluation",
+      "cpu_protocol_evidence": "evidence/g0_cpu_protocol_20261105.json"
     },
     {
       "name": "TRAM",

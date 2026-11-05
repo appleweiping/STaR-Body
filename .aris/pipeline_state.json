@@ -1,7 +1,7 @@
 {
-  "updated_utc": "2026-11-05T17:12:52.090346+00:00",
+  "updated_utc": "2026-11-05T21:35:55.628211+00:00",
   "stage": "experiment-plan",
-  "status": "external_baseline_development_adapter_ready_waiting_server_and_data",
+  "status": "star_body_validation_cpu_preflight_passed_real_assets_pending",
   "last_confirmed_checkpoint_step": 2000,
   "target_steps_per_arm": 6000,
   "order": [
@@ -119,5 +119,23 @@
     "training_state_currently_observable": false,
     "other_project_actions": 0
   },
-  "user_clarification": "STaR-Body is the research subject; external baseline preparation supports method validation and is not the main research objective."
+  "user_clarification": "STaR-Body is the research subject; external baseline preparation supports method validation and is not the main research objective.",
+  "cpu_preflight": {
+    "evidence": "evidence/g0_cpu_protocol_20261105.json",
+    "checkpoint_metadata": "pass",
+    "analytical_metric_checks": "pass_with_protocol_differences",
+    "real_data_parity": false,
+    "model_forward_calls": 0
+  },
+  "novelty_update": {
+    "evidence": "evidence/jfg_hmr_coverage_20261105.json",
+    "review": "same-family provisional Astra xhigh",
+    "current_candidate": "retained; broad novelty claims restricted",
+    "fulltext_gap_open": true
+  },
+  "last_connection_check": {
+    "checked_utc": "2026-11-05T21:36:29.316736+00:00",
+    "status": "refused_before_authentication",
+    "current_training_state": "unobserved"
+  }
 }

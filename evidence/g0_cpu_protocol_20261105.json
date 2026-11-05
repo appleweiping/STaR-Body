@@ -1,0 +1,195 @@
+{
+  "checked_utc": "2026-11-05T21:35:55.628211+00:00",
+  "scope": "G0 CPU checkpoint metadata and analytical metric witness; no model or real-data evaluation",
+  "runtime": {
+    "python": "3.14.5",
+    "numpy": "2.4.6",
+    "torch": "2.12.0+cpu",
+    "scope": "existing CPU inspection runtime only; not declared ready for WHAM inference",
+    "installs": 0
+  },
+  "checkpoint": {
+    "model": "WHAM",
+    "variant": "wham_vit_w_3dpw",
+    "bytes": 527307587,
+    "sha256": "9835bcbc952221ad72fa72e768e1f4620e96788b12cecd676a3b1dbee057dd66",
+    "independent_recalculation_matched": true,
+    "metadata_status": "PASS_NARROW_COMPATIBILITY_STATE_METADATA_ONLY",
+    "top_level_keys": [
+      "epoch",
+      "model",
+      "performance",
+      "optimizer"
+    ],
+    "tensor_summary": {
+      "state_key": "model",
+      "tensor_count": 97,
+      "tensor_numel": 47696189,
+      "tensor_bytes": 190950248,
+      "all_tensors_cpu": true,
+      "shape_list_complete": true,
+      "not_parameter_count": "state_dict may include buffers; this is tensor numel, not verified trainable-parameter count",
+      "not_integrity_claim": "Only keys/shapes/dtypes/numel read; tensor values and full model forward were not validated"
+    },
+    "inspection": {
+      "weights_only": true,
+      "map_location": "cpu",
+      "mmap": true,
+      "allowlist": [
+        "numpy.core.multiarray.scalar -> numpy._core.multiarray.scalar",
+        "numpy.dtype -> numpy.dtype",
+        "numpy.dtypes.Float64DType (exact type required by first trace)"
+      ],
+      "forward_calls": 0,
+      "tensor_values_validated": false
+    },
+    "initial_failures_preserved": [
+      "45s probe timeout before stage-aware diagnosis",
+      "default weights_only NumPy scalar rejection"
+    ]
+  },
+  "analytic_tests": {
+    "existing_geometry_tests": 4,
+    "exit_code": 0,
+    "status": "PASS_SHARED_MATH_SYNTHETIC_WITH_DOCUMENTED_PROTOCOL_DIFFERENCES",
+    "checks": {
+      "hip_alignment": {
+        "max_abs_wham_minus_local_m": 0.0,
+        "translation_invariance_max_abs_m": 4.917383193969727e-07,
+        "pass": true,
+        "hip_indices": [
+          2,
+          3
+        ]
+      },
+      "PA": [
+        {
+          "case": "exact_similarity",
+          "batch": 8,
+          "dtype": "float32",
+          "max_abs_aligned_difference_m": 9.5367431640625e-07,
+          "max_abs_error_difference_m": 4.5159410433370795e-07,
+          "wham_mean_pa_m": 5.715208999390597e-07,
+          "local_mean_pa_m": 4.860338549406151e-07,
+          "pass": true
+        },
+        {
+          "case": "noisy_similarity",
+          "batch": 8,
+          "dtype": "float32",
+          "max_abs_aligned_difference_m": 9.5367431640625e-07,
+          "max_abs_error_difference_m": 5.587935447692871e-08,
+          "wham_mean_pa_m": 0.030370047315955162,
+          "local_mean_pa_m": 0.030370047315955162,
+          "pass": true
+        }
+      ],
+      "acceleration": {
+        "N": 9,
+        "wham_math_count": 7,
+        "local_consecutive_count": 7,
+        "local_centers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "max_abs_raw_difference_m_per_frame2": 0.0,
+        "raw_parity_pass": true,
+        "wham_evaluator_extra_slice": "[1:-1] applied after N-2 finite differences",
+        "wham_evaluator_count": 5,
+        "wham_evaluator_centers": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "expected_counts": {
+          "math_and_local": "N-2",
+          "wham_after_extra_trim": "max(N-4,0)"
+        },
+        "raw_errors_m_per_frame2": [
+          0.004285714285714288,
+          0.008571428571428574,
+          0.012857142857142855,
+          0.01714285714285715,
+          0.021428571428571436,
+          0.02571428571428569,
+          0.03000000000000002
+        ],
+        "cropped_errors_m_per_frame2": [
+          0.008571428571428574,
+          0.012857142857142855,
+          0.01714285714285715,
+          0.021428571428571436,
+          0.02571428571428569
+        ],
+        "local_mean_mm_per_annotation_frame2": 17.142857142857146,
+        "wham_cropped_mean_m_per_s2_assuming_30fps": 15.428571428571427,
+        "wham_cropped_equivalent_mm_per_annotation_frame2": 17.14285714285714,
+        "factor_from_mm_per_frame2_to_m_per_s2_at30fps": 0.9,
+        "units_note": "WHAM evaluator multiplies accel by30**2 but does not multiply bym2mm; pose/PVE do multiply by1000. Local reports m/frame^2 internally andmm/annotation-frame^2 externally. Fps and identical triplet selection are required for numerical comparison.",
+        "synthetic_input_dtype": "numpy.float64",
+        "mean_policy_caveat": "This cubic synthetic perturbation yields linear triplet error magnitudes, so symmetric trimming preserves its mean. Equal means in this example do not establish equivalent triplet policies; counts differ7 versus5 and arbitrary sequences may yield different means."
+      },
+      "gap_guard": {
+        "local_valid_triplets": 2,
+        "local_centers": [
+          1,
+          4
+        ],
+        "wham_if_blindly_given_same6rows_count": 4,
+        "interpretation": "WHAM pure helper assumes rows are consecutive; reader/schema must guarantee this. Local excludes frame gaps."
+      }
+    },
+    "source": {
+      "pin": "2b54f7797391c94876848b905ed875b154c4a295",
+      "sha256": "b9591eff5a0023f61abb55d959937fd43549f14b7696a283f09f6763c1a45b9f",
+      "only_selected_math_defs_executed": true,
+      "full_wham_module_imported": false,
+      "functions": {
+        "compute_error_accel": {
+          "line": 24,
+          "end_line": 52
+        },
+        "batch_compute_similarity_transform_torch": {
+          "line": 201,
+          "end_line": 252
+        },
+        "batch_align_by_pelvis": {
+          "line": 295,
+          "end_line": 314
+        }
+      }
+    },
+    "reproduction_script_sha256": "54297a056b0beab60c2e3ad884b2791223cf10a592ba5987fcc8d0f18f921768",
+    "mean_coincidence_on_fixture_does_not_validate_frame_selection": true
+  },
+  "assets": {
+    "known_project_paths_checked": 9,
+    "independent_smpl_files_confirmed": false,
+    "real_3dpw_validation_confirmed": false,
+    "scope": "Only explicit known local paths checked; placeholders excluded. Checkpoint buffers do not establish independent model asset readiness."
+  },
+  "resource_scope": {
+    "cpu_threads": 1,
+    "rss_limit_gib": 3,
+    "gpu_calls": 0,
+    "server_actions": 0,
+    "other_project_actions": 0,
+    "new_files_and_caches": "E drive only"
+  },
+  "real_benchmark_runs": 0,
+  "sota_claim": false,
+  "remaining": [
+    "server connectivity",
+    "original native checkpoint and bound runtime recovery",
+    "legal independent body model assets",
+    "real validation cache and frozen IDs",
+    "real-data official/common evaluator parity"
+  ]
+}

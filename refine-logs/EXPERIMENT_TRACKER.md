@@ -4,8 +4,8 @@
 
 | Run ID | Gate | 目的 | 系统/数据 | 状态 | 下一项证据 |
 |---|---|---|---|---|---|
-| G0-001 | G0 | 性别资产和评测口径 | 官方SMPL/SMPL-X/MHR及J14/J24 | BLOCKED_ASSETS | 合法来源+identity+官方输出对齐 |
-| G0-002 | G0b | 最强视频起点复评 | WHAM/TRAM/GVHMR/PromptHMR/OnlineHMR/Human3R | WHAM_ADAPTER_REVIEWED_WEIGHT_DOWNLOADED | 527307587 B权重SHA已记；真实资产、开发ID及完整开发输出待核 |
+| G0-001 | G0 | 性别资产和评测口径 | 官方SMPL/SMPL-X/MHR及J14/J24 | CPU_MATH_PASS_REAL_ASSETS_PENDING | 解析/合成核验通过；真实性别资产与官方输出待核 |
+| G0-002 | G0b | 最强视频起点复评 | WHAM/TRAM/GVHMR/PromptHMR/OnlineHMR/Human3R | WHAM_CPU_METADATA_PASS | 527307587 B权重SHA已记；真实资产、开发ID及完整开发输出待核 |
 | G0-003 | G0 | 单帧强起点及转换成本 | SAM3DB、CameraHMR、TokenHMR | TODO | 映射误差/资源profile |
 | G0-004 | G0a | 冻结外部矩阵元数据（不跑test） | 15候选×3数据家族 | METADATA_CREATED_PENDING_ELIGIBILITY | 每方法每指标资格、输入/训练数据/coverage |
 | G1-001 | G1 | 错误反馈observation | 固定train/val困难片段 | TODO | 分层前后误差和失败机制 |

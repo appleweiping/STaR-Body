@@ -1,0 +1,38 @@
+{
+  "checked_utc": "2026-11-05T21:28:26.887384+00:00",
+  "paper": "JFG-HMR: 3D joint feature-guided human mesh recovery with global-local feature fusion",
+  "doi": "10.1016/j.cag.2025.104339",
+  "primary_url": "https://www.sciencedirect.com/science/article/pii/S0097849325001803",
+  "bibliographic_identity": "Crossref verified via fixed ARIS helper",
+  "reading_mode": "Publisher search-index preview snippets; direct fulltext request403",
+  "fulltext_coverage_complete": false,
+  "novelty_exclusion_complete": false,
+  "unread": [
+    "complete3.2",
+    "complete3.3",
+    "full equations and implementation",
+    "complete experiments and ablations"
+  ],
+  "source_capture_sha256": "764052665db1574b2587478e33c460723ec3f9b409e0f55fb9800bc651472d1b",
+  "capture_trace_correction": "Earlier publisher_search_index.txt contained title-only matches; it is not method evidence. Correct target preview was separately captured and numbered.",
+  "review": {
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "xhigh",
+    "actual_backend_identity": "not independently exposed",
+    "independence": "same-family provisional",
+    "verdict": "retain current three-component candidate; narrow claims; no fulltext novelty pass"
+  },
+  "observed_prior_art": [
+    "joint-image cross-attention",
+    "global/local feature fusion",
+    "projection feedback with recurrent fitting"
+  ],
+  "not_established": [
+    "exact implementation equivalence",
+    "absence of reliability or topology routing in unread fulltext",
+    "reported performance verified",
+    "STaR component effectiveness"
+  ],
+  "research_action": "Run the planned paired occlusion/recovery observation after legal assets and calibrated development evaluation; add one same-input capacity-matched unstructured correction control within existing budget.",
+  "new_training_or_predictions": false
+}
