@@ -22,3 +22,7 @@ student3000的MPJPE/PA-MPJPE/PVE为60.90945183/37.60175182/72.72183195 mm，acce
 ## 运行状态更新（2026-11-05）
 
 恢复连接后的只读检查发现原记录PID不存在、原source/experiment/controller路径不可用；当前不能执行或承诺连续训练。此前3000步数值与审阅结论仍作为历史证据保留，不能据此声称checkpoint当前可恢复。最近保存进度报告为C10=3000、C00=2000；真实latest及原绑定资产定位/核验完成前，下一步是恢复资产可用性，而非重新初始化或启动其他实验。服务器侧本次状态快照尚未同步；详细范围和限制见`evidence/runtime_unavailable_20261105.json`。本轮无新validation，未重复语义科研审查。
+
+## 标准评测口径待验收（2026-11-05总体进度核对）
+
+既有本地baseline审计确认：外部方法在C10共享validation上的完整同协议复现数为0；文献表的14种方法、20个3DPW test设置不能与C10 validation直接排名。历史实际male/female模型文件曾同SHA，C10 run_config又将male/female/neutral记为同SHA；当前服务器资产尚不可复验，标准gendered-GT等价未建立。保留原数值为继承协议内部结果，既不删除也不升级为SOTA结论。此处是读取既有证据，不是新实验；原严格续训合同不作中途修改。具体去敏字段与来源摘要见`evidence/protocol_status_20261105.json`。

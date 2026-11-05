@@ -1,0 +1,36 @@
+{
+  "project": "STaR-Body",
+  "updated_utc": "2026-11-05T16:18:42.405702+00:00",
+  "scope": "Existing local protocol evidence read for overall progress report; no new experiment or server asset inspection",
+  "verified_external_methods_on_c10_shared_validation": 0,
+  "published_baseline_table": "14 external methods, 20 literature-reported 3DPW test settings; not matched C10 validation reruns",
+  "current_c10_protocol": "Inherited cached-input 3DPW validation; 10413 person-frames, 10226 acceleration triplets",
+  "metric_definitions": {
+    "mpjpe": "H36M17 regressor, SPIN/LSP J14 selection, pelvis-centred mean Euclidean error in mm",
+    "pa_mpjpe": "Per-frame similarity Procrustes on J14, mm",
+    "pve": "Unaligned Euclidean vertex error over 6890 SMPL vertices, mm",
+    "acceleration": "Hip-centred J14 second-difference prediction-minus-GT error on adjacent annotation UIDs; mm/annotation-frame^2"
+  },
+  "c10_manifest_smpl_asset_records": {
+    "smpl_neutral": {
+      "bytes": 109007243,
+      "sha256": "466ce1408aa7a76f8806d0eea74ba9224b80897875ced3a104b03bc6102789a8"
+    },
+    "smpl_male": {
+      "bytes": 109007243,
+      "sha256": "466ce1408aa7a76f8806d0eea74ba9224b80897875ced3a104b03bc6102789a8"
+    },
+    "smpl_female": {
+      "bytes": 109007243,
+      "sha256": "466ce1408aa7a76f8806d0eea74ba9224b80897875ced3a104b03bc6102789a8"
+    }
+  },
+  "historical_actual_male_female_file_audit_status": "historically_confirmed_identical_gender_assets_not_merely_manifest_suspicion",
+  "current_server_asset_files_verified_now": false,
+  "standard_gendered_ground_truth_equivalence": "not established; retrieve and directly validate true model assets before standard benchmark claims",
+  "c10_test_result_search_status": "no_C10_test_result_found_in_audited_local_scope",
+  "project_history_test_seen": true,
+  "all_original_results_retained": true,
+  "frozen_continuation_protocol_changed": false,
+  "source_private_audit_sha256": "4c4c5a4c2bfc87e23b4d479c2b181a73fa98b8daf8a69c122f63b0e671ed4712"
+}
