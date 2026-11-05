@@ -17,3 +17,5 @@
 | LEGACY-RECOVERY | 历史 | 找回原latest与资产 | C10/C00 | BLOCKED_RUNTIME | 不自动启动C00，不重置旧状态 |
 
 G2硬门：开发ID/seed、绝对B和B_eval、三指标保护线、checkpoint SHA及评测资格均须冻结；当前均未完成。原定时任务删除，不自动排队。
+
+执行地点已由用户固定为server_only；包括所有后续CPU/合成核验。历史本地检查行只作已完成证据，不能作为本地重跑入口。

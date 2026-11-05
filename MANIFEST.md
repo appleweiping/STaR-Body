@@ -200,3 +200,5 @@
 | 2026-11-05 21:38 | /experiment-bridge, /research-lit | `runs/session_20261104/work/novelty_gap_20261105/retrieval_log.json` | implementation | E盘私有原始回执/源码片段，不入Git |
 | 2026-11-05 21:38 | /experiment-bridge, /research-lit | `runs/session_20261104/work/novelty_gap_20261105/retrieve_jfg.py` | implementation | E盘私有原始回执/源码片段，不入Git |
 | 2026-11-05 21:38 | /experiment-bridge, /research-lit | `runs/session_20261104/work/novelty_gap_20261105/verified_papers.json` | implementation | E盘私有原始回执/源码片段，不入Git |
+| 2026-11-05 21:43 | /experiment-plan | `refine-logs/EXPERIMENT_PLAN_20261105_214336.md` | implementation | 用户明确实验仅服务器，本地核验停止 |
+| 2026-11-05 21:43 | /experiment-plan | `refine-logs/EXPERIMENT_TRACKER_20261105_214336.md` | implementation | 用户明确实验仅服务器，本地核验停止 |

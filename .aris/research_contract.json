@@ -59,7 +59,7 @@
     ],
     "no_identification_by_account_or_gpu_alone": true
   },
-  "updated_utc": "2026-11-05T17:12:52.090346+00:00",
+  "updated_utc": "2026-11-05T21:43:36.999829+00:00",
   "scheduler_allowed": false,
   "automatic_tasks": "disabled and existing star-body automation deleted at user request",
   "legacy_continuation": {
@@ -149,5 +149,24 @@
     "scope": "Deprecated read-only aliases for the audited original recovery observer. Not the active new-method budget or selector.",
     "active_training_configuration": "Not yet frozen; G0/G1 required. New benchmark code must never read these aliases."
   },
-  "user_clarification": "External baselines are comparisons, not the research direction. Retain the improved plan and organize evidence around STaR-Body method claims."
+  "user_clarification": "External baselines are comparisons, not the research direction. Retain the improved plan and organize evidence around STaR-Body method claims.",
+  "execution_location_policy": {
+    "project": "STaR-Body",
+    "experiments": "server_only",
+    "local_experiments_allowed": false,
+    "server_only_activities": [
+      "training",
+      "inference and evaluation",
+      "CPU/GPU analytical or synthetic experiment checks",
+      "checkpoint execution or deserialization for research verification"
+    ],
+    "local_allowed": [
+      "code and document editing",
+      "literature reading",
+      "read-only connection diagnostics",
+      "Git and artifact synchronization"
+    ],
+    "existing_local_results": "Retain as historical evidence; do not rerun locally",
+    "user_instruction": "别用本地做实验"
+  }
 }

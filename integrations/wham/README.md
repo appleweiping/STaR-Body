@@ -10,6 +10,8 @@
 - 保留原forward、权重选择与metric代码；记录person-frame/accel样本数、flip、checkpoint路径、原始指标和单位。
 - 官方GT首帧root用于世界轨迹初值；静态源码中不影响该camera-space指标，JSON保留这个限定披露。
 
+**执行地点：以下评测与后续CPU/GPU核验只能在服务器执行，本地禁止运行。历史本地检查保留记录。**
+
 ## 执行前条件
 
 补丁已通过11项stdlib/静态检查及Astra代码审查，只放行保存为开发适配。实际运行还需合法、不同性别的SMPL资产、H36M回归器及官方辅助资产；冻结3DPW validation序列/person/frame IDs，验证缓存schema、正常/flip内容和无test混入；固定权重SHA与变体；核验独立STaR-Body目录、环境、GPU资源及输出位置。旧C10的latest不是新baseline前提。

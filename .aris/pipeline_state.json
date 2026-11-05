@@ -1,7 +1,7 @@
 {
-  "updated_utc": "2026-11-05T21:35:55.628211+00:00",
+  "updated_utc": "2026-11-05T21:43:36.999829+00:00",
   "stage": "experiment-plan",
-  "status": "star_body_validation_cpu_preflight_passed_real_assets_pending",
+  "status": "server_only_experimentation_waiting_connectivity_and_assets",
   "last_confirmed_checkpoint_step": 2000,
   "target_steps_per_arm": 6000,
   "order": [
@@ -125,7 +125,8 @@
     "checkpoint_metadata": "pass",
     "analytical_metric_checks": "pass_with_protocol_differences",
     "real_data_parity": false,
-    "model_forward_calls": 0
+    "model_forward_calls": 0,
+    "scope": "Historical local checks completed before latest instruction; do not repeat locally"
   },
   "novelty_update": {
     "evidence": "evidence/jfg_hmr_coverage_20261105.json",
@@ -137,5 +138,7 @@
     "checked_utc": "2026-11-05T21:36:29.316736+00:00",
     "status": "refused_before_authentication",
     "current_training_state": "unobserved"
-  }
+  },
+  "execution_location": "server_only",
+  "local_experiments_allowed": false
 }
