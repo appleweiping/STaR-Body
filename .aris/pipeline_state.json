@@ -1,7 +1,7 @@
 {
-  "updated_utc": "2026-11-05T16:44:05.297152+00:00",
+  "updated_utc": "2026-11-05T17:00:32.842878+00:00",
   "stage": "experiment-plan",
-  "status": "external_benchmark_registry_and_coupled_design_preparation",
+  "status": "external_baseline_development_adapter_ready_waiting_server_and_data",
   "last_confirmed_checkpoint_step": 2000,
   "target_steps_per_arm": 6000,
   "order": [
@@ -72,7 +72,8 @@
     "real_latest_checkpoint_located": false,
     "server_backup_deep_search": "pending_due_to_intermit_tcp_timeout_or_refusal; not counted as completed",
     "existing_heartbeat_updated_for_pending_search": false,
-    "automation_status": "deleted; earlier heartbeat updates are historical only"
+    "automation_status": "deleted; earlier heartbeat updates are historical only",
+    "latest_reconnect_result": "SSH refused before authentication; TCP timeout; no current PID/disk verification"
   },
   "primary_workstream": "External baseline standard-protocol evaluation and new coupled mechanism; no internal variant loop",
   "plan": "refine-logs/EXPERIMENT_PLAN.md",
@@ -92,5 +93,30 @@
     "assurance": "same-family; preparation-stage only",
     "verdict": "G0a_PREPARATION_PASS_G2_NOT_AUTHORIZED",
     "report": "refine-logs/DESIGN_REVIEW.md"
+  },
+  "baseline_preparation": {
+    "checked_utc": "2026-11-05T17:00:32.842878+00:00",
+    "model": "WHAM",
+    "source_commit": "2b54f7797391c94876848b905ed875b154c4a295",
+    "variant": "wham_vit_w_3dpw",
+    "downloaded": true,
+    "bytes": 527307587,
+    "sha256": "9835bcbc952221ad72fa72e768e1f4620e96788b12cecd676a3b1dbee057dd66",
+    "identity_scope": "SHA256 of retrieved official-linked artifact; no independently published checksum matched",
+    "container_inspection": {
+      "format_magic_hex": "504b030400000808",
+      "model_state_loaded": false,
+      "format": "pytorch_zip_candidate",
+      "entries": 225,
+      "has_data_pickle": true
+    },
+    "patch": "integrations/wham/g0_validation.patch",
+    "patch_review": "refine-logs/WHAM_G0_CODE_REVIEW_20261105.md",
+    "checks": "evidence/wham_g0_patch_checks_20261105.json",
+    "gpu_runs": 0,
+    "actual_evaluation": "pending_server_data_assets_and_environment",
+    "server_connection": "two SSH attempts refused; three TCP probes timed out; independent DNS agrees",
+    "training_state_currently_observable": false,
+    "other_project_actions": 0
   }
 }

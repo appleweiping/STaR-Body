@@ -1,0 +1,105 @@
+--- a/configs/config.py
++++ b/configs/config.py
+@@ -88,13 +88,15 @@
+         return False
+ 
+ 
+-def parse_args(test=False):
++def parse_args(test=False, default_eval_split='test'):
+     parser = argparse.ArgumentParser()
+     parser.add_argument('-c', '--cfg', type=str, default='./configs/debug.yaml', help='cfg file path')
+     parser.add_argument(
+         "--eval-set", type=str, default='3dpw', help="Evaluation dataset")
+     parser.add_argument(
+-        "--eval-split", type=str, default='test', help="Evaluation data split")
++        "--eval-split", type=str, default=default_eval_split, help="Evaluation data split")
++    parser.add_argument('--metrics-output-dir', type=str, default=None,
++                        help='Explicit output directory for development metric JSON')
+     parser.add_argument('--render', default=False, type=bool_arg,
+                         help='Render SMPL meshes after the evaluation')
+     parser.add_argument('--save-results', default=False, type=bool_arg,
+--- a/lib/eval/evaluate_3dpw.py
++++ b/lib/eval/evaluate_3dpw.py
+@@ -1,4 +1,6 @@
+ import os
++import json
++from pathlib import Path
+ import time
+ import os.path as osp
+ from glob import glob
+@@ -34,6 +36,26 @@
+ 
+ 
+ m2mm = 1e3
++def development_result_path(cfg, args):
++    """Reject final-test access and absent assets before initializing CUDA."""
++    if args.eval_set != '3dpw' or args.eval_split != 'val':
++        raise ValueError('This development entry requires --eval-set 3dpw --eval-split val')
++    if not args.metrics_output_dir or not Path(args.metrics_output_dir).is_absolute():
++        raise ValueError('An absolute --metrics-output-dir is required')
++    checkpoint = Path(cfg.TRAIN.CHECKPOINT)
++    if not checkpoint.is_file():
++        raise FileNotFoundError(f'Missing selected checkpoint: {checkpoint}')
++    cache = Path(_C.PATHS.PARSED_DATA) / f'3dpw_val_{cfg.MODEL.BACKBONE}.pth'
++    if not cache.is_file():
++        raise FileNotFoundError(f'Missing validation cache: {cache}')
++    output_dir = Path(args.metrics_output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    result_path = output_dir / 'wham_3dpw_validation.json'
++    if result_path.exists():
++        raise FileExistsError(f'Refusing to overwrite development evidence: {result_path}')
++    return result_path
++
++
+ @torch.no_grad()
+ def main(cfg, args):
+     torch.backends.cuda.matmul.allow_tf32 = False
+@@ -43,7 +65,7 @@
+     logger.info(f'GPU feat -> {torch.cuda.get_device_properties("cuda")}')    
+     
+     # ========= Dataloaders ========= #
+-    eval_loader = setup_eval_dataloader(cfg, '3dpw', 'test', cfg.MODEL.BACKBONE)
++    eval_loader = setup_eval_dataloader(cfg, '3dpw', args.eval_split, cfg.MODEL.BACKBONE)
+     logger.info(f'Dataset loaded')
+     
+     # ========= Load WHAM ========= #
+@@ -166,6 +188,8 @@
+             writer.close()
+             # =======>
+             
++    person_frames = sum(len(v) for v in accumulator['mpjpe'])
++    acceleration_samples = sum(len(v) for v in accumulator['accel'])
+     for k, v in accumulator.items():
+         accumulator[k] = np.concatenate(v).mean()
+ 
+@@ -173,9 +197,27 @@
+     log_str = 'Evaluation on 3DPW, '
+     log_str += ' '.join([f'{k.upper()}: {v:.4f},'for k,v in accumulator.items()])
+     logger.info(log_str)
+-    
++    report = {
++        'model': 'WHAM', 'dataset': '3DPW', 'split': 'val',
++        'development': True, 'final_benchmark': False,
++        'source_commit': '2b54f7797391c94876848b905ed875b154c4a295',
++        'checkpoint_path': str(Path(cfg.TRAIN.CHECKPOINT).resolve()),
++        'cache_path': str((Path(_C.PATHS.PARSED_DATA) / f'3dpw_val_{cfg.MODEL.BACKBONE}.pth').resolve()),
++        'flip_eval': bool(cfg.FLIP_EVAL),
++        'sequence_count': len(eval_loader), 'person_frames': person_frames,
++        'acceleration_samples': acceleration_samples,
++        'gt_first_frame_root_used_by_world_trajectory_branch': True,
++        'camera_space_outputs_do_not_use_that_root_in_inspected_source': True,
++        'metrics': {k: float(v) for k, v in accumulator.items()},
++        'units': {'pa_mpjpe': 'mm', 'mpjpe': 'mm', 'pve': 'mm', 'accel': 'm/s^2'},
++    }
++    with args.result_json.open('x', encoding='utf-8') as stream:
++        json.dump(report, stream, indent=2, allow_nan=False)
++
+ if __name__ == '__main__':
+-    cfg, cfg_file, args = parse_args(test=True)
++    cfg, cfg_file, args = parse_args(test=True, default_eval_split='val')
++    args.result_json = development_result_path(cfg, args)
++    cfg.OUTPUT_DIR = str(args.result_json.parent)
+     cfg = prepare_output_dir(cfg, cfg_file)
+     
+     main(cfg, args)
+\ No newline at end of file

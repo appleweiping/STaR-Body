@@ -250,7 +250,7 @@
       "observed_utc": "2026-11-05T16:38:18.388541+00:00",
       "source_status": "commit_pinned_readme_audited",
       "evaluation_execution_status": "NOT_RUN",
-      "weights_downloaded": false,
+      "weights_downloaded": true,
       "dependencies_installed": false,
       "gpu_used": false,
       "venue": "CVPR2024",
@@ -271,7 +271,6 @@
       ],
       "weights": "published via official fetch_demo_data.sh / GoogleDrive",
       "pending": [
-        "checkpoint SHA",
         "audit predicted camera vs GT gyro, flip, postprocessing",
         "data preprocessing source retains TODO"
       ],
@@ -308,7 +307,7 @@
         }
       ],
       "launch_authorized_by_registry": false,
-      "checkpoint_sha256": null,
+      "checkpoint_sha256": "9835bcbc952221ad72fa72e768e1f4620e96788b12cecd676a3b1dbee057dd66",
       "benchmark_cells": {
         "3DPW": {
           "status": "PENDING_PROTOCOL_AND_ASSETS",
@@ -328,7 +327,11 @@
           "published_metric": null,
           "reproduced_metric": null
         }
-      }
+      },
+      "downloaded_variant": "wham_vit_w_3dpw",
+      "checkpoint_status": "downloaded_to_E_not_loaded",
+      "development_adapter": "integrations/wham/g0_validation.patch",
+      "development_adapter_status": "reviewed_static_only_no_real_evaluation"
     },
     {
       "name": "TRAM",

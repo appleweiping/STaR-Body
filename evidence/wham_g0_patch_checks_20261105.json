@@ -1,0 +1,20 @@
+{
+  "patch_sha256": "cb957bf68475e3f60e09e3559c9bafa4974814e821cd068280c4be661c5a3313",
+  "source_commit": "2b54f7797391c94876848b905ed875b154c4a295",
+  "checks": {
+    "parser_development_default_val": true,
+    "ast_parse_both_files": true,
+    "git_apply_check": true,
+    "reject_explicit_test": true,
+    "reject_missing_output_dir": true,
+    "reject_relative_output_dir": true,
+    "reject_missing_checkpoint": true,
+    "reject_missing_validation_cache": true,
+    "valid_guard_returns_validation_json": true,
+    "reject_overwrite": true,
+    "model_forward_metric_block_byte_identical": true
+  },
+  "runtime_inference": "NOT_RUN",
+  "source_files_modified": false,
+  "note": "Only scratch fixtures and patched copies written. Guard test fixtures are not real weights/caches."
+}

@@ -1,0 +1,668 @@
+{
+  "schema": "star-body-g0-asset-requirements-v1",
+  "scope": "WHAM/GVHMR/CameraHMR author-source audit only; no model weights or datasets downloaded; no GPU/model imports; no server access",
+  "created_utc": "2026-11-05",
+  "asset_presence_checked": false,
+  "execution_allowed": false,
+  "first_candidate": {
+    "model": "WHAM",
+    "dataset": "3DPW validation",
+    "readiness": "NOT_READY; shortest verified development route conditional on asset inventory and split adapter",
+    "why": "Pinned official docs explicitly support --split val in threedpw_eval_utils; native network/body asset URLs are present; 3DPW evaluation uses SMPL directly",
+    "required_before_run": [
+      "Freeze admissible 3DPW validation sequence/person/frame IDs independently of outcomes",
+      "Verify actual asset presence and content hashes on target machine",
+      "Pin either wham_vit_w_3dpw or wham_vit_bedlam_w_3dpw; do not conflate variants",
+      "Prepare validation keypoints/image features/initialization caches with matching IDs and flipped counterparts if FLIP_EVAL=True",
+      "Isolate test loader: evaluate_3dpw.py currently calls setup_eval_dataloader(cfg,'3dpw','test',...)",
+      "Verify exact parsed cache schema/filename and adapter using CPU metadata inspection, not GPU import",
+      "Record pelvis alignment, J14 regressor and acceleration conversion against unified evaluator"
+    ]
+  },
+  "global_constraints": {
+    "G0": "development IDs only; reference test commands are not permitted launch commands",
+    "RICH": "No verified development split/manifest in these inspected release entrypoints; all inspected RICH evaluation paths reference test. RICH test must remain G5 until an authorized genuine train/validation selection is established.",
+    "EMDB": "Do not use for development selection without legitimate development split; explicit test tasks are G5.",
+    "ground_truth": "Use labels only in metrics/preprocessor separation; never as new forward features.",
+    "weight_state": "Published URLs verified in source text only. HTTP payload availability, licensing eligibility, exact binary hashes and checkpoint state keys have not been verified.",
+    "public_results": "No new predictions, scores, or person-frame coverage claimed."
+  },
+  "models": [
+    {
+      "name": "WHAM",
+      "repo": "yohanshin/WHAM",
+      "commit": "2b54f7797391c94876848b905ed875b154c4a295",
+      "representation": "SMPL",
+      "weight_variants": [
+        {
+          "file": "checkpoints/wham_vit_w_3dpw.pth.tar",
+          "variant": "ViT with3DPW; README evaluation command explicitly selects it",
+          "url": "https://drive.google.com/uc?id=1i7kt9RlCCCNEW2aYaDWVr-G778JkLNcB&export=download&confirm=t",
+          "locator": "exact official fetch script URL",
+          "hash": null,
+          "status": "SOURCE_VERIFIED_NOT_DOWNLOADED"
+        },
+        {
+          "file": "checkpoints/wham_vit_bedlam_w_3dpw.pth.tar",
+          "variant": "ViT+BEDLAM+3DPW; pinned demo.yaml default; not same weights as README evaluation override",
+          "url": "https://drive.google.com/uc?id=19qkI-a6xuwob9_RFNSPWf1yWErwVVlks&export=download&confirm=t",
+          "locator": "exact official fetch script URL",
+          "hash": null,
+          "status": "SOURCE_VERIFIED_NOT_DOWNLOADED"
+        }
+      ],
+      "body_assets": [
+        {
+          "files": [
+            "dataset/body_models/smpl/SMPL_NEUTRAL.pkl"
+          ],
+          "url": "https://download.is.tue.mpg.de/download.php?domain=smplify&resume=1&sfile=mpips_smplify_public_v2.zip",
+          "access": "SMPLify registration",
+          "status": "SOURCE_VERIFIED_NOT_DOWNLOADED"
+        },
+        {
+          "files": [
+            "dataset/body_models/smpl/SMPL_MALE.pkl",
+            "dataset/body_models/smpl/SMPL_FEMALE.pkl"
+          ],
+          "url": "https://download.is.tue.mpg.de/download.php?domain=smpl&sfile=SMPL_python_v.1.0.0.zip",
+          "access": "SMPL registration",
+          "status": "SOURCE_VERIFIED_NOT_DOWNLOADED"
+        },
+        {
+          "files": [
+            "dataset/body_models/J_regressor_h36m.npy",
+            "dataset/body_models/J_regressor_extra.npy",
+            "dataset/body_models/J_regressor_wham.npy",
+            "dataset/body_models/J_regressor_feet.npy",
+            "dataset/body_models/smpl_mean_params.npz",
+            "dataset/body_models/smpl_faces.npy",
+            "dataset/body_models/smplx2smpl.pkl",
+            "dataset/body_models/coco_aug_dict.pth"
+          ],
+          "url": "https://drive.google.com/uc?id=1pbmzRbWGgae6noDIyQOnohzaVnX_csUZ&export=download&confirm=t",
+          "status": "PATHS_AND_BUNDLE_LOCATOR_SOURCE_VERIFIED_CONTENTS_NOT_INSPECTED",
+          "note": "All names declared by pinned constants; subset actually loaded per network path must still be checked. H36M regressor is explicitly loaded in3DPW evaluator; smplx2smpl is explicitly loaded inRICH evaluator."
+        },
+        {
+          "files": [
+            "dataset/body_models/smplx/SMPLX_MALE.npz",
+            "dataset/body_models/smplx/SMPLX_FEMALE.npz",
+            "dataset/body_models/smplx/SMPLX_NEUTRAL.npz"
+          ],
+          "url": "https://smpl-x.is.tue.mpg.de/",
+          "status": "RICH_GENDERED_SMPLX_REQUIREMENT_VERIFIED_EXACT_RELEASE_FILES_PENDING",
+          "note": "RICH evaluator constructs SMPLX(path=SMPL path.replace('smpl','smplx'),gender=batch['gender']); filenames shown as expected SMPLX convention, exact supplied release not inspected."
+        }
+      ],
+      "cached_evaluation": {
+        "root": "dataset/parsed_data",
+        "url": "https://drive.google.com/drive/folders/13T2ghVvrw_fEk3X-8L0e6DVSYx_Og8o3?usp=sharing",
+        "status": "CACHE_PATH_AND_FIELDS_SOURCE_VERIFIED_ACTUAL_ASSETS_NOT_INSPECTED",
+        "required_for_3dpw": [
+          "Matching parsed 3DPW validation data, with frozen split/IDs",
+          "ViT image features (constants declare1024 dimensions)",
+          "17-keypoint observations",
+          "network initialization data consumed by prepare_batch",
+          "normal+flip data if FLIP_EVAL=True",
+          "SMPL GT pose/betas/gender for metrics"
+        ],
+        "required_for_rich": [
+          "Matching parsed RICH genuine development data (not released test by default)",
+          "SMPL-X GT pose/betas/gender",
+          "SMPLX-to-SMPL matrix before24-joint/vertex metrics"
+        ],
+        "fields_verified_at_eval_boundary": [
+          "batch.gender",
+          "batch.vid",
+          "gt.pose [6D joint rotations; evaluator indexes gt.pose[0,:,1:] and root]",
+          "gt.betas",
+          "batch.cam_intrinsics [render-only3DPW]",
+          "batch.frame_id [render-only3DPW]",
+          "prepare_batch returns x,inits,features,kwargs,gt (internal field keys not yet inspected)"
+        ],
+        "pending_schema": [
+          "Actual array dtypes/shapes and frame identity alignment require the real cache, not just source",
+          "Development manifest coverage and held-out overlap must be checked before launch"
+        ],
+        "preprocess_doc_commands": [
+          "python -m lib.data_utils.threedpw_eval_utils --split val",
+          "python -m lib.data_utils.rich_eval_utils (documented only; source split behavior NOT_INSPECTED)"
+        ],
+        "raw_requirements": [
+          "Official3DPW images/annotations",
+          "ViTPose detections at dataset/detection_results/<DATASET-NAME>/<SEQUENCE_NAME.npy>",
+          "TCMR parsed3DPW under dataset/parsed_data/TCMR_preproc/ per official docs"
+        ],
+        "verified_3dpw_validation_cache": "dataset/parsed_data/3dpw_val_vit.pth",
+        "verified_rich_test_cache": "dataset/parsed_data/rich_test_vit.pth",
+        "required_serialized_keys": [
+          "kp2d",
+          "pose",
+          "betas",
+          "gender",
+          "res",
+          "vid",
+          "frame_id",
+          "cam_poses",
+          "features",
+          "bbox",
+          "init_kp3d",
+          "init_pose"
+        ],
+        "required_flip_keys_if_enabled": [
+          "flipped_features",
+          "flipped_bbox",
+          "flipped_kp2d",
+          "flipped_init_kp3d",
+          "flipped_init_pose"
+        ],
+        "initial_frame_semantics": "EvalDataset uses first cached frame for init_pose/init_kp3d/init_kp2d; evaluation starts atindex1, frame_id/features/bbox sliced[1:]. Full coverage must explicitly account for this first frame."
+      },
+      "extractors_if_rebuilding_caches": [
+        {
+          "file": "checkpoints/hmr2a.ckpt",
+          "url": "https://drive.google.com/uc?id=1J6l8teyZrL0zFzHhzkC7efRhU0ZJ5G9Y&export=download&confirm=t",
+          "status": "SOURCE_VERIFIED_NOT_DOWNLOADED"
+        },
+        {
+          "file": "checkpoints/vitpose-h-multi-coco.pth",
+          "url": "https://drive.google.com/uc?id=1xyF7F3I7lWtdq82xmEPVQ5zl4HaasBso&export=download&confirm=t",
+          "status": "SOURCE_VERIFIED_NOT_DOWNLOADED"
+        },
+        {
+          "file": "checkpoints/yolov8x.pt",
+          "url": "https://drive.google.com/uc?id=1zJ0KP23tXD42D47cw1Gs7zE2BA_V_ERo&export=download&confirm=t",
+          "status": "OPTIONAL_DEMO_PREPROCESSING_SOURCE_VERIFIED"
+        },
+        {
+          "file": "checkpoints/dpvo.pth",
+          "url": "https://drive.google.com/uc?id=1kXTV4EYb-BI3H7J-bkR3Bc4gT9zfnHGT&export=download&confirm=t",
+          "status": "GLOBAL_PIPELINE_ONLY_NOT_NECESSARY_FOR_CACHED_CAMERA_METRICS"
+        }
+      ],
+      "metric_contract_verified": {
+        "threeDPW": "H36M regressor subset J14; hip indices[2,3]; genderedSMPL GT, neutral prediction; pelvis aligns joints and vertices",
+        "rich": "SMPL24 native regressor; hips[1,2]; genderedSMPLX GT mapped toSMPL; pelvis aligns vertices and joints",
+        "acceleration": "compute_error_accel(...)[1:-1] *30**2; treated asm/s虏 in paper; do not compare directly with C10mm/frame虏",
+        "flip_eval": "True in pinned demo.yaml",
+        "side_effects": "RICH evaluator top-level joblib.load(smplx2smpl) and.cuda(); no import for CPU-only preflight"
+      },
+      "unsafe_official_entrypoints": [
+        {
+          "entry": "lib.eval.evaluate_3dpw",
+          "reason": "Hardcodes setup_eval_dataloader(cfg,'3dpw','test',cfg.MODEL.BACKBONE)",
+          "G0_allowed": false
+        },
+        {
+          "entry": "lib.eval.evaluate_rich",
+          "reason": "Hardcodes setup_eval_dataloader(cfg,'rich','test',cfg.MODEL.BACKBONE); top-levelCUDA allocation",
+          "G0_allowed": false
+        }
+      ],
+      "required_adapter": "new explicit development manifest/split loader; no default fallback to test; ID coverage and non-overlap checked before model load",
+      "ground_truth_root_trace": {
+        "status": "STATIC_SOURCE_TRACE_VERIFIED_NOT_RUNTIME_TEST",
+        "origin": "dataset_eval.py prepare_initialization uses target.pose[:,0] from ground truth, converts to6D",
+        "forward_route": "prepare_auxiliary forwards init_root; Network.forward calls trajectory_decoder(motion_context,init_root,cam_angvel); TrajectoryDecoder reads root[:,:1] only",
+        "camera_route": "MotionDecoder receives motion_context (optionally image-integrated) and init_smpl; not init_root. forward_smpl builds camera SMPL frompred_pose/pred_shape/pred_cam. TrajectoryRefiner only appends refinedworldroot/velocity fields. Reviewed camera metric outputs are not overwritten by global route.",
+        "scope": "Original GT world-root initialization retained; do not describe entire forward as GT-free; no source modification to remove it."
+      },
+      "checkpoint_missing_behavior": "Original build_network only warns and continues if selected checkpoint absent. Proposeddevelopmentpatch adds preflightFileNotFoundError without changing choice orload"
+    },
+    {
+      "name": "GVHMR",
+      "repo": "zju3dv/GVHMR",
+      "commit": "ee960bb6e2ea2d381aa97f08e9b71ef320b624b1",
+      "representation": "PredictSMPL-X, SMPL evaluation/conversion path",
+      "weight_variants": [
+        {
+          "file": "inputs/checkpoints/gvhmr/gvhmr_siga24_release.ckpt",
+          "variant": "SIGGRAPH Asia2024 release, README420epochs",
+          "url": "https://drive.google.com/drive/folders/1eebJ13FUEXrKBawHpJroW0sNSxLjh9xD?usp=drive_link",
+          "locator": "official collection; individual binary URL NOT_YET_VERIFIED",
+          "hash": null,
+          "status": "COLLECTION_AND_FILENAME_VERIFIED_NOT_DOWNLOADED"
+        }
+      ],
+      "body_assets": [
+        {
+          "files": [
+            "inputs/checkpoints/body_models/smplx/SMPLX_MALE.npz",
+            "inputs/checkpoints/body_models/smplx/SMPLX_FEMALE.npz",
+            "inputs/checkpoints/body_models/smplx/SMPLX_NEUTRAL.npz"
+          ],
+          "url": "https://smpl-x.is.tue.mpg.de/",
+          "status": "INSTALL_DOC_VERIFIED_NOT_DOWNLOADED"
+        },
+        {
+          "files": [
+            "inputs/checkpoints/body_models/smpl/SMPL_MALE.pkl",
+            "inputs/checkpoints/body_models/smpl/SMPL_FEMALE.pkl",
+            "inputs/checkpoints/body_models/smpl/SMPL_NEUTRAL.pkl"
+          ],
+          "url": "https://smpl.is.tue.mpg.de/",
+          "status": "INSTALL_DOC_VERIFIED_NOT_DOWNLOADED"
+        },
+        {
+          "files": [],
+          "role": "SMPL-X-to-SMPL transfer and evaluation joint regressors",
+          "status": "REQUIRED_ROLE_KNOWN_EXACT_GVHMR_PATHS_PENDING",
+          "note": "Do not reuse WHAM matrix by filename alone; inspect callbacks/smpl utility before execution"
+        }
+      ],
+      "cached_evaluation": {
+        "url": "https://drive.google.com/drive/folders/10sEef1V_tULzddFxzCmDUpsIqfv7eP-P?usp=drive_link",
+        "files": [
+          "3DPW_hmr4d_support.tar.gz -> inputs/3DPW/hmr4d_support/",
+          "RICH_hmr4d_support.tar.gz -> inputs/RICH/hmr4d_support/"
+        ],
+        "status": "INSTALL_DOC_VERIFIED_TEST_COLLECTION_ONLY_DEVELOPMENT_SCHEMA_PENDING",
+        "required_for_3dpw": [
+          "Original licensed images/annotations where dataset reader needs them",
+          "Matched image features,17-point observations,bbox/camera metadata; exact serialized keys pending dataset source",
+          "Explicit admissible validation/train IDs; providedtest support cannot be used inG0"
+        ],
+        "required_for_rich": [
+          "RICH development images/SMPL-X labels/camera metadata and support features",
+          "Explicit genuine development IDs; releasedrich_test_labels must not become validation"
+        ],
+        "known_rich_aux_locator_from_Human3R_docs": {
+          "labels_url": "https://drive.google.com/file/d/17fbG1IsN6DfF_KwYWR2FbNZFKvs9waVb/view?usp=drive_link",
+          "labels_name": "rich_test_labels.pt",
+          "camera_source": "https://github.com/zju3dv/GVHMR/blob/088caff492aa38c2d82cea363b78a3c65a83118f/hmr4d/dataset/rich/resource/cam2params.pt",
+          "status": "CROSS_OFFICIAL_REFERENCE_ONLY_DIFFERENT_COMMIT_TEST_ASSETS_NOT_G0"
+        },
+        "fields_verified_at_eval_boundary": [],
+        "pending_schema": [
+          "hmr4d.dataset.threedpw.threedpw_motion_test fields and file names",
+          "hmr4d.dataset.rich.rich_motion_test fields and file names",
+          "metric_3dpw/metric_rich callbacks mapping and units",
+          "development loader construction; explicit train/test separation"
+        ]
+      },
+      "extractors_if_rebuilding_caches": [
+        {
+          "file": "inputs/checkpoints/hmr2/epoch=10-step=25000.ckpt",
+          "source": "same official model collection",
+          "status": "FILENAME_VERIFIED"
+        },
+        {
+          "file": "inputs/checkpoints/vitpose/vitpose-h-multi-coco.pth",
+          "source": "same official model collection",
+          "status": "FILENAME_VERIFIED"
+        },
+        {
+          "file": "inputs/checkpoints/yolo/yolov8x.pt",
+          "source": "same official model collection",
+          "status": "FILENAME_VERIFIED"
+        },
+        {
+          "file": "inputs/checkpoints/dpvo/dpvo.pth",
+          "source": "same official model collection",
+          "status": "GLOBAL_MOTION_ORIGINAL_VARIANT; current demo defaultsSimpleVO; variantmust be frozen"
+        }
+      ],
+      "unsafe_official_entrypoints": [
+        {
+          "entry": "python tools/train.py global/task=gvhmr/test_3dpw_emdb_rich ...",
+          "reason": "Explicit test task; despite train.py name this dispatches trainer.test; contains3DPW/RICH/EMDB test",
+          "G0_allowed": false
+        }
+      ],
+      "required_adapter": "Register development task/dataloader that is restricted to immutable development IDs and callback output paths; retainFP32 test metric semantics; never launch fit task",
+      "metric_contract_pending": [
+        "source callbacks must be inspected before claiming matchingJ14/J24,PVE or acceleration"
+      ]
+    },
+    {
+      "name": "CameraHMR",
+      "repo": "pixelite1201/CameraHMR",
+      "commit": "65d11a0640d23c60f55ec82ae54298e9e7e549e0",
+      "venue": "3DV2025",
+      "representation": "primarycamerahmr experimentMODEL.TYPE=smpl; laterSMPL-X/BEDLAM2 separate",
+      "weight_variants": [
+        {
+          "file": "data/pretrained-models/camerahmr_checkpoint_cleaned.ckpt",
+          "variant": "paper CameraHMRSMPL",
+          "url": "https://camerahmr.is.tue.mpg.de/",
+          "locator": "author download site only; nativebinaryURL not yet verified",
+          "hash": null,
+          "status": "PATH_AND_AUTHOR_LOCATOR_VERIFIED"
+        },
+        {
+          "file": "data/pretrained-models/cam_model_cleaned.ckpt",
+          "variant": "required camera/FoV model loaded byeval.py",
+          "url": "https://camerahmr.is.tue.mpg.de/",
+          "locator": "author download site only; binaryURLpending",
+          "hash": null,
+          "status": "PATH_AND_DIRECT_EVAL_USAGE_VERIFIED"
+        },
+        {
+          "file": "data/pretrained-models/bedlam_v1_v2.ckpt",
+          "variant": "laterSMPL-X/BEDLAM2; do not conflate with3DV2025 row",
+          "url": "https://camerahmr.is.tue.mpg.de/",
+          "status": "DECLARED_ALTERNATIVE_NOT_SELECTED"
+        }
+      ],
+      "body_assets": [
+        {
+          "files": [
+            "data/models/SMPL/SMPL_NEUTRAL.pkl",
+            "data/smpl_mean_params.npz"
+          ],
+          "status": "PATHS_VERIFIED_CORE_CONSTANTS; additionalgenderedGT model use pending trainer source"
+        },
+        {
+          "files": [
+            "data/train-eval-utils/SMPL_to_J19.pkl",
+            "data/train-eval-utils/J_regressor_extra.npy",
+            "data/train-eval-utils/J_regressor_h36m.npy",
+            "data/train-eval-utils/smplx2smpl.pkl",
+            "data/train-eval-utils/downsample_mat.pkl"
+          ],
+          "status": "DECLARED_PATHS_VERIFIED_USAGE_AND_BUNDLE_CONTENTS_PENDING"
+        },
+        {
+          "files": [
+            "data/models/SMPLX/SMPLX_NEUTRAL.npz",
+            "data/models/smplx_neutral_head/models_lockedhead/smplx"
+          ],
+          "status": "ALTERNATIVE_SMPLX_CONSTANTS_VERIFIED; exactRICHGT constructionpending"
+        }
+      ],
+      "cached_evaluation": {
+        "files": [
+          "data/test-labels/3dpw_test.npz",
+          "data/test-labels/rich_test.npz",
+          "data/test-labels/emdb_test.npz",
+          "data/test-labels/spec_test.npz",
+          "data/test-labels/coco_val.npz"
+        ],
+        "images": [
+          "data/test-images/3DPW/imageFiles",
+          "data/test-images/RICH/test",
+          "data/test-images/EMDB/P0..P9"
+        ],
+        "status": "TEST_PATHS_VERIFIED;NONE_AUTOMATICALLY_AUTHORIZED_FOR_G0",
+        "label_fetch_reference": "scripts/fetch_test_labels.sh (mentionedin docs; rawURLcontents not inspected)",
+        "dataset_names": {
+          "3dpw-test-cam-smpl": "data/test-labels/3dpw_test.npz",
+          "rich-smplx": "data/test-labels/rich_test.npz"
+        },
+        "fields_verified_at_eval_boundary": [],
+        "pending_schema": [
+          "NPZ field names/units/coordinate definitions; inspect core datasetreader",
+          "development3DPW validation labels and image mapping not provided in inspectedeval config",
+          "genuineRICHdevelopment split/manifest",
+          "exactSMPLX-to-SMPL andJ14/J24 metrics intrainer"
+        ]
+      },
+      "extractors_if_rebuilding_caches": [
+        {
+          "file": "data/pretrained-models/model_final_f05665.pkl",
+          "role": "ViTDet demo only; annotationbox evaluation need not require detector, inspectDataModule before asserting"
+        },
+        {
+          "file": "data/train-eval-utils/vitpose_backbone.pth",
+          "role": "declaredbackbone asset; exactloadusagepending"
+        },
+        {
+          "file": "data/pretrained-models/densekp.ckpt",
+          "role": "optionalDenseKP/CamSMPLify path, not loadedby inspectedmain eval.py"
+        }
+      ],
+      "unsafe_official_entrypoints": [
+        {
+          "entry": "python eval.py data=eval experiment=camerahmr",
+          "reason": "data/eval.yaml VAL_DATASETS includes emdb-smpl_3dpw-test-cam-smpl_spec-test-smpl_rich-smplx_coco-val-smpl; eval.py unconditionally trainer.test(model,datamodule). Callingit can evaluate multiple finaltest sets.",
+          "G0_allowed": false
+        }
+      ],
+      "required_adapter": "Separate single-dataset development config + explicit immutableIDs; replace test-label mappings; ensureDataModule does not create all originaltest loaders; main evalfile also setsSIGUSR1 so nativeWindows portability must be handled",
+      "source_configuration": {
+        "MODEL.TYPE": "smpl",
+        "MODEL.IMAGE_SIZE": 256,
+        "context_dim": 1280,
+        "validation_dataset_combination": "emdb-smpl_3dpw-test-cam-smpl_spec-test-smpl_rich-smplx_coco-val-smpl"
+      }
+    }
+  ],
+  "patch_artifact": {
+    "path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\wham_g0_validation.patch",
+    "status": "PREPARED_NOT_APPLIED_TO_OFFICIAL_SOURCE_NOT_LAUNCHED",
+    "checks_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\wham_g0_patch_checks.json",
+    "sha256": "cb957bf68475e3f60e09e3559c9bafa4974814e821cd068280c4be661c5a3313"
+  },
+  "evidence_sources": [
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_configs__config.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/configs/config.py",
+      "sha256": "9c5004a230995c841e575268b3940efcd7c338509cad91c4287011f5d9b6865a"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_configs__constants.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/configs/constants.py",
+      "sha256": "b60a3a7ddbafa5f4c9521afa46259e9479fde5aa837a3d43f53c691e0df44dac"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__data___dataset.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/data/_dataset.py",
+      "sha256": "b542c501bbf5c911d97f4f731685b6e38b4aef99f19c09753fb5b004f49bd9ea"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__data__dataloader.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/data/dataloader.py",
+      "sha256": "b33bd2a3ec2e462c8ebd84ced30d8c53042c764f40191716523880129765ed55"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__data__datasets____init__.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/data/datasets/__init__.py",
+      "sha256": "3fd5c72432ba5ad8e0a2884fbba76da0a7a783ccafd18cdbe49c86515ac3f134"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__data__datasets__dataset_eval.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/data/datasets/dataset_eval.py",
+      "sha256": "d8f0d69bc87e60b4034424c3e8367b780d018b0b92c4a5a9cfe5f91d2c1c8d29"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__eval__evaluate_3dpw.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/eval/evaluate_3dpw.py",
+      "sha256": "c06fc6619dd261275586bcc60564657b5c593d5ac63b6699b684a6916be0967e"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__eval__evaluate_emdb.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/eval/evaluate_emdb.py",
+      "sha256": "ad389da5f2bdd15e2e78c760152e25dacaf8e70dc0c7140319ce411d77794a51"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__eval__evaluate_rich.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/eval/evaluate_rich.py",
+      "sha256": "6d0549e267774512c4df0906a4a3eda1046bf432e44e81ec0e457c6ab3907de5"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__models____init__.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/models/__init__.py",
+      "sha256": "5c5f7a9c2249fa90623ca3fb53528c676462808601ea3bd94343d07a5cd49f46"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__models__layers____init__.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/models/layers/__init__.py",
+      "sha256": "4b3e635bb55d4b1bdb2164066677c707337632a202676b23def26eeec3f18cd5"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__models__layers__modules.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/models/layers/modules.py",
+      "sha256": "3f86c73d7925495b3ee0264d54d2098f9473b5a51a30b2a56b7cf409c41d2533"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__models__wham.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/models/wham.py",
+      "sha256": "be608c4991ecafd75a86ec55f7942c9e3e2979ead81f623622b22d5d7bb1f293"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__utils__data_utils.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/utils/data_utils.py",
+      "sha256": "babc4b667eb1f87cae0b5f3a9ac46869ca651ca4b43887e1cdcbcbdba1f5aefe"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_lib__utils__utils.py",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/utils/utils.py",
+      "sha256": "082207d4a0c275dca1e3da14f2416399b75ca4dc9201f5363f880b274fe74e7f"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_configs__yamls__demo.yaml",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/configs/yamls/demo.yaml",
+      "sha256": "290a7f8f86fa92b811ce5aca40562f10337a450bce6e7fd5285bcf639ef5cb85"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_configs__yamls__model_base.yaml",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/configs/yamls/model_base.yaml",
+      "sha256": "0427347cc93069ed7ca957671559981a86d67a89ba1f62cc18df25a3eb1d10b0"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_docs__DATASET.md",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/docs/DATASET.md",
+      "sha256": "ec83e720f5916ab07b9c496af7aacb1d4a18f41f8e204b4f1607ad28da695deb"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_README.md",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/README.md",
+      "sha256": "7d4e97bba0c0d1e72f96e4ffcdcc62173ff9f1e34174c862465b64cbc75afc72"
+    },
+    {
+      "model": "WHAM",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\WHAM_fetch_demo_data.sh",
+      "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/fetch_demo_data.sh",
+      "sha256": "70aa5597579af8170a1cfe1420d226e08d7d814719e76ec2eb49f367e98b9775"
+    },
+    {
+      "model": "GVHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\GVHMR_hmr4d__configs____init__.py",
+      "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/hmr4d/configs/__init__.py",
+      "sha256": "602d11da98ce7925bd91f81d39512fa9a32871545d3e1993cf1374065eb45f1f"
+    },
+    {
+      "model": "GVHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\GVHMR_hmr4d__configs__store_gvhmr.py",
+      "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/hmr4d/configs/store_gvhmr.py",
+      "sha256": "3a24682b106d23005a5ef7f767ed09ab495dbcb16cf5107c78cf54c34ac6135c"
+    },
+    {
+      "model": "GVHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\GVHMR_tools__train.py",
+      "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/tools/train.py",
+      "sha256": "49cac49fe2afe4a272b41be0c48f9757ad3ad37de42077cf77f3b895551f1121"
+    },
+    {
+      "model": "GVHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\GVHMR_hmr4d__configs__train.yaml",
+      "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/hmr4d/configs/train.yaml",
+      "sha256": "85782dbf55c71ce58b143013afd63d45268f034b8b8cf2f6c136f774df28c60d"
+    },
+    {
+      "model": "GVHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\GVHMR_docs__INSTALL.md",
+      "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/docs/INSTALL.md",
+      "sha256": "dedb2e37062cddebf8e7fae2cacf7b0bdc3da6a5353cf34b6fba3f80401d7051"
+    },
+    {
+      "model": "GVHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\GVHMR_README.md",
+      "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/README.md",
+      "sha256": "376bc54f58ff22eda1e27a86b8a70fe7434b97d7ca53832be2ccdf06e80fd456"
+    },
+    {
+      "model": "CameraHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\CameraHMR_core__configs____init__.py",
+      "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/core/configs/__init__.py",
+      "sha256": "e1dc7b98c40c7867bc76821f55c965cf14a3e9f3170a2c9d45fe79a13984fa76"
+    },
+    {
+      "model": "CameraHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\CameraHMR_core__constants.py",
+      "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/core/constants.py",
+      "sha256": "43f42e0d4526bd108e519c19a89bf1ae42446bdd3bb2c5d92bbe0c64aaaf2585"
+    },
+    {
+      "model": "CameraHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\CameraHMR_eval.py",
+      "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/eval.py",
+      "sha256": "c88f85bddb5ca333cf25ebcaeb9d1f02d4184118a8d7b5bacdec41a2cf36da3f"
+    },
+    {
+      "model": "CameraHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\CameraHMR_core__configs_hydra__data__eval.yaml",
+      "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/core/configs_hydra/data/eval.yaml",
+      "sha256": "d3e2f4c27685372f12a5ebcc9120904b92c0e93836263244d9fd4e1fb9b696a0"
+    },
+    {
+      "model": "CameraHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\CameraHMR_core__configs_hydra__experiment__camerahmr.yaml",
+      "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/core/configs_hydra/experiment/camerahmr.yaml",
+      "sha256": "be7f9fb6d369a40efe94b6d2699ba74a70d9b32da1fbf91539e2d38b6b33e293"
+    },
+    {
+      "model": "CameraHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\CameraHMR_core__configs_hydra__train.yaml",
+      "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/core/configs_hydra/train.yaml",
+      "sha256": "1bbc855c5dd7fbc4d072d747e6276e7d2687667d319bb6319bdb047c7be45baa"
+    },
+    {
+      "model": "CameraHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\CameraHMR_docs__training.md",
+      "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/docs/training.md",
+      "sha256": "9c939253ed78f46d66022dd67e59ce405522145782311efe3bfc48c95c67093f"
+    },
+    {
+      "model": "CameraHMR",
+      "local_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\CameraHMR_ReadMe.md",
+      "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/ReadMe.md",
+      "sha256": "c9d0d5995b1e03db9c428a07d26871fd7cb6ddca6dfb5b60a242235fdc045037"
+    }
+  ],
+  "retrieved_weight_update": {
+    "checked_utc": "2026-11-05T17:00:32.842878+00:00",
+    "model": "WHAM",
+    "source_commit": "2b54f7797391c94876848b905ed875b154c4a295",
+    "variant": "wham_vit_w_3dpw",
+    "downloaded": true,
+    "bytes": 527307587,
+    "sha256": "9835bcbc952221ad72fa72e768e1f4620e96788b12cecd676a3b1dbee057dd66",
+    "identity_scope": "SHA256 of retrieved official-linked artifact; no independently published checksum matched",
+    "container_inspection": {
+      "format_magic_hex": "504b030400000808",
+      "model_state_loaded": false,
+      "format": "pytorch_zip_candidate",
+      "entries": 225,
+      "has_data_pickle": true
+    },
+    "patch": "integrations/wham/g0_validation.patch",
+    "patch_review": "refine-logs/WHAM_G0_CODE_REVIEW_20261105.md",
+    "checks": "evidence/wham_g0_patch_checks_20261105.json",
+    "gpu_runs": 0,
+    "actual_evaluation": "pending_server_data_assets_and_environment",
+    "server_connection": "two SSH attempts refused; three TCP probes timed out; independent DNS agrees",
+    "training_state_currently_observable": false,
+    "other_project_actions": 0
+  }
+}

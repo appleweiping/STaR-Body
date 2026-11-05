@@ -1,0 +1,25 @@
+{
+  "checked_utc": "2026-11-05T17:00:32.842878+00:00",
+  "model": "WHAM",
+  "source_commit": "2b54f7797391c94876848b905ed875b154c4a295",
+  "variant": "wham_vit_w_3dpw",
+  "downloaded": true,
+  "bytes": 527307587,
+  "sha256": "9835bcbc952221ad72fa72e768e1f4620e96788b12cecd676a3b1dbee057dd66",
+  "identity_scope": "SHA256 of retrieved official-linked artifact; no independently published checksum matched",
+  "container_inspection": {
+    "format_magic_hex": "504b030400000808",
+    "model_state_loaded": false,
+    "format": "pytorch_zip_candidate",
+    "entries": 225,
+    "has_data_pickle": true
+  },
+  "patch": "integrations/wham/g0_validation.patch",
+  "patch_review": "refine-logs/WHAM_G0_CODE_REVIEW_20261105.md",
+  "checks": "evidence/wham_g0_patch_checks_20261105.json",
+  "gpu_runs": 0,
+  "actual_evaluation": "pending_server_data_assets_and_environment",
+  "server_connection": "two SSH attempts refused; three TCP probes timed out; independent DNS agrees",
+  "training_state_currently_observable": false,
+  "other_project_actions": 0
+}
