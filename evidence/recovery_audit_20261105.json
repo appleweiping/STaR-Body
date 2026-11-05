@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "project": "STaR-Body",
+  "date": "2026-11-05",
+  "scope": "Sanitized recovery acceptance evidence; no new scientific result or training",
+  "status": "partial_recovery_original_runtime_assets_pending",
+  "mount_observation": {
+    "checked_utc": "2026-11-05T13:33:58.328956+00:00",
+    "read_only": true,
+    "original_recorded_device_filesystem_and_volume_identity_match": true,
+    "original_data_volume_mounted": true,
+    "auxiliary_ssd_mounted": true,
+    "exact_original_source_experiment_controller_roots_visible": false,
+    "readable_mount_namespaces": 1,
+    "readable_namespace_scope": "self",
+    "namespace_permission_denied_count": 1477,
+    "limitation": "Other namespaces were not readable; mounted volume identity does not establish original file availability."
+  },
+  "original_processes": {
+    "known_roles": [
+      "controller",
+      "wrapper",
+      "trainer"
+    ],
+    "earlier_read_only_observation": "All three original recorded PID handles absent",
+    "fresh_process_check_in_mount_observation": false
+  },
+  "bound_source_recovery": {
+    "status": "passed",
+    "verified_utc": "2026-11-05T13:37:52.403176+00:00",
+    "source": "Existing C10 source archive; only the original bound manifest entries extracted",
+    "archive_member_sha_matches": 500,
+    "extracted_file_sha_matches": 500,
+    "total_source_bytes": 5019656,
+    "unexpected_files": 0,
+    "symlinks_or_path_escapes": 0,
+    "manifest_sha256": "b96f09adcb72e6584cda14967beb977f2df83533e8bc6875d44495d2f9e219c5",
+    "binding_manifest_sha256": "2ba6f3c5f54923b7bb8f1efdd7d63d80a5fff4047afcf1ad99f1753596ee4cb4",
+    "private_e_drive_work_only": true,
+    "original_archive_and_current_project_sources_modified": false,
+    "source_copy_in_git_candidates": false
+  },
+  "local_checkpoint_search": {
+    "status": "not_found_within_checked_scope",
+    "project_checkpoint_files": "Only two 29-byte CPU fixtures",
+    "source_archives_checked": [
+      "C10 source zip",
+      "V30 source zip",
+      "Git source tar"
+    ],
+    "weight_members_in_checked_source_archives": 0,
+    "additional_backup_directories_visited": 5852,
+    "related_project_name_hits_in_additional_backup_directories": 0,
+    "limitation": "Name-based backup directory scan and named archive inspection are not an exhaustive search of every possible backup."
+  },
+  "historical_latest_candidate_filters": {
+    "C10_latest_bytes": 288894163,
+    "C00_latest_bytes": 287179222,
+    "latest_sha256_available": false,
+    "C10_step3000_payload_identity_verified": false,
+    "limitation": "Historical stat only; filename, size, progress and best weights do not establish resumable payload identity."
+  },
+  "pending_recovery_search": {
+    "C11_manifest_proves_complete_latest_backup": false,
+    "C11_manifest_scope": "Original asset fingerprints and C10 best2000 metadata; no verified complete latest migration destination",
+    "trash_and_combined_deep_probe_status": "pending_not_successfully_executed",
+    "transport_failures": [
+      "SSH timeout",
+      "SSH refused"
+    ],
+    "trash_candidate_observed_at_top_level": true,
+    "search_exhausted": false,
+    "failed_or_planned_probes_counted_as_passed": false,
+    "current_endpoint_reconfirmed_by_user": true,
+    "latest_recorded_attempt_utc": "2026-11-05T13:53:02.219261+00:00",
+    "combined_probe_attempt_count": 6,
+    "combined_probe_successful_execution_count": 0
+  },
+  "strict_continuation": {
+    "executed": false,
+    "total_steps_per_arm": 6000,
+    "order": [
+      "C10",
+      "C00"
+    ],
+    "restart_from_scratch": false,
+    "restart_from_best_with_reset": false,
+    "required_before_launch": [
+      "Verified original latest payload",
+      "Model and optimizer state",
+      "EMA state",
+      "Random and sample stream state",
+      "Bound source, configuration, environment and asset invariants",
+      "Live process and lock checks"
+    ]
+  },
+  "boundaries": {
+    "TempoRAC_modified": false,
+    "shared_mounts_modified": false,
+    "other_projects_modified": false,
+    "training_started_or_stopped_by_recovery_checks": false
+  },
+  "synchronization": {
+    "local": "Reviewed sanitized records preserved on E; exact source copy remains private",
+    "github": "Current scoped change set; commit and push verification recorded separately",
+    "server": "pending_original_destination_unavailable",
+    "three_way_complete": false
+  },
+  "private_evidence_ids": [
+    "recovery_20261105/mounts_1333.json",
+    "recovery_20261105/bound_source_exact_receipt.json",
+    "recovery_20261105/bound_source_exact_manifest.json",
+    "remote_evidence_20261104_1856/snapshot.json"
+  ],
+  "git_candidate_files": [
+    "docs/RECOVERY_AUDIT_20261105.md",
+    "evidence/recovery_audit_20261105.json"
+  ],
+  "updated_utc": "2026-11-05T13:52:43.770596+00:00",
+  "followup": {
+    "existing_30_minute_monitor_active": true,
+    "same_thread": true,
+    "pending_metadata_search_instructions_saved": true,
+    "no_duplicate_automation": true
+  }
+}

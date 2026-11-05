@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-11-05T11:03:15.781541+00:00",
+  "updated_utc": "2026-11-05T13:52:43.770596+00:00",
   "stage": "experiment-bridge",
   "status": "recovery_waiting_for_original_runtime_assets",
   "last_confirmed_checkpoint_step": 2000,
@@ -65,6 +65,12 @@
     "last_completed_three_way_sync_commit": "4cb5c7a30922f55e737807a056546e605eb83145",
     "current_server_snapshot_sync": "pending; original destination unavailable",
     "restart_attempted": false,
-    "frozen_6000_step_contract_preserved": true
+    "frozen_6000_step_contract_preserved": true,
+    "deep_recovery_audit": "evidence/recovery_audit_20261105.json",
+    "exact_bound_source_recovered_locally": true,
+    "bound_source_files_sha_verified": 500,
+    "real_latest_checkpoint_located": false,
+    "server_backup_deep_search": "pending_due_to_intermit_tcp_timeout_or_refusal; not counted as completed",
+    "existing_heartbeat_updated_for_pending_search": true
   }
 }
