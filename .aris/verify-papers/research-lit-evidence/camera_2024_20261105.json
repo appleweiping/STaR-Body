@@ -1,0 +1,30 @@
+{
+  "shard_id": "camera_2024",
+  "stage": "source_table_evidence_frozen_before_final_synthesis",
+  "entries": [
+    {
+      "paper_id": "TRAM",
+      "title": "TRAM",
+      "verification_status": "primary_pdf_table_read",
+      "abstract": "See primary PDF; this frozen evidence is for table-scale claims only.",
+      "source_excerpt": "Table 4 external methods excluding ours: SPIN, PARE, CLIFF, HybrIK, HMR2.0, ReFit, TCMR, VIBE, MPS-Net, GLoT, GLAMR, TRACE, WHAM",
+      "local_pdf_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\tram_eccv2024.pdf",
+      "local_note_paths": [
+        "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\primary_paper_table_counts.json"
+      ],
+      "evidence_status": "PROCESSABLE_PRIMARY_TABLE_EVIDENCE"
+    },
+    {
+      "paper_id": "GVHMR",
+      "title": "GVHMR",
+      "verification_status": "primary_pdf_table_read",
+      "abstract": "See primary PDF; this frozen evidence is for table-scale claims only.",
+      "source_excerpt": "Table 2 external methods excluding ours: SPIN, PARE, CLIFF, HybrIK, HMR2.0, ReFit, TCMR, VIBE, MPS-Net, GLoT, GLAMR, TRACE, SLAHMR, PACE, WHAM",
+      "local_pdf_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\gvhmr_siga2024.pdf",
+      "local_note_paths": [
+        "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\primary_paper_table_counts.json"
+      ],
+      "evidence_status": "PROCESSABLE_PRIMARY_TABLE_EVIDENCE"
+    }
+  ]
+}

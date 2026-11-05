@@ -1,7 +1,7 @@
 {
-  "updated_utc": "2026-11-05T13:52:43.770596+00:00",
-  "stage": "experiment-bridge",
-  "status": "recovery_waiting_for_original_runtime_assets",
+  "updated_utc": "2026-11-05T16:44:05.297152+00:00",
+  "stage": "experiment-plan",
+  "status": "external_benchmark_registry_and_coupled_design_preparation",
   "last_confirmed_checkpoint_step": 2000,
   "target_steps_per_arm": 6000,
   "order": [
@@ -20,7 +20,7 @@
   "quality_completion": false,
   "test_used": false,
   "writing": "deferred_until_experiments_and_audits",
-  "heartbeat": "configured_every_30_minutes_for_liveness_and_sync_only",
+  "heartbeat": "deleted; no recurring tasks permitted",
   "checkpoint_resumed_from_step": 2000,
   "last_observed_optimizer_step": 3601,
   "last_observed_sample_step": 3673,
@@ -71,6 +71,26 @@
     "bound_source_files_sha_verified": 500,
     "real_latest_checkpoint_located": false,
     "server_backup_deep_search": "pending_due_to_intermit_tcp_timeout_or_refusal; not counted as completed",
-    "existing_heartbeat_updated_for_pending_search": true
+    "existing_heartbeat_updated_for_pending_search": false,
+    "automation_status": "deleted; earlier heartbeat updates are historical only"
+  },
+  "primary_workstream": "External baseline standard-protocol evaluation and new coupled mechanism; no internal variant loop",
+  "plan": "refine-logs/EXPERIMENT_PLAN.md",
+  "tracker": "refine-logs/EXPERIMENT_TRACKER.md",
+  "new_method_implemented": false,
+  "new_external_evaluations_completed": 0,
+  "legacy_continuation_priority": "evidence recovery only; no automatic C00 launch under new user direction",
+  "legacy_fields_scope": "All existing step, order, old launch_review and old selector fields refer solely to historical C10/C00. They do not authorize launching a new method.",
+  "historical_project_3dpw_test_access": true,
+  "new_method_test_opened": false,
+  "test_used_scope": "test_used=false refers to the current legacy continuation only; the project has older 3DPW test exposure",
+  "external_baseline_registry": "configs/external_benchmark_registry.json",
+  "new_design_review": {
+    "requested_model": "gpt-6-astra",
+    "requested_effort": "xhigh",
+    "actual_backend_id": "not_independently_exposed",
+    "assurance": "same-family; preparation-stage only",
+    "verdict": "G0a_PREPARATION_PASS_G2_NOT_AUTHORIZED",
+    "report": "refine-logs/DESIGN_REVIEW.md"
   }
 }

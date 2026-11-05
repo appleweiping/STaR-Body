@@ -4,27 +4,33 @@
   "auto_proceed": true,
   "final_writing_after_experiments": true,
   "preserve_original_model_and_training_files": true,
-  "active_route": "C10/V37r1 matched C00 strict continuation from step2000; runtime preflight passed, controller launched",
+  "active_route": "External top-conference baselines and evidence-gated coupled-refinement vNext; legacy C10 preserved as historical evidence",
   "inherited_checkpoint_steps": 2000,
   "total_steps_per_arm": 6000,
-  "split": "3DPW train/validation; test untouched until frozen selection",
+  "split": "Core standard benchmark plan: 3DPW, RICH, EMDB; model and dataset selection on predeclared development data, final test only after freeze",
   "full_train_windows": 2909,
   "full_validation_frames": 10413,
   "full_acceleration_triplets": 10226,
   "training_caps": 0,
   "selection": "negative max(MPJPE/60, PA-MPJPE/37.3), inherited protected metrics",
-  "loss": "inherited frozen objective; fewer-than-three user criterion currently unmet, no relabeling",
+  "loss": "Legacy C10 objective preserved unchanged. New candidate must use at most two genuinely distinct training objectives; no relabelled grouping.",
   "required_later_evidence": [
-    "same-protocol competitive baselines",
-    "C10 matched additional seeds",
-    "three coupled components and removal ablations",
-    "isolate joint routing from input and parameter changes",
-    "empirical observation motivation",
-    "hyperparameter/stability curves",
-    "efficiency and reproducibility",
-    "final Word/PDF all-page render verification"
+    "correct standard model assets and official metric cross-check",
+    "pinned external baseline replication matrix",
+    "real error-feedback observation on fixed development data",
+    "three useful coupled components with true deletion and interaction studies",
+    "paired multi-seed statistical evidence",
+    "hyperparameter stability and measured efficiency",
+    "transparent dataset selection and negative-result ledger",
+    "SOTA on declared measured scope",
+    "final Word/PDF all-page rendering after experiment completion"
   ],
-  "six_dataset_seven_baseline_user_requirement": "retained as unmet/unresolved for this inherited one-dataset project; not a CVPR official requirement; do not silently waive or claim satisfied",
+  "six_dataset_seven_baseline_user_requirement": {
+    "previous": "At least6 datasets and7 top-conference frameworks, previously unmet",
+    "current_scale_basis": "Latest explicit2026-11-05 user request: match actual recent task-matched top-conference papers",
+    "replacement_plan": "Three core dataset families and approximately15 external candidate methods, based on five audited primary paper tables; no claim prior six-dataset requirement was met",
+    "status": "re-scoped explicitly, experiments not completed"
+  },
   "forbidden": [
     "restart from best checkpoint with reset state",
     "revive superseded V37 CUDA RNG implementation",
@@ -52,5 +58,93 @@
       "configuration"
     ],
     "no_identification_by_account_or_gpu_alone": true
+  },
+  "updated_utc": "2026-11-05T16:42:10.735165+00:00",
+  "scheduler_allowed": false,
+  "automatic_tasks": "disabled and existing star-body automation deleted at user request",
+  "legacy_continuation": {
+    "order": [
+      "C10",
+      "C00"
+    ],
+    "horizon_per_arm": 6000,
+    "last_reported_saved_steps": {
+      "C10": 3000,
+      "C00": 2000
+    },
+    "status": "runtime assets unavailable; checkpoint recovery is evidence-preservation branch",
+    "automatic_resume_or_c00_launch": false,
+    "requirements": "Preserve source/config/assets/optimizer/EMA/RNG/streams and native invariants. New priority supersedes running internal iterations as the main research loop.",
+    "immutable_original_contract": {
+      "inherited_checkpoint_steps": 2000,
+      "total_steps_per_arm": 6000,
+      "full_train_windows": 2909,
+      "full_validation_frames": 10413,
+      "full_acceleration_triplets": 10226,
+      "training_caps": 0,
+      "selection": "negative max(MPJPE/60, PA-MPJPE/37.3), inherited protected metrics"
+    }
+  },
+  "external_benchmark": {
+    "candidate_method_count": 15,
+    "dataset_families": [
+      "3DPW",
+      "RICH",
+      "EMDB"
+    ],
+    "verified_reruns": 0,
+    "counting": "Distinct external methods only; body/input conditions separated; variants andEMDB subsets do not inflate counts",
+    "stronger_incompatible_references": "Retain transparently; require validated conversion before comparable metrics",
+    "execution": "Prefer official released checkpoints with pinned code/weights and full-coverage evaluation; do not blindly retrain every baseline",
+    "registry": "configs/external_benchmark_registry.json",
+    "development_selection": "Use preregistered train/validation IDs only. G0a is metadata/evaluator parity; G0b is development evaluation. Do not execute official hardcoded test commands."
+  },
+  "sota_acceptance": {
+    "goal": "Best primary performance against the strongest comparable frozen external methods on the declared benchmark scope",
+    "primary_metric": "Official benchmark MPJPE with dataset-specific joint mapping",
+    "secondary_metrics": [
+      "PA-MPJPE",
+      "PVE",
+      "Acceleration under verified time units",
+      "efficiency and coverage"
+    ],
+    "claims": "Only measured scope; no validation/test mixing or deleting stronger/adverse comparisons"
+  },
+  "component_acceptance": {
+    "core_candidate_components": [
+      "feedback_reliability",
+      "identity_consistent_temporal_evidence",
+      "geometry_constrained_update"
+    ],
+    "status": "working hypothesis, observation and novelty gates pending",
+    "each_component": "Full versus true deletion with paired seeds; deleterious, equivalent or unresolved effects do not pass; redesign within preregistered budget",
+    "coupling": "Shared residual/reliability update plus preregistered A-B/B-C interaction tests",
+    "training_losses_max": 2,
+    "screening": "At most2 substantive candidate directions, finite low-budget screen before full ablations"
+  },
+  "dataset_stop_policy": {
+    "selection_data": "train/validation only, with IDs and decisions archived before final test",
+    "stop_or_switch": "Stop validation-unpromising or structurally incompatible datasets/designs at fixed resource gates; log all failures and cost",
+    "forbidden": "No test-informed dataset replacement, metric/seed selection, hidden negative results, or narrowed claims presented as universal"
+  },
+  "new_version_direction": {
+    "preferred": "Strongest reproducible public video initializer plus lightweight coupled correction",
+    "challenger": "SAM3DB native representation plus same hypothesis, only if mapping/cost gates pass",
+    "max_substantive_candidates": 2,
+    "legacy_starting_point": "C10 original code and results retained, never rewritten",
+    "new_training_budget": "Calibrate compute B after G0; cannot substitute old6000 horizon or invent GPU-hour estimates"
+  },
+  "legacy_compatibility_fields": {
+    "fields": [
+      "inherited_checkpoint_steps",
+      "total_steps_per_arm",
+      "full_train_windows",
+      "full_validation_frames",
+      "full_acceleration_triplets",
+      "training_caps",
+      "selection"
+    ],
+    "scope": "Deprecated read-only aliases for the audited original recovery observer. Not the active new-method budget or selector.",
+    "active_training_configuration": "Not yet frozen; G0/G1 required. New benchmark code must never read these aliases."
   }
 }

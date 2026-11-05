@@ -1,0 +1,1168 @@
+{
+  "schema": "star-body-external-baseline-registry-v1",
+  "created_utc": "2026-11-05T16:42:10.735165+00:00",
+  "scope": "15 external candidate families; pinned source audit only. Zero completed matched evaluations.",
+  "core_candidate_benchmarks": [
+    "3DPW",
+    "RICH",
+    "EMDB"
+  ],
+  "acceptance_caveats": [
+    "Repository HEAD is not checkpoint hash or paper code snapshot",
+    "Official README command existence is not successful execution",
+    "Missing benchmark adapter or topology mapping remains pending, never count as completed",
+    "Camera-space and global metrics, image/video/online and extra inputs must remain separately labeled",
+    "Published weight link does not mean current link access or license permission was tested"
+  ],
+  "models": [
+    {
+      "name": "HMR2",
+      "official_repo": "https://github.com/shubham-goel/4D-Humans",
+      "repo_commit": "efe18deff163b29dff87ddbd575fa29b716a356c",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\nefe18deff163b29dff87ddbd575fa29b716a356c\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:18.384251+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "ICCV2023",
+      "kind": "image; optional PHALP tracking wrapper is separate",
+      "representation": "SMPL",
+      "extra_inputs": "person boxes/crops; detector in demo",
+      "commands": [
+        "python eval.py --dataset 'H36M-VAL-P2,3DPW-TEST,LSP-EXTENDED,POSETRACK-VAL,COCO-VAL'"
+      ],
+      "datasets": [
+        "H36M-VAL-P2",
+        "3DPW-TEST",
+        "LSP-EXTENDED",
+        "POSETRACK-VAL",
+        "COCO-VAL"
+      ],
+      "weights": "published; default HMR2.0b auto-download; HMR2.0a separate author URL",
+      "variant": "HMR2.0a and b are different checkpoints of one framework; current STaR cache specifically a",
+      "pending": [
+        "RICH/EMDB adapter not in README standard eval list",
+        "pin checkpoint SHA and select a/b explicitly"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/shubham-goel/4D-Humans/blob/efe18deff163b29dff87ddbd575fa29b716a356c/README.md",
+          "locally_read": true,
+          "sha256": "269d140424a9c47ea4f3f41f95ac720d868ecd33b1207c75dfc3dfb6bf117d9d"
+        },
+        {
+          "path": "eval.py",
+          "url": "https://github.com/shubham-goel/4D-Humans/blob/efe18deff163b29dff87ddbd575fa29b716a356c/eval.py",
+          "locally_read": true,
+          "sha256": "8d09115e394df873acbf852824e00afe9f5cd7135e369a9b6f985e673e46fe41"
+        },
+        {
+          "path": "hmr2/configs/datasets_eval.yaml",
+          "url": "https://github.com/shubham-goel/4D-Humans/blob/efe18deff163b29dff87ddbd575fa29b716a356c/hmr2/configs/datasets_eval.yaml",
+          "locally_read": true,
+          "sha256": "bce0b68bb5eeb364c836ebb00c4aa81ee3ffcced3b5696235e2e4989ef6e514a"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "ReFit",
+      "official_repo": "https://github.com/yufu-wang/ReFit",
+      "repo_commit": "3167cbfe6e3ad4cc9ffb4a407364aa4254137ba4",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\n3167cbfe6e3ad4cc9ffb4a407364aa4254137ba4\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:18.385702+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "ICCV2023",
+      "kind": "image iterative recurrent fitting; multiview demo optional",
+      "representation": "SMPL",
+      "extra_inputs": "person crop/box; YOLOv7 in demo; multiview mode has extra views and cannot mix into monocular row",
+      "commands": [
+        "python scripts/eval.py"
+      ],
+      "datasets": [
+        "3dpw_test hardcoded in official script"
+      ],
+      "weights": "published GoogleDrive folders; no weight downloaded",
+      "variant": "scripts/eval.py hardcodes data/pretrain/refit_all/checkpoint_best.pth.tar and 3dpw_test",
+      "pending": [
+        "EMDB/RICH evaluation adapter",
+        "config/checkpoint pairing",
+        "crop and flip protocol"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/yufu-wang/ReFit/blob/3167cbfe6e3ad4cc9ffb4a407364aa4254137ba4/README.md",
+          "locally_read": true,
+          "sha256": "90aa488e1818ed51684e569d8359edd8ec48c1fb0a2cefe5a871d3ac359cfd59"
+        },
+        {
+          "path": "scripts/eval.py",
+          "url": "https://github.com/yufu-wang/ReFit/blob/3167cbfe6e3ad4cc9ffb4a407364aa4254137ba4/scripts/eval.py",
+          "locally_read": true,
+          "sha256": "ae97d7ad284ccc7e286c380bac9f29883972214b2e8df6687463aa14c746454a"
+        },
+        {
+          "path": "data/README.md",
+          "url": "https://github.com/yufu-wang/ReFit/blob/3167cbfe6e3ad4cc9ffb4a407364aa4254137ba4/data/README.md",
+          "locally_read": true,
+          "sha256": "6d10e3329367948c5c45a03d592a6b2de4b5e9ee1225a3f96ed42ab498d65006"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "TokenHMR",
+      "official_repo": "https://github.com/saidwivedi/TokenHMR",
+      "repo_commit": "ededd631bd7e2d405c77fd94000685a9e31d2bd3",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\nededd631bd7e2d405c77fd94000685a9e31d2bd3\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:18.387105+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "CVPR2024",
+      "kind": "image",
+      "representation": "SMPL with tokenized pose representation",
+      "extra_inputs": "person crop/box; image features; no temporal recovery",
+      "commands": [
+        "python tokenhmr/eval.py --dataset EMDB,3DPW-TEST --batch_size 32 --log_freq 50 --dataset_dir tokenhmr/dataset_dir/evaluation_data --checkpoint data/checkpoints/tokenhmr_model.ckpt --model_config data/checkpoints/model_config.yaml"
+      ],
+      "datasets": [
+        "EMDB",
+        "3DPW-TEST"
+      ],
+      "weights": "author download links published (tokenhmr_paper.ckpt, model.zip, latest.zip, bedlam_only.ckpt)",
+      "variant": "Paper100K ViTPose-init vs release200K HMR2-init vs demo350K vs BEDLAM-only are variants, one framework",
+      "pending": [
+        "select paper/release variant before running; README evaluation command mentions original model but default file model.ckpt may correspond release",
+        "RICH adapter",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/saidwivedi/TokenHMR/blob/ededd631bd7e2d405c77fd94000685a9e31d2bd3/README.md",
+          "locally_read": true,
+          "sha256": "3a249f5324a721dcd47c749940c4d1330ab4b8934db812e9d27f90e91e30b150"
+        },
+        {
+          "path": "tokenhmr/eval.py",
+          "url": "https://github.com/saidwivedi/TokenHMR/blob/ededd631bd7e2d405c77fd94000685a9e31d2bd3/tokenhmr/eval.py",
+          "locally_read": true,
+          "sha256": "f145b51fac5fe638c353c64cca1e37925b884062d91b3ae155084c48a541a857"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "WHAM",
+      "official_repo": "https://github.com/yohanshin/WHAM",
+      "repo_commit": "2b54f7797391c94876848b905ed875b154c4a295",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\n2b54f7797391c94876848b905ed875b154c4a295\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:18.388541+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "CVPR2024",
+      "kind": "video offline/window temporal",
+      "representation": "SMPL",
+      "extra_inputs": "2D keypoints ViTPose, image features; DPVO/DROID camera motion for global output; optional GT gyro and temporal SMPLify must be separate variants",
+      "commands": [
+        "python -m lib.eval.evaluate_3dpw --cfg configs/yamls/demo.yaml TRAIN.CHECKPOINT checkpoints/wham_vit_w_3dpw.pth.tar",
+        "python -m lib.eval.evaluate_rich --cfg configs/yamls/demo.yaml TRAIN.CHECKPOINT checkpoints/wham_vit_w_3dpw.pth.tar",
+        "python -m lib.eval.evaluate_emdb --cfg configs/yamls/demo.yaml --eval-split 1 TRAIN.CHECKPOINT checkpoints/wham_vit_w_3dpw.pth.tar",
+        "python -m lib.eval.evaluate_emdb --cfg configs/yamls/demo.yaml --eval-split 2 TRAIN.CHECKPOINT checkpoints/wham_vit_w_3dpw.pth.tar"
+      ],
+      "datasets": [
+        "3DPW",
+        "RICH",
+        "EMDB1",
+        "EMDB2"
+      ],
+      "weights": "published via official fetch_demo_data.sh / GoogleDrive",
+      "pending": [
+        "checkpoint SHA",
+        "audit predicted camera vs GT gyro, flip, postprocessing",
+        "data preprocessing source retains TODO"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/README.md",
+          "locally_read": true,
+          "sha256": "7d4e97bba0c0d1e72f96e4ffcdcc62173ff9f1e34174c862465b64cbc75afc72"
+        },
+        {
+          "path": "lib/eval/evaluate_3dpw.py",
+          "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/eval/evaluate_3dpw.py",
+          "locally_read": true,
+          "sha256": "c06fc6619dd261275586bcc60564657b5c593d5ac63b6699b684a6916be0967e"
+        },
+        {
+          "path": "lib/eval/evaluate_rich.py",
+          "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/eval/evaluate_rich.py",
+          "locally_read": true,
+          "sha256": "6d0549e267774512c4df0906a4a3eda1046bf432e44e81ec0e457c6ab3907de5"
+        },
+        {
+          "path": "lib/eval/evaluate_emdb.py",
+          "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/lib/eval/evaluate_emdb.py",
+          "locally_read": true,
+          "sha256": "ad389da5f2bdd15e2e78c760152e25dacaf8e70dc0c7140319ce411d77794a51"
+        },
+        {
+          "path": "fetch_demo_data.sh",
+          "url": "https://github.com/yohanshin/WHAM/blob/2b54f7797391c94876848b905ed875b154c4a295/fetch_demo_data.sh",
+          "locally_read": true,
+          "sha256": "70aa5597579af8170a1cfe1420d226e08d7d814719e76ec2eb49f367e98b9775"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "TRAM",
+      "official_repo": "https://github.com/yufu-wang/tram",
+      "repo_commit": "4861c112f3c148201326680a50c9199650da6088",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\n4861c112f3c148201326680a50c9199650da6088\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:21.051542+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "ECCV2024",
+      "kind": "video offline",
+      "representation": "SMPL; VIMO camera-space and TRAM global",
+      "extra_inputs": "HMR2b feature backbone; detector/tracker; masked DROID-SLAM; metric-depth camera scale for global output",
+      "commands": [
+        "bash scripts/emdb/run.sh",
+        "python scripts/emdb/run_eval.py --split 2 --input_dir results/emdb"
+      ],
+      "datasets": [
+        "EMDB2 explicit evaluation command"
+      ],
+      "weights": "published via scripts/download_models.sh; saved EMDB predictions also linked separately",
+      "variant": "current HEAD includes 2025 gravity/floor update; not automatically identical to ECCV2024 paper snapshot",
+      "pending": [
+        "3DPW/RICH official evaluator path still pending; shared adapter likely needed",
+        "pin correct paper or current variant",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/yufu-wang/tram/blob/4861c112f3c148201326680a50c9199650da6088/README.md",
+          "locally_read": true,
+          "sha256": "da3a8f50ccdf0b924a20b8d63ce6e9ffc39868f3b2e112f1ceee8ec6aef91c59"
+        },
+        {
+          "path": "scripts/emdb/run.sh",
+          "url": "https://github.com/yufu-wang/tram/blob/4861c112f3c148201326680a50c9199650da6088/scripts/emdb/run.sh",
+          "locally_read": true,
+          "sha256": "7dcfb8d58b36be43435d095a5777df5a97a77855f7322d6bec9319065e25a9bd"
+        },
+        {
+          "path": "scripts/emdb/run_eval.py",
+          "url": "https://github.com/yufu-wang/tram/blob/4861c112f3c148201326680a50c9199650da6088/scripts/emdb/run_eval.py",
+          "locally_read": true,
+          "sha256": "4a17baacd38e078e5f2ec5a86beeafadc4627bc667429a43d994e9c3b556cc14"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "GVHMR",
+      "official_repo": "https://github.com/zju3dv/GVHMR",
+      "repo_commit": "ee960bb6e2ea2d381aa97f08e9b71ef320b624b1",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\nee960bb6e2ea2d381aa97f08e9b71ef320b624b1\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:21.052330+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "SIGGRAPH Asia2024",
+      "kind": "video offline",
+      "representation": "predicts SMPL-X; SMPL conversion/evaluation asset required",
+      "extra_inputs": "2D keypoints, image features, relative camera rotations; default current demo SimpleVO; original DPVO or GT gyro are separate variants",
+      "commands": [
+        "python tools/train.py global/task=gvhmr/test_3dpw_emdb_rich exp=gvhmr/mixed/mixed ckpt_path=inputs/checkpoints/gvhmr/gvhmr_siga24_release.ckpt"
+      ],
+      "datasets": [
+        "3DPW",
+        "RICH",
+        "EMDB"
+      ],
+      "weights": "published GoogleDrive; README names gvhmr_siga24_release.ckpt",
+      "variant": "global/task=gvhmr/test_3dpw, test_rich, test_emdb for individual datasets; command uses train.py but explicit test task",
+      "pending": [
+        "verify task dispatch test-only before any execution",
+        "SMPL-X-to-SMPL mapping hash",
+        "pin camera-input and postprocess/flip variants",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/README.md",
+          "locally_read": true,
+          "sha256": "376bc54f58ff22eda1e27a86b8a70fe7434b97d7ca53832be2ccdf06e80fd456"
+        },
+        {
+          "path": "docs/INSTALL.md",
+          "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/docs/INSTALL.md",
+          "locally_read": true,
+          "sha256": "dedb2e37062cddebf8e7fae2cacf7b0bdc3da6a5353cf34b6fba3f80401d7051"
+        },
+        {
+          "path": "tools/train.py",
+          "url": "https://github.com/zju3dv/GVHMR/blob/ee960bb6e2ea2d381aa97f08e9b71ef320b624b1/tools/train.py",
+          "locally_read": true,
+          "sha256": "49cac49fe2afe4a272b41be0c48f9757ad3ad37de42077cf77f3b895551f1121"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "PromptHMR",
+      "official_repo": "https://github.com/yufu-wang/PromptHMR",
+      "repo_commit": "3b566b7dbb28ce506c7ea972c18693f4c705ce8c",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\n3b566b7dbb28ce506c7ea972c18693f4c705ce8c\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:21.076522+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "CVPR2025",
+      "kind": "full-image image model; PromptHMR-video and global video pipeline distinct variants",
+      "representation": "SMPL-X",
+      "extra_inputs": "box/mask/text/interaction prompts; optional global pipeline adds detector/SAM2, DROID-SLAM, metric depth etc.",
+      "commands": [
+        "python scripts/eval_phmr.py --dataset EMDB"
+      ],
+      "datasets": [
+        "EMDB",
+        "3DPW_TEST",
+        "HI4D_TEST",
+        "RICH_TEST"
+      ],
+      "weights": "published via fetch_data.sh; extra BEDLAM1/BEDLAM2 video checkpoints on GoogleDrive/author BEDLAM2 URLs",
+      "variant": "eval_phmr.py builds image PromptHMR; this command is not proof of PromptHMR-video evaluation",
+      "pending": [
+        "video evaluation entrypoint not yet established",
+        "select image/video and BEDLAM1/BEDLAM2 variant",
+        "SMPL-X conversion and optional prompt fairness",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/yufu-wang/PromptHMR/blob/3b566b7dbb28ce506c7ea972c18693f4c705ce8c/README.md",
+          "locally_read": true,
+          "sha256": "bc04e8554f9c9ff5a9ca5e90f8d34482f55399fd43538963c33aae90ddfd4832"
+        },
+        {
+          "path": "scripts/eval_phmr.py",
+          "url": "https://github.com/yufu-wang/PromptHMR/blob/3b566b7dbb28ce506c7ea972c18693f4c705ce8c/scripts/eval_phmr.py",
+          "locally_read": true,
+          "sha256": "fc4efd2e7cc6fb56036dd2a305e0119d9f4206497d0395c8e2933bc4f81b4947"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "OnlineHMR",
+      "official_repo": "https://github.com/Tsukasane/Video-OnlineHMR",
+      "repo_commit": "5236d2206068027e1b73480e34903092728f84f5",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/beta_test_w_tracking\tHEAD\n5236d2206068027e1b73480e34903092728f84f5\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:21.116750+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "CVPR2026 (official repository label)",
+      "kind": "causal streaming video",
+      "representation": "SMPL",
+      "extra_inputs": "HMR2b feature backbone, human-centric incremental MASt3R-SLAM; MoGe and mask/tracker dependencies for global pipeline",
+      "commands": [
+        "README camera evaluation: python train.py --cfg configs/config_vimo.yaml (DO NOT EXECUTE as an eval-only command)",
+        "python scripts/emdb/cam_only_eval.py --camera_root results/emdb2_results/camera",
+        "python scripts/emdb/run_eval_mast3r_slam.py --split 2 --human_rootdir results/emdb2_results/human --camera_rootdir results/emdb2_results/camera"
+      ],
+      "datasets": [
+        "3DPW-video-test or EMDB1 via config",
+        "EMDB2 global"
+      ],
+      "weights": "own model link verified in scripts/download_models.sh: GoogleDrive id1bbMhJyk9Qk5Ub01y7MJG5xFzRRkKB2Mm; no download",
+      "variant": "config lists 3dpw_vid_test; source train.py calls Trainer.train, not eval-only",
+      "pending": [
+        "safe eval-only wrapper required; do not run documented training command to get eval",
+        "RICH protocol adapter",
+        "causality and preprocessing comparisons",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/Tsukasane/Video-OnlineHMR/blob/5236d2206068027e1b73480e34903092728f84f5/README.md",
+          "locally_read": true,
+          "sha256": "8af97d499e88bb7b5918f9e652892a1ca7c8c8360c970d688ee71b37a08c0725"
+        },
+        {
+          "path": "train.py",
+          "url": "https://github.com/Tsukasane/Video-OnlineHMR/blob/5236d2206068027e1b73480e34903092728f84f5/train.py",
+          "locally_read": true,
+          "sha256": "9cee233eafd489382f253f2ee70fad0b214b697a7045712f388b1b3ae7f30cba"
+        },
+        {
+          "path": "configs/config_vimo.yaml",
+          "url": "https://github.com/Tsukasane/Video-OnlineHMR/blob/5236d2206068027e1b73480e34903092728f84f5/configs/config_vimo.yaml",
+          "locally_read": true,
+          "sha256": "ba7bed888d9d77c152a3e806dce994a51b55a1de352759b837c536f4302bafb7"
+        },
+        {
+          "path": "scripts/emdb/run_eval_mast3r_slam.py",
+          "url": "https://github.com/Tsukasane/Video-OnlineHMR/blob/5236d2206068027e1b73480e34903092728f84f5/scripts/emdb/run_eval_mast3r_slam.py",
+          "locally_read": true,
+          "sha256": "ce0daad54614b94d6564e382b2e1453e511624d5bb7e362fbaa7cc844b676faf"
+        },
+        {
+          "path": "scripts/download_models.sh",
+          "url": "https://github.com/Tsukasane/Video-OnlineHMR/blob/5236d2206068027e1b73480e34903092728f84f5/scripts/download_models.sh",
+          "locally_read": true,
+          "sha256": "ae15cca6b8e85f9c0c0941c2e629ea8355422e753f7ab3ecd0bf8272d4338aee"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "Human3R",
+      "official_repo": "https://github.com/fanegg/Human3R",
+      "repo_commit": "402f2b2c7f20514e99cb42e4126c46b4ff75593f",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/master\tHEAD\n402f2b2c7f20514e99cb42e4126c46b4ff75593f\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:23.631618+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "ICLR2026 (official repository label)",
+      "kind": "online recurrent full-image human-scene video",
+      "representation": "multi-person SMPL-X plus dense scene and cameras",
+      "extra_inputs": "RGB sequence; unified model claims no separate detector/depth/SLAM preprocessing; evaluation optional TTT/reset policies must be pinned",
+      "commands": [
+        "CUDA_VISIBLE_DEVICES=0 bash eval/global_human/run.sh",
+        "CUDA_VISIBLE_DEVICES=0 bash eval/global_human/run_emdb2.sh",
+        "CUDA_VISIBLE_DEVICES=0 bash eval/global_human/run_rich.sh"
+      ],
+      "datasets": [
+        "3DPW",
+        "EMDB1",
+        "EMDB2",
+        "RICH"
+      ],
+      "weights": "published HuggingFace faneggg/human3r; human3r_896L.pth and672S/B/L variants",
+      "variant": "There is a second unrelated Human3R paper arxiv2512.06368; this row is fanegg arxiv2510.06219",
+      "pending": [
+        "inspect shell wrappers and model config before running",
+        "verify RICH script yields needed camera metrics besides global metrics",
+        "SMPL-X conversion",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/fanegg/Human3R/blob/402f2b2c7f20514e99cb42e4126c46b4ff75593f/README.md",
+          "locally_read": true,
+          "sha256": "b78883947802e7f5bbad6cc1471d1d5b68f55d4659fe8aa375be1135bc1f1952"
+        },
+        {
+          "path": "docs/eval.md",
+          "url": "https://github.com/fanegg/Human3R/blob/402f2b2c7f20514e99cb42e4126c46b4ff75593f/docs/eval.md",
+          "locally_read": true,
+          "sha256": "449e91bf90bde69a731eb1f75d86ea549562ad1e4ff553a0e9b4d35685498d7b"
+        },
+        {
+          "path": "docs/inference.md",
+          "url": "https://github.com/fanegg/Human3R/blob/402f2b2c7f20514e99cb42e4126c46b4ff75593f/docs/inference.md",
+          "locally_read": true,
+          "sha256": "daabc06626a4b2ec836fd26869a28bfaf83650e899e8a3a6d2361a5e3a2c8604"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "CameraHMR",
+      "official_repo": "https://github.com/pixelite1201/CameraHMR",
+      "repo_commit": "65d11a0640d23c60f55ec82ae54298e9e7e549e0",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/master\tHEAD\n65d11a0640d23c60f55ec82ae54298e9e7e549e0\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:23.641108+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "3DV2025 (NOT CVPR)",
+      "kind": "image",
+      "representation": "paper SMPL; later SMPL-X/BEDLAM2 variant separately available",
+      "extra_inputs": "person crop/bbox location, perspective/focal prediction; DenseKP/CamSMPLify are optional separate paths",
+      "commands": [
+        "python eval.py data=eval experiment=camerahmr"
+      ],
+      "datasets": [
+        "EMDB",
+        "3DPW",
+        "SPEC-syn-test",
+        "RICH",
+        "COCO"
+      ],
+      "weights": "published on author CameraHMR site; registration/access may be required; no download or credentials used",
+      "variant": "paper CameraHMR vs newer SMPL-X/BEDLAM2 not interchangeable",
+      "pending": [
+        "exact checkpoint and config selection",
+        "paper variant representation",
+        "dataset/crop/focal protocol",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "ReadMe.md",
+          "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/ReadMe.md",
+          "locally_read": true,
+          "sha256": "c9d0d5995b1e03db9c428a07d26871fd7cb6ddca6dfb5b60a242235fdc045037"
+        },
+        {
+          "path": "docs/training.md",
+          "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/docs/training.md",
+          "locally_read": true,
+          "sha256": "9c939253ed78f46d66022dd67e59ce405522145782311efe3bfc48c95c67093f"
+        },
+        {
+          "path": "eval.py",
+          "url": "https://github.com/pixelite1201/CameraHMR/blob/65d11a0640d23c60f55ec82ae54298e9e7e549e0/eval.py",
+          "locally_read": true,
+          "sha256": "c88f85bddb5ca333cf25ebcaeb9d1f02d4184118a8d7b5bacdec41a2cf36da3f"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "CLIFF",
+      "official_repo": "https://github.com/huawei-noah/noah-research/tree/a0846cc6eef71e79151a867113296ca75a05cc32/CLIFF",
+      "repo_commit": "a0846cc6eef71e79151a867113296ca75a05cc32",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/master\tHEAD\na0846cc6eef71e79151a867113296ca75a05cc32\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:23.648816+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "ECCV2022",
+      "kind": "image (official video demo is framewise, no temporal smoothing)",
+      "representation": "SMPL",
+      "extra_inputs": "crop plus bbox/full-image location; focal approximation",
+      "commands": [
+        "sh scripts/run_demo.sh (demo only, NOT benchmark evaluation)"
+      ],
+      "datasets": [
+        "No official benchmark eval command found in reviewed README"
+      ],
+      "weights": "published GoogleDrive model links incl hr48/res50 3DPW and AGORA",
+      "variant": "official repo is huawei-noah/noah-research/CLIFF; haofanwang fork not official paper implementation",
+      "pending": [
+        "official benchmark evaluator missing in README; author points to BEDLAM/MMHuman3D alternatives",
+        "new common adapter needed for EMDB/RICH",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "CLIFF/README.MD",
+          "url": "https://github.com/huawei-noah/noah-research/blob/a0846cc6eef71e79151a867113296ca75a05cc32/CLIFF/README.MD",
+          "locally_read": true,
+          "sha256": "647e5cf8ca1f0092a537d0578ce539947b4b078bb6e8844aff421aded26acd8d"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "HybrIK",
+      "official_repo": "https://github.com/Jeff-sjtu/HybrIK",
+      "repo_commit": "c281eeeb3c0689a4d619a06ed0c4488e791eda76",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\nc281eeeb3c0689a4d619a06ed0c4488e791eda76\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:23.683558+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "CVPR2021",
+      "kind": "image (video demo runs single frames)",
+      "representation": "HybrIK SMPL; HybrIK-X SMPL-X is distinct variant",
+      "extra_inputs": "crop/detection; learned3D joints + inverse kinematics",
+      "commands": [
+        "./scripts/validate_smpl_cam.sh ./configs/256x192_adam_lr1e-3-hrw48_cam_2x_w_pw3d_3dhp.yaml ./pretrained_hrnet.pth"
+      ],
+      "datasets": [
+        "3DPW",
+        "Human3.6M per official model zoo; exact script config controls"
+      ],
+      "weights": "published GoogleDrive links for ResNet34/HRNet48, with/without3DPW; no download",
+      "pending": [
+        "inspect validate_smpl_cam.sh and paired config (downloaded validate_smpl.py is not sufficient to confirm wrapper)",
+        "choose paper-era/checkpoint variant",
+        "EMDB/RICH adapter",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/Jeff-sjtu/HybrIK/blob/c281eeeb3c0689a4d619a06ed0c4488e791eda76/README.md",
+          "locally_read": true,
+          "sha256": "51fa24c6a76ddb0a34ed82e4d3c9c5882291cbb944796f08070b43362d2e2273"
+        },
+        {
+          "path": "scripts/validate_smpl.py",
+          "url": "https://github.com/Jeff-sjtu/HybrIK/blob/c281eeeb3c0689a4d619a06ed0c4488e791eda76/scripts/validate_smpl.py",
+          "locally_read": true,
+          "sha256": "92ce20e6a6ff3cd0300654279bbb124c8b7f23aeb0f8898fae398b7715c1dbcc"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "TCMR",
+      "official_repo": "https://github.com/hongsukchoi/TCMR_RELEASE",
+      "repo_commit": "c41fdd7745bab5d4771325d9f88a372595e173d9",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/master\tHEAD\nc41fdd7745bab5d4771325d9f88a372595e173d9\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:24.983478+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "CVPR2021",
+      "kind": "video temporal",
+      "representation": "SMPL",
+      "extra_inputs": "preprocessed image features/track windows",
+      "commands": [
+        "python evaluate.py --dataset 3dpw --cfg ./configs/repr_table4_3dpw_model.yaml --gpu 0"
+      ],
+      "datasets": [
+        "3DPW",
+        "MPI-INF-3DHP",
+        "H36M"
+      ],
+      "weights": "published GoogleDrive checkpoint folder",
+      "variant": "official README warns config filename changes dataset behavior; preserve exact file",
+      "pending": [
+        "EMDB/RICH adapter",
+        "feature extractor and temporal crop protocol",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/hongsukchoi/TCMR_RELEASE/blob/c41fdd7745bab5d4771325d9f88a372595e173d9/README.md",
+          "locally_read": true,
+          "sha256": "b80a684ec1eb40283fe08e6c1045e8db9d3fc7eab56bf350290bcfef47f39d56"
+        },
+        {
+          "path": "evaluate.py",
+          "url": "https://github.com/hongsukchoi/TCMR_RELEASE/blob/c41fdd7745bab5d4771325d9f88a372595e173d9/evaluate.py",
+          "locally_read": true,
+          "sha256": "0492429d8796a74eb7c5ac2b47a7d5222b3405fffcbc085b33c8bf3c267a4bdc"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "GLoT",
+      "official_repo": "https://github.com/sxl142/GLoT",
+      "repo_commit": "109f4782234820ece11c70b079cc22dac6e60d84",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\n109f4782234820ece11c70b079cc22dac6e60d84\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:24.994923+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "CVPR2023",
+      "kind": "video global-to-local temporal",
+      "representation": "SMPL",
+      "extra_inputs": "preprocessed video/image features; VIBE/TCMR-derived cache protocol",
+      "commands": [
+        "python evaluate.py --dataset 3dpw --cfg ./configs/repr_table1_3dpw.yaml --gpu 0",
+        "python evaluate.py --dataset h36m --cfg ./configs/repr_table1_h36m_mpii3d.yaml --gpu 0",
+        "python evaluate.py --dataset mpii3d --cfg ./configs/repr_table1_h36m_mpii3d.yaml --gpu 0"
+      ],
+      "datasets": [
+        "3DPW",
+        "H36M",
+        "MPI-INF-3DHP"
+      ],
+      "weights": "README published model download links; no download",
+      "pending": [
+        "EMDB/RICH adapter",
+        "feature extractor and temporal crop protocol",
+        "checkpoint SHA"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/sxl142/GLoT/blob/109f4782234820ece11c70b079cc22dac6e60d84/README.md",
+          "locally_read": true,
+          "sha256": "864d095e042dbacef20a729a12fb9a85fab4427b58dbe16a65945023d47f0e64"
+        },
+        {
+          "path": "evaluate.py",
+          "url": "https://github.com/sxl142/GLoT/blob/109f4782234820ece11c70b079cc22dac6e60d84/evaluate.py",
+          "locally_read": true,
+          "sha256": "a2ad7e8d45d128e70f6d22885f15b6a01cc384ec83b7f56012a9dfb13954e65c"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    },
+    {
+      "name": "SAM3DB",
+      "official_repo": "https://github.com/facebookresearch/sam-3d-body",
+      "repo_commit": "b5c765a0d89d789985e186d396315e7590887b94",
+      "git_ls_remote": {
+        "returncode": 0,
+        "stdout": "ref: refs/heads/main\tHEAD\nb5c765a0d89d789985e186d396315e7590887b94\tHEAD",
+        "stderr": ""
+      },
+      "observed_utc": "2026-11-05T16:38:25.033640+00:00",
+      "source_status": "commit_pinned_readme_audited",
+      "evaluation_execution_status": "NOT_RUN",
+      "weights_downloaded": false,
+      "dependencies_installed": false,
+      "gpu_used": false,
+      "venue": "CVPR2026 (official CVF paper); release2025-11-19",
+      "kind": "image full-body",
+      "representation": "MHR (Momentum Human Rig), NOT native SMPL",
+      "extra_inputs": "RGB; optional keypoint/mask prompts and hand refinement; optional MoGe/SAM3 dependencies",
+      "commands": [
+        "python demo.py --image_folder <images> --output_folder <outputs> --checkpoint_path <model.ckpt> --mhr_path <mhr_model.pt> (demo only; exact flags in pinned README)"
+      ],
+      "datasets": [
+        "README reports3DPW,EMDB,RICH,COCO,LSPET,FreiHand; benchmark evaluator not established"
+      ],
+      "weights": "published but HuggingFace gated access request required; facebook/sam-3d-body-dinov3 and -vith",
+      "variant": "DINOv3-H+840M and ViT-H631M one method family; native MHR mesh cannot be compared as same-topology SMPL PVE",
+      "pending": [
+        "official benchmark evaluator and evaluation mapping",
+        "MHR-to-common joints/vertices protocol must be explicit; PVE mapping not established",
+        "checkpoint access and SHA",
+        "no claim of runnable primary baseline until protocol matched"
+      ],
+      "evidence": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/facebookresearch/sam-3d-body/blob/b5c765a0d89d789985e186d396315e7590887b94/README.md",
+          "locally_read": true,
+          "sha256": "95a4a2f373a56dc433deff5bc07581539b2a9f328918e078890f6158e4431fbb"
+        },
+        {
+          "path": "INSTALL.md",
+          "url": "https://github.com/facebookresearch/sam-3d-body/blob/b5c765a0d89d789985e186d396315e7590887b94/INSTALL.md",
+          "locally_read": true,
+          "sha256": "63a732dadcbabc444d480fbb9fd229e191308dda8b64edf24476cdd55577c3a8"
+        }
+      ],
+      "launch_authorized_by_registry": false,
+      "checkpoint_sha256": null,
+      "benchmark_cells": {
+        "3DPW": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "RICH": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        },
+        "EMDB": {
+          "status": "PENDING_PROTOCOL_AND_ASSETS",
+          "evaluated_person_frames": 0,
+          "published_metric": null,
+          "reproduced_metric": null
+        }
+      }
+    }
+  ],
+  "source_draft_sha256": "9ab3319b1147d3c52a866fe93a8ab85cfc31a824ccd26f803b7c689826c75e88",
+  "automatic_launch_allowed": false,
+  "execution_policy": {
+    "stage": "G0a manifest only, G0b development evaluations after assets/protocol gate",
+    "official_commands": "Reference text only; review runtime semantics and adapt to frozen development IDs before use. No train.py or hardcoded test commands in G0.",
+    "test_policy": "Hold all new final-test metrics until G5; known historical 3DPW test exposure remains disclosed.",
+    "weight_identity": "Each exact checkpoint/config/dataset mapping must be hashed before execution.",
+    "version_policy": "Current official HEAD pins are audit snapshots, not proof of paper-release equivalence; paper/release settings must be labelled separately."
+  }
+}

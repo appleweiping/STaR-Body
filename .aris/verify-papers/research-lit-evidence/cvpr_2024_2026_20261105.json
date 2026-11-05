@@ -1,0 +1,42 @@
+{
+  "shard_id": "cvpr_2024_2026",
+  "stage": "source_table_evidence_frozen_before_final_synthesis",
+  "entries": [
+    {
+      "paper_id": "WHAM",
+      "title": "WHAM",
+      "verification_status": "primary_pdf_table_read",
+      "abstract": "See primary PDF; this frozen evidence is for table-scale claims only.",
+      "source_excerpt": "Table 1 external methods excluding ours: SPIN, PARE, CLIFF, HybrIK, HMR2.0, ReFit, TCMR, VIBE, MPS-Net, GLoT, GLAMR, TRACE, SLAHMR, PACE",
+      "local_pdf_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\wham.pdf",
+      "local_note_paths": [
+        "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\wham_prompthmr_onlinehmr_table_audit.json"
+      ],
+      "evidence_status": "PROCESSABLE_PRIMARY_TABLE_EVIDENCE"
+    },
+    {
+      "paper_id": "PromptHMR",
+      "title": "PromptHMR",
+      "verification_status": "primary_pdf_table_read",
+      "abstract": "See primary PDF; this frozen evidence is for table-scale claims only.",
+      "source_excerpt": "Table 1 external methods excluding ours: CLIFF, HMR2.0a, TokenHMR, CameraHMR, BEV, Multi-HMR, WHAM, TRAM, GVHMR",
+      "local_pdf_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\prompthmr.pdf",
+      "local_note_paths": [
+        "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\wham_prompthmr_onlinehmr_table_audit.json"
+      ],
+      "evidence_status": "PROCESSABLE_PRIMARY_TABLE_EVIDENCE"
+    },
+    {
+      "paper_id": "OnlineHMR",
+      "title": "OnlineHMR",
+      "verification_status": "primary_pdf_table_read",
+      "abstract": "See primary PDF; this frozen evidence is for table-scale claims only.",
+      "source_excerpt": "Table 1 external methods excluding ours: HybrIK, HMR2.0, ReFit, TCMR, GLoT, GLAMR, WHAM, TRAM, GVHMR, PHMR (PromptHMR-Vid), TRACE, Human3R",
+      "local_pdf_path": "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\onlinehmr.pdf",
+      "local_note_paths": [
+        "E:\\STaR-Body\\runs\\session_20261104\\work\\benchmark_audit_20261105\\wham_prompthmr_onlinehmr_table_audit.json"
+      ],
+      "evidence_status": "PROCESSABLE_PRIMARY_TABLE_EVIDENCE"
+    }
+  ]
+}

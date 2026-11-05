@@ -9,7 +9,7 @@ and earlier version files; the C10 release adds its required model, runtime,
 training, evaluation, asset-preparation, acceptance-check, and configuration
 files without rewriting those originals.
 
-Research status (2026-11-05): [checkpoint-3000 results](docs/C10_STEP3000_COMPLETE_20261104.md), [current workflow](docs/ARIS_CONTINUATION.md), [recovery audit](docs/RECOVERY_AUDIT_20261105.md), and [claim boundaries](findings.md). The frozen 6,000-step paired experiment is incomplete and currently blocked on native-checkpoint and runtime-asset recovery. The validation table below preserves the original release's 1,000-step EMA snapshot. [Protocol status](evidence/protocol_status_20261105.json) records the unresolved SMPL asset identity and the absence of matched external baseline reruns.
+Research status (2026-11-05): the active plan now prioritizes [external top-conference baselines](docs/EXTERNAL_BASELINES_20261105.md) and [evidence-gated coupled-refinement experiments](refine-logs/EXPERIMENT_PLAN.md). No recurring automation remains enabled. C10 is the preserved implemented snapshot, with [checkpoint-3000 evidence](docs/C10_STEP3000_COMPLETE_20261104.md); its legacy continuation and [runtime recovery](docs/RECOVERY_AUDIT_20261105.md) remain incomplete. [Protocol status](evidence/protocol_status_20261105.json) records the unresolved body-model assets. The table below preserves the original 1,000-step EMA release result; no new external-benchmark or vNext performance is claimed.
 
 [C10 release guide](C10_RELEASE.md) · [Validation evidence](evidence/c10_validation.json) ·
 [Recorded controls](evidence/c10_transcribed_controls.json) ·

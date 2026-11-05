@@ -1,0 +1,232 @@
+{
+  "project": "STaR-Body",
+  "checked_utc": "2026-11-05T16:37:58.826454+00:00",
+  "count_rule": "Exclude ours; distinct external method family versus configuration rows; dataset families and subsets are separate; missing cells do not count as complete comparisons",
+  "coverage": {
+    "assigned": [
+      "WHAM",
+      "PromptHMR",
+      "OnlineHMR",
+      "TRAM",
+      "GVHMR"
+    ],
+    "covered": [
+      "GVHMR",
+      "OnlineHMR",
+      "PromptHMR",
+      "TRAM",
+      "WHAM"
+    ],
+    "uncovered": [],
+    "primary_pdf_tables_visually_checked": true
+  },
+  "entries": [
+    {
+      "paper": "WHAM",
+      "venue": "CVPR 2024",
+      "source": "https://openaccess.thecvf.com/content/CVPR2024/papers/Shin_WHAM_Reconstructing_World-grounded_Humans_with_Accurate_3D_Motion_CVPR_2024_paper.pdf",
+      "table": 1,
+      "pdf_page": 7,
+      "external_methods": 14,
+      "configuration_rows": 14,
+      "methods": [
+        "SPIN",
+        "PARE",
+        "CLIFF",
+        "HybrIK",
+        "HMR2.0",
+        "ReFit",
+        "TCMR",
+        "VIBE",
+        "MPS-Net",
+        "GLoT",
+        "GLAMR",
+        "TRACE",
+        "SLAHMR",
+        "PACE"
+      ],
+      "benchmarks": [
+        "3DPW",
+        "RICH",
+        "EMDB-1"
+      ],
+      "nonempty_rows_per_dataset": {
+        "3DPW": 13,
+        "RICH": 13,
+        "EMDB-1": 13
+      },
+      "training": "PDF p5-6: AMASS pretraining80 epochs; finetune 3DPW,MPI-INF-3DHP,Human3.6M,InstaVariety30 epochs; batch64,81-frame chunks. BEDLAM additional setting. ResNet50/HRNet-W48/ViT-H16 image backbones.",
+      "availability": "Official repo offers model downloads, data preparation, 3DPW/RICH/EMDB evaluation and two-stage training; BEDLAM training section remains TBD.",
+      "repo": "https://github.com/yohanshin/WHAM",
+      "cautions": [
+        "Table1 acceleration is m/s^2, not raw mm/annotation-frame^2.",
+        "Star denotes training on 3DPW."
+      ]
+    },
+    {
+      "paper": "PromptHMR",
+      "venue": "CVPR 2025",
+      "source": "https://openaccess.thecvf.com/content/CVPR2025/papers/Wang_PromptHMR_Promptable_Human_Mesh_Recovery_CVPR_2025_paper.pdf",
+      "table": 1,
+      "pdf_page": 7,
+      "external_methods": 9,
+      "configuration_rows": 9,
+      "methods": [
+        "CLIFF",
+        "HMR2.0a",
+        "TokenHMR",
+        "CameraHMR",
+        "BEV",
+        "Multi-HMR",
+        "WHAM",
+        "TRAM",
+        "GVHMR"
+      ],
+      "benchmarks": [
+        "3DPW",
+        "EMDB",
+        "RICH"
+      ],
+      "nonempty_rows_per_dataset": {
+        "3DPW": 9,
+        "EMDB": 9,
+        "RICH": 6
+      },
+      "training": "PDF p6: BEDLAM,AGORA,3DPW,COCO,MPII,AIC,InstaVariety plus CHI3D/HI4D interaction training; AdamW batch96 at896x896, convergence within350K steps. Ablations448x448 select within150K steps.",
+      "availability": "Official repo offers checkpoints, SMPL/SMPL-X download and eval for EMDB,3DPW_TEST,HI4D_TEST,RICH_TEST. Training code explicitly not released due to licensing. New BEDLAM2 checkpoints must not silently substitute original CVPR25 setting.",
+      "repo": "https://github.com/yufu-wang/PromptHMR",
+      "cautions": [
+        "Table1 star means GT focal length at inference, unlike WHAM table star meaning.",
+        "All video methods evaluated without flip augmentation.",
+        "SMPL-X output and extra prompts must be disclosed/matched.",
+        "Six evaluated named datasets do not imply six external-baseline main tables; HBW is prompt ablation."
+      ]
+    },
+    {
+      "paper": "OnlineHMR",
+      "venue": "CVPR 2026",
+      "source": "https://openaccess.thecvf.com/content/CVPR2026/papers/Zhao_OnlineHMR_Video-based_Online_World-Grounded_Human_Mesh_Recovery_CVPR_2026_paper.pdf",
+      "table": 1,
+      "pdf_page": 6,
+      "external_methods": 12,
+      "configuration_rows": 12,
+      "methods": [
+        "HybrIK",
+        "HMR2.0",
+        "ReFit",
+        "TCMR",
+        "GLoT",
+        "GLAMR",
+        "WHAM",
+        "TRAM",
+        "GVHMR",
+        "PHMR (PromptHMR-Vid)",
+        "TRACE",
+        "Human3R"
+      ],
+      "benchmarks": [
+        "3DPW",
+        "EMDB-1"
+      ],
+      "nonempty_rows_per_dataset": null,
+      "training": "PDF p6: BEDLAM,3DPW,H3.6M; convergence about52K iterations on one80GB H100. Current public config:256px,16frame windows,batch24 (config MAX_STEP250000 differs from paper convergence).",
+      "availability": "Official repo exposes train.py, evaluation scripts, HMR2.0b and own checkpoint download (download_models.sh), also EMDB2 prediction package. Licensed SMPL assets separate.",
+      "repo": "https://github.com/Tsukasane/Video-OnlineHMR",
+      "cautions": [
+        "Two datasets, with EMDB split into camera EMDB-1 and world EMDB-2; not three independent datasets.",
+        "Table2 JOSH vs JOSH3R count as two named systems but same cited-paper family.",
+        "Public config values are current repository observations, not guaranteed original-paper frozen config."
+      ]
+    },
+    {
+      "paper": "TRAM",
+      "venue": "ECCV 2024",
+      "source": "https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/01796.pdf",
+      "table": 4,
+      "pdf_page": 12,
+      "external_methods": 13,
+      "configuration_rows": 14,
+      "methods": [
+        "SPIN",
+        "PARE",
+        "CLIFF",
+        "HybrIK",
+        "HMR2.0",
+        "ReFit",
+        "TCMR",
+        "VIBE",
+        "MPS-Net",
+        "GLoT",
+        "GLAMR",
+        "TRACE",
+        "WHAM"
+      ],
+      "benchmarks": [
+        "3DPW",
+        "EMDB-1"
+      ],
+      "nonempty_rows_per_dataset": null,
+      "training": "100K iterations; batch24; window16; frozen HMR2 ViT-H",
+      "cautions": [
+        "Main paper explicitly names EMDB subsets; inspected section does not spell out 3DPW test designation."
+      ]
+    },
+    {
+      "paper": "GVHMR",
+      "venue": "SIGGRAPH Asia 2024",
+      "source": "https://arxiv.org/pdf/2409.06662v1",
+      "table": 2,
+      "pdf_page": 6,
+      "external_methods": 15,
+      "configuration_rows": 15,
+      "methods": [
+        "SPIN",
+        "PARE",
+        "CLIFF",
+        "HybrIK",
+        "HMR2.0",
+        "ReFit",
+        "TCMR",
+        "VIBE",
+        "MPS-Net",
+        "GLoT",
+        "GLAMR",
+        "TRACE",
+        "SLAHMR",
+        "PACE",
+        "WHAM"
+      ],
+      "benchmarks": [
+        "3DPW",
+        "RICH test",
+        "EMDB-1"
+      ],
+      "nonempty_rows_per_dataset": {
+        "3DPW": 14,
+        "RICH": 14,
+        "EMDB": 14
+      },
+      "training": "p5 from scratch500epochs; batch256; length120; 2RTX4090 13h",
+      "cautions": [
+        "PACE only RICH, TRACE no RICH; further metric-level null cells",
+        "Author project page says420epochs; retain version distinction"
+      ]
+    }
+  ],
+  "summary": {
+    "camera_space_external_method_range": [
+      9,
+      15
+    ],
+    "core_dataset_family_range": [
+      2,
+      3
+    ],
+    "not_a_conference_minimum": true
+  },
+  "raw_evidence_sha256": {
+    "wham_prompthmr_onlinehmr_table_audit.json": "0d28ba9c4faa7f63aaa84fdaa3f8a2f81de5f6c8ae049e318a1fdedc40341e66",
+    "primary_paper_table_counts.json": "48001f0ef0cd5976616cee310427755646a9c1cac80372e0b13f3987472cdbc6"
+  },
+  "repository_followup": "configs/external_benchmark_registry.json; commands audited as source references, not all safe eval-only launchers"
+}
